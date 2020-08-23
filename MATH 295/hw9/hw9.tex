@@ -1,0 +1,155 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{mathtools}
+
+\newcommand\Myperm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\Mycomb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+\footskip = -0.75in
+
+\begin{document}
+
+% title page
+\title{Homework 9}
+\author{Landon Fox}
+\date{April 29, 2020}
+
+\begin{flushleft}
+Landon Fox \\
+Math 295 \\
+Section 1001 \\
+April 29, 2020
+\end{flushleft}
+\begin{center}
+\Large Homework 9
+\end{center}
+
+\begin{itemize}
+	% problem 1
+	\item[] {\large 1)}
+	Use the Pigeonhole principle to prove that in any group of $n$ people there are
+	at least two people who have the same number of friends in the group. \\
+	Let us attempt to partition the group into classes based on the number
+	of friends they have in the group. Clearly we can say that any individual
+	can have anywhere from 0 to $n-1$ friends, providing $n$ classes. \\
+	If there is an individual with exactly $n-1$ friends, this would
+	imply that there does not exist an individual
+	with 0 friends in the group. Furthermore if we have only $n-1$ classes
+	and $n$ individuals, via the Pigeonhole principle there would exist at least
+	two individuals with the same number of friends in the group. \\
+	Otherwise if there does not exist an individual with $n-1$ friends, there would
+	not exist anyone in that class. By the same argument, there exists
+	$n-1$ classes and $n$ individuals, there must be at least two individuals with
+	the same number of friends. $\blacksquare$
+
+	% problem 2
+	\item[] {\large 2)}
+	Use the Pigeonhole principle to prove that any set of 5 integer lattice points
+	in $\mathbb{R}^2$ contains a pair of points whose centroid is
+	also an integer lattice point. \\
+	Let us attempt to partition the group into classes based on the parity
+	of the coordinates. For the centroid of any two points to also be an
+	integer lattice point, the $x$ value in the first coordinate can share the
+	same parity as the second along the $y$ values as well ($x_1$, $x_2$ have the
+	same parity and so does $y_1$ and $y_2$). This provides 4 classes, therefore
+	if we are given 5 points via the Pigeonhole principle there must exist two within
+	the same class thus they will result in a centroid that is also an interger lattice
+	point. $\blacksquare$
+
+	% problem 3
+	\item[] {\large 3)}
+	\begin{itemize}
+		% problem 3i
+		\item[] {\large 3i)}
+		Show by combinatorial counting that
+		$k^2=2\binom{k}{2}+\binom{k}{1}$ for any positive integer $k$. \\
+		Let's assume we have a string of two characters with an alphabet of $k$
+		characters, how many strings can we create? \\
+		By permutations with repetition there is $k^2$ ways. A different
+		approach, for both characters we have $\Myperm[k]{2}=2\binom{k}{2}$
+		for unique characters and $\Mycomb[k]{1}=\binom{k}{1}$ if they share
+		the same character. Thus by the principle of counting in two ways
+		$k^2=2\binom{k}{2}+\binom{k}{1}$. $\blacksquare$
+
+		% problem 3ii
+		\item[] {\large 3ii)}
+		Show that $\sum_{k=1}^n k^2 = \frac{1}{6}n(n+1)(2n+1)$.
+		\begin{flalign}
+			\sum_{k=1}^n k^2 &= \frac{1}{6}n(n+1)(2n+1) \nonumber \\
+			\sum_{k=1}^n \left ( 2\binom{k}{2}+\binom{k}{1} \right ) &=\;\;\; via\; 3i \nonumber \\
+			2\sum_{k=2}^n \binom{k}{2} + \sum_{k=1}^n \binom{k}{1} &= \nonumber \\
+			2\binom{n+1}{3} + \binom{n+1}{2} &=\;\;\; via\; "Hockey-Stick"\; Identity \nonumber \\
+			\frac{2}{3}(n+1)\binom{n}{2} + \frac{1}{2}(n+1)\binom{n}{1} &=\;\;\; via\; "Committee-Chair"\; Identity \nonumber \\
+			\frac{1}{6}(n+1)\left ( 4\binom{n}{2} + 3\binom{n}{1} \right ) &= \nonumber \\
+			\frac{1}{6}(n+1)( 2n^2 + n ) &=\;\;\; via\; 3i \nonumber \\
+			\frac{1}{6}n(n+1)(2n+1) &= \frac{1}{6}n(n+1)(2n+1)\;\; \blacksquare \nonumber
+		\end{flalign}
+	\end{itemize}
+
+	% problem 4
+	\item[] {\large 4)}
+	\begin{itemize}
+		% problem 4i
+		\item[] {\large 4i)}
+		Let $p$ be a prime number and $0< k < p$. Show that $p|\binom{p}{k}$. \\
+		Observe that $\binom{p}{k}=\frac{p}{p-k}\binom{p-1}{k}$. Also we know that
+		$\binom{p}{k} \in \mathbb{Z}$ and that $\binom{p-1}{k} \in \mathbb{Z}$. \\
+		Let us consider the case where $p-k=1$, this provides $p|p\binom{p-1}{k}$,
+		which is clearly true. \\
+		If $p-k > 1$, then $p-k \cancel{|} p$ since it is prime. That would imply that
+		$p-k | \binom{p-1}{k}$ since $\binom{p}{k} \in \mathbb{Z}$. Futhermore
+		$\frac{1}{p-k}\binom{p-1}{k} \in \mathbb{Z}$ thus $p|\frac{p}{p-k}\binom{p-1}{k}$.
+		$\blacksquare$
+
+		% problem 4ii
+		\item[] {\large 4ii)}
+		Show that $a^p \equiv a\; (mod\; p)$ given $a \in \mathbb{N}$ and $p$ is prime. \\
+		Base case $a=1$, $1^p \equiv 1\; (mod\; p)$ clearly holds. \\
+		Inductive step, assume $a^p \equiv a\; (mod\; p)$, show that $(a+1)^p \equiv a+1\; (mod\; p)$.
+		\begin{flalign}
+			(a+1)^p &\equiv a+1\; (mod\; p) \nonumber \\
+			\sum_{k=0}^p \binom{p}{k} a^k 1^{p-k} &\equiv\;\;\; via\; Binomial\; Thm \nonumber \\
+			\binom{p}{p}a^p + \binom{p}{0}a^0 + \sum_{k=1}^{p-1} \binom{p}{k} a^k &\equiv \nonumber \\
+			a^p + 1 + \sum_{k=1}^{p-1} \binom{p}{k} a^k &\equiv \nonumber
+		\end{flalign}
+		From $4i$ we know that $p|\binom{p}{k}$ if $0< k < p$ and $p$ is prime. Thus every term
+		in $\sum_{k=1}^{p-1} \binom{p}{k} a^k$ is divisible by $p$. Therefore
+		\begin{flalign}
+			a^p + 1 &\equiv a + 1\; (mod\; p) \nonumber \\
+			a^p &\equiv a\; (mod\; p) \nonumber
+		\end{flalign}
+		Based on the assumption this holds, therefore
+		$\forall a \in \mathbb{N},\; prime\; p,\;\; a^p \equiv a\; (mod\; p).\;\;\; \blacksquare$
+	\end{itemize}
+
+	% problem 5
+	\item[] {\large 5)}
+	A six-sided die is rolled repeatedly until all the numbers one through six have appeared
+	at least once each. What is the probability that this happens in the first $n$ rolls?
+	Use a calculator to find the first $n$ where the probability exceeds 0.5. \\
+	By using the princible of inclusion-exclusion, the number of cases where all faces
+	occur in the first $n$ rolls should be the cardinality of the entire universe, then
+	subtracting all cases where one character does not appear, adding all cases where
+	two characters do not appear, and so on until we reach the case where zero characters
+	appear. This provides
+	\begin{flalign}
+		\binom{6}{0}6^n - \binom{6}{1}5^n + \binom{6}{2}4^n &- \binom{6}{3}3^n + \binom{6}{4}2^n - \binom{6}{5}1^n + \binom{6}{0}0^n \nonumber \\
+		&\sum_{k=0}^{6} (-1)^n\binom{6}{k}(6-k)^n \nonumber
+	\end{flalign}
+	The total cardinality of the universe is $6^n$ thus the probability is
+	\begin{flalign}
+		\frac{1}{6^n} \sum_{k=0}^{6} (-1)^n\binom{6}{k}(6-k)^n \nonumber
+	\end{flalign}
+	The first value of $n$ that results in a probability greater than 0.5 is 13,
+	evaluating to roughly 51.4\%.
+
+
+\end{itemize}
+
+\end{document}

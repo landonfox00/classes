@@ -1,0 +1,90 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, mathrsfs, mathtools}
+\usepackage[margin=0.5in]{geometry}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 285 \\
+\noindent August 7, 2020
+
+\begin{center}
+\Large Quiz 5
+\end{center}
+
+\begin{enumerate}
+	\item[\textbf{1.}] Use the definition if the Laplace Transform to find $\mathscr{L}\{f(t)\}$ given
+		$$ f(x) = \begin{cases} t; & 0 \leq t < 1 \\ 1; & t \geq 1 \end{cases}. $$
+
+		\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+			\begin{align*}
+				\mathscr{L}\{f(t)\} &= \int_0^\infty e^{-st} f(t)\; \mathrm{d}t \\
+				&= \int_0^1 te^{-st}\; \mathrm{d}t + \int_1^\infty e^{-st}\; \mathrm{d}t \\
+				&= \left [ -\frac{te^{-st}}{s} - \frac{e^{-st}}{s^2} \right ]_0^1 + \left [ -\frac{e^{-st}}{s} \right ]_1^\infty \;\;\;\;\; \mathrm{Using\; integration\; by\; parts} \\
+				&= -\frac{e^{-s}}{s} - \frac{e^{-s}}{s^2} + \frac{1}{s^2} + \frac{e^{-s}}{s} - \lim_{t \to \infty} \frac{e^{-st}}{s} \\
+				\mathscr{L}\{f(t)\} &= \frac{1 - e^{-s}}{s^2}
+			\end{align*}
+		\end{proof}
+
+
+	\item[\textbf{2.}] Find the inverse Laplace Transform $$\mathscr{L}^{-1} \left \{ \frac{6}{s^2 + 49} \right \}.$$
+
+		\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+			\begin{align*}
+				\mathscr{L}^{-1} \left \{ \frac{6}{s^2 + 49} \right \} &= \frac{6}{7} \mathscr{L}^{-1} \left \{ \frac{7}{s^2 + 49} \right \} \\
+				\mathscr{L}^{-1} \left \{ \frac{6}{s^2 + 49} \right \} &= \frac{6}{7} \sin 7t
+			\end{align*}
+		\end{proof}
+
+
+	\item[\textbf{3.}] Find the Laplace Transform $$\mathscr{L}\{t^{11}e^{-7t}\}.$$
+
+		\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+			\begin{align*}
+				\mathscr{L}\{t^{11}e^{-7t}\} &= \mathscr{L}\{t^{11}\}_{s \to s+7} \\
+				&= \left [ \frac{11!}{s^{12}} \right ]_{s \to s+7} \\
+				\mathscr{L}\{t^{11}e^{-7t}\} &= \frac{11!}{(s+7)^{12}}
+			\end{align*}
+		\end{proof}
+
+
+	\item[\textbf{4.}] Find the Inverse Laplace Transform $$\mathscr{L}^{-1} \left \{ \frac{1}{(s-3)^3} \right \}.$$
+
+		\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+			\begin{align*}
+				\mathscr{L}^{-1} \left \{ \frac{1}{(s-3)^3} \right \} &= e^{3t} \mathscr{L}^{-1} \left \{ \frac{1}{s^3} \right \} \\
+				&= \frac{1}{2} e^{3t} \mathscr{L}^{-1} \left \{ \frac{2}{s^3} \right \} \\
+				\mathscr{L}^{-1} \left \{ \frac{1}{(s-3)^3} \right \} &= \frac{1}{2} t^2 e^{3t}
+			\end{align*}
+		\end{proof}
+
+
+	\item[\textbf{5.}] Use the Laplace Transform to solve the differential equation given the initial conditions $$y'' + 9y = \cos 3t;\;\; y(0) = 4,\; y'(0) = 2.$$
+
+		\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+			Let us first apply the Laplace Transform to the differential equation and attempt to solve for $\mathscr{L}\{y\} = Y$.
+			\begin{align*}
+				\mathscr{L}\{y'' + 9y\} &= \mathscr{L}\{\cos 3t\} \\
+				s^2Y - sy(0) - y'(0) + 9Y &= \frac{s}{s^2 + 9} \\
+				(s^2 + 9)Y &= \frac{s}{s^2 + 9} + 4s - 2 \\
+				Y &= \frac{4s^3 + 2s^2 + 37s + 18}{(s^2 + 9)^2}
+			\end{align*}
+			Before applying the Inverse Laplace Transform, let us apply partial fraction to simplify $Y$.
+			\begin{align*}
+				\frac{4s^3 + 2s^2 + 37s + 18}{(s^2 + 9)^2} &= \frac{\alpha s + \beta}{s^2 + 9} + \frac{\gamma s + \delta}{(s^2 + 9)^2} \\
+				4s^3 + 2s^2 + 37s + 18 &= (\alpha s + \beta)(s^2 + 9) + \gamma s + \delta \\
+				4s^3 + 2s^2 + 37s + 18 &= \alpha s^3 + \beta s^2 + (9 \alpha + \gamma)s + (9\beta + \delta) \\
+			\end{align*}
+			The above equation illustrates that $\alpha = 4$, $\beta = 2$, $\gamma = 37 - 9\alpha = 1$, $\delta = 18 - 9\beta = 0$. Thus, $$Y = \frac{4s + 2}{s^2 + 9} + \frac{s}{(s^2 + 9)^2}.$$
+			Now applying the Inverse Laplace Transform,
+			\begin{align*}
+				\mathscr{L}^{-1}\{Y\} &= \mathscr{L}^{-1} \left \{\frac{4s + 2}{s^2 + 9} + \frac{s}{(s^2 + 9)^2} \right \} \\
+				y &= \mathscr{L}^{-1} \left \{\frac{4s + 2}{s^2 + 9} + \frac{s}{(s^2 + 9)^2} \right \} \\
+				&= \mathscr{L}^{-1} \left \{ 4\frac{s}{s^2 + 9} + \frac{2}{3}\frac{3}{s^2 + 9} + \frac{1}{6}\frac{6s}{(s^2 + 9)^2} \right \} \\
+				&= 4\cos 3t + \frac{2}{3}\sin 3t + \frac{1}{6}t\sin 3t \\
+				y &= 4\cos 3t + \frac{1}{6}(t + 4)\sin 3t
+			\end{align*}
+		\end{proof}
+\end{enumerate}
+
+\end{document}

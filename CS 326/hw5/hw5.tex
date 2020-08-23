@@ -1,0 +1,118 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage[margin=0.5in]{geometry}
+\footskip = -0.75in
+
+\begin{document}
+
+% title page
+\title{Homework 5}
+\author{Landon Fox}
+\date{April 9, 2020}
+
+\begin{flushleft}
+Landon Fox \\
+CS 326 \\
+Section 1001 \\
+April 9, 2020
+\end{flushleft}
+\begin{center}
+\Large Homework 5
+\end{center}
+
+\begin{itemize}
+	% problem 1
+	\item[] {\large 1)}
+	Let us consider the size of a single record. The record has the following
+	items: $short$, $char$, $short$, $char$, $real$, $integer$ in that respective
+	order. Knowing that addresses have the following form $n \cdot sizeof( DATA\_TYPE )$;
+	we will have $s$ followed by $c$, then free space until the forth byte where $t$ is
+	located, followed by $d$. Now we must place our $real$ value $r$, the next multiple
+	of the size of a $real$ is 8 where $r$ is located then finally $i$ proceeds it.
+	Resulting in a total of 20 bytes for a single record. \\
+	Therefore 200 bytes are required to allocate an array of 10 records. \\
+
+	% problem 2
+	\item[] {\large 2)}
+	\begin{itemize}
+		% problem 2a
+		\item[] {\large 2a)}
+		Structural equiviliance: $a,\, b,\, c,\, d$ \\
+
+		% problem 2b
+		\item[] {\large 2b)}
+		Strict name equiviliance: $a,\, b$ \\
+
+		% problem 2c
+		\item[] {\large 2c)}
+		Loose name equiviliance: $a,\, b,\, c$ \\
+	\end{itemize}
+
+	% problem 3
+	\item[] {\large 3)}
+	The program produces a run-time error because it attempts to use and free
+	memory of a dangling pointer. The pointer $c$ never is assigned to the $Cell$
+	memory. When $c$ is passed into $AllocateCell$, it is a pass by value. $q$ 
+	is then assigned to the memory address, afterwards $q$ is immediately destroyed, 
+	never interacting with $c$. To fix this, allow $c$ to be passed by reference.
+	\begin{lstlisting}[language=C]
+void AllocateCell( Cell** q )
+{
+	q* = ( Cell* ) malloc ( sizeof( Cell ) );
+}
+
+void main()
+{
+	Cell* c;
+	AllocateCell( &c );
+	c->a = 1;
+	free( c );
+}
+	\end{lstlisting}
+
+	% problem 4
+	\item[] {\large 4)}
+	Since this is a 32-bit system, we know that $char$ and $int$ have a size of
+	one and four bytes respectively. Also addresses have the form $4n$, where ours
+	starts specifically at 1000. Each struct in our array takes up 8 bytes due
+	to the 5 from the $int$ and $char$, the rest is free space due to the next
+	multiple of 4. The two dimensional array is one dimensional contiguous array
+	therefore it can be treated as so. \\
+	To find the address of $A[3][7]$ we have the following \\
+	$( col \cdot i + j ) \cdot sizeof( A[0][0] ) + off = ( 10 \cdot 3 + 7 ) \cdot 8 + 1000 = 1296$ \\
+
+	% problem 5
+	\item[] {\large 5)}
+	A union in C stores only one allocation of memory that can be viewed as many
+	different types depending on the variable that is being accessed. This
+	allows data of one type to be viewed as another without casting. The below
+	code illustrates this with primitive data types. For instance a $char$ can be
+	placed in a union to find the respective ascii value when viewed as an $int$.
+	\begin{lstlisting}[language=C]
+#include <stdio.h>
+
+union Type_Conv
+{
+	char c;
+	short s;
+	int i;
+	long l;
+	float f;
+} tc;
+
+int main()
+{
+	tc.c = 21;
+	printf( "%d", tc.i );
+	return 0;
+}
+	\end{lstlisting}
+\end{itemize}
+
+\end{document}

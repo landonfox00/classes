@@ -1,0 +1,261 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage[margin=0.5in]{geometry}
+\footskip = -0.75in
+
+\begin{document}
+
+% title page
+\title{Homework 6}
+\author{Landon Fox}
+\date{April 17, 2020}
+
+\begin{flushleft}
+Landon Fox \\
+STAT 461 \\
+Section 1001 \\
+April 17, 2020
+\end{flushleft}
+\begin{center}
+\Large Homework 6
+\end{center}
+
+\begin{itemize}
+	% problem 1
+	\item[] {\large 3.6.20)}
+	Find $\gamma_1$ given $f_Y(y) = e^{-y};\; y>0$.
+	\begin{flalign}
+		\gamma_1 &= \frac{E[(W - \mu)^3]}{\sigma^3} \nonumber \\
+		&= \frac{\mu_3 - 3\mu_1 \mu_2 + 2\mu_1^3}{(\mu_2 - \mu_1^2)^{\frac{3}{2}}} \nonumber
+	\end{flalign}
+	\begin{flalign}
+		\mu_1 &= \int_0^{\infty} ye^{-y}dy \nonumber \\
+		&= \left [ -e^{-y}(y + 1) \right ]_0^{\infty}\; via\, integration\, by\, parts\nonumber \\
+		&= -\lim_{y \rightarrow \infty} \left [ \frac{y}{e^y} \right ] + 1 \nonumber \\
+		\mu_1 &= 1 \nonumber \\
+		\mu_2 &= \int_0^{\infty} y^2e^{-y}dy \nonumber \\
+		&= \left [ -e^{-y}(y^2 + 2y + 2) \right ]_0^{\infty}\; via\, integration\, by\, parts \nonumber \\
+		&= -\lim_{y \rightarrow \infty} \left [ \frac{y^2}{e^y} + \frac{2y}{e^y} + \frac{2}{e^y} \right ] + 2 \nonumber \\
+		\mu_2 &= 2 \nonumber \\
+		\mu_3 &= \int_0^{\infty} y^3e^{-y}dy \nonumber \\
+		&= \left [ -e^{-y}(y^3 + 3y^2 + 6y + 6) \right ] _0^{\infty}\; via\, integration\, by\, parts \nonumber \\
+		&= -\lim_{y \rightarrow \infty} \left [ \frac{y^3}{e^y} + \frac{3y^2}{e^y} + \frac{6y}{e^y} + \frac{6}{e^y} \right ] + 6 \nonumber \\
+		\mu_3 &= 6 \nonumber
+	\end{flalign}
+	\begin{flalign}
+		\gamma_1 &= \frac{6 - 3 \cdot 2 + 2}{(2 - 1)^{\frac{3}{2}}} \nonumber \\
+		\gamma_1 &= 2 \nonumber
+	\end{flalign}
+	\newpage
+
+	% problem 2
+	\item[] {\large 2)}
+	$f_X(x) = \frac{1}{b - a};\; a > 0,\, b > 0$
+	\begin{itemize}
+		% problem 2a
+		\item[] {\large a)}
+		Find the $n$th moment about the origin.
+		\begin{flalign}
+			\mu_n &= E[X^n] \nonumber \\
+			&= \int_a^b \frac{x^n}{b-a} dx \nonumber \\
+			&= \left [ \frac{1}{(b-a)(n+1)} \cdot x^{n+1} \right ]_a^b \nonumber \\
+			\mu_n &= \frac{b^{n+1} - a^{n+1}}{(b-a)(n+1)} \nonumber
+		\end{flalign}
+
+		% problem 2b
+		\item[] {\large b)}
+		Find the $n$th moment about the mean.
+		\begin{flalign}
+			\mu_n' &= E[(X - \mu)^n] \nonumber \\
+			&= \sum_{k=0}^n \binom{n}{k} E[X^k](-\mu)^{n-k} \nonumber \\
+			&= \sum_{k=0}^n \binom{n}{k} \frac{b^{k+1} - a^{k+1}}{(b-a)(k+1)}(-\mu)^{n-k}\; via\, 2a \nonumber
+		\end{flalign}
+		\begin{flalign}
+			\mu &= \int_a^b \frac{x}{b-a} dx \nonumber \\
+			&= \left [ \frac{1}{b-a} \cdot \frac{1}{2} x^2 \right ]_a^b \nonumber \\
+			&= \frac{b^2-a^2}{2(b-a)} \nonumber \\
+			\mu &= \frac{1}{2}(b+a) \nonumber
+		\end{flalign}
+		\begin{flalign}
+			\mu_n' =& \sum_{k=0}^n \binom{n}{k} \frac{b^{k+1} - a^{k+1}}{(b-a)(k+1)}\left (-\frac{1}{2}(b+a) \right )^{n-k} \nonumber
+		\end{flalign}
+	\end{itemize}
+
+	% problem 3
+	\item[] {\large 3.7.2)}
+	Find $c$ given $f_{X,Y}(x,y)=c(x^2+y^2);\; 0 \leq x \leq 1,\, 0 \leq y \leq 1$.
+	\begin{flalign}
+		know\;\;\; \int_0^1 \int_0^1 f_{X,Y}(x,y)\, dydx &= 1 \nonumber \\
+		\int_0^1 \left [ c(x^2y + \frac{1}{3}y^3) \right ]_0^1\, dx &= \nonumber \\
+		\int_0^1 c(x^2 + \frac{1}{3})\, dx &= \nonumber \\
+		\left [ c(\frac{1}{3}x^3 + \frac{1}{3}x) \right ]_0^1 &= \nonumber \\
+		\frac{2}{3}c &= 1 \nonumber \\
+		c &= \frac{3}{2} \nonumber
+	\end{flalign}
+
+	% problem 4
+	\item[] {\large 3.7.11)}
+	Find $P(Y < 3X)$ given $f_{X,Y}(x,y)=2e^{-(x+y)};\; 0 \leq x \leq y \leq 1,\, \leq 0 \leq y$
+	\begin{flalign}
+		P(Y < 3X) &= \int_0^{\infty} \int_x^{3x} f_{X,Y}(x,y)\, dydx \nonumber \\
+		&= \int_0^{\infty} \int_x^{3x} 2e^{-(x+y)}\, dydx \nonumber \\
+		&= 2 \int_0^{\infty} \left [ e^{-x} \cdot e^{-y} \right ]_x^{3x}\, dx \nonumber \\
+		&= 2 \int_0^{\infty} (e^{-2x} - e^{-4x})\, dx\nonumber \\
+		&= 2 \left [ (\frac{1}{4}e^{-4x} - \frac{1}{2}e^{-2x}) \right ]_0^{\infty} \nonumber \\
+		&= \lim_{x \rightarrow \infty} \left [ \frac{1}{2}e^{-4x} - e^{-2x} \right ] - (\frac{1}{2} - 1) \nonumber \\
+		P(Y < 3X) &= \frac{1}{2} \nonumber
+	\end{flalign}
+
+	% problem 5
+	\item[] {\large 3.7.19)}
+	Find $f_X(x)$ and $f_Y(y)$.
+	\begin{itemize}
+		% problem 5a
+		\item[] {\large b)}
+		Given $f_{X,Y}(x,y)=\frac{3}{2}y^2;\; 0 \leq x \leq 2,\, 0 \leq y \leq 1$.
+		\begin{flalign}
+			f_X(x) &= \int_0^1 f_{X,Y}(x,y) dy \nonumber \\
+			&= \int_0^1 \frac{3}{2}y^2 dy \nonumber \\
+			&= \left [ \frac{3}{2} \cdot \frac{1}{3}y^3 \right ]_0^1 \nonumber \\
+			f_X(x) &= \frac{1}{2} \nonumber
+		\end{flalign}
+		\begin{flalign}
+			f_Y(y) &= \int_0^2 f_{X,Y}(x,y) dx \nonumber \\
+			&= \int_0^2 \frac{3}{2}y^2 dx \nonumber \\
+			&= \left [ \frac{3}{2}xy^2 \right ]_0^2 \nonumber \\
+			f_Y(y) &= 3y^2 \nonumber
+		\end{flalign}
+
+		% problem 5b
+		\item[] {\large d)}
+		Given $f_{X,Y}(x,y)=c(x+y);\; 0 \leq x \leq 1,\, 0 \leq y \leq 1$.
+		\begin{flalign}
+			f_X(x) &= \int_0^1 f_{X,Y}(x,y) dy \nonumber \\
+			&= \int_0^1 c(x+y) dy \nonumber \\
+			&= \left [ c(xy+\frac{1}{2}y^2) \right ]_0^1 \nonumber \\
+			f_X(x) &= c(x+\frac{1}{2}) \nonumber
+		\end{flalign}
+		\begin{flalign}
+			f_Y(y) &= \int_0^1 f_{X,Y}(x,y) dx \nonumber \\
+			&= \int_0^1 c(x+y) dx \nonumber \\
+			&= \left [ c(\frac{1}{2}x^2+xy) \right ]_0^1 \nonumber \\
+			f_Y(y) &= c(y+\frac{1}{2}) \nonumber
+		\end{flalign}
+		\begin{flalign}
+			know\;\;\; \int_0^1 \int_0^1 f_{X,Y}(x,y) dydx &= 1 \nonumber \\
+			\int_0^1 \int_0^1 c(x+y) dydx &= \nonumber \\
+			\int_0^1 \left [ c(xy+\frac{1}{2}y^2) \right ]_0^1 dx &= \nonumber \\
+			\int_0^1 c(x+\frac{1}{2}) dx &= \nonumber \\
+			\left [ c(\frac{1}{2}x^2 + \frac{1}{2}x) \right ]_0^1 &= \nonumber \\
+			c &= 1 \nonumber
+		\end{flalign}
+		\begin{flalign}
+			f_X(x) &= x+\frac{1}{2} \nonumber \\
+			f_Y(y) &= y+\frac{1}{2} \nonumber
+		\end{flalign}
+	\end{itemize}
+
+	% problem 6
+	\item[] {\large 3.7.26)}
+	Find $F_{X,Y}(1,2)$.
+	\begin{flalign}
+		p_{X,Y}(x,y) &= \frac{ \binom{5}{x} \binom{4}{y} \binom{3}{4-x-y} }{ \binom{12}{4} };\; 0 \leq x \leq 5,\, 0 \leq y \leq 4,\, x+y \leq 4 \nonumber \\
+		F_{X,Y}(u,v) &= \sum_{x=0}^u \sum_{y=0}^v \frac{ \binom{5}{x} \binom{4}{y} \binom{3}{4-x-y} }{ \binom{12}{4} } \nonumber \\
+		F_{X,Y}(1,2) &= \frac{1}{495} \sum_{x=0}^1 \sum_{y=0}^2 \binom{5}{x} \binom{4}{y} \binom{3}{4-x-y} \nonumber \\
+		&= \frac{1}{495} (4+18+5+60+90) \nonumber \\
+		F_{X,Y}(1,2) &= \frac{59}{165} \nonumber
+	\end{flalign}
+	\newpage
+
+	% problem 7
+	\item[] {\large 3.7.27)}
+	Find $F_{X,Y}(u,v)$ given $f_{X,Y}(x,y)=4xy;\; 0 \leq x \leq 1,\, 0 \leq y \leq 1$.
+	\begin{flalign}
+		F_{X,Y}(u,v) &= \int_0^u \int_0^v 4xy\, dydx \nonumber \\
+		&= 4\int_0^u x\,dx \cdot \int_0^v y\,dy \nonumber \\
+		&= 4 \cdot \frac{1}{2}u^2 \cdot \frac{1}{2}v^2 \nonumber \\
+		F_{X,Y}(u,v) &= u^2v^2 \nonumber
+	\end{flalign}
+
+	% problem 8
+	\item[] {\large 3.7.30)}
+	Find $f_{X,Y}(x,y)$ given $F_{X,Y}(u,v)=(1-e^{-\lambda u})(1-e^{-\lambda v});\; x > 0,\, y > 0$.
+	\begin{flalign}
+		f_{X,Y}(x,y) &= \frac{\partial^2 }{\partial x\partial y} F_{X,Y}(x,y) \nonumber \\
+		&= \frac{\partial^2 }{\partial x\partial y} (1-e^{-\lambda x})(1-e^{-\lambda y}) \nonumber \\
+		&= \frac{d}{dx}(1-e^{-\lambda x}) \cdot \frac{d}{dy}(1-e^{-\lambda y}) \nonumber \\
+		&= \lambda e^{-\lambda x} \cdot \lambda e^{-\lambda y} \nonumber \\
+		f_{X,Y}(x,y) &= \lambda^2 e^{-\lambda(x+y)} \nonumber
+	\end{flalign}
+
+	% problem 9
+	\item[] {\large 3.7.39)}
+	Show that $X$ and $Y$ are independent and find their marginal pdfs given \\
+	$f_{X,Y}(x,y)=\lambda^2 e^{-\lambda(x+y)};\; x \geq 0,\, y \geq 0$.
+	\begin{flalign}
+		f_X(x) &= \int_0^{\infty} \lambda^2 e^{-\lambda(x+y)} dy \nonumber \\
+		&= \lambda^2 e^{-\lambda x} \cdot \left [ -\frac{1}{\lambda} e^{-\lambda y} \right ]_0^\infty \nonumber \\
+		&= \lambda e^{-\lambda x} \left ( 1 - \lim_{y \rightarrow \infty} e^{-\lambda y} \right ) \nonumber \\
+		f_X(x) &= \lambda e^{-\lambda x} \nonumber
+	\end{flalign}
+	\begin{flalign}
+		f_Y(y) &= \int_0^{\infty} \lambda^2 e^{-\lambda(x+y)} dx \nonumber \\
+		&= \lambda^2 e^{-\lambda y} \cdot \left [ -\frac{1}{\lambda} e^{-\lambda x} \right ]_0^\infty \nonumber \\
+		&= \lambda e^{-\lambda y} \left ( 1 - \lim_{x \rightarrow \infty} e^{-\lambda x} \right ) \nonumber \\
+		f_Y(y) &= \lambda e^{-\lambda y} \nonumber
+	\end{flalign}
+	\begin{flalign}
+		f_{X,Y}(x,y) &= \lambda^2 e^{-\lambda(x+y)} \nonumber \\
+		&= \lambda e^{-\lambda x} \cdot \lambda e^{-\lambda y} \nonumber \\
+		f_{X,Y}(x,y) &= f_X(x) \cdot f_Y(y) \nonumber
+	\end{flalign}
+
+	% problem 10
+	\item[] {\large 3.7.44)}
+	Find $F_{X,Y}(u,v)$ given $X$ and $Y$ are independent and $f_X(x)=\frac{x}{2},\; f_Y(y)=2y;$ \\ $0 \leq x \leq 2,\, 0 \leq y \leq 1$.
+	\begin{flalign}
+		F_X(u) &= \int_0^u \frac{x}{2}\, dx \nonumber \\
+		&= \left [ \frac{x^2}{4} \right ]_0^u \nonumber \\
+		F_X(u) &= \frac{u^2}{4} \nonumber
+	\end{flalign}
+	\begin{flalign}
+		F_Y(v) &= \int_0^v 2y\, dy \nonumber \\
+		&= \left [ y^2 \right ]_0^v \nonumber \\
+		F_Y(v) &= v^2 \nonumber
+	\end{flalign}
+	\begin{flalign}
+		F_{X,Y}(u,v) &= F_X(u) \cdot F_Y(v) \nonumber \\
+		F_{X,Y}(u,v) &= \frac{1}{4}u^2v^2 \nonumber
+	\end{flalign}
+
+	% problem 11
+	\item[] {\large 3.8.1)}
+	Find $p_W(w)$ if $W=X+Y$ and $p_X(k)=e^{-\lambda}\frac{\lambda^k}{k!},\; p_Y(k)=e^{-\mu}\frac{\mu^k}{k!};\; k=0,1,2, \hdots$
+	\begin{flalign}
+		p_W(w) &= \sum_{k=0}^w p_X(k)p_Y(w-k) \nonumber \\
+		&= \sum_{k=0}^w e^{-\lambda}\frac{\lambda^k}{k!} \cdot e^{-\mu}\frac{\mu^k}{k!} \nonumber \\
+		&= \frac{e^{-(\lambda + \mu)}}{w!} \sum_{k=0}^w \frac{w!}{(w-k)!k!} \lambda^k \mu^{w-k} \nonumber \\
+		p_W(w) &= e^{-(\lambda + \mu)} \frac{(\lambda + \mu)^w}{w!};\; w=0,1,2, \hdots \nonumber
+	\end{flalign}
+	Observe that $p_W(w)$ is within the same family of pdfs as $p_X(k)$ and $p_Y(k)$ with the constant $\lambda + \mu$.
+
+	% problem 13
+	\item[] {\large 3.8.11)}
+	Find $f_W(w)$ if $W=\frac{Y}{X}$ and $f_X(x)=xe^{-x},\; f_Y(y)=e^{-y};\; x \geq 0,\, y \geq 0$.
+	\begin{flalign}
+		f_W(w) &= \int_0^\infty |x| f_X(x)f_Y(wx)\,dx \nonumber \\
+		&= \int_0^\infty x \cdot xe^{-x} \cdot e^{-wx}\,dx \nonumber \\
+		&= \int_0^\infty x^2e^{-x(w+1)}\,dx \nonumber \\
+		&= \left [ -e^{-x(w+1)} \left ( \frac{x^2}{w+1} + \frac{2x}{(w+1)^2} + \frac{2}{(w+1)^3} \right ) \right ]_0^\infty\; via\, integration\, by\, parts \nonumber \\
+		&= -\lim_{x \rightarrow \infty} \left [ -e^{-x(w+1)} \left ( \frac{x^2}{w+1} + \frac{2x}{(w+1)^2} + \frac{2}{(w+1)^3} \right ) \right ] + \frac{2}{(w+1)^3} \nonumber \\
+		f_W(w) &= \frac{2}{(w+1)^3};\; w \geq 0 \nonumber
+	\end{flalign}
+\end{itemize}
+
+\end{document}

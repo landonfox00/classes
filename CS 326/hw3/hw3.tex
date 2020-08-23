@@ -1,0 +1,70 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{mathdots}
+\usepackage[margin=.75in]{geometry}
+
+\begin{document}
+
+% title page
+\title{%
+	Homework 3 \\
+	\large CS 326 \\
+	Section 1001}
+\author{Landon Fox}
+\date{February 27, 2020}
+\maketitle
+\newpage
+
+\begin{itemize}
+	\item[] {1) \large}
+	$6$ variables; $24$ bytes. Once it reaches the third nested scope where $f$ is defined, $6$ variables are active. Once it starts leaving the scopes, the memory is freed.
+	 When entering/leaving the other scopes there is only $6$ or less active bindings, making $6$ the maximum.
+
+	 \item[] {2) \large}
+	 Z: real, variable inside procedure R body. \\
+	 A: real, variable within procedure R parameters. \\
+	 C: real, variable within procedure R parameters. \\
+	 R: procedure, inside procedure P body. \\
+	 Q: procedure, inside procedure P body. \\
+	 X: real, variable inside procedure P body. \\
+	 B: real, variable within procedure P parameters. \\
+	 P: procedure, inside global context.
+
+	 \item[] {3) \large}
+	 \begin{itemize}
+	 	\item[] a)
+	 	$inner$ print: $3, 1$ \\
+	 	$middle$ print: $3, 1$ \\
+	 	$main$ print: $1, 2$
+
+	 	\item[] b)
+	 	$inner$ print: $symantic\, error$ \\
+	 	$middle$ print: $symantic\, error$ \\
+	 	$main$ print: $1, 2$ (assuming you can print after an error)
+
+	 	\item[] c)
+	 	$inner$ print: $1, 2$ \\
+	 	$middle$ print: $1, 2$ \\
+	 	$main$ print: $1, 2$
+	 \end{itemize}
+
+	 \item[] {4) \large}
+	 \begin{itemize}
+	 	\item[] a)
+	 	$x=3$
+
+	 	\item[] b)
+	 	$x=4$
+
+	 	\item[] c)
+	 	$x=1$
+
+	 \end{itemize}
+\end{itemize}
+
+\end{document}

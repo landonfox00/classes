@@ -1,0 +1,139 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{mathtools}
+\footskip = -0.75in
+\lstset{
+    tabsize=2
+}
+
+\begin{document}
+
+% title page
+\title{Homework 6}
+\author{Landon Fox}
+\date{April 21, 2020}
+
+\begin{flushleft}
+Landon Fox \\
+CS 326 \\
+Section 1001 \\
+April 21, 2020
+\end{flushleft}
+\begin{center}
+\Large Homework 6
+\end{center}
+
+\begin{itemize}
+	% problem 1
+	\item[] {\large 1)}
+	\begin{itemize}
+		% problem 1a
+		\item[] {\large 1a)}
+		$i$ appears to remember its value because $foo$'s stack frame data still exists. The frame is popped off the stack marked unused
+		however the data still remains waiting for the next subroutine to erase it. Moreover, $i$'s data still remains and is
+		incremented each call of $foo$. If another subroutine was to be called that required the same storage then overworte it, the data 
+		will no longer remain.
+
+		% problem 1b
+		\item[] {\large 1b)}
+		\begin{lstlisting}[language=C]
+void foo() 
+{
+	int i;
+	printf( "%d ", i++ );
+}
+
+void bar()
+{
+	int a = 5;
+	int b = 6;
+	int c = a + b;
+}
+
+void main() 
+{
+	for ( int j = 1; j <= 10; j++ )
+	{
+		foo();
+		bar();
+	}
+}
+		\end{lstlisting}
+
+	\end{itemize}
+
+	% problem 2
+	\item[] {\large 2)}
+	No, macros use the preprocessor to replace all instances of itself with its definition. It is not capable of recursion because
+	the preprocessor lacks the ability to copying code in a variable amount.
+
+	% problem 3
+	\item[] {\large 3)}
+	\begin{itemize}
+		% problem 3a
+		\item[] {\large 3a)}
+		For a language that passes by value, a function $swap(X,Y)$ cannot exist when given only the values of variables that need to be
+		swapped. Assuming we do not have access to the addresses of the variables $X$ and $Y$, it's impossible to assign them.
+
+		% problem 3b
+		\item[] {\large 3b)}
+		For a language that passes by name, a function $swap(X,Y)$ cannot exist because of cases when the arguments are dependent of
+		one another. For example if we called $swap(i, a[i])$, it is impossible to swap their values because altering one may affect
+		the other.
+	\end{itemize}
+	\newpage
+
+	% problem 4
+	\item[] {\large 4)}
+	\begin{itemize}
+		% problem 4a
+		\item[] {\large 4a)}
+		Parameters passed by value are copies of the original data thus $1,\, 10,\, 11$.
+
+		% problem 4b
+		\item[] {\large 4b)}
+		Parameters passed by reference alter the data of the address thus $3,\, 2,\, 11$.
+		\begin{lstlisting}
+i := i + 1   // i = 2
+a[1] := i    // a[1] = 2
+i := i + 1   // i = 3
+		\end{lstlisting}
+
+		% problem 4c
+		\item[] {\large 4c)}
+		Parameters passed by value-result create a copy of the data which is writen back. The results are ambiguous.
+		\begin{lstlisting}
+x_t := i; y_z := a[i]; z_t := i // x_t = 1, y_z = 10, z_t = 1
+
+x_t := x_t + 1   // x_t = 2
+y_t := z_t       // y_t = 1
+z_t := z_t + 1   // z_t = 2
+		\end{lstlisting}
+		The two potentially ambiguous issues are the assignment of $i$, will it be $x\_t$ or $z\_t$? In this case it would be $2$.
+		Also we no longer know the index of $a[i]$, would we use the original value or the new value of $i$ to assign $a[i]$?
+
+		% problem 4d
+		\item[] {\large 4d)}
+		Parameters passed by name copy their respective names thus $3,\, 10,\, 2$.
+		\begin{lstlisting}
+i := i + 1   // i = 2
+a[i] := i    // a[2] = 2
+i := i + 1   // i = 3
+		\end{lstlisting}
+	\end{itemize}
+
+	% problem 5
+	\item[] {\large 5)}
+	Yes, the omitted parameters will not need to be assigned thus less operations needed, less time required.
+
+
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,183 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, mathtools}
+\usepackage[margin=0.5in]{geometry}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 330 \\
+\noindent July 28, 2020
+
+\begin{center}
+\Large Homework 2
+\end{center}
+
+\begin{enumerate}
+	\item[\textbf{1.}] Let $A$ be any $n \times n$ matrix.
+		\begin{enumerate}
+			\item[\textbf{(i)}] Show that $A + A^T$ is symmetric and $A - A^T$ is skew-symmetric.
+			\item[\textbf{(ii)}] Show that for any square matrix $A$, there is a unique way to write it as a sum of a symmetric matrix and a skew-symmetric matrix.
+		\end{enumerate}
+
+		\begin{proof}
+			Suppose $A = [ a_{ij} ]$ is an $n \times n$ matrix. By definition, $A^T = [ a_{ji} ]$.
+			\begin{enumerate}
+				\item[\textbf{(i)}] Observe that $A + A^T = [ a_{ij} + a_{ji} ] = [ a_{ji} + a_{ij} ] = (A + A^T)^T$. Thus by definition, $A + A^T$ is symmetric. \\
+					Similarly we can see that $-(A - A^T) = [ -a_{ij} + a_{ji} ] = [ a_{ji} - a_{ij} ] = (A - A^T)^T$. Thus by definition, $A - A^T$ is skew-symmetric.
+
+				\item[\textbf{(ii)}] Let us begin by showing uniqueness. Suppose by contradiction that there exists symmetric matrices $B_1$, $B_2$ and skew-symmetric matrices
+					$C_1$, $C_2$ such that $A = B_1 + C_1 = B_2 + C_2$. Let us now take the transpose of the equality, $$B_1 - C_1 = B_1^T + C_1^T = (B_1 + C_1)^T =
+					(B_2 + C_2)^T = B_2^T + C_2^T = B_2 - C_2$$ which follows due to transpose properties as well as symmetric and skew-symmetric definitions. Now we have
+					$B_1 + C_1 = B_2 + C_2$ and $B_1 - C_1 = B_2 - C_2$; adding the equalities gives us $$2B_1 = B_1 + C_1 + B_1 - C_1 = B_2 + C_2 + B_2 - C_2 = 2B_2.$$ it
+					follows that $B_1 = B_2$; additionally, this implies that $C_1 = C_2$. Thus the symmetric and skew-symmetric matrices $B$, $C$ are unique. \\
+
+					It is clearly true that any constant multiple of a symmetric matrix and a skew-symmetric matrix shall also be symmetric and skew-symmetric, respectively.
+					Then we can see that both $\frac{1}{2}(A + A^T)$ and $\frac{1}{2}(A - A^T)$ maintain their symmetry based on the results of \textbf{(i)}. Thus
+					$A = \frac{1}{2}(A + A^T) + \frac{1}{2}(A - A^T)$ is clearly true and its sum is unique.
+			\end{enumerate}
+		\end{proof}
+
+
+	\item[\textbf{2.}] An elementary interchange matrix is an elementary matrix obtained only by a single interchange row operation. A product of elementary interchange
+		matrices is called a permutation matrix. If $P$ is a permutation matrix, then show that $P^{-1} = P^T$. \\
+
+		\textbf{Lemma}. Any elementary interchange matrix is symmetric.
+
+		\begin{proof}[Lemma Proof]
+			Suppose $E$ is an $n \times n$ elementary interchange matrix. By definition, $E$ is the identity matrix with one row swapped with another. Let row $i$ swap with
+			row $j$. Then we can see that $e_{ii} = e_{jj} = 0$ and $e_{ij} = e_{ji} = 1$. We know that the identity matrix is naturally symmetric; additionally, any terms
+			down the diagonal do not affect symmetry. Thus $E$ is symmetric.
+		\end{proof}
+
+		\begin{proof}
+			Suppose $P$ is a permutation matrix such that $P = E_k E_{k-1} \hdots E_1$, where $E_i$ is an elementary interchange matrix for all $i$. Let us now turn to the
+			matrix product
+			$PP^T$, $$PP^T = E_k E_{k-1} \hdots E_1 (E_k E_{k-1} \hdots E_1)^T = E_k E_{k-1} \hdots E_1 E_1^T E_2^T \hdots E_k^T.$$ As a result of our lemma, we know that
+			$E_i = E_i^T$ for all $i$. Additionally, observe that $E_i^2 = I_n$ for all $i$; it is clear that two swapping operations on the same two rows will result in the
+			original orientation. Thus, $$PP^T =  E_k E_{k-1} \hdots (E_1 E_1) E_2 \hdots E_k = E_k E_{k-1} \hdots (E_2 I_n E_2) \hdots E_k = I_n.$$ By the results of
+			\textbf{7 (i)} (see below), we can also conclude that $P^TP = I_n$. Hence, $PP^T = P^TP = I_n$ illustrates that $P^{-1} = P^T$ by the uniqueness of an inverse.
+		\end{proof}
+
+
+	\item[\textbf{3.}] State True or False. Justify your answer.
+		\begin{enumerate}
+			\item[\textbf{(i)}] Given $m \times n$ matrices $A$, $B$, if $A\vec{x} = B\vec{x}$ for every $\vec{x} \in \mathbb{R}^n$, then $A = B$.
+			\item[\textbf{(ii)}] If columns of $B$ are linearly dependent, then columns of $AB$ also are.
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{(i)}] True. Suppose for every $\vec{x} \in \mathbb{R}^n$, $A\vec{x} = B\vec{x}$ for $m \times n$ matrices $A$, $B$. Let
+					$T : \mathbb{R}^n \to \mathbb{R}^m$ such that $T(\vec{x}) = A\vec{x} = B\vec{x}$. We know that there exists a unique matrix that defines the transformation $T$.
+					Moreover, this uniqueness instists that $A = B$.
+				\item[\textbf{(ii)}] False. As a counter-example, suppose that $A = 0_{n \times n}$ and $B = I_n$. Then $AB = 0_{n \times n}$, where the columns of $AB$ are
+					$\vec{0}$, clearly linearly dependent.
+			\end{enumerate}
+		\end{proof}
+
+
+	\item[\textbf{4.}] Let $T \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} x_1 + x_2 \\ x_2 + x_3 \\ x_3 + x_1 \end{pmatrix}$.
+		\begin{enumerate}
+			\item[\textbf{(i)}] Is $T$ a linear transformation?
+			\item[\textbf{(ii)}] Is $T$ injective? Is $T$ surjective?
+			\item[\textbf{(iii)}] If so, then find the expression for $T^{-1} \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix}$.
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{(i)}] True. Let $T \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \begin{pmatrix} x_1 + x_2 \\ x_2 + x_3 \\ x_3 + x_1 \end{pmatrix}$.
+					Let us consider homogeneity of $T$, $$T \begin{pmatrix} cx_1 \\ cx_2 \\ cx_3 \end{pmatrix} =
+					\begin{pmatrix} cx_1 + cx_2 \\ cx_2 + cx_3 \\ cx_3 + cx_1 \end{pmatrix} = c\begin{pmatrix} x_1 + x_2 \\ x_2 + x_3 \\ x_3 + x_1 \end{pmatrix} =
+					cT \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix}.$$
+					Now additivity, $$T \begin{pmatrix} x_1 + y_1 \\ x_2 + y_2 \\ x_3 + y_3 \end{pmatrix} =
+					\begin{pmatrix} x_1 + y_1 + x_2 + y_2 \\ x_2 + y_2 + x_3 + y_3 \\ x_3 + y_3 + x_1 + y_1 \end{pmatrix} =
+					\begin{pmatrix} x_1 + x_2 \\ x_2 + x_3 \\ x_3 + x_1 \end{pmatrix} + \begin{pmatrix} y_1 + y_2 \\ y_2 + y_3 \\ y_3 + y_1 \end{pmatrix} =
+					T \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} + T \begin{pmatrix} y_1 \\ y_2 \\ y_3 \end{pmatrix}.$$ Hence, $T$ is a linear transformation.
+				\item[\textbf{(ii)}] True. Let us now find the matrix equiviliant of $T$ by transforming the cartesian basis vectors $\vec{e_1}$, $\vec{e_2}$, $\vec{e_3}$.
+					\begin{align*}
+						T \left ( \vec{e_1} \right ) &= \begin{pmatrix} 1 \\ 0 \\ 1 \end{pmatrix} \\
+						T \left ( \vec{e_2} \right ) &= \begin{pmatrix} 1 \\ 1 \\ 0 \end{pmatrix} \\
+						T \left ( \vec{e_1} \right ) &= \begin{pmatrix} 0 \\ 1 \\ 1 \end{pmatrix}
+					\end{align*}
+					Now we can see that $$T \left ( \vec{x} \right ) =
+					\begin{bmatrix} T \left ( \vec{e_1} \right ) & T \left ( \vec{e_2} \right ) & T \left ( \vec{e_3} \right ) \end{bmatrix} \vec{x} =
+					\begin{bmatrix} 1 & 1 & 0 \\ 0 & 1 & 1 \\ 1 & 0 & 1 \end{bmatrix} \vec{x}.$$ Observe that $|A| = 1(1-0) - 1(0-1) = 2 \neq 0$. The determinant
+					$|A| \neq 0$ illustrates that $T$ is bijective.
+				\item[\textbf{(iii)}] As shown, we know that $T \left ( \vec{x} \right ) = A\vec{x}$. Then it follows that $T^{-1} \left ( \vec{x} \right ) = A^{-1}\vec{x}$.
+					Let us now compute $A^{-1}$. $$\begin{bmatrix} 1 & 1 & 0 & | & 1 & 0 & 0 \\ 0 & 1 & 1 & | & 0 & 1 & 0 \\ 1 & 0 & 1 & | & 0 & 0 & 1 \end{bmatrix} \sim
+					\begin{bmatrix} 1 & 0 & 0 & | & \frac{1}{2} & -\frac{1}{2} & \frac{1}{2} \\ 0 & 1 & 0 & | & \frac{1}{2} & \frac{1}{2} & -\frac{1}{2} \\ 0 & 0 & 1 & | & -\frac{1}{2} & \frac{1}{2} & \frac{1}{2} \end{bmatrix}.$$
+					Hence, $$T^{-1} \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix} = \frac{1}{2} \begin{bmatrix} 1 & -1 & 1 \\ 1 & 1 & -1 \\ -1 & 1 & 1 \end{bmatrix} \begin{pmatrix} x_1 \\ x_2 \\ x_3 \end{pmatrix}
+					= \frac{1}{2}\begin{pmatrix} x_1 - x_2 + x_3 \\ x_1 + x_2 - x_3 \\ -x_1 + x_2 + x_3 \end{pmatrix}.$$
+			\end{enumerate}
+		\end{proof}
+
+
+	\item[\textbf{5.}] An airline serves five cities, say $A$, $B$, $C$, $D$, $H$. The various routes
+		between the cities is given. Note that visiting a city more than once is allowed. Without listing flights by brute-force find:
+		\begin{enumerate}
+			\item[\textbf{(i)}] How many routes from $A$ to $B$ require exactly three connecting flights?
+			\item[\textbf{(ii)}] How many routes from $A$ to $B$ require no more than four connecting flights?
+		\end{enumerate}
+
+		\textbf{Lemma:} Given an adjacency matrix $G$ of an unweighted, directed or undirected graph, then entry $ij$ of $G^n$ represents the number of walks from node $i$
+			to node $j$ of length $n$.
+
+		\begin{proof}[Lemma Proof]
+			Suppose we have an unweighted graph represented by the adjacency matrix $G$. As a base case let $n=1$, clearly we can see $G^1$ illustrates all nodes that can
+			be accessed via walks of length one. For the inductive step, suppose for every $i$, $j$, $[G^n]_{ij}$ equals the number of unique walks of length $n$ from $i$
+			to $j$. In regard to the entry $[G^{n+1}]_{ij}$, we can see that it is equal to the dot product of row $i$ in $G^n$ and the column $j$ in $G$. The row $i$ in
+			$G^n$ represents walks of length $n$ to all nodes in their repsective column from $i$. The column $j$ in $G$ depicts all nodes that can access node $j$. Thus
+			it is clear that the product between the two vectors is the sum of all walks that can access node $j$ given an additional step. (In fact, this has an equiviliant for weighted graphs, however this is ommited for simplicity).
+		\end{proof}
+
+		\begin{proof}[Computation]\renewcommand{\qedsymbol}{}
+			\begin{enumerate}
+				\item[\textbf{(i)}] Given our graph, we can see our adjacency matrix is $$G = \begin{bmatrix} 0 & 0 & 1 & 0 & 1 \\ 1 & 0 & 0 & 0 & 1 \\ 0 & 0 & 0 & 1 & 1 \\ 0 & 1 & 0 & 0 & 1 \\ 1 & 1 & 1 & 1 & 0 \end{bmatrix}.$$
+					As a result of our lemma, we can see that $[G^3]_{12}$ is the number of unique walks of length three from node $A$ to node $B$. Moreover,
+					$$[G^3]_{12} = \begin{bmatrix} 2 & 3 & 2 & 2 & 5 \\ 2 & 2 & 2 & 3 & 5 \\ 3 & 2 & 2 & 2 & 5 \\ 2 & 2 & 3 & 2 & 5 \\ 5 & 5 & 5 & 5 & 4 \end{bmatrix}_{12} = 3.$$
+				\item[\textbf{(ii)}] Similiar to \textbf{(i)}, we seek the number of walks from $A$ to $B$; however we are now concerned with the sum $$\sum_{n=1}^4 [G^n]_{12} =
+				0 + 1 + 3 + 7 = 11.$$
+			\end{enumerate}
+		\end{proof}
+
+
+	\item[\textbf{6.}]
+		\begin{enumerate}
+			\item[\textbf{(i)}] Consider the matrix $A = \begin{bmatrix} 3 & 4 & 5 \\ 4 & 3 & 7 \\ 5 & 7 & 5 \end{bmatrix}$, and show that $|A|$ is divisible by 23, without
+				computing.
+			\item[\textbf{(ii)}] Show without expanding that for the matrix $A = \begin{bmatrix} 0 & -a & -b \\ a & 0 & -c \\ b & c & 0 \end{bmatrix}$, $|A| = 0$.
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{(i)}] Let us first row reduce $A$ using only row replacement operations.
+					\begin{align*}
+						\begin{bmatrix} 3 & 4 & 5 \\ 4 & 3 & 7 \\ 5 & 7 & 5 \end{bmatrix} \sim \begin{bmatrix} -1 & 1 & -2 \\ 4 & 3 & 7 \\ 5 & 7 & 5 \end{bmatrix} \sim
+						\begin{bmatrix} -1 & 1 & -2 \\ 0 & 7 & -1 \\ 0 & 12 & -5 \end{bmatrix} \sim \begin{bmatrix} -1 & 1 & -2 \\ 0 & -5 & 4 \\ 0 & 12 & -5 \end{bmatrix} \sim
+						\begin{bmatrix} -1 & 1 & -2 \\ 0 & -5 & 4 \\ 0 & 0 & \frac{23}{5} \end{bmatrix}.
+					\end{align*}
+					Since our matrix is in row echelon form, our determinant is the product of the diagonal, illustrating that 23 divides $|A|$ since $\frac{23}{5}$ is a diagonal
+					member.
+				\item[\textbf{(ii)}] Observe that the matrix $A$ is skew-symmetric; in other words, $-A = A^T$. Let us now take the determinant of the equality,
+					$-|A| = (-1)^3|A| = |-A| = |A^T| = |A|$. Now we can see that $2|A| = 0$ illustrating that $|A| = 0$.
+			\end{enumerate}
+		\end{proof}
+		\newpage
+
+
+	\item[\textbf{7 (i).}] Given an $n \times n$ matrix $A$, show that existence of a right-inverse of $A$ is enough to guarantee the existence of left-inverse of $A$, that is, show that if there exists an $n \times n$
+		matrix $X$ such that $AX = I_n$, then $XA = I-n$; and vice-versa.
+
+	\begin{proof}
+		Suppose $A$ is an $n \times n$ matrix. Let us first show that the existence of a right-inverse $X$ implies the existence of a left-inverse; in other words, $AX = I_n$
+		implies $XA = I_n$. Observe that $|AX| = |I_n| = 1$ implies that $|X| \neq 0$, thus $X$ has a unique inverse (right and left-inverse). Let us now right multiply by
+		$X^{-1}$ to the equality $AX = I_n$, $$A = AXX^{-1} = I_nX^{-1} = X^{-1}.$$ Now left multiply $A = X^{-1}$ by $X$, $$XA = XX^{-1} = I_n.$$ \\
+
+		Conversely, we can use a similiar argument. We can see that $XA = I_n$ implies that $|X| \neq 0$ and that $X^{-1}$ exists. Let's now multiply $XA = I_n$ by $X^{-1}$
+		on the left and $X$ on the right, $$AX = I_nAX = X^{-1}XAX = X^{-1}I_nX = X^{-1}X = I_n.$$ \\
+
+		Hence, $AX = I_n$ holds if and only if $XA = I_n$.
+	\end{proof}
+\end{enumerate}
+
+\end{document}

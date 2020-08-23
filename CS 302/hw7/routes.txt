@@ -1,0 +1,15 @@
+Route 1) Reno, Las Vegas, Salt Lake City, Seattle, San Fransico, Reno
+Route 2) Reno, Las Vegas, San Fransico, Seattle, Salt Lake City, Reno
+Route 3) Reno, Salt Lake City, Las Vegas, San Fransico, Seattle, Reno
+Route 4) Reno, Salt Lake City, Las Vegas, Seattle, San Fransico, Reno
+Route 5) Reno, Salt Lake City, Seattle, Las Vegas, San Fransico, Reno
+Route 6) Reno, Salt Lake City, Seattle, San Fransico, Las Vegas, Reno
+Route 7) Reno, San Fransico, Las Vegas, Salt Lake City, Seattle, Reno
+Route 8) Reno, San Fransico, Las Vegas, Seattle, Salt Lake City, Reno
+Route 9) Reno, San Fransico, Seattle, Las Vegas, Salt Lake City, Reno
+Route 10) Reno, San Fransico, Seattle, Salt Lake City, Las Vegas, Reno
+Route 11) Reno, Seattle, Salt Lake City, Las Vegas, San Fransico, Reno
+Route 12) Reno, Seattle, San Fransico, Las Vegas, Salt Lake City, Reno
+
+Cheapest route(s) with cost: 2713 miles
+Route 1) Reno, San Fransico, Seattle, Salt Lake City, Las Vegas, Reno

@@ -1,0 +1,201 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{mathdots}
+
+\begin{document}
+
+% title page
+\title{%
+	Homework 2 \\
+	\large CS 477 Analysis of Algorithims \\
+	Section 1001}
+\author{Landon Fox}
+\date{February 11, 2020}
+\maketitle
+\newpage
+
+% problem 1
+\section{}
+
+% problem 1a
+\subsection{}
+\begin{flalign}
+T(n) = 3T(\frac{n}{3})+n^2
+\end{flalign}
+Master's Method:
+\begin{flalign}
+a=3,\, b=3,\, f(n)&=n^2,\, g(n)=n^{log_33}=n \\
+n &\leq cn^2 \\
+g(n) &\leq cf(n)
+\end{flalign}
+Case 3: f(n) dominates g(n) \\
+Show:
+\begin{flalign}
+af(\frac{n}{b}) &\leq cf(n) \\
+3f(\frac{n}{3}) &\leq cf(n) \\
+3(\frac{n}{3})^2 &\leq cn^2 \\
+\frac{n^2}{3} &\leq cn^2 \\
+c = \frac{1}{3}&,\, c \leq 1 \\
+\therefore T(n) &= \Theta(n^2)
+\end{flalign}
+
+% problem 1b
+\subsection{}
+\begin{flalign}
+T(n) = 8T(\frac{n}{2})+n^3
+\end{flalign}
+Master's Method:
+\begin{flalign}
+a=8,\, b=2,\, f(n)&=n^3,\, g(n)=n^{log_28}=n^3 \\
+c_1n^3 \leq\, &n^3 \leq c_2n^3 \\
+c_1g(n) \leq &f(n) \leq c_2g(n)
+\end{flalign}
+Case 2: f(n) equals g(n) \\
+\begin{flalign}
+\therefore T(n) &= \Theta(n^3lgn)
+\end{flalign}
+
+% problem 1c
+\subsection{}
+\begin{flalign}
+T(n) = 4T(\frac{n}{2})+\sqrt{n}
+\end{flalign}
+Master's Method:
+\begin{flalign}
+a=4,\, b=2,\, f(n)&=\sqrt{n},\, g(n)=n^{log_24}=n^2 \\
+\sqrt{n} &\leq cn^2 \\
+f(n) &\leq cg(n)
+\end{flalign}
+Case 1: g(n) dominates f(n) \\
+\begin{flalign}
+\therefore T(n) &= \Theta(n^2)
+\end{flalign}
+
+% problem 2
+\section{}
+
+% problem 2a
+\subsection{}
+The algorithm recursively finds the minimum integer of a given array.
+
+% problem 2b
+\subsection{}
+Accounting for all if-statements, assignments, and return statements as basic operations:
+\begin{flalign}
+T(n) &=\, \sim 4 + T(n-1) \\
+T(1) &=\, \sim 2
+\end{flalign}
+or more generally:
+\begin{flalign}
+T(n) &= c + T(n-1) \\
+&= c + c + T(n-2) \\
+&= c + c + c + T(n-3) \\
+&= \underset{n-1}{\underbrace{c + c + c + \cdots}} + T(1) \\
+&= c(n-1) + T(1) \\
+T(n) &= \Theta(n)
+\end{flalign}
+
+% problem 3
+\section{}
+
+% problem 3a
+\subsection{}
+\begin{lstlisting}[language=Python]
+def exp2(n):
+  if n == 1:
+    return 2
+  return exp2(n - 1) + exp2(n - 1)
+\end{lstlisting}
+
+% problem 3b
+\subsection{}
+\begin{flalign}
+T(n) &= 2T(n-1) + 1
+\end{flalign}
+\begin{center}
+\begin{tikzpicture}[level 1/.style={sibling distance=18em},
+  level 2/.style={sibling distance=10em},
+  level 3/.style={sibling distance=5em},
+  level 4/.style={sibling distance=3em},
+  every node/.style = {align=center,
+    top color=white, bottom color=white!20}]]
+  \node {T(n)=1}
+	child { node {T(n-1)=1}
+		child { node {T(n-2)=1}
+			child { node {$\iddots$}
+				child { node {T(1)} }
+				child { node {$\cdots$} }
+			}
+			child { node {$\ddots$}
+				child { node {$\cdots$} }
+				child { node {$\cdots$} }
+			}
+		}
+		child { node {T(n-2)=1}
+			child { node {$\iddots$}
+				child { node {$\cdots$} }
+				child { node {$\cdots$} }
+			}
+			child { node {$\ddots$}
+				child { node {$\cdots$} }
+				child { node {$\cdots$} }
+			}
+		}
+	}
+	child { node {T(n-1)=1}
+		child { node {T(n-2)=1}
+			child { node {$\iddots$}
+				child { node {$\cdots$} }
+				child { node {$\cdots$} }
+			}
+			child { node {$\ddots$}
+				child { node {$\cdots$} }
+				child { node {$\cdots$} }
+			}
+		}
+		child { node {T(n-2)=1}
+			child { node {$\iddots$}
+				child { node {$\cdots$} }
+				child { node {$\cdots$} }
+			}
+			child { node {$\ddots$}
+				child { node {$\cdots$} }
+				child { node {$\cdots$} }
+			}
+		}
+	};
+\end{tikzpicture}
+\end{center}
+\begin{flalign}
+level&(n):\, 2^n\, nodes \\
+T(n) &= \sum_{i=0}^{n-2}(1)(2^i) + 2^{n-1}T(1) \\
+&= \frac{1-2^{n-2}}{1-2} + 2^{n-1}T(1) \\
+&= 2^{n-2} + 2^{n-1}T(1) - 1 \\
+&= 2^n(\frac{1}{4} + \frac{1}{2}T(1)) - 1 \\
+T(n) &= \Theta(2^n)
+\end{flalign}
+
+% problem 5
+\section{Extra Credit}
+\begin{flalign}
+T(n) &= \sqrt n T(\sqrt n) + n \\
+\frac{T(n)}{n} &= \frac{T(\sqrt n)}{\sqrt n} + 1 \\
+let\;\;\; S(n) &= \frac{T(n)}{n} \\
+S(n) &= S(\sqrt n) + 1 \\
+let\;\;\; m = lgn &\rightarrow 2^m = n \\
+S(2^m) &= S(2^{\frac{m}{2}}) + 1 \\
+let\;\;\; Q(m) &= S(2^m) \\
+Q(m) &= Q(\frac{m}{2}) + 1 \\
+&= \underset{lgm}{\underbrace{1 + 1 + 1 + \cdots}} + Q(1) \\
+&= lgm + c \\
+S(n) &= lglgn + c \\
+T(n) &= nlglgn + cn \\
+&= O(nlglgn)
+\end{flalign}
+
+\end{document}

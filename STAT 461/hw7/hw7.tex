@@ -1,0 +1,182 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage[margin=0.5in]{geometry}
+\footskip = -0.75in
+
+\begin{document}
+
+% title page
+\title{Homework 7}
+\author{Landon Fox}
+\date{April 29, 2020}
+
+\begin{flushleft}
+Landon Fox \\
+STAT 461 \\
+Section 1001 \\
+April 29, 2020
+\end{flushleft}
+\begin{center}
+\Large Homework 7
+\end{center}
+
+\begin{itemize}
+	% problem 1
+	\item[] {\large 3.9.5)}
+	Under what conditions does $E \left ( \sum_{i=1}^{n} a_i X_i \right ) = \mu$ hold given $E(X_i) = \mu$?
+	\begin{flalign}
+		E \left ( \sum_{i=1}^{n} a_i X_i \right ) &= \mu \nonumber \\
+		\sum_{i=1}^{n} a_i E( X_i ) &= \nonumber \\
+		\mu \sum_{i=1}^{n} a_i &= \mu \nonumber \\
+		\sum_{i=1}^{n} a_i &= 1 \nonumber
+	\end{flalign}
+
+	% problem 2
+	\item[] {\large 3.9.12)}
+	Find $E \left [ \sqrt[n]{Y_1Y_2 \hdots Y_n} \right ]$ if $Y$ is independent and uniform over $[0,1]$ and compare to $\overline{Y}$.
+	\begin{flalign}
+		E \left [ \sqrt[n]{Y_1Y_2 \hdots Y_n} \right ] &= E \left [ \sqrt[n]{Y_1} \right ] E \left [ \sqrt[n]{Y_2} \right ] \hdots E \left [ \sqrt[n]{Y_n} \right ] \nonumber
+	\end{flalign}
+	\begin{flalign}
+		E \left [ \sqrt[n]{Y_k} \right ] &= \int_0^1 \sqrt[n]{y_k}\, dy_k \nonumber \\
+		&= \left [ \frac{n}{n+1}y_k^{\frac{1}{n}+1} \right ]_0^1 \nonumber \\
+		E \left [ \sqrt[n]{Y_k} \right ] &= \frac{n}{n+1} \nonumber
+	\end{flalign}
+	\begin{flalign}
+		E \left [ \sqrt[n]{Y_1Y_2 \hdots Y_n} \right ] &= \prod_{k=1}^{n} \frac{n}{n+1} \nonumber \\
+		&= \left ( \frac{n}{n+1} \right )^n \nonumber
+	\end{flalign}
+	$\overline{Y}=\frac{1}{2}$ which is equal to $\left ( \frac{n}{n+1} \right )^n$ evaulated at 1.
+
+	% problem 3
+	\item[] {\large 3.9.14)}
+	Show that $Cov(aX+b, cY+d)=acCov(X,Y)$.
+	\begin{flalign}
+		Cov(aX+b, cY+d) &= E \left [ (aX+b)(cY+d) \right ] - E \left [ aX+b \right ]E \left [ cY+d \right ] \nonumber \\
+		&= E \left [ acXY + adX + bcY + bd \right ] - \left ( aE[X] + b \right ) \left ( cE[Y] + d \right ) \nonumber \\
+		&= acE[XY] + adE[X] + bcE[Y] + bd - acE[X]E[Y] - adE[X] - bcE[Y] - bd \nonumber \\
+		&= acE[XY] - acE[X]E[Y] \nonumber \\
+		Cov(aX+b, cY+d) &= acCov(X,Y) \nonumber
+	\end{flalign}
+
+	% problem 4
+	\item[] {\large 3.9.21)}
+	Find the expected cost and cost variance if $E[U_i]=7$ and $E[V_i]=4$ and cost $\$50$ and $\$60$ respectively. \\
+	Let's find the expected value for the first nine hours of a day.
+	\begin{flalign}
+		E[U_1 + U_2 + \hdots + U_9 ] &= E[U_1] + E[U_2] + \hdots + E[U_9] \nonumber \\
+		&= \sum_{i=1}^9 E[U_i] \nonumber \\
+		&= \sum_{i=1}^9 7 \nonumber \\
+		E[U] &= 63 \nonumber
+	\end{flalign}
+	Now let's find the expected value of the next fifteen hours.
+	\begin{flalign}
+		E[V_1 + V_2 + \hdots + V_{15} ] &= E[V_1] + E[V_2] + \hdots + E[V_9] \nonumber \\
+		&= \sum_{i=1}^{15} E[V_i] \nonumber \\
+		&= \sum_{i=1}^{15} 4 \nonumber \\
+		E[V] &= 60 \nonumber
+	\end{flalign}
+	The expected cost can now be calculated.
+	\begin{flalign}
+		E \left [ 50U + 60V \right ] &= 50 \cdot 63 + 60 \cdot 60 \nonumber \\
+		&= \$6750 \nonumber
+	\end{flalign}
+	Finally cost variance.
+	\begin{flalign}
+		Var(50U+60V) &= 50^2Var(U) + 60^2Var(V)\;\;\; via\; Thm\; 3.9.5 \nonumber \\
+		&= 2500 \cdot 63 + 3600 \cdot 60\;\;\; via\; Poisson\; variance \nonumber \\
+		Var(50U+60V) &= \$373500 \nonumber
+	\end{flalign}
+	\newpage
+
+	% problem 5
+	\item[] {\large 3.11.4)}
+	Find $P(X=2|Y=2)$.
+	\begin{flalign}
+		p_X(x) &= \frac{\binom{4}{x}\binom{52-4}{5-x}}{\binom{52}{5}} \nonumber \\
+		p_{X,Y}(x,y) &= \frac{\binom{4}{x}\binom{4}{y}\binom{52-4-4}{5-x-y}}{\binom{52}{5}} \nonumber
+	\end{flalign}
+	\begin{flalign}
+		P(X=x|Y=y) &= p_{X|y}(x) = \frac{p_{X,Y}(x,y)}{p_X(x)} \nonumber \\
+		&= \frac{\frac{\binom{4}{x}\binom{4}{y}\binom{44}{5-x-y}}{\binom{52}{5}}}{\frac{\binom{4}{x}\binom{48}{5-x}}{\binom{52}{5}}} \nonumber \\
+		&= \frac{\binom{4}{y}\binom{44}{5-x-y}}{\binom{48}{5-x}} \nonumber \\
+		p_{X|2}(2) &= \frac{\binom{4}{2}\binom{44}{1}}{\binom{48}{3}} \nonumber \\
+		=& \frac{33}{2162} \nonumber
+	\end{flalign}
+
+	% problem 6
+	\item[] {\large 3.11.9)}
+	Find conditional pdf of $X$ given $X+Y=n$ knowing $X \sim Poisson(\lambda)$ and $Y \sim Poisson(\mu)$.
+	\begin{flalign}
+		p_{X+Y}(n) &= \sum_{k=0}^n p_X(k)p_Y(n-k) \nonumber \\
+		&= \sum_{k=0}^n e^{-\lambda}\frac{\lambda^k}{k!} \cdot e^{-\mu}\frac{\mu^k}{k!} \nonumber \\
+		&= \frac{e^{-(\lambda + \mu)}}{n!} \sum_{k=0}^n \frac{n!}{(n-k)!k!} \lambda^k \mu^{n-k} \nonumber \\
+		p_{X+Y}(n) &= e^{-(\lambda + \mu)} \frac{(\lambda + \mu)^n}{n!};\; n=0,1,2, \hdots \nonumber
+	\end{flalign}
+	\begin{flalign}
+		p_{X|x+y=n}(k,n) &= \frac{P(X=k,X+Y=n)}{p_{X+Y}(n)} \nonumber \\
+		&= \frac{P(X=k,Y=n-k)}{p_{X+Y}(n)} \nonumber \\
+		&= \frac{p_{X,Y}(k, n-k)}{p_{X+Y}(n)} \nonumber \\
+		&= \frac{e^{-\lambda}\frac{\lambda^k}{k!} \cdot e^{-\mu}\frac{\mu^{n-k}}{(n-k)!}}{e^{-(\lambda + \mu)} \frac{(\lambda + \mu)^n}{n!}} \nonumber \\
+		&= \frac{n!}{(n-k)!k!} \cdot \frac{\lambda^k \mu^{n-k}}{(\lambda+\mu)^n} \cdot \frac{1}{(\lambda+\mu)^{-k}(\lambda+\mu)^k} \nonumber \\
+		p_{X|x+y=n}(k,n) &= \binom{n}{k} \left ( \frac{\lambda}{\lambda + \mu} \right )^k \left ( 1 - \frac{\lambda}{\lambda + \mu} \right )^{n-k} \nonumber \\
+		X|x+y=n &\sim Binom \left ( n, \frac{\lambda}{\lambda + \mu} \right ) \nonumber
+	\end{flalign}
+
+	% problem 7
+	\item[] {\large 3.11.13)}
+	Find the conditional pdf of $Y$ given $x$ if $f_{X,Y}(x,y)=x+y$; $0 \leq x \leq 1$; $0 \leq y \leq 1$.
+	\begin{flalign}
+		f_{Y|x}(y) = \frac{f_{X,Y}(x,y)}{f_X(x)} \nonumber
+	\end{flalign}
+	\begin{flalign}
+		f_X(x) &= \int_0^1 f_{X,Y}(x,y)\,dy \nonumber \\
+		&= \int_0^1 (x+y)\,dy \nonumber \\
+		&= \left [ xy + \frac{1}{2}y^2 \right ]_0^1 \nonumber \\
+		f_X(x) &= x + \frac{1}{2} \nonumber
+	\end{flalign}
+	\begin{flalign}
+		f_{Y|x}(y) &= \frac{x+y}{x+\frac{1}{2}} \nonumber \\
+		&= \frac{2x+2y}{2x+1};\;\;\; 0 \leq y \leq 1 \nonumber
+	\end{flalign}
+
+	% problem 8
+	\item[] {\large 3.12.3)}
+	Find $E[e^{3X}]$ if $X \sim Binom(10, \frac{1}{3})$.
+	\begin{flalign}
+		E[e^{3X}] &= \sum_{k \in S} e^{3k} p_X(k) \nonumber \\
+		&= \sum_{k=0}^{10} e^{3k} \cdot \binom{10}{k} \left ( \frac{1}{3} \right )^k \left ( \frac{2}{3} \right )^{n-k} \nonumber \\
+		&= \sum_{k=0}^{10} \binom{10}{k} \left ( \frac{e^3}{3} \right )^k \left ( \frac{2}{3} \right )^{n-k} \nonumber \\
+		&= \left ( \frac{e^3}{3} + \frac{2}{3} \right )^{10} \nonumber \\
+		E[e^{3X}] &= \frac{1}{3^{10}} \left ( e^3 + 2 \right )^{10} \nonumber
+	\end{flalign}
+
+	% problem 9
+	\item[] {\large 3.12.4)}
+	Find $M_X(t)$ given $p_X(k)=\left ( \frac{3}{4} \right )^k \left ( \frac{1}{4} \right )$; $k=0,1,2,\hdots$.
+	\begin{flalign}
+		M_X(t) &= \sum_{k \in S} e^{tk} p_x(k) \nonumber \\
+		&= \sum_{k=0}^{\infty} e^{tk} \cdot \left ( \frac{3}{4} \right )^k \left ( \frac{1}{4} \right ) \nonumber \\
+		&= \frac{1}{4} \sum_{k=0}^{\infty} \left ( \frac{3e^t}{4} \right )^k \nonumber \\
+		&= \frac{1}{4} \cdot \frac{1}{1-\frac{3e^t}{4}};\;\;\; \frac{3e^t}{4} < 1 \nonumber \\
+		M_X(t) &= \frac{1}{4-3e^t};\;\;\; e^t < \frac{4}{3} \nonumber
+	\end{flalign}
+
+	% problem 10
+	\item[] {\large 4.2.24)}
+	Find $p_W(w)$ if $W=X+Y$ and $p_X(k)=e^{-\lambda}\frac{\lambda^k}{k!},\; p_Y(k)=e^{-\mu}\frac{\mu^k}{k!};\; k=0,1,2, \hdots$
+	\begin{flalign}
+		p_W(w) &= \sum_{k=0}^w p_X(k)p_Y(w-k) \nonumber \\
+		&= \sum_{k=0}^w e^{-\lambda}\frac{\lambda^k}{k!} \cdot e^{-\mu}\frac{\mu^k}{k!} \nonumber \\
+		&= \frac{e^{-(\lambda + \mu)}}{w!} \sum_{k=0}^w \frac{w!}{(w-k)!k!} \lambda^k \mu^{w-k} \nonumber \\
+		p_W(w) &= e^{-(\lambda + \mu)} \frac{(\lambda + \mu)^w}{w!};\; w=0,1,2, \hdots \nonumber
+	\end{flalign}
+\end{itemize}
+
+\end{document}

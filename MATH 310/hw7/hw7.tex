@@ -1,0 +1,108 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, cancel}
+\usepackage[margin=0.5in]{geometry}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 310 \\
+\noindent July 9, 2020
+
+\begin{center}
+\Large Homework 7
+\end{center}
+
+\begin{enumerate}
+	\item[\textbf{1.}] Define $f: \mathbb{R} \rightarrow \mathbb{R}$ by \[ f(x) = \begin{cases} 1; & x < 0 \\ 3x^2; & 0 \leq x < 1 \\ 2x+1; & x \geq 1 \end{cases} \]
+		and define $F(x) = \int_0^x f(t)\,\mathrm{d}t$. Prove that $F$ is differentiable at 1 but not at 0 and find $F'(1)$.
+
+	\begin{proof}
+		Suppose $f$ is integrable on any closed bounded interval. We can see that $f$ is continuous and also differentiable everywhere except possibly at 0 and 1. \\
+
+		Let us show that $F$ is not differentiable at 0. Observe that $\lim_{h \rightarrow 0^-} \frac{F(h) - F(0)}{h} = \lim_{h \rightarrow 0^-} \frac{F(h)}{h}$ is in the
+		form $\frac{0}{0}$. By L'H\^opital's Rule and the Fundamental Theorem of Calculus (i), $$\lim_{h \rightarrow 0^-} \frac{F(h)}{h} \overset{L'H}{=}
+		\lim_{h \rightarrow 0^-} \frac{F'(h)}{1} = \lim_{h \rightarrow 0^-} f(h) = \lim_{h \rightarrow 0^-} 1 = 1.$$ Likewise, we can see that $$\lim_{h \rightarrow 0^+}
+		\frac{F(h) - F(0)}{h} = \lim_{h \rightarrow 0^+} \frac{F(h)}{h} \overset{L'H}{=} \lim_{h \rightarrow 0^+} \frac{F'(h)}{1} = \lim_{h \rightarrow 0^+} f(h) =
+		\lim_{h \rightarrow 0^+} 3h^2 = 0.$$ Therefore, $F$ is not differentiable at 0. \\
+
+		To show $F$ is differentiable at 1, observe that $$\lim_{h \rightarrow 0^-} \frac{F(1 + h) - F(1)}{h} \overset{L'H}{=} \lim_{h \rightarrow 0^-} \frac{F'(1 + h)(1 + h)'}{1}=
+		\lim_{h \rightarrow 0^-} f(1 + h) = \lim_{h \rightarrow 0^-} 3(1 + h)^2 = 3$$ and also $$\lim_{h \rightarrow 0^+} \frac{F(1 + h) - F(1)}{h} \overset{L'H}{=}
+		\lim_{h \rightarrow 0^+} \frac{F'(1 + h)(1 + h)'}{1} = \lim_{h \rightarrow 0^+} f(1 + h) = \lim_{h \rightarrow 0^+} 2(1 + h) + 1 = 3$$ by L'H\^opital's Rule and the
+		Fundamental Theorem of Calculus (i). Thus $F$ is differentiable at 1 and $F'(1) = 3$.
+	\end{proof}
+	\newpage
+
+
+	\item[\textbf{2.}] Let $F(x) = \int_{x^3}^{e^x} \cos(t^2)\,\mathrm{d}t$. Show that $F$ is differentiable on its domain and find its derivative.
+
+	\begin{proof}
+		Suppose $F(x) = \int_{x^3}^{e^x} \cos(t^2)\,\mathrm{d}t$. Let $G(x) = \int_{1}^{e^x} \cos(t^2)\,\mathrm{d}t$ and $H(x) = \int_{1}^{x^3} \cos(t^2)\,\mathrm{d}t$. If $f(t) = \cos(t^2)$ is
+		integrable between $x^3$ and $e^x$ for all $x \in \mathbb{R}$, then $F(x) = G(x) - H(x)$ by Theorem 5.20. Let us now perform a change of variables for $G$ and $H$.
+		Let $\phi(x) = e^x$ and $\psi(x) = x^3$; observe that both $\phi$ and $\psi$ are continuously differentiable on $\mathbb{R}$. Additionally, we can see that $f$ is
+		continuous on $\mathbb{R}$ since both $\cos(t)$ and $t^2$ are continuous. Thus by a change of variables for continuous integrands, $$G(x) =
+		\int_{0}^{x} \cos(\phi^2(t))\phi'(t)\,\mathrm{d}t = \int_{0}^{x} e^t\cos(e^{2t})\,\mathrm{d}t$$ and $$H(t) = \int_{1}^{x} \cos(\psi^2(t))\psi'(t)\,\mathrm{d}t = \int_{1}^{x} 3t^2\cos(t^6)\,\mathrm{d}t$$
+		with the substitiution of $\phi$ and $\psi$, respectively. Then it follows, $G$ and $H$ are differentiable in addition to $$G'(x) =
+		\frac{\mathrm{d} }{\mathrm{d} x} \int_{0}^{x} e^t\cos(e^{2t})\,\mathrm{d}t = e^x\cos(e^{2x})$$ and $$H'(x) = \frac{\mathrm{d} }{\mathrm{d} x} \int_{1}^{x} 3t^2\cos(t^6)\,\mathrm{d}t =
+		3x^2\cos(x^6)$$ by the Fundamental Theorem of Calculus (i). Hence $F$ is differentiable on $\mathbb{R}$ and $$F'(x) = G'(x) - H'(x) = e^x\cos(e^{2x}) - 3x^2\cos(x^6).$$
+	\end{proof}
+
+
+	\item[\textbf{3.}] Prove that the series $\sum_{k = 0}^\infty \frac{(-1)^{k-1}}{\pi^{2k}}$ converges and find its sum.
+
+	\begin{proof}
+		Suppose $$s_n = \sum_{k=0}^n \frac{(-1)^k}{\pi^{2k}} = \sum_{k=0}^n \left ( \frac{-1}{\pi^2} \right )^k$$ such that the series $$\sum_{k = 0}^\infty
+		\frac{(-1)^{k-1}}{\pi^{2k}} = -\lim_{n \rightarrow \infty} s_n.$$ Observe that $s_n$ is a finite geometric series with $x = -\frac{1}{\pi^2}$. Clearly we can see
+		that $|x| = \left | -\frac{1}{\pi^2} \right | < 1$. Then it follows by the Geometric Series that $\lim_{n \rightarrow \infty} s_n$ converges and equals
+		$\frac{x^0}{1 - x} = \frac{\pi^2}{1 + \pi^2}$. Therefore $$\sum_{k = 0}^\infty \frac{(-1)^{k-1}}{\pi^{2k}} = -\frac{\pi^2}{1 + \pi^2}$$ is convergent.
+	\end{proof}
+	\newpage
+
+
+	\item[\textbf{4.}] Suppose $g$ is continuous and nonnegative on $[a, b]$ with $g(a) > 0$. Show that $g$ is integrable on $[a, b]$ and $\int_a^b g(x)\, \mathrm{d}x > 0$.
+
+	\begin{proof}
+		Suppose $g$ is continuous and nonnegative on $[a, b]$ with $g(a) > 0$. By Theorem 5.10, we can see that $g$ is also integrable on $[a, b]$. Additionally,
+		observe that $0 \leq g(x)$ for all $x \in [a, b]$. Then it follows that $$0 = \int_a^b 0\,\mathrm{d}x \leq \int_a^b g(x)\,\mathrm{d}x$$ via Theorem 5.16 and the Comparison Theorem
+		for Integrals. Since $g$ is integrable on $[a, b]$, let $\epsilon = L(g, P)$ for an arbitrary partition $P$ of $[a, b]$. Then there must exist a partition $Q$ of
+		$[a, b]$ such that $\left | L(g, Q) - U(g, Q) \right | < \epsilon$. By the Fundamental Theorem of Absolute Values, we can see that $U(g, Q) - L(g, P) = U(g, Q) -
+		\epsilon < L(g, Q)$. By Remark 5.8 we know that $0 \leq U(g, Q) - L(g, P)$ for any partition $P$ and $Q$ of $[a, b]$ illustrating that $0 < L(g, Q)$ by Transitivity.
+		Thus $$0 < L(g, Q) \leq \sup_{R \in \textbf{Part}[a, b]}\{L(g, R)\} = \int_a^b g(x)\,\mathrm{d}x.$$ 
+	\end{proof}
+
+
+	\item[\textbf{5.}] Consider the function $f: \left ( -\frac{\pi}{2}, \frac{\pi}{2} \right ) \rightarrow \mathbb{R}$ defined by $f(x) = \tan x$. Given that
+		$f \left( \left ( -\frac{\pi}{2}, \frac{\pi}{2} \right ) \right) = \mathbb{R}$ and $f'(x) = \sec^2x$ for all $x \in \left ( -\frac{\pi}{2}, \frac{\pi}{2} \right )$,
+		prove that $f$ has a differentiable inverse function defined on $\mathbb{R}$ and $$f^{-1}(x) = \int_0^x \frac{1}{t^2 + 1}\,\mathrm{d}t$$ for all $x \in \mathbb{R}$.
+
+	\begin{proof}
+		Suppose the function $f: \left ( -\frac{\pi}{2}, \frac{\pi}{2} \right ) \rightarrow \mathbb{R}$ is defined by $f(x) = \tan x$. Further, suppose
+		$f \left( \left ( -\frac{\pi}{2}, \frac{\pi}{2} \right ) \right) = \mathbb{R}$ and $f'(x) = \sec^2x$ for all $x \in \left ( -\frac{\pi}{2}, \frac{\pi}{2} \right )$.
+		Observe that $f'(x) = \sec^2x > 0$ for all $x \in \left ( -\frac{\pi}{2}, \frac{\pi}{2} \right )$, thus $f$ is an injective function. If we assume that $f$ is
+		continuous on $\left ( -\frac{\pi}{2}, \frac{\pi}{2} \right )$, then it follows that $f^{-1}$ exists and is differentiable (thus continuous) on
+		$\left ( -\frac{\pi}{2}, \frac{\pi}{2} \right )$ such that $$(f^{-1})'(\tan \theta) = \frac{1}{f'(\theta)} = \frac{1}{\sec^2 \theta}$$ for all $\theta \in
+		\left ( -\frac{\pi}{2}, \frac{\pi}{2} \right )$ by the Inverse Function Theorem. Let $t = \tan \theta \in \mathbb{R}$. Then $(f^{-1})'(t) = \frac{1}{t^2 + 1}$ which
+		we can see to be continuous for all $t \in \mathbb{R}$ and thus integrable by Theorem 5.10. Hence $$f^{-1}(x) = f^{-1}(x) - f^{-1}(0) = \int_0^x \frac{1}{t^2 + 1}\,\mathrm{d}t$$
+		by the Fundamental Theorem of Calculus (ii).
+	\end{proof}
+	\newpage
+
+
+	\item[\textbf{6.}] Prove that the following series $$\sum_{k=1}^\infty \frac{3k + 2}{5k^3 + k - 1}$$ converges.
+
+	\begin{proof}
+		Suppose $a_k = \frac{3k + 2}{5k^3 + k - 1}$ and $b_k = \frac{1}{k^2}$. Observe that $$0 \leq a_k = \frac{3k + 2}{5k^3 + k - 1} \leq \frac{3k + 2k}{5k^3 + k - 1}
+		\leq \frac{5k}{5k^3} = \frac{1}{k^2} = b_k$$ for all $k \geq 1$. Additionally, by the p-Series Test we can see that the series $\sum_{k = 1}^\infty b_k$ converges since
+		$p = 2 > 1$. Thus by the Comparison Test (i), $\sum_{k=1}^\infty a_k = \sum_{k=1}^\infty \frac{3k + 2}{5k^3 + k - 1}$ converges.
+	\end{proof}
+	\newpage
+
+
+	I had a question regarding your use of LaTeX. When depicting a large symbol such as an integral or summation, it seems I have two options regarding the use of single or
+		double dollar signs which provides $\int_a^b f(x)\,\mathrm{d}x$ and $$\int_a^b f(x)\,\mathrm{d}x,$$ respectively. I see that you are able to combine them both almost. For instance, in
+		problem 2, your integral $\int_{x^3}^{e^x} \cos(t^2)\,\mathrm{d}t$ is not made small like mine is with the use of single dollar signs; however I cannot make it inline with the
+		use of double dollar signs. If I illustrated this properly, would you mind explaining how you can do that? Thank you. \\ \\
+	Also thank you for a great semester! I really enjoyed Analysis and I felt I improved a lot with your input. I'm looking forward to Analysis 2 in the fall! You'll have at least five of us from the Math Center in the fall :)
+
+\end{enumerate}
+
+\end{document}

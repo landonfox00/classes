@@ -1,0 +1,87 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, cancel}
+\usepackage[margin=0.5in]{geometry}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 310 \\
+\noindent June 26, 2020
+
+\begin{center}
+\Large Homework 4
+\end{center}
+
+\begin{enumerate}
+	\item[\textbf{1.}] Use the definition to prove that the following limit exists: $\lim_{x \rightarrow \infty} \frac{\cos x}{x^3}$
+
+	\begin{proof}
+		Suppose $\epsilon > 0$. Let $0 < M = \frac{1}{\sqrt[3]{\epsilon}} < x$. Then it follows that $\frac{1}{x} < \sqrt[3]{\epsilon}$ and $\frac{1}{x^3} <
+		\epsilon$ by multiplicative properties and transitivity since both sides of the inequality are positive. Furthermore, $\left | \frac{\cos x}{x^3} \right | \leq
+		\frac{1}{x^3} < \epsilon$. Thus $0 < M = \frac{1}{\sqrt[3]{\epsilon}} < x$ implies $\left | \frac{\cos x}{x^3} - 0 \right | < \epsilon$. By definition
+		$\lim_{x \rightarrow \infty} \frac{\cos x}{x^3}$ exists and equals zero.
+	\end{proof}
+
+
+	\item[\textbf{2.}] Use the definition to prove that $f(x) = x^2 - x - 2$ is uniformly continuous on $(0,1)$.
+
+	\begin{proof}
+		Suppose $\epsilon > 0$ and $x, a \in (0,1)$. Let $\delta = \frac{\epsilon}{3}$. Observe that $|x + a - 1| \leq |x| + |a| + 1 < 3$. Then $|x - a| < \delta$ implies
+		$|f(x) - f(a)| = |x^2 - x - 2 - (a^2 - a - 2)| = |x - a||x + a - 1| < 3|x - a| < 3\delta = \epsilon$. Thus $|x - a| < \delta$ implies $|f(x) - f(a)| < \epsilon$ for
+		all $x, a \in (0,1)$.
+	\end{proof}
+
+
+	\item[\textbf{3.}] Let $A \subseteq \mathbb{R}$, $A \neq \emptyset$, and that $f,g: A \rightarrow \mathbb{R}$ are both uniformly continuous on $A$. Prove that $f + g$ is
+		also uniformly continuous on $A$.
+
+	\begin{proof}
+		Suppose $A \subseteq \mathbb{R}$, $A \neq \emptyset$, and that $f,g: A \rightarrow \mathbb{R}$ are both uniformly continuous on $A$. Further suppose $\epsilon > 0$
+		and $x, a \in A$. Let $\delta = \min \{ \delta_1, \delta_2 \}$ where $\delta_1$ and $\delta_2$ exist to show that $f$ and $g$ have uniform continuity on $A$
+		respectively. Moreover, $\delta = \min \{ \delta_1, \delta_2 \}$ should suffice so that $|x - a| < \delta$ implies both $|f(x) - f(a)| < \frac{\epsilon}{2}$ and
+		$|g(x) - g(a)| < \frac{\epsilon}{2}$ for all $\epsilon > 0$ and $x, a \in A$. If this were not true, then it would contradict the uniform continuity of either $f$
+		or $g$ on $A$ since we are maintaining or lessening $\delta_1$ and $\delta_2$ for both $f$ and $g$. Then it follows that $\left | (f(x) + g(x)) - (f(a) + g(a)) \right | \leq
+		|f(x) - f(a)| + |g(x) - g(a)| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon$. Thus $\left | (f(x) + g(x)) - (f(a) + g(a)) \right | < \epsilon$ for all
+		$\epsilon > 0$ and $x, a \in A$. By definition $f + g$ is uniformly continuous on A.
+	\end{proof}
+
+
+	\item[\textbf{4.}] Prove that there is at least one $x \in \mathbb{R}$ such that $e^x = x^2$. \\
+
+	\textbf{Lemma.} The function $h(x) = e^x$ is increasing for all $x \in \mathbb{R}$.
+
+	\begin{proof}[Lemma Proof]
+		Suppose by contradiction that $x,y \in \mathbb{R}$, $x < y$, and $e^x > e^y$. Then it follows that $1 > e^{y-x}$. We know that the codomain of $h$ is $(1, \infty)$
+		where the domain is $(0, \infty)$ and that $y - x > 0$; thus $1 > e^{y-x}$ is a contradiction.
+	\end{proof}
+
+	\begin{proof}
+		Suppose $f(x) = e^x - x^2$. \\
+		
+		Let us show that $e^x$ is continuous on $\mathbb{R}$. Suppose $\epsilon > 0$ and $a \in \mathbb{R}$. Let $\delta = \ln ( \frac{\epsilon}{e^a} + 1 )$.
+		Then $|x - a| < \delta$ illustrates that $-\delta + a < x < \delta + a$. Additionally, we can see that $e^{-\delta + a} - e^a < e^x - e^a < e^{\delta + a} - e^a$ because $e^x$ is an increasing function.
+		By factoring, it follows that $-e^a(e^\delta - 1) < -\frac{e^a(e^\delta - 1)}{e^\delta} < e^x - e^a < e^a(e^\delta - 1)$ since $\delta > 0$. Then, $|e^x - e^a| < e^a(e^\delta - 1) = \epsilon$ by transitivity and the fundamental theorem of absoulute value.
+		Thus $|x - a| < \delta$ implies $|e^x - e^a| < \epsilon$, by definition, $e^x$ is continuous on $\mathbb{R}$. \\
+
+		Let us show that $x^2$ is continuous on $[-1, 0]$. Suppose $\epsilon > 0$ and $x, a \in [-1, 0]$. Let $\delta = \frac{\epsilon}{2}$. Observe that $|x + a| \leq
+		|x| + |a| \leq 2$. Then $|x - a| < \delta$ implies $|x^2 - a^2| = |x - a||x + a| \leq 2|x - a| < 2\delta = \epsilon$. Thus $|x^2 - a^2| < \epsilon$ by transitivity.
+		By definition $x^2$ is continuous on $[-1, 0]$. \\
+
+		By Theorem 3.22, $f$ is continuous on $[-1, 0]$. Observe that $f(-1) < 0$ and $f(0) > 0$. Thus by the Intermediate Value Theorem, there exists an $x \in [-1,0]$
+		such that $f(x) = 0$ and satifies $e^x = x^2$.
+	\end{proof}
+
+
+	\item[\textbf{5.}] Let $f: [a,b] \rightarrow [a,b]$ be a continuous function. Prove that there is an $x \in [a,b]$ such that $f(x) = x$.
+
+	\begin{proof}
+		Suppose $f: [a,b] \rightarrow [a,b]$ be a continuous function. Let us show that $x$ is a continuous function. Suppose $0 < \epsilon = \delta$ and $a \in \mathbb{R}$.
+		Then it follows that $|x - a| < \delta$ implies $|x - a| < \epsilon$. Thus $x$ is a continuous function on $\mathbb{R}$. Moreover, using Theorem 3.22 we can see that
+		the function $g(x) = f(x) - x$ is also continuous on $[a, b]$. Observe that $g(a) = f(a) - a \geq a - a = 0$ and that $g(b) = f(b) - b \leq b - b = 0$. Suppose
+		$g(a) \neq 0$ and $g(b) \neq 0$, otherwise there would exist an $x$ such that $f(x) = x$; thus $g(a) > 0$ and $g(b) < 0$. By the Intermediate Value Theorem, there
+		must exist a $x \in [a, b]$ such that $g(x) = 0$ and satisfies $f(x) = x$.
+	\end{proof}
+
+\end{enumerate}
+
+\end{document}

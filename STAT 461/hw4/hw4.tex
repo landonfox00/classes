@@ -1,0 +1,160 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{enumerate}
+\usepackage[margin=0.5in]{geometry}
+\footskip = -0.75in
+
+\begin{document}
+
+% title page
+\title{Homework 4}
+\author{Landon Fox}
+\date{February 26, 2020}
+
+\begin{flushleft}
+Landon Fox \\
+STAT 461 \\
+Section 1001 \\
+February 26, 2020
+\end{flushleft}
+\begin{center}
+{Homework 4 \large}
+\end{center}
+
+\begin{itemize}
+	% problem 2.7.6
+	\item[] {2.7.6) \large}
+	\begin{flalign}
+		P(A) &= \frac{ \binom{2}{1}^{50} }{ \binom{100}{50} } \nonumber
+	\end{flalign}
+
+	% problem 2.7.7
+	\item[] {2.7.7) \large}
+	\begin{flalign}
+		P(A) &= \frac{6}{6^n} \nonumber
+	\end{flalign}
+
+	% problem 2.7.11
+	\item[] {2.7.11) \large}
+	\begin{itemize}
+		% problem 2.7.11 a
+		\item[] a)
+		\begin{flalign}
+			P(A) &= \frac{7!}{7^n} \nonumber
+		\end{flalign}
+
+		% problem 2.7.11 b
+		\item[] b)
+		\begin{flalign}
+			P(B) &= \frac{7}{7^n} \nonumber
+		\end{flalign}
+
+		% problem 2.7.11 c
+		\item[] c)
+		We are assuming each outcome is equally likely. This assumption may not be reasonable because some floors may be more visited than others.
+	\end{itemize}
+
+	% problem 2.7.15
+	\item[] {2.7.15) \large}
+	\begin{flalign}
+		P(A) &= \frac{ \binom{k}{2} \binom{365}{k-2} }{ \binom{365}{1}^k } \nonumber
+	\end{flalign}
+
+	% problem 2.7.22
+	\item[] {2.7.22) \large}
+	There are $4$ aces, 10s, jacks, queens, and kings. Therefore those $20$ cards are unwanted in our probability leaving us only $32$ of a $52$ card deck.
+	\begin{flalign}
+		P(A) &= \frac{ \binom{32}{13} }{ \binom{52}{13} } \nonumber
+	\end{flalign}
+
+	% problem 3.2.4
+	\item[] {3.2.4) \large}
+	\begin{flalign}
+		P(A) &= 1 - ( \binom{6}{0}(0.153)^0(1-0.153)^{6-0} + \binom{6}{1}(0.153)^1(1-0.153)^{6-1}) \nonumber \\
+		&= 1 - 0.769 \nonumber \\
+		&= 0.231 \nonumber
+	\end{flalign}
+
+	% problem 3.2.11
+	\item[] {3.2.11) \large}
+	\begin{flalign}
+		P(2B) &= \binom{4}{2}(0.5)^2(0.5)^{4-2} \nonumber \\
+		&= \frac{6}{16} \nonumber \\
+		P(1B \cup 3B) &= \binom{4}{1}(0.5)^1(0.5)^{4-1} + \binom{4}{3}(0.5)^3(0.5)^{4-3} \nonumber \\
+		&= \frac{1}{2} \nonumber
+	\end{flalign}
+	You are more likely to get $3$ children of one gender.
+
+	% problem 3.2.22
+	\item[] {3.2.22) \large}
+	\begin{flalign}
+		P(A) &= \frac{\binom{514}{k} \binom{4050-514}{65-k}}{\binom{4050}{65}} \nonumber \\
+		&= \frac{\binom{514}{k} \binom{3536}{65-k}}{\binom{4050}{65}} \nonumber
+	\end{flalign}
+
+	% problem 3.2.34
+	\item[] {3.2.34) \large}
+	\begin{flalign}
+		P(A) &= 1 - ( \frac{\binom{7}{2} \binom{7}{1} \binom{7}{1} }{ \binom{21}{4} } + \frac{\binom{7}{1} \binom{7}{2} \binom{7}{1} }{ \binom{21}{4} } + \frac{\binom{7}{1} \binom{7}{1} \binom{7}{2} }{ \binom{21}{4} } )\nonumber \\
+		&= 1 - 3 \cdot \frac{\binom{7}{2} \binom{7}{1} \binom{7}{1} }{ \binom{21}{4} } \nonumber \\
+		&= 1 - \frac{49}{95} \nonumber \\
+		&= \frac{46}{95} \nonumber
+	\end{flalign}
+
+	% problem 10
+	\item[] {10) \large}
+	\begin{itemize}
+		% problem 10 a
+		\item[] a)
+		\begin{flalign}
+			P(A) &= \frac{6}{6^6} \nonumber \\
+			&= \frac{1}{7776} \nonumber
+		\end{flalign}
+
+		% problem 10 b
+		\item[] b)
+		\begin{flalign}
+			P(B) &= \frac{6!}{6^6} \nonumber \\
+			&= \frac{5}{324} \nonumber
+		\end{flalign}
+	\end{itemize}
+	\newpage
+
+	% problem 11
+	\item[] {11) \large}
+	All $S_i$ have the same sample space being
+	\begin{flalign}
+		S_i = \{ 0, 1, 2, 3, 4, 5, 6 \} \nonumber
+	\end{flalign}
+	\begin{itemize}
+		% problem 11 a
+		\item[] a)
+		\begin{flalign}
+			P(Y_1=k) &= \frac{3^k \cdot 3^{6-k}}{6^6} \nonumber \\
+			&= \frac{3^6}{6^6} \nonumber \\
+			&= \frac{1}{64} \nonumber
+		\end{flalign}
+
+		% problem 11 b
+		\item[] b)
+		\begin{flalign}
+			P(Y_2=k) &= \frac{1^k \cdot 5^{6-k}}{6^6} \nonumber \\
+			&= \frac{5^6}{6^{6+k}} \nonumber
+		\end{flalign}
+
+		% problem 11 c
+		\item[] c)
+		\begin{flalign}
+			P(Y_3=k) &= \frac{3^k \cdot 3^{6-k}}{6^6} \nonumber \\
+			&= \frac{3^6}{6^6} \nonumber \\
+			&= \frac{1}{64} \nonumber
+		\end{flalign}
+	\end{itemize}	
+
+\end{itemize}
+
+\end{document}

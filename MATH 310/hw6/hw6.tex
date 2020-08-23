@@ -1,0 +1,84 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, cancel}
+\usepackage[margin=0.5in]{geometry}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 310 \\
+\noindent July 6, 2020
+
+\begin{center}
+\Large Homework 6
+\end{center}
+
+\begin{enumerate}
+	\item[\textbf{1.}] Consider the function $f: \mathbb{R} \rightarrow \mathbb{R}$ given by $f(x) = x^2 - 3x$. Consider the partition $P = \{ 0, 1, 2, 3, 4, 5, 6 \}$
+		of the interval $[0,6]$. Compute $U(f, P)$ and $L(f, P)$.
+
+	\begin{proof}[Computation]\renewcommand{\qedsymbol}{}
+		Suppose $f(x) = x^2 - 3x$ and $P = \{ 0, 1, 2, 3, 4, 5, 6 \}$. To compute $U(f, P)$ and $L(f, P)$, let us first find $m_j(f)$ and $M_j(f)$. Observe that $f'(x) =
+		2x - 3$. We can see that $f(x)$ is decreasing on the interval $\left (-\infty, \frac{3}{2} \right )$ and increasing on $\left (\frac{3}{2}, \infty \right )$ Then it
+		follows, with the exception of the interval $[1, 2]$, by the Extreme Value Theorem the infimum of every interval regarding the partition in $\left (\frac{3}{2},
+		\infty \right )$ and $\left (-\infty, \frac{3}{2} \right )$ will be the leftmost and rightmost end point, respectively. Likewise, disregarding $[1, 2]$, the supremum
+		will be the leftmost and rightmost end points of every interval in $\left (-\infty, \frac{3}{2} \right )$ and $\left (\frac{3}{2}, \infty \right )$, respectively.
+		Finally since it is both increasing and decreasing, $f \left (\frac{3}{2} \right )$ and $f(1) = f(2)$ can be see to be the infimum and supremum of $[1, 2]$,
+		respectively. Hence,
+		\begin{align*}
+			U(f, P) &= f(0)(1 - 0) + f(1)(2 - 1) + f(3)(3 - 2) + f(4)(4 - 3) + f(5)(5 - 4) + f(6)(6 - 5) \\
+				&= 30
+		\end{align*}
+		and
+		\begin{align*}
+			L(f, P) &= f(1)(1 - 0) + f \left (\frac{3}{2} \right )(2 - 1) + f(2)(3 - 2) + f(3)(4 - 3) + f(4)(5 - 4) + f(5)(6 - 5) \\
+				&= \frac{31}{4}.
+		\end{align*}
+	\end{proof}
+
+
+	\item[\textbf{2.}] For each $n \in \mathbb{N}$ consider the partition of the interval $[0,1]$ given by $P_n = \left \{ \frac{j}{n}: j = 0, 1, \hdots, n \right \}$. Let
+		$f$ be a bounded function. Prove that if $\lim_{n \rightarrow \infty} L(f, P_n) = \lim_{n \rightarrow \infty} U(f, P_n) = I$, then $f$ is integrable on $[0,1]$, in
+		which case $\int_0^1 f(x)\, dx = I$.
+
+	\begin{proof}
+		Suppose $f$ is a bounded function on $[0, 1]$ and for all $n \in \mathbb{N}$, $P_n = \left \{ \frac{j}{n}: j = 0, 1, \hdots, n \right \}$ which partitions $[0, 1]$.
+		Further suppose $\lim_{n \rightarrow \infty} L(f, P_n) = \lim_{n \rightarrow \infty} U(f, P_n) = I$ exists. Let $\epsilon > 0$. Choose an $N \in \mathbb{N}$ such that
+		$n \geq N$ implies $|I - L(f, P_n)| < \frac{\epsilon}{2}$ and $|U(f, P_n) - I| < \frac{\epsilon}{2}$. By the Triangle Inequality, we have
+		$\left |(U(f, P_n) - I) + (I - L(f, P_n)) \right | < \epsilon$ and with simplification, $U(f, P_n) - L(f, P_n) < \epsilon$. Hence for any $\epsilon > 0$ there exists
+		a partition $P_n$ on $[0, 1]$ such that $U(f, P_n) - L(f, P_n) < \epsilon$ illustrating the integrability of $f$ on $[0, 1]$. Additionally, by Definition 5.13 and
+		Theorem 5.15, $(U) \int_0^1 f(x)\,dx = (L) \int_0^1 f(x)\,dx = \int_0^1 f(x)\,dx = I$.
+	\end{proof}
+	\newpage
+
+
+	\item[\textbf{3.}] Use the partitions $P_n$ defined in the previous problem to define analogous paritions for the interval $[a,b]$. Then use these partitions and the
+		previous problem to prove that the function $f(x) = x$ is integrable over $[a, b]$ and evaluate $\int_a^b x\,dx$.
+
+	\begin{proof}
+		Let $P_n' = \left \{ (b-a)\frac{j}{n} + a: j=0,1, \hdots, n \right \}$. Fix $n \in \mathbb{N}$ and let $x_j = (b-a)\frac{j}{n} + a$. Then it follows that $a=x_0<x_1<
+		\hdots<x_n=b$. Thus $P_n'$ is a partition of $[a,b]$. \\ \\
+		Let us now calculate $L(f, P_n')$ and $U(f, P_n')$ where $f(x) = x$. Observe that $f(x)$ is an increasing function on $\mathbb{R}$ since $f'(x) = 1 > 0$ for all
+		$x \in \mathbb{R}$. Then it follows that for any interval $I=[c,d] \subseteq \mathbb{R}$, $m_I(f) = c$ and $M_I(f) = d$. Hence,
+		\begin{align*}
+			L(f, P_n) &= \sum_{j = 1}^n m_j(f) \Delta x_j \\
+				&= \sum_{j = 1}^n x_j \cdot \frac{b-a}{n} \\
+				&= \sum_{j = 1}^n \frac{b-a}{n} \left ( (b-a) \frac{j}{n} + a \right ) \\
+				&= \frac{(b-a)^2}{n^2} \sum_{j = 1}^n j + \frac{b-a}{n} \sum_{j = 1}^n a \\
+				&= \frac{(b-a)^2}{n^2} \cdot \frac{n(n+1)}{2} + \frac{b-a}{n} \cdot na \\
+			L(f, P_n) &= \frac{b^2 - a^2}{2} + \frac{(b-a)^2}{2n}
+		\end{align*}
+		and
+		\begin{align*}
+			U(f, P_n) &= \sum_{j = 1}^n M_j(f) \Delta x_j \\
+				&= \sum_{j = 1}^n x_{j+1} \cdot \frac{b-a}{n} \\
+				&= \sum_{j = 1}^n \frac{b-a}{n} \left ( (b-a) \frac{j+1}{n} + a \right ) \\
+				&= \frac{(b-a)^2}{n^2} \sum_{j = 1}^n (j+1) + \frac{b-a}{n} \sum_{j = 1}^n a \\
+				&= \frac{(b-a)^2}{n^2} \cdot \frac{n(n+3)}{2} + \frac{b-a}{n} \cdot na \\
+			U(f, P_n) &= \frac{b^2 - a^2}{2} + \frac{3(b-a)^2}{2n}.
+		\end{align*}
+		Now by taking the limit, we can see that $\lim_{n \rightarrow \infty} L(f, P_n) = \lim_{n \rightarrow \infty} U(f, P_n) = \frac{b^2 - a^2}{2}$. Thus by similiar
+		methods to (2), we can conclude that $f(x) = x$ is integrable on $[a, b]$ and $\int_a^b x\,dx = \frac{b^2 - a^2}{2}$.
+	\end{proof}
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,125 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{mathdots}
+\usepackage[margin=.75in]{geometry}
+
+\begin{document}
+
+% title page
+\title{%
+	Homework 4 \\
+	\large CS 326 \\
+	Section 1001}
+\author{Landon Fox}
+\date{March 5, 2020}
+\maketitle
+\newpage
+
+\lstset{morecomment=[l][keywordstyle]{;}, keywords={define, and, or, cons, car, cdr, if, else, cond, append, list}}
+
+\begin{itemize}
+	% problem 1
+	\item[] {1) \large}
+	\begin{itemize}
+		% problem 1a
+		\item[] a)
+		\begin{flalign}
+			b\, b\, b\, \times\, 4\, a\, \times\, c\, \times\, -\, sqrt\, +\, 2\, a\, \times\, / \nonumber
+		\end{flalign}
+
+		% problem 1b
+		\item[] b)
+		\begin{flalign}
+			/\, +\, b\, sqrt\, -\, \times\, b\, b\, \times\, \times\, 4\, a\, c\, \times\, 2\, a \nonumber
+		\end{flalign}
+	\end{itemize}
+
+	% problem 2
+	\item[] {2) \large}
+	\begin{itemize}
+		% problem 2a
+		\item[] a)
+		\begin{flalign}
+			&A\, and\, B \nonumber \\
+			&if\, A\, then\, B\, else\, false \nonumber
+		\end{flalign}
+
+		% problem 2b
+		\item[] a)
+		\begin{flalign}
+			&A\, or\, B \nonumber \\
+			&if\, A\, then\, true\, else\, B \nonumber
+		\end{flalign}
+	\end{itemize}
+
+	% problem 3
+	\item[] {3) \large}
+	\begin{itemize}
+		% problem 3a
+		\item[] a)
+		\begin{lstlisting}[language=C]
+    line = read_line();
+    while ( !all_blanks( line ) )
+    {
+        process_line( line );
+        line = read_line();
+    }
+		\end{lstlisting}
+
+		% problem 3b
+		\item[] b)
+		\begin{lstlisting}[language=C]
+    line = read_line();
+    if ( !all_blanks( line ) )
+    {
+        do
+        {
+            process_line( line );
+            line = read_line();
+        } while ( !all_blanks( line ) );
+    }
+		\end{lstlisting}
+	\end{itemize}
+	\newpage
+
+	\item[] {4) \large}
+	\begin{lstlisting}
+    ( define ( factorial n )
+        ( fac_helper n 2 1 )
+    )
+
+    ( define ( fac_helper n i p )
+        ( if ( < ( - n i ) 0 )
+            p
+            ( fac_helper n ( + i 1 ) ( * p i ) )
+        )
+    )
+	\end{lstlisting}
+
+	\item[] {5) \large}
+	\begin{itemize}
+		\item[] a)
+		Inline performs faster than macro:
+		\begin{lstlisting}[language=C]
+    #define CUBE( x ) x*x*x
+    inline int cube( x ) { return x*x*x; }
+		\end{lstlisting}
+		The inline performs faster because for each use of the parameter, the inline will use applicable analysis.
+
+		\item[] b)
+		Macro performs faster than inline:
+		\begin{lstlisting}[language=C]
+    #define PI 3.1415
+    inline double pi() { return 3.1415; }
+		\end{lstlisting}
+		The macro performs faster because it uses the preprocessor to insert the value rather than a function call.
+	\end{itemize}
+
+\end{itemize}
+
+\end{document}

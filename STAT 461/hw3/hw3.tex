@@ -1,0 +1,192 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{mathdots}
+\usepackage[margin=.75in]{geometry}
+
+\begin{document}
+
+% title page
+\title{Homework 3}
+\author{Landon Fox}
+\date{February 19, 2020}
+
+\begin{flushleft}
+	Landon Fox \\
+	STAT 461 \\
+	Section 1001 \\
+	February 19, 2020
+\end{flushleft}
+\begin{center}
+	{Homework 3 \Large}
+\end{center}
+
+\begin{itemize}
+
+	% problem 1
+	\item[] {2.6.1) \large}
+	Using the multiplication rule:
+	\begin{flalign}
+		x &= 2 \cdot 3 \cdot 2 \nonumber \\
+		&= 12 \nonumber
+	\end{flalign}
+	To find every combination twice:
+	\begin{flalign}
+		2x &= 24 \nonumber
+	\end{flalign}
+
+	% problem 2
+	\item[] {2.6.3) \large}
+	Using the multiplication rule, the amount of terms are:
+	\begin{flalign}
+		x &= 3 \cdot 3 \cdot 5 \nonumber \\
+		&= 45 \nonumber
+	\end{flalign}
+	Only $aeu$ and $cdx$ can be found within the product. $bef$ and $xvw$ will not be found because they are not combinations
+	of all three polynomials. $aeu$ and $cdx$ both have single terms from all three of the product.
+
+	% problem 3
+	\item[] {2.6.4) \large}
+	\begin{itemize}
+
+		% problem 3a
+		\item[] a)
+		\begin{flalign}
+			x &= 26^2 \cdot 10^4 \nonumber \\
+			&= 6760000 \nonumber
+		\end{flalign}
+
+		% problem 3b
+		\item[] b)
+		\begin{flalign}
+			x &= 26^2 \cdot 10 \cdot 9 \cdot 8 \cdot 7 \nonumber \\
+			&= 3407040 \nonumber
+		\end{flalign}
+
+		% problem 3c
+		\item[] c)
+		\begin{flalign}
+			x &= 26^2 \cdot 10^4 - 26^2 \nonumber \\
+			&= 6759324 \nonumber
+		\end{flalign}
+
+	\end{itemize}
+
+	% problem 4
+	\item[] {2.6.10) \large}
+	Two cases: starting with a black note, or starting with a white note.
+	\begin{flalign}
+		x &= 5 \cdot 7 \cdot 4 \cdot 6 \cdot 3 \cdot 5 \cdot 2 \cdot 4 + 7 \cdot 5 \cdot 6 \cdot 4 \cdot 5 \cdot 3 \cdot 4 \cdot 2 \nonumber \\
+		&= 201600 \nonumber
+	\end{flalign}
+
+	% problem 5
+	\item[] {2.6.15) \large}
+	Thirteen cards to a suit, four to a card type. If the first card is an ace of clubs, it will alter the second draw of an ace.
+	\begin{flalign}
+		x &= 13 \cdot 4 - 4 + 3 \nonumber \\
+		&= 51 \nonumber
+	\end{flalign}
+
+	% problem 6
+	\item[] {2.6.18) \large}
+	\begin{itemize}
+		\item[] a)
+		If all tires are distinct
+		\begin{flalign}
+			x &= 4 \cdot 3 \cdot 2 \cdot 1 \nonumber \\
+			&= 24 \nonumber
+		\end{flalign}
+
+		\item[] b)
+		If two are snow tires
+		\begin{flalign}
+			x &= \frac{4!}{2!} \nonumber \\
+			&= 12 \nonumber
+		\end{flalign}
+	\end{itemize}
+
+	% problem 7
+	\item[] {2.6.26) \large}
+	For each placement of a family, there are many ways the family members can be arranged.
+	\begin{flalign}
+		x = n&(m(m-1)(m-2) \cdots (2)(1)) \nonumber \\
+		\cdot &(n-1)(m(m-1)(m-2) \cdots (2)(1)) \nonumber \\
+		&\ddots \nonumber \\
+		\cdot 2&(m(m-1)(m-2) \cdots (2)(1)) \nonumber \\
+		\cdot &(m(m-1)(m-2) \cdots (2)(1)) \nonumber
+	\end{flalign}
+	\begin{flalign}
+		x &= n!(m!)^n \nonumber
+	\end{flalign}
+
+	% problem 8
+	\item[] {2.6.28) \large}
+	\begin{flalign}
+		let\;\;\; P(n):\; n(n-1)(n-2) \cdots (n-k+1) = \frac{n!}{(n-k)!} \nonumber
+	\end{flalign}
+	Base Case:
+	\begin{flalign}
+		P(k):\; k(k-1)(k-2) \cdots (k-k+1) &= \frac{k!}{(k-k)!} \nonumber \\
+		k(k-1)(k-2) \cdots (2)(1) &= \frac{k!}{0!} \nonumber \\
+		k(k-1)(k-2) \cdots (2)(1) &= k! \nonumber
+	\end{flalign}
+	Based off the definition of the factorial function, the above statement holds. \\
+	\newpage
+	Inductive step:
+	\begin{flalign}
+		assume\;\;\; n(n-1)(n-2) \cdots (n-k+1) &= \frac{n!}{(n-k)!} \nonumber \\
+		show\;\;\; (n+1)(n)(n-1) \cdots (n+1-k+1) &= \frac{(n+1)!}{(n+1-k)!} \nonumber \\
+		(n+1)(n)(n-1)(n-2) \cdots (n-k+1)(n+1-k+1) &= \frac{(n+1)n!}{(n+1-k)(n-k)!} \nonumber \\
+		\cancel{(n+1)}(n)(n-1)(n-2) \cdots (n-k+1)(n+1-k+1)(n-k+1) &= \frac{\cancel{(n+1)}n!}{(n+1-k)(n-k)!}(n-k+1) \nonumber \\
+		\frac{n!}{(n-k)!} &= \frac{n!}{\cancel{(n+1-k)}(n-k)!}\cancel{(n-k+1)} \nonumber \\
+		\frac{n!}{(n-k)!} &= \frac{n!}{(n-k)!} \nonumber
+	\end{flalign}
+	\begin{flalign}
+		&P(k) \nonumber \\
+		&P(n) \rightarrow P(n+1) \nonumber \\
+		&\noindent\rule{2cm}{0.4pt} \nonumber \\
+		&\therefore \forall n \geq k, P(n)\; \square \nonumber
+	\end{flalign}
+
+	% problem 9
+	\item[] {2.6.38) \large}
+	Three L's, four vowels, four consonants other than L's. \\
+	What must be accounted for: four consonants, also all the different placements of the vowels and orders (including the repeating U's) \\
+	Note: Stars and Bars method
+	\begin{flalign}
+		\binom{n+k-1}{n} \nonumber
+	\end{flalign}
+	Let L's and consonants be bars and all vowels be stars
+	\begin{flalign}
+		\cdots L \cdots L \cdots L \cdots C \cdots C \cdots C \cdots C \cdots \nonumber
+	\end{flalign}
+	\begin{flalign}
+		x &= 4! \binom{4+8-1}{4} \frac{4!}{2!1!1!} \nonumber \\
+		&= \frac{4!4!11!}{2!4!7!} \nonumber \\
+		&= 95040 \nonumber
+	\end{flalign}
+	\newpage
+
+	% problem 10
+	\item[] {2.6.46) \large}
+	Prove:
+	\begin{flalign}
+		\sum_{k=0}^{n} \binom{n}{k} = 2^n \nonumber
+	\end{flalign}
+	Note: Binomial Theorem
+	\begin{flalign}
+		(x+y)^n = \sum_{k=0}^{n} \binom{n}{k} x^k y^{n-k} \nonumber
+	\end{flalign}
+	\begin{flalign}
+		let\;\;\; x&=y=1 \nonumber \\
+		(1+1)^n &= \sum_{k=0}^{n} \binom{n}{k} 1^k 1^{n-k} \nonumber \\
+		2^n &= \sum_{k=0}^{n} \binom{n}{k} \nonumber
+	\end{flalign}
+
+\end{itemize}
+
+\end{document}

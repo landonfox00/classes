@@ -1,0 +1,112 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, cancel}
+\usepackage[margin=0.5in]{geometry}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 310 \\
+\noindent June 22, 2020
+
+\begin{center}
+\Large Homework 3
+\end{center}
+
+\begin{enumerate}
+	\item[\textbf{1.}] Suppose that $x_0 \in \mathbb{R}$ and $x_n = \frac{1+x_{n-1}}{2}$ for $n \in \mathbb{N}$. Use the Monotone Convergence Theorem to prove that
+		$x_n \rightarrow 1$ as $n \rightarrow \infty$. \\
+
+	\textbf{Lemma (i).} If a sequence $x_n \rightarrow a \in \mathbb{R}$ as $n \rightarrow \infty$, then $x_{n-1} \rightarrow a$ as $n \rightarrow \infty$.
+
+	\begin{proof}[Lemma (i) Proof]
+		Suppose $x_n$ is a sequence converging to $a \in \mathbb{R}$ as $n \rightarrow \infty$. Based on the definition of a limit of a sequence, for all
+		$\epsilon > 0$ there exists an $N_1 \in \mathbb{N}$ s.t. $n \geq N_1$ implies that $|x_n - a| < \epsilon$. Suppose $\epsilon > 0$, let $N_2 = N_1 - 1$
+		s.t. $n - 1 \geq N_2$ implies $|x_{n-1} - a| < \epsilon$. If this were not true, then it would imply that $x_n$ does not converge to $a$ which is a
+		contradiction.
+	\end{proof}
+
+	\begin{proof}
+		Suppose $x_0 \in \mathbb{R}$ and $x_n = \frac{1+x_{n-1}}{2}$ for $n \in \mathbb{N}$. \\
+
+		If $x_0 \leq 1$ then let us show that $x_n$ is an increasing sequence bounded from above by $1$. To show boundedness, we can see that the base
+		case, $n=0$, is true by specification. In regard to the inductive hypothesis, suppose $x_n \leq 1$. Then
+		$x_{n+1} = \frac{1 + x_n}{2} \leq \frac{1 + 1}{2} = 1$. Moreover, $x_{n+1} \leq 1$; illustrating that $x_n \leq 1$ for all $n \in \mathbb{N}$. To show
+		that $x_n$ is an increasing sequence, observe that $x_n \leq 1$ for all $n \in \mathbb{N}$. Then we can see the following holds, $2x_n \leq 1 + x_n$ and
+		$x_n \leq \frac{1 + x_n}{2} = x_{n+1}$. Thus $x_n$ is increasing for all $n \in \mathbb{N}$. \\
+
+		Otherwise, if $x_0 > 1$ then let us show that $x_n$ is a decreasing sequence bounded from below by $1$. To show boundedness, we can see that
+		the base case, $n=0$, is true by specification. In regard to the inductive hypothesis, suppose $x_n > 1$. Then
+		$x_{n+1} = \frac{1 + x_n}{2} > \frac{1 + 1}{2} = 1$. Moreover, $x_{n+1} > 1$; illustrating that $x_n > 1$ for all $n \in \mathbb{N}$. To show
+		that $x_n$ is a decreasing sequence, observe that $x_n > 1$ for all $n \in \mathbb{N}$. Then we can see the following holds, $2x_n > 1 + x_n$ and
+		$x_n > \frac{1 + x_n}{2} = x_{n+1}$. Thus $x_n$ is decreasing for all $n \in \mathbb{N}$. \\
+
+		By the Monotone Convergence Theorem, in all cases of the value $x_0$, $x_n$ converges because it is either increasing or decreasing and bounded by $1$
+		from above or below respectively. Additionally, $a = \lim_{n \rightarrow \infty} x_n = \lim_{n \rightarrow \infty} \frac{1 + x_{n-1}}{2} =
+		\frac{1 + \lim_{n \rightarrow \infty} x_{n-1}}{2} = \frac{1 + a}{2}$ via Limit Laws (i) and (iv) as well as Lemma (i). Moreover, $a = \frac{1 + a}{2}$
+		implies that $a=1$.
+	\end{proof}
+
+
+	\item[\textbf{2.}] Suppose that $\{x_n\}$ and $\{y_n\}$ are both Cauchy. Use the definition of a Cauchy sequence to prove that the following sequences are
+		Cauchy.
+
+	\begin{enumerate}
+		\item[\textbf{a.}] $\{x_n + y_n\}$.
+
+		\begin{proof}
+			Suppose $\{x_n\}$ and $\{y_n\}$ are both Cauchy. Then we know for any $\epsilon > 0$ there exists an $N_1 \in \mathbb{N}$ s.t. $m,n \geq N_1$ implies
+			$|x_n - x_m| < \frac{\epsilon}{2}$. Likewise, the same is true for $\{y_n\}$ with its own $N_2 \in \mathbb{N}$ based on the definition of Cauchy
+			sequences. Let us now show that $\{x_n + y_n\}$ is Cauchy. Suppose $\epsilon > 0$. Let $N = \max\{N_1, N_2\}$ s.t. $m,n \geq N$, illustrating that
+			both $|x_n - x_m| < \frac{\epsilon}{2}$ and $|y_n - y_m| < \frac{\epsilon}{2}$ hold. Then it follows that $|(x_n + y_n) - (x_m + y_m)| =
+			|x_n - x_m + y_n - y_m| \leq |x_n - x_m| + |y_n - y_m| < \frac{\epsilon}{2} + \frac{\epsilon}{2} = \epsilon$ via the Triangle Inequality. Thus
+			$|(x_n + y_n) - (x_m + y_m)| < \epsilon$ by transitivity; implying that $\{x_n + y_n\}$ is Cauchy by definition.
+		\end{proof}
+
+
+		\item[\textbf{b.}] $\{x_n y_n\}$.
+
+		\begin{proof}
+			Suppose $\{x_n\}$ and $\{y_n\}$ are both Cauchy. By the Cauchy Theorem, we know that both $\{x_n\}$ and $\{y_n\}$ can be bounded by $M_1$ and $M_2$ from above because they are convergent.
+			Let $M = \max\{M_1, M_2\}$ s.t. $M$ bounds all values of $\{x_n\}$ and $\{y_n\}$ from above. In the case that $M = 0$, then let $M = 1$ to prevent division by zero. Let us now show that $\{x_n y_n\}$
+			is also Cauchy. Suppose $\epsilon > 0$. Then $|x_n y_n - x_m y_m| = |x_n y_n  - x_n y_m + x_n y_m - x_m y_m| \leq |x_n||y_n - y_m| + |y_m||x_n - x_m| \leq
+			\frac{M \epsilon}{2M} + \frac{M \epsilon}{2M} = \epsilon$ by the Triangle Inequality and if $|x_n - x_m|, |y_n - y_m| < \frac{\epsilon}{2M}$. Thus
+			$|x_n y_n - x_m y_m| < \epsilon$ implying that $\{x_n y_n\}$ is Cauchy by definition.
+		\end{proof}
+	\end{enumerate}
+
+
+	\item[\textbf{3.}] Suppose that $\{x_n\}$ and $\{y_n\}$ are both Cauchy and $x_n + y_n > 0$ for all $n \in \mathbb{N}$. Prove that the sequence
+		$\left \{\frac{1}{x_n+y_n} \right \}$ cannot converge to zero. \\
+
+	\textbf{Lemma (ii).} If a sequence $w_n \rightarrow 0$ as $n \rightarrow \infty$ and $w_n > 0$ for all $n \in \mathbb{N}$, then
+		$\frac{1}{w_n} \rightarrow +\infty$ as $n \rightarrow \infty$.
+
+	\begin{proof}[Lemma (ii) Proof]
+		Suppose $w_n \rightarrow 0$ as $n \rightarrow \infty$ and $w_n > 0$ for all $n \in \mathbb{N}$. Based on the definition of the limit, we know that for all
+		$\epsilon > 0$, there exists an $N \in \mathbb{N}$ s.t. $n \geq N$ implies $|w_n| < \epsilon$. Then it follows that $0 < w_n < \epsilon$. Let $M = \frac{1}{\epsilon}$
+		s.t. $0 < M = \frac{1}{\epsilon} < \frac{1}{w_n}$ by the multiplicative inverse of the inequality. We know that the codomain of $M = \frac{1}{\epsilon}$ will
+		be all positive real values for the domain $\epsilon > 0$, thus $M \in \mathbb{R}^+$. Furthermore, for all $M \in \mathbb{R}^+$ there exists an
+		$N \in \mathbb{N}$ s.t. $n \geq N$ implies $\frac{1}{\epsilon} = M < \frac{1}{w_n}$; implying that $\frac{1}{w_n} \rightarrow +\infty$ as
+		$n \rightarrow \infty$ by definition of divergence of sequences.
+	\end{proof}
+
+	\begin{proof}
+		Suppose $\{x_n\}$ and $\{y_n\}$ are both Cauchy and $x_n + y_n > 0$ for all $n \in \mathbb{N}$. By the Cauchy Theorem, we know that the limits of both
+		$\{x_n\}$ and $\{y_n\}$ exist. By (2a) and the Cauchy Theorem we also know that $x_n + y_n$ is convergent. Additionally, by the Limit Comparison Theorem
+		we can see that $\lim_{n \rightarrow \infty}(x_n + y_n) \geq 0$ since $x_n + y_n > 0$ for all $n \in \mathbb{N}$. In the case that
+		$\lim_{n \rightarrow \infty}(x_n + y_n) = 0$, then by Lemma (ii), $\frac{1}{x_n + y_n}$ does not converge to zero, rather diverges to $+\infty$. Otherwise,
+		Limit Law (iv) can be applied, stating that the limit exists and that it evaulates to $\frac{1}{x+y}$ where $x_n \rightarrow x \in \mathbb{R}$ and
+		$y_n \rightarrow y \in \mathbb{R}$ as $n \rightarrow \infty$. Furthermore, $\frac{1}{x+y} \neq 0$ unless $1 = 0$, which is a contradiction.
+	\end{proof}
+
+
+	\item[\textbf{4.}] Use the definition of a limit of a function to show that $\lim_{x \rightarrow 2}(x^2 - x + 1) = 3$.
+
+	\begin{proof}
+		Suppose $\epsilon > 0$. Observe that $f(x) - L = x^2 - x + 1 - 3 = (x-2)(x+1)$. Additionally, let $0 < \delta \leq 1$ and $|x-2| < \delta$, then we can see
+		that $1 < x < 3$ and that $|x+1| < 4$. Let $\delta = \min\{1, \frac{\epsilon}{4}\}$ implying that $|(x-2)(x+1)| < 4|x-2| < 4\delta \leq \epsilon$. Thus
+		$|(x-2)(x+1)| < \epsilon$ by transitivity. Furthermore, by definition $x^2 - x + 1 \rightarrow 3$ as $x \rightarrow 2$.
+	\end{proof}
+\end{enumerate}
+
+\end{document}

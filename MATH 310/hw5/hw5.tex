@@ -1,0 +1,46 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, cancel}
+\usepackage[margin=0.5in]{geometry}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 310 \\
+\noindent July 2, 2020
+
+\begin{center}
+\Large Homework 5
+\end{center}
+
+\begin{enumerate}
+	\item[\textbf{1.}] Let $f(x) = x^2 - 3x$. Use the definition of differentiability to prove that $f'(x)$ exists for all $a \in \mathbb{R}$.
+
+	\begin{proof}
+		Suppose $f(x) = x^2 - 3x$ and $a \in \mathbb{R}$. Then it follows that $\lim_{h \rightarrow 0} \frac{f(a+h) - f(a)}{h} =$ \\
+		$\lim_{h \rightarrow 0} \frac{(a+h)^2 - 3(a+h) - a^2 + 3a}{h} = \lim_{h \rightarrow 0} (2a - 3 + h) = 2a - 3 \in \mathbb{R}$ exists. Thus by definition,
+		$f'(a) = 2a - 3$ exists for all $a \in \mathbb{R}$.
+	\end{proof}
+
+
+	\item[\textbf{2.}] Let $g(x) = x^2|x|$. Prove that $g$ is differentiable on $\mathbb{R}$ and find $g'(x)$.
+
+	\begin{proof}
+		Suppose $g(x) = x^2|x|$. Observe that \[ g(x) = \begin{cases} -x^3; & x < 0 \\ x^3; & x \geq 0 \end{cases}. \] Let us continue by showing $x^3$ is differentiable on
+		$\mathbb{R}$. Let $x \in \mathbb{R}$. It follows that $\lim_{h \rightarrow 0} \frac{(x+h)^3 - x^3}{h} = \lim_{h \rightarrow 0} (3x^2 + 3hx + h^2) =
+		3x^2 \in \mathbb{R}$ exists; thus by definition, $x^3$ is differentiable on $\mathbb{R}$. Moreover, we can see that $x^3$ is differentiable when $x > 0$
+		and the derivative equals $3x^2$ as just shown. Likewise, when $x < 0$, $-x^3$ is differentiable and the derivative equals $-3x^2$ by Theorem 4.10. Finally, the existence of the limit
+		$\lim_{h \rightarrow 0} \frac{g(0+h) - g(0)}{h} = \lim_{h \rightarrow 0} \frac{h^2|h| - 0}{h} = \lim_{h \rightarrow 0} h|h| = 0 = 3x^2 = -3x^2$ when $x = 0$
+		illustrates differentiability at $0$. Thus $g$ is differentiable and \[ g'(x) = 3x|x| = \begin{cases} -3x^2; & x < 0 \\ 3x^2; & x \geq 0 \end{cases}. \]
+	\end{proof}
+
+
+	\item[\textbf{3.}] Prove that if $f$ is differentiable on $[a, b]$, then $f$ is uniformly continuous on $[a, b]$.
+
+	\begin{proof}
+		Suppose $f$ is differentiable on $[a, b]$. Then by Theorem 4.4 we know that $f$ is continuous on $[a, b]$. Additionally, since $[a, b]$ is a closed, bounded interval
+		and $f$ is continuous on the interval, Theorem 3.39 states $f$ must be uniformly continuous on $[a, b]$.
+	\end{proof}
+
+\end{enumerate}
+
+\end{document}

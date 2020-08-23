@@ -1,0 +1,198 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, cancel}
+\usepackage[margin=0.5in]{geometry}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 310 \\
+\noindent June 15, 2020
+
+\begin{center}
+\Large Homework 2
+\end{center}
+
+\begin{enumerate}
+	\item[\textbf{1.}] Decide which of the following statements are true and
+	which are false. Prove the true ones and provide a counterexample for the
+	false ones.
+
+	\begin{enumerate}
+		\item[\textbf{a.}] If $x_n$ converges, then $\frac{x_n}{n}$ also
+		converges.
+
+		\begin{proof}
+			Suppose $x_n$ converges. Based on the definition of convergence,
+			$x_n \rightarrow a$ as $n \rightarrow \infty$. Additionally,
+			we know the sequence $\frac{1}{n} \rightarrow 0$ as
+			$n \rightarrow \infty$. Thus by the Squeeze Thm (ii) the product
+			$\frac{1}{n} \cdot x_n \rightarrow 0$ as $n \rightarrow \infty$
+			since $x_n$ is bounded by Thm 2.8.
+		\end{proof}
+
+
+		\item[\textbf{b.}] If $x_n$ does not converge, then $\frac{x_n}{n}$ does
+		not converge.
+
+		\begin{proof}[Disproof]
+			Let $x_n = n$. Observe that $x_n$ does not converge; if $x_n$ were
+			to converge, it would imply that for every $\epsilon > 0$ there
+			exists $N \in \mathbb{N}$ s.t. $n \geq N$ and $|n-a| < \epsilon$.
+			As $n \in [N, \infty)$ increments, it's clear that $|n-a|$ can never
+			be contained by every $\epsilon > 0$. In other words, $n$ will be
+			incremented beyond $\lceil a + \epsilon \rceil$, implying
+			$|\lceil a + \epsilon \rceil-a| \geq \epsilon$. Additionally, notice
+			that $\frac{x_n}{n} = 1$ a constant sequence, clearly convergent.
+		\end{proof}
+
+
+		\item[\textbf{c.}] If $x_n$ converges and $y_n$ is bounded, then
+		$x_n y_n$ converges.
+
+		\begin{proof}[Disproof]
+			Let $x_n = 1$ and $y_n = (-1)^n$. It can be seen that $x_n$ is
+			convergent since it is a constant sequence. Similarly, $y_n$ is
+			bounded by $-1$ and $1$; $n$ can be either even or odd illustrating
+			that $y_n$ can only result in the values $-1$ and $1$, thus
+			$y_n$ is dominated by $1$. The product $x_n y_n = (-1)^n$ is not
+			convergent.
+		\end{proof}
+
+
+		\item[\textbf{d.}] If $x_n$ converges to zero and $y_n > 0$ for all
+		$n \in \mathbb{N}$, then $x_n y_n$ converges.
+
+		\begin{proof}[Disproof]
+			Let $x_n = \frac{1}{n}$ and $y_n = n^2$. We can see that
+			$\frac{1}{n} \rightarrow 0$ as $n \rightarrow \infty$. Also
+			$n^2 > 0$ for all $n \in \mathbb{N}$, otherwise this would
+			contradict closure of $\mathbb{N}$ under multiplication. The product
+			$x_n y_n = \frac{1}{n} \cdot n^2 = n$ which does not converge as
+			$n \rightarrow \infty$.
+		\end{proof}
+
+	\end{enumerate}
+
+
+	\item[\textbf{2.}] Using the method of Example 2.2i in our textbook, prove
+	that $2 - \frac{1}{n} \rightarrow 2$ as $n \rightarrow \infty$.
+
+	\begin{proof}
+		The definition of the limit of a sequence states that for every
+		$\epsilon > 0$ there exists $N \in \mathbb{N}$ s.t. $n \geq N$
+		and $|2 - \frac{1}{n} - 2| = |\frac{1}{n}| < \epsilon$.
+		Let $\frac{1}{\epsilon} < N \leq n$ for all $\epsilon > 0$ where
+		$N \in \mathbb{N}$ via the use of the Archimedean Principle. The
+		multiplicative reciprocal of the inequality illustrates
+		$\frac{1}{n} \leq \frac{1}{N} < \epsilon$. By the transitive property
+		and the fact that $\frac{1}{n} > 0$ since $n \in \mathbb{N}$,
+		$|\frac{1}{n}| < \epsilon$ holds for all $\epsilon > 0$.
+	\end{proof}
+
+
+	\item[\textbf{3.}] Suppose that $\{ x_n \}_{x \in \mathbb{N}}$ is a
+	sequence and $x_n \rightarrow 2$ as $n \rightarrow \infty$. Using the
+	definition of convergence of sequences, prove that
+	$1 + 3x_n \rightarrow 7$ as $n \rightarrow \infty$.
+
+	\begin{proof}
+		Suppose $x_n \rightarrow 2$ as $n \rightarrow \infty$. Then for all
+		$\epsilon > 0$ there exists $N \in \mathbb{N}$ and
+		$|x_n - 2| < \frac{\epsilon}{3}$. Moreover, $|3x_n - 6| < \epsilon$
+		and $|1 + 3x_n - 7| < \epsilon$. This implies for all $\epsilon > 0$
+		the corresponding $N \in \mathbb{N}$ used in $x_n \rightarrow 2$ can
+		be used to show $|1 + 3x_n - 7| < \epsilon$; thus,
+		$1 + 3x_n \rightarrow 7$ as $n \rightarrow \infty$.
+	\end{proof}
+	\newpage
+
+
+	\item[\textbf{4.}] Use the Limit Laws to find the following limits.
+
+	\begin{enumerate}
+		\item[\textbf{a.}] $x_n = \frac{1 - 3n + 5n^2}{2 + 2n - 3n^2}$. \\
+
+		The limit can be found by first multiplying $\frac{1}{n^2}$ in the
+		numerator and denominator then applying the Limit Laws (i), (ii), and (iv).
+		After observing that
+		$\lim_{n \rightarrow \infty} \frac{1}{n^2} = \lim_{n \rightarrow \infty} \frac{1}{n} = 0$,
+		the limit can be found to be $-\frac{5}{3}$.
+
+		\begin{flalign}
+			&\lim_{n \rightarrow \infty} \frac{1 - 3n + 5n^2}{2 + 2n - 3n^2} \nonumber \\
+			&\lim_{n \rightarrow \infty} \frac{1 - 3n + 5n^2}{2 + 2n - 3n^2} \cdot \frac{\frac{1}{n^2}}{\frac{1}{n^2}} \nonumber \\
+			&\lim_{n \rightarrow \infty} \frac{\frac{1}{n^2} - \frac{3}{n} + 5}{\frac{2}{n^2} + \frac{2}{n} - 3} \nonumber \\
+			&\frac{\lim_{n \rightarrow \infty} \left ( \frac{1}{n^2} - \frac{3}{n} + 5 \right )}{\lim_{n \rightarrow \infty} \left ( \frac{2}{n^2} + \frac{2}{n} - 3 \right )}\; \textbf{via Quotient Law} \nonumber \\
+			&\frac{\lim_{n \rightarrow \infty} \frac{1}{n^2} - \lim_{n \rightarrow \infty} \frac{3}{n} + 5}{\lim_{n \rightarrow \infty}\frac{2}{n^2} + \lim_{n \rightarrow \infty}\frac{2}{n} - 3}\; \textbf{via Sum and Difference Laws} \nonumber \\
+			&\frac{\lim_{n \rightarrow \infty} \frac{1}{n^2} - 3\lim_{n \rightarrow \infty} \frac{1}{n} + 5}{2\lim_{n \rightarrow \infty}\frac{1}{n^2} + 2\lim_{n \rightarrow \infty}\frac{1}{n} - 3}\; \textbf{via Constant Law} \nonumber \\
+			&\frac{0 - 3 \cdot 0 + 5}{2 \cdot 0 + 2 \cdot 0 - 3}\; \textbf{via Evaluation} \nonumber \\
+			&-\frac{5}{3} \nonumber
+		\end{flalign}
+		\newpage
+
+
+		\item[\textbf{b.}] $x_n = \frac{n^3 - n + 2}{2n^3 - n + 2}$. \\
+
+		The limit can be found by first multiplying $\frac{1}{n^3}$ in the
+		numerator and denominator then applying the Limit Laws (i), (ii), and (iv).
+		After observing that
+		$\lim_{n \rightarrow \infty} \frac{1}{n^3} = \lim_{n \rightarrow \infty} \frac{1}{n^2} = \lim_{n \rightarrow \infty} \frac{1}{n} = 0$,
+		the limit can be found to be $\frac{1}{2}$.
+
+		\begin{flalign}
+			&\lim_{n \rightarrow \infty} \frac{n^3 - n + 2}{2n^3 - n + 2} \nonumber \\
+			&\lim_{n \rightarrow \infty} \frac{n^3 - n + 2}{2n^3 - n + 2} \cdot \frac{\frac{1}{n^3}}{\frac{1}{n^3}} \nonumber \\
+			&\lim_{n \rightarrow \infty} \frac{1 - \frac{1}{n^2} + \frac{2}{n^3}}{2 - \frac{1}{n^2} + \frac{2}{n^3}} \nonumber \\
+			&\frac{\lim_{n \rightarrow \infty} \left ( 1 - \frac{1}{n^2} + \frac{2}{n^3} \right )}{\lim_{n \rightarrow \infty} \left ( 2 - \frac{1}{n^2} + \frac{2}{n^3} \right )}\; \textbf{via Quotient Law} \nonumber \\
+			&\frac{1 - \lim_{n \rightarrow \infty} \frac{1}{n^2} + \lim_{n \rightarrow \infty} \frac{2}{n^3}}{2 - \lim_{n \rightarrow \infty}\frac{1}{n^2} + \lim_{n \rightarrow \infty}\frac{2}{n^3}}\; \textbf{via Sum and Difference Laws} \nonumber \\
+			&\frac{1 - \lim_{n \rightarrow \infty} \frac{1}{n^2} + 2\lim_{n \rightarrow \infty} \frac{1}{n^3}}{2 - \lim_{n \rightarrow \infty}\frac{1}{n^2} + 2\lim_{n \rightarrow \infty}\frac{1}{n^3}}\; \textbf{via Constant Law} \nonumber \\
+			&\frac{1 - 0 + 2 \cdot 0}{2 - 0 + 2 \cdot 0}\; \textbf{via Evaluation} \nonumber \\
+			&\frac{1}{2} \nonumber
+		\end{flalign}
+	\end{enumerate}
+
+
+	\item[\textbf{5.}] Prove that given $x \in \mathbb{R}$ there is a sequence
+	$r_n \in \mathbb{Q}$ such that $r_n \rightarrow x$ as $n \rightarrow \infty$.
+
+	\textbf{Lemma}. The sequence $10^{-n} \rightarrow 0$ as
+	$n \rightarrow \infty$.
+	
+	\begin{proof}[Lemma Proof]
+		The definition of the limit of a sequence states that for every
+		$\epsilon > 0$ there exists $N \in \mathbb{N}$ s.t. $n \geq N$
+		and $|10^{-n} - 0| = 10^{-n} < \epsilon$. The Archimedean Principle
+		shows that for any $\epsilon > 0$, there exists an $m \in \mathbb{N}$
+		s.t. $\frac{1}{\epsilon} < m$. Additionally, for any $m$ we can always
+		find a natural power of $10$ greater than or equal to $m$. We can
+		verify this by observing $m = 10^{\log m} \leq 10^{\lceil \log m \rceil}$
+		since $10^x$ is an increasing function. Furthermore, we can conclude
+		that there exists an $N$ s.t. $\frac{1}{\epsilon} < m \leq 10^N$. By
+		the transitive property, $\frac{1}{\epsilon} < 10^N$. Moreover, 
+		$|10^{-n}| \leq |10^{-N}| < \epsilon$ if $n \geq N$ since $10^{-x}$ is a
+		decreasing function. Thus for every $\epsilon > 0$ there exists a
+		$N \in \mathbb{N}$ s.t. $n \geq N$ and $|10^{-n} - 0| < \epsilon$.
+	\end{proof}
+
+	\begin{proof}
+		Let $r_n = \frac{\lfloor x \cdot 10^n \rfloor}{10^n} \in \mathbb{Q}$.
+		\textbf{Claim}: $r_n \rightarrow x$ as $n \rightarrow \infty$. If
+		$r_n \rightarrow x$ then it sufficies to show
+		$|r_n - x| \rightarrow 0$. Let us attempt to show that $|r_n - x|$ is
+		bounded by the $0$ sequence and $10^{-n}$. \\
+		Clearly based on the
+		definition of the absolute value, the result is always greater than or
+		equal to $0$, thus $0 \leq |r_n - x|$. \\
+		Let us now examine
+		$|r_n - x| = \frac{\left | \lfloor x \cdot 10^n \rfloor - x \cdot 10^n  \right |}{10^n}$.
+		We can see that the numerator is the fractional part of $x \cdot 10^n$.
+		By definition, the fractional part of any real number must be less than
+		$1$; implying that $\frac{\left | \lfloor x \cdot 10^n \rfloor - x \cdot 10^n  \right |}{10^n} < \frac{1}{10^n}$.
+		Thus illustrating that $|r_n - x| \leq 10^{-n}$. \\
+		For $n \geq 1$, $0 \leq |r_n - x| \leq 10^{-n}$, additionally by the
+		lemma, $10^{-n} \rightarrow 0$. Thus by Squeeze Thm (i), we see that
+		$|r_n - x| \rightarrow 0$ and $r_n \rightarrow x$.
+	\end{proof}
+\end{enumerate}
+
+\end{document}

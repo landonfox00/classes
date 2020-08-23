@@ -1,0 +1,159 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{enumerate}
+\usepackage[margin=0.5in]{geometry}
+\footskip = -0.75in
+
+\begin{document}
+
+% title page
+\title{Homework 5}
+\author{Landon Fox}
+\date{March 29, 2020}
+
+\begin{flushleft}
+Landon Fox \\
+STAT 461 \\
+Section 1001 \\
+March 29, 2020
+\end{flushleft}
+\begin{center}
+\large Homework 5
+\end{center}
+
+\begin{itemize}
+	% problem 1
+	\item[] {\large 3.5.28)}
+	\newline
+	Let $X$ be a binomial random variable, $n=10$, $p=\frac{2}{5}$
+	\begin{flalign}
+		E[3X - 4] &= 3E[X] - 4 \nonumber \\
+		&= 3(10 \frac{2}{5}) - 4 \nonumber \\
+		E[3X - 4] &= 8 \nonumber
+	\end{flalign}
+
+	% problem 2
+	\item[] {\large 3.5.30)}
+	\begin{flalign}
+		f_Y(y) &= 2(1 - y);\; 0 \leq y \leq 1 \nonumber \\
+		f_W(w) &= \frac{1}{\sqrt{w}} - 1;\; 0 \leq w \leq 1 \nonumber \\
+		W &= Y^2 \nonumber
+	\end{flalign}
+	Method 1:
+	\begin{flalign}
+		E[W] &= \int_0^1 w(\frac{1}{\sqrt{w}} - 1)dw \nonumber \\
+		&= \left [ \frac{2}{3}w^{\frac{3}{2}} - \frac{1}{2}w^2 \right ]_0^1 \nonumber \\
+		&= \frac{2}{3} - \frac{1}{2} \nonumber \\
+		E[W] &= \frac{1}{6} \nonumber
+	\end{flalign}
+
+	Method 2:
+	\begin{flalign}
+		E[W] &= \int_0^1 w(1 - y)dy \nonumber \\
+		&= \int_0^1 y^2(1 - y)dy \nonumber \\
+		&= \left [ \frac{2}{3}y^3 - \frac{2}{4}y^4 \right ]_0^1 \nonumber \\
+		&= \frac{2}{3} - \frac{1}{2} \nonumber \\
+		E[W] &= \frac{1}{6} \nonumber
+	\end{flalign}
+	\newpage
+
+	% problem 3
+	\item[] {\large 3.6.5)}
+	\newline
+	Find $Var(Y)$
+	\begin{flalign}
+		f_Y(y) = 3(1 - y)^2;\; 0 \leq y \leq 1 \nonumber
+	\end{flalign}
+	\begin{flalign}
+		Var(Y) = E[Y^2] - E^2[Y] \nonumber
+	\end{flalign}
+	\begin{flalign}
+		E[Y^2] &= \int_0^1 y^2 \cdot 3(1 - y)^2dy \nonumber \\
+		&= \int_0^1 (3y^2 - 6y^3 + 3y^4)dy \nonumber \\
+		&= \left [ y^3 - \frac{6}{4}y^4 + \frac{3}{5}y^5 \right ]_0^1 \nonumber \\
+		&= 1 - \frac{3}{2} + \frac{3}{5} \nonumber \\
+		&= \frac{1}{10} \nonumber
+	\end{flalign}
+	\begin{flalign}
+		E[Y] &= \int_0^1 y \cdot 3(1 - y)^2dy \nonumber \\
+		&= \int_0^1 (3y - 6y^2 + 3y^3)dy \nonumber \\
+		&= \left [ \frac{3}{2}y^2 - \frac{6}{2}y^3 + \frac{3}{4}y^4 \right ]_0^1 \nonumber \\
+		&= \frac{3}{2} - 2 + \frac{3}{4} \nonumber \\
+		&= \frac{1}{4} \nonumber \\
+		E^2[Y] &= \frac{1}{16} \nonumber
+	\end{flalign}
+	\begin{flalign}
+		Var(Y) &= \frac{1}{10} - \frac{1}{16} \nonumber \\
+		Var(Y) &= \frac{3}{80} \nonumber
+	\end{flalign}
+	\newpage
+
+	% problem 4
+	\item[] {\large 3.6.11)}
+	\newline
+	Show that $Var(Y)=\frac{1}{\lambda^2}$
+	\begin{flalign}
+		f_Y(y) = \lambda e^{-\lambda y};\; y \geq 0 \nonumber
+	\end{flalign}
+	\begin{flalign}
+		Var(Y) = E[Y^2] - E^2[Y] \nonumber
+	\end{flalign}
+	\begin{flalign}
+		E[Y^2] = &\int_0^\infty y^2 \cdot \lambda e^{-\lambda y} dy \nonumber \\
+		= &\left [ -y^2e^{-\lambda y} - \frac{2}{\lambda}ye^{-\lambda y} - \frac{2}{\lambda^2}e^{-\lambda y} \right ]_0^\infty\; via\; integration\; by\; parts \nonumber \\
+		= &\lim_{y\to\infty} \left [ -y^2e^{-\lambda y} - \frac{2}{\lambda}ye^{-\lambda y} - \frac{2}{\lambda^2}e^{-\lambda y} \right ] + \frac{2}{\lambda^2} \nonumber \\
+		= &\lim_{y\to\infty} \left [ -\frac{y^2}{e^{\lambda y}} - \frac{2y}{\lambda e^{\lambda y}} \right ] + \frac{2}{\lambda^2} \nonumber \\
+		\overset{L'\widehat{H}}{=} &\lim_{y\to\infty} \left [ -\frac{2}{\lambda^2}e^{-\lambda y} - \frac{2}{\lambda^2}e^{-\lambda y} \right ] + \frac{2}{\lambda^2} \nonumber \\
+		E[Y^2] = &\frac{2}{\lambda^2} \nonumber
+	\end{flalign}
+	\begin{flalign}
+		E[Y] = &\int_0^\infty y^2 \cdot \lambda e^{-\lambda y}dy \nonumber \\
+		= &\left [ -ye^{-\lambda y} - \frac{1}{\lambda}e^{-\lambda y} \right ]_0^\infty\; via\; integration\; by\; parts \nonumber \\
+		= &\lim_{y\to\infty} \left [ -ye^{-\lambda y} - \frac{1}{\lambda}e^{-\lambda y} \right ] + \frac{1}{\lambda} \nonumber \\
+		= &\lim_{y\to\infty} \left [ -\frac{y}{e^{\lambda y}} \right ] + \frac{1}{\lambda} \nonumber \\
+		\overset{L'\widehat{H}}{=} &\lim_{y\to\infty} \left [ -\frac{1}{\lambda}e^{-\lambda y} \right ] + \frac{1}{\lambda} \nonumber \\
+		= &\frac{1}{\lambda} \nonumber \\
+		E^2[Y] = &\frac{1}{\lambda^2} \nonumber
+	\end{flalign}
+	\begin{flalign}
+		Var(Y) &= \frac{2}{\lambda^2} - \frac{1}{\lambda^2} \nonumber \\
+		&= \frac{1}{\lambda^2} \nonumber
+	\end{flalign}
+	\newpage
+
+	% problem 5
+	\item[] {\large 3.6.16)}
+	\newline
+	Given $E[W]=\mu$, $Var(W)=\sigma^2$
+	\begin{itemize}
+		% problem 5a
+		\item[] 3.6.16a)
+		\newline
+		Show that $E \left [ \frac{W-\mu}{\sigma} \right ] =0$
+		\begin{flalign}
+			E \left [ \frac{W-\mu}{\sigma} \right ] &= \frac{E[W] - \mu}{\sigma} \nonumber \\
+			&= \frac{\mu - \mu}{\sigma} \nonumber \\
+			E \left [ \frac{W-\mu}{\sigma} \right ] &= 0 \nonumber
+		\end{flalign}
+
+		% problem 5b
+		\item[] 3.6.16b)
+		\newline
+		Show that $Var \left ( \frac{W-\mu}{\sigma} \right ) =1$
+		\begin{flalign}
+			Var \left ( \frac{W-\mu}{\sigma} \right ) &= E \left [ \left ( \frac{W - \mu}{\sigma} \right )^2 \right ] - E^2 \left [ \frac{W - \mu}{\sigma} \right ] \nonumber \\
+			&= E \left [ \left ( \frac{W - \mu}{\sigma} \right )^2 \right ]\; via\; 3.6.16a \nonumber \\
+			&= \frac{E[ (W - \mu)^2 ]}{\sigma^2} \nonumber \\
+			&= \frac{Var(W)}{\sigma^2} \nonumber \\
+			&= \frac{\sigma^2}{\sigma^2} \nonumber \\
+			Var \left ( \frac{W-\mu}{\sigma} \right ) &= 1 \nonumber
+		\end{flalign}
+	\end{itemize}
+
+\end{itemize}
+
+\end{document}

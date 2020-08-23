@@ -1,0 +1,363 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{enumerate}
+\usepackage[margin=0.5in]{geometry}
+\footskip = -0.75in
+
+\begin{document}
+
+% title page
+\title{Homework 6}
+\author{Landon Fox}
+\date{March 25, 2020}
+
+\begin{flushleft}
+Landon Fox \\
+MATH 295 \\
+Section 1001 \\
+March 25, 2020
+\end{flushleft}
+\begin{center}
+\large Homework 6
+\end{center}
+
+\begin{itemize}
+	% problem 1
+	\item[] {\large 1)}
+	\begin{itemize}
+		% problem 1i
+		\item[] 1i)
+		\begin{flalign}
+			A &= \{ x\, \epsilon\, \mathbb{R} : x^2 < x \} \nonumber \\
+			B &= (0,1) \nonumber
+		\end{flalign}
+		Show that $A=B$ \\
+		$A \subseteq B$
+		\begin{flalign}
+			let\;\;\; &x\, \epsilon\, A \nonumber \\
+			\rightarrow\; &x^2 < x \wedge x\, \epsilon\, \mathbb{R} \nonumber \\
+			\rightarrow\; &x \neq 0 \wedge x^2 \geq 0\; iff\; x\, \epsilon\, \mathbb{R} \nonumber \\
+			\rightarrow\; &0 < x^2 < x \nonumber \\
+			\rightarrow\; &0 < x < 1 \nonumber \\
+			\rightarrow\; &x\, \epsilon\, B \nonumber
+		\end{flalign}
+		$A \supseteq B$
+		\begin{flalign}
+			let\;\;\; &x\, \epsilon\, B \nonumber \\
+			\rightarrow\; &0 < x < 1 \nonumber \\
+			\rightarrow\; &0 < x^2 < x \wedge x^2 \geq 0\, iff\, x\, \epsilon\, \mathbb{R} \nonumber \\
+			\rightarrow\; &x^2 < x \nonumber \\
+			\rightarrow\; &x\, \epsilon\, A \nonumber
+		\end{flalign}
+		\begin{flalign}
+			\therefore A \subseteq B \wedge A \supseteq B \rightarrow A=B\; \blacksquare \nonumber
+		\end{flalign}
+
+		% problem 1ii
+		\item[] 1ii)
+		\begin{flalign}
+			A &= \{ x\, \epsilon\, \mathbb{R} : x(x-1)(x-2)(x-3) < 0 \} \nonumber \\
+			B &= (0,1) \nonumber \\
+			C &= (2,3) \nonumber
+		\end{flalign}
+		Show that $A=B \cup C$ \\
+		$A \subseteq B \cup C$
+		\begin{flalign}
+			let\;\;\; &x\, \epsilon\, A \nonumber \\
+			\rightarrow\; &x(x-1)(x-2)(x-3) < 0 \nonumber \\
+			\rightarrow\; &x < 0,\, x < 1,\, x < 2,\, x < 3 \nonumber
+		\end{flalign}
+		This implies that the interval with an odd amount of terms must be negative. The intervals defined my the terms are
+		$(-\infty,-3), (-3,-2e), (-2, -1), (-1, 0), (0, \infty)$. The intervals have the following amount of overlaps.
+		\begin{flalign}
+			(-\infty,-3) &: 4 \nonumber \\
+			(-3,-2) &: 3 \nonumber \\
+			(-2, -1) &: 2 \nonumber \\
+			(-1, 0) &: 1 \nonumber \\
+			(0, \infty) &: 0 \nonumber
+		\end{flalign}
+		The only intervals with an odd amount of overlaps are $(-3,-2), (-1, 0)$
+		\begin{flalign}
+			\therefore x\, \epsilon\, B \cup C \nonumber
+		\end{flalign}
+
+		$A \supseteq B \cup C$
+		\begin{flalign}
+			let\;\;\; &x\, \epsilon\, (m, n);\; m < n;\; m,n\, \epsilon\, \mathbb{Z} \nonumber \\
+			\rightarrow\; &m < x \wedge x < n \nonumber \\
+			\rightarrow\; &0 < x - m \wedge x - n < 0 \nonumber \\
+			\rightarrow\; & (x - m)(x - n) < 0 \nonumber \\
+			let\;\;\; &p, q\, \epsilon\, (-\infty, m) \vee p, q\, \epsilon\, (n, \infty) \nonumber \\
+			\rightarrow\; &(p < x \wedge q < x) \vee (p > x \wedge q > x) \nonumber \\
+			\rightarrow\; &(0 < x - p \wedge 0 < x - q) \vee (0 > x - p \wedge 0 > x - q) \nonumber \\
+			\rightarrow\; &0 < (x - p)(x - q) \nonumber \\
+			\rightarrow\; &(x - m)(x - n)(x - p)(x - q) < 0 \nonumber
+		\end{flalign}
+		\begin{flalign}
+			let\;\;\; &x\, \epsilon\, B \cup C \nonumber \\
+			\rightarrow\; &x\, \epsilon\, (0,1) \cup (2,3) \nonumber \\
+			WLOG\; let\;\;\; &m = 0,\, n = 1,\, p = 2,\, q = 3 \nonumber \\
+			\rightarrow\; &x(x-1)(x-2)(x-3) < 0 \nonumber \\
+			\rightarrow\; &x\, \epsilon\, A \nonumber
+		\end{flalign}
+		\begin{flalign}
+			\therefore A \subseteq B \cup C \wedge A \supseteq B \cup C \rightarrow A = B \cup C \; \blacksquare \nonumber
+		\end{flalign}
+	\end{itemize}
+
+	% problem 2
+	\item[] {\large 2)}
+	\begin{itemize}
+		% problem 2i
+		\item[] 2i)
+		\begin{flalign}
+			x^2 < y^2 \rightarrow x < y;\; x, y\, \epsilon\, \mathbb{R} \nonumber
+		\end{flalign}
+		Disproof: counter-example
+		\begin{flalign}
+			let\;\;\; &x = 0,\, y = -1 \nonumber \\
+			\rightarrow\; &0 < 1 \rightarrow 0 < -1\; \blacksquare \nonumber
+		\end{flalign}
+		A fallacy.
+
+		% problem 2ii
+		\item[] 2ii)
+		\begin{flalign}
+			x^3 < y^3 \rightarrow x < y;\; x, y\, \epsilon\, \mathbb{R} \nonumber
+		\end{flalign}
+		Proof: contraposition
+		\begin{flalign}
+			x \geq y \rightarrow x^3 \geq y^3 \nonumber
+		\end{flalign}
+		\begin{flalign}
+			&x \geq y \nonumber \\
+			\rightarrow\; &x^3 \geq y^3\; \blacksquare \nonumber
+		\end{flalign}
+	\end{itemize}
+
+	% problem 3
+	\item[] {\large 3)}
+	\begin{itemize}
+		% problem 3i
+		\item[] 3i)
+		\begin{flalign}
+			\exists\, p, q\;\; s.t.\;\; p - q = 2020;\; p, q\; prime \nonumber
+		\end{flalign}
+		Proof: constructive
+		\begin{flalign}
+			let\;\;\; &p = 2039,\, q = 19 \nonumber \\
+			\rightarrow\; &2039 - 19 = 2020\; \blacksquare \nonumber
+		\end{flalign}
+
+		% problem 3ii
+		\item[] 3ii)
+		\begin{flalign}
+			\exists\, p, q\;\; s.t.\;\; p - q = 295;\; p, q\; prime \nonumber
+		\end{flalign}
+		Disproof: contradiction
+		\begin{flalign}
+			&p - q = 295 \nonumber \\
+			\rightarrow\; &odd(p - q) \wedge p > q \nonumber \\
+			\rightarrow\; &p, q\; different\; parity \wedge p > q \nonumber \\
+			\rightarrow\; &q = 2 \nonumber \\
+			\rightarrow\; &p - 2 = 295 \nonumber \\
+			\rightarrow\; &p = 297 \nonumber \\
+			\rightarrow\; &p\; not\; prime\; \blacksquare \nonumber
+		\end{flalign}
+		A contradiction, p was defined to be prime.
+	\end{itemize}
+	\newpage
+
+	% problem 4
+	\item[] {\large 4)}
+	\begin{itemize}
+		% problem 4i
+		\item[] 4i)
+		Proof: constructive \\
+		Tile all dominos horizontally such that the top row (row with missing corners) has three dominos and all others have four.
+
+		% problem 4ii
+		\item[] 4ii)
+		Disproof: contradiction \\
+		Let $h$ and $v$ be the total amount of horizontal and vertical dominos.
+		\begin{flalign}
+			2h + 2v &= 62 \nonumber \\
+			h + v &= 31 \nonumber \\
+			\rightarrow\; h, v\; &different\; parity \nonumber
+		\end{flalign}
+		Let $h_i$ be the amount of horizontal dominos in the $i$th row. \\
+		and $v_i$ be the amount of vertical dominos in the $i$th row, accounting only when the lowest tile is came upon. \\
+		Then we should have the following equations
+		\begin{flalign}
+			&2h_1 + v_1 = 7 \nonumber \\
+			&2h_2 + v_2 + v_1 = 8 \nonumber \\
+			&2h_3 + v_3 + v_2 = 8 \nonumber \\
+			&\;\;\;\;\;\;\vdots \nonumber \\
+			&2h_7 + v_7 + v_6 = 8 \nonumber \\
+			&2b_8 + v_7 = 7 \nonumber
+		\end{flalign}
+		Mod both sides of all the equations by 2.
+		\begin{flalign}
+			&v_1 \equiv 1 (mod\, 2) \nonumber \\
+			&v_2 + v_1 \equiv 0 (mod\, 2) \nonumber \\
+			&v_3 + v_2 \equiv 0 (mod\, 2) \nonumber \\
+			&\;\;\;\;\;\;\vdots \nonumber \\
+			&v_7 + v_6 \equiv 0 (mod\, 2) \nonumber \\
+			&v_7 \equiv 1 (mod\, 2) \nonumber \\
+			\rightarrow\; &\forall 1\leq i\leq7, odd(v_i) \nonumber \\
+			\rightarrow\; &odd(v) \nonumber \\
+			\rightarrow\; &even(h) \nonumber
+		\end{flalign}
+		Let us now repeat the process for columns. Now the role for horizontal and vertical dominos swap. \\
+		WLOG, just as we found that the amount of horizontal dominos is even, we will find that it is also odd via the same logic of the column equations. \\
+		A fallacy, the amount of horizontal dominos cannot be both even and odd. $\blacksquare$
+		\newpage
+
+		% problem 4iii
+		\item[] 4iii)
+		Disproof: contradiction \\
+		Let us create similiar equations as we did in $ii$ for triominos.
+		\begin{flalign}
+			&3h_1 + v_1 = 7 \nonumber \\
+			&3h_2 + v_2 + v_1 = 8 \nonumber \\
+			&3h_3 + v_3 + v_2 + v_1 = 8 \nonumber \\
+			&\;\;\;\;\;\;\vdots \nonumber \\
+			&3h_6 + v_6 + v_5 + v_4 = 8 \nonumber \\
+			&3h_7 + v_6 + v_5 = 8 \nonumber \\
+			&3b_8 + v_6 = 8 \nonumber
+		\end{flalign}
+		Mod both sides of all the equations by 3.
+		\begin{flalign}
+			&v_1 \equiv 1 (mod\, 3) \nonumber \\
+			&v_2 + v_1 \equiv 2 (mod\, 3) \nonumber \\
+			&v_3 + v_2 + v_1 \equiv 2 (mod\, 3) \nonumber \\
+			&\;\;\;\;\;\;\vdots \nonumber \\
+			&v_6 + v_5 + v_4 \equiv 2 (mod\, 3) \nonumber \\
+			&v_6 + v_5 \equiv 2 (mod\, 3) \nonumber \\
+			&v_6 \equiv 2 (mod\, 3) \nonumber \\
+			\rightarrow\; &v_2 \equiv 1 (mod\, 3) \nonumber \\
+			\rightarrow\; &v_3 \equiv 0 (mod\, 3) \nonumber \\
+			\rightarrow\; &v_4 \equiv 1 (mod\, 3) \nonumber \\
+			\rightarrow\; &v_5 \equiv 1 (mod\, 3) \wedge v_5 \equiv 2 (mod\, 3) \nonumber \\
+			\rightarrow\; &v_6 \equiv 0 (mod\, 3) \wedge v_6 \equiv 2 (mod\, 3) \nonumber
+		\end{flalign}
+		Both $v_5$ and $v_6$ themselves are of different congruences, a fallacy. $\blacksquare$
+	\end{itemize}
+
+	% problem 5
+	\item[] {\large 5)}
+	\begin{itemize}
+		% problem 5i
+		\item[] 5i)
+		\begin{flalign}
+			A_1 &= \{ (x,y)\, \epsilon\, \mathbb{R}^2 : x^2 + y^2 = 1, x \neq 1 \} \nonumber \\
+			B_1 &= \{ ( \frac{1-t^2}{1+t^2}, \frac{2t}{1+t^2} ) : t\, \epsilon\, \mathbb{R} \} \nonumber
+		\end{flalign}
+		\newpage
+		Show that $A_1=B_1$ \\
+		$A_1 \subseteq B_1$ \\
+		Let us consider the line $y = t(x+1)$
+		\begin{flalign}
+			let\;\;\; S &= \{ (x,y)\, \epsilon\, \mathbb{R}^2 : y = t(x + 1), t\, \epsilon\, \mathbb{R} \} \nonumber \\
+			clearly\;\;\; A_1 &\subseteq S \nonumber
+		\end{flalign}
+		\begin{flalign}
+			let\;\;\; &(x,y)\, \epsilon\, A_1 \nonumber \\
+			\rightarrow\; &(x,y)\, \epsilon\, S \nonumber \\
+			\rightarrow\; &(x,y) = (x, t(x+1));\; x, t\, \epsilon\, \mathbb{R} \nonumber \\
+			\rightarrow\; &x^2 + t^2(x+1)^2 = 1 \nonumber \\
+			\rightarrow\; &(1+t^2)x^2 + 2t^2x + t^2 - 1 = 0 \nonumber \\
+			\rightarrow\; &x = \frac{-2t \pm \sqrt{4t^4 - 4(t^2 + 1)(t^2 - 1)}}{2(t^2+1)} \nonumber \\
+			\rightarrow\; &x = \cancel{-1}, \frac{1 - t^2}{1 + t^2} \nonumber \\
+			\rightarrow\; &y = \frac{2t}{1 + t^2} \nonumber \\
+			\rightarrow\; &(x,y) = (\frac{1 - t^2}{1 + t^2}, \frac{2t}{1 + t^2}) \nonumber \\
+			\rightarrow\; &(x,y)\, \epsilon\, B_1 \nonumber
+		\end{flalign}
+
+		$A_1 \supseteq B_1$
+		\begin{flalign}
+			let\;\;\; &(x,y)\, \epsilon\, B_1 \nonumber \\
+			\rightarrow\; &(x,y) = (\frac{1 - t^2}{1 + t^2}, \frac{2t}{1 + t^2});\; t\, \epsilon\, \mathbb{R} \nonumber \\
+			\rightarrow\; &x = \frac{1 - t^2}{1 + t^2},\, y = \frac{2t}{1 + t^2} \nonumber \\
+			\rightarrow\; &t^2x + t^2 = 1 - x \nonumber \\
+			\rightarrow\; &t = \pm \sqrt{\frac{1 - x}{1 + x}} \nonumber \\
+			\rightarrow\; &y = \pm \frac{2\sqrt{ \frac{1-x}{1+x} }}{1 + \frac{1-x}{1+x}} \nonumber \\
+			\rightarrow\; &y = \pm \sqrt{1 - x^2} \nonumber \\
+			\rightarrow\; &x^2 + y^2 = 1 \wedge \neg \exists t\, \epsilon\, \mathbb{R}\; s.t.\; \frac{1-t^2}{1+t^2} = -1 \nonumber \\
+			\rightarrow\; &(x,y)\, \epsilon\, A_1 \nonumber
+		\end{flalign}
+		\begin{flalign}
+				\therefore A_1 \subseteq B_1 \wedge A_1 \supseteq B_1 \rightarrow A_1=B_1\; \blacksquare \nonumber
+		\end{flalign}
+		\newpage
+
+		% problem 5ii
+		\item[] 5ii)
+		\begin{flalign}
+			A_2 &= \{ (x,y)\, \epsilon\, \mathbb{Q}^2 : x^2 + y^2 = 1, x \neq 1 \} \nonumber \\
+			B_2 &= \{ ( \frac{1-t^2}{1+t^2}, \frac{2t}{1+t^2} ) : t\, \epsilon\, \mathbb{Q} \} \nonumber
+		\end{flalign}
+		Show that $A_2=B_2$
+		\begin{flalign}
+			assuming\;\;\; (x, y)\, \epsilon\, A_1 \wedge x, y\, \epsilon\, \mathbb{Q} \rightarrow (x, y)\, \epsilon\, A_2 \nonumber
+		\end{flalign}
+		$A_2 \subseteq B_2$
+		\begin{flalign}
+			let\;\;\; &(x, y)\, \epsilon\, A_2 \nonumber \\
+			\rightarrow\; &(x, y)\, \epsilon\, A_1 \wedge x, y\, \epsilon\, \mathbb{Q} \nonumber \\
+			\rightarrow\; &(x, y)\, \epsilon\, B_1 \wedge x, y\, \epsilon\, \mathbb{Q} \nonumber \\
+			\rightarrow\; &(x, y)\, \epsilon\, B_2 \nonumber
+		\end{flalign}
+		WLOG we can presume via the same logic that $A_2 \supseteq B_2$.
+		\begin{flalign}
+				\therefore A_2 \subseteq B_2 \wedge A_2 \supseteq B_2 \rightarrow A_2=B_2\; \blacksquare \nonumber
+		\end{flalign}
+
+		% problem 5iii
+		\item[] 5iii)
+		\begin{flalign}
+			A_3 &= \{ (x,y,z)\, \epsilon\, \mathbb{Z}^3 : x^2 + y^2 = z^2 \} \nonumber \\
+			B_3 &= \{ ( m^2 - n^2, 2mn, m^2 + n^2 ) : m,n\, \epsilon\, \mathbb{Z} \} \nonumber
+		\end{flalign}
+		Show that $A_3=B_3$ \\
+		$A_3 \subseteq B_3$
+		\begin{flalign}
+			let\;\;\; &(x, y, z)\, \epsilon\, A_3 \nonumber \\
+			\rightarrow\; &x^2 + y^2 = z^2 \wedge x, y, z\, \epsilon\, \mathbb{Z} \nonumber \\
+			\rightarrow\; &(\frac{x}{z})^2 + (\frac{y}{z})^2 = 1 \nonumber \\
+			let\;\;\; &u = \frac{x}{z},\, v = \frac{y}{z};\; u, v\, \epsilon\, \mathbb{Q} \nonumber \\
+			\rightarrow\; &u^2 + v^2 = 1 \nonumber \\
+			\rightarrow\; &(u, v)\, \epsilon\, A_2 \nonumber \\
+			\rightarrow\; &(u, v)\, \epsilon\, B_2\; via\; ii \nonumber \\
+			\rightarrow\; &u = \frac{1-\frac{n}{m}^2}{1+\frac{n}{m}^2}, v = \frac{2\frac{n}{m}}{1+\frac{n}{m}^2};\; m, n\, \epsilon\, \mathbb{Z} \nonumber \\
+			\rightarrow\; &\frac{x}{z} = \frac{m^2 - n^2}{m^2 + n^2},\, \frac{y}{z} = \frac{2mn}{m^2 + n^2} \nonumber \\
+			\rightarrow\; &x = m^2 - n^2,\, y = 2mn,\, z = m^2 + n^2;\; m, n\, \epsilon\, \mathbb{Z} \nonumber \\
+			\rightarrow\; &(x, y, z)\, \epsilon\, B_3 \nonumber
+		\end{flalign}
+
+		$A_3 \supseteq B_3$
+		\begin{flalign}
+			let\;\;\; &(x, y, z)\, \epsilon\, B_3 \nonumber \\
+			\rightarrow\; &x = m^2 - n^2,\, y = 2mn,\, z = m^2 + n^2;\; m, n\, \epsilon\, \mathbb{Z} \nonumber \\
+			\rightarrow\; &x + z = 2m^2,\, m^2 = \frac{y^2}{4n^2} \nonumber \\
+			\rightarrow\; &x + z = \frac{y^2}{2n^2} \nonumber \\
+			\rightarrow\; &n^2 = \frac{y^2}{2(x+z)} \nonumber \\
+			\rightarrow\; &m^2 = \frac{y^2}{2\frac{y^2}{(x+z)}} \nonumber \\
+			\rightarrow\; &m^2 = \frac{1}{2}(x+z) \nonumber \\
+			\rightarrow\; &x = \frac{1}{2}(x+z) - \frac{y^2}{2(x+z)} \nonumber \\
+			\rightarrow\; &2x(x + z) = (x + z)^2 - y^2 \nonumber \\
+			\rightarrow\; &x^2 + y^2 = z^2 \nonumber \\
+			\rightarrow\; &(x, y, z)\, \epsilon\, A_3 \nonumber
+		\end{flalign}
+		\begin{flalign}
+				\therefore A_3 \subseteq B_3 \wedge A_3 \supseteq B_3 \rightarrow A_3=B_3\; \blacksquare \nonumber
+		\end{flalign}
+	\end{itemize}
+
+\end{itemize}
+
+\end{document}

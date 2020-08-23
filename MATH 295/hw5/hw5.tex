@@ -1,0 +1,146 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{enumerate}
+\usepackage[margin=0.5in]{geometry}
+\footskip = -0.75in
+
+\begin{document}
+
+% title page
+\title{Homework 5}
+\author{Landon Fox}
+\date{March 11, 2020}
+
+\begin{flushleft}
+Landon Fox \\
+MATH 295 \\
+Section 1001 \\
+March 11, 2020
+\end{flushleft}
+\begin{center}
+Homework 5 \large
+\end{center}
+
+\begin{itemize}
+	% problem 1
+	\item[] {1) \large}
+	Case 1: All given values are non-zero
+	\begin{center}
+		\begin{tabular}{ |c|c|c| }
+		 \hline
+		 x & y & z \\
+		 + & + & + \\
+		 + & + & - \\
+		 + & - & + \\
+		 + & - & - \\
+		 - & + & + \\
+		 - & + & - \\
+		 - & - & + \\
+		 - & - & - \\
+		 \hline
+		\end{tabular}
+	\end{center}
+	No matter the result of their product, based off the table there always results in two positive or two negative numbers whose product will always be non-negative. \\ \\
+	Case 2: There exists one value being zero. The product of any value and zero will always result in a non-negative value therefore the zero value can be multiplied by any other value. \\
+	This is a non-constructive proof.
+
+	% problem 2
+	\item[] {2) \large}
+	Consider the difference between any two consecutive squares
+	\begin{flalign}
+		&(n+1)^2 - n^2 \nonumber \\
+		&n^2 + 2n + 1 + n^2 \nonumber \\
+		&2n + 1 \nonumber
+	\end{flalign}
+	Let this difference be greater than $100$
+	\begin{flalign}
+		2n + 1 &\geq 100 \nonumber \\
+		n &\geq \frac{99}{2} \nonumber
+	\end{flalign}
+	This implies that the distance between the squares of $50$ and $51$ is greater than $100$ implying that there exists $100$ consecutive positive integers that 
+	are not perfect squares. If this were not true, that would imply there is an integer between $50$ and $51$ which is a falacy. \\
+	This is a constructive proof.
+	\newpage
+
+	% problem 3
+	\item[] {3) \large}
+	\begin{flalign}
+		\exists\, x\, \epsilon\, \mathbb{Q},\, y\, \cancel{\epsilon}\, \mathbb{Q}\; s.t.\; x^y\, \cancel{\epsilon}\, \mathbb{Q} \nonumber \\
+		let\;\;\; x = 3,\; y = \frac{1}{2}log_32 \nonumber \\
+		x^y = 2^{\frac{1}{2}log_32} \nonumber \\
+		= \sqrt{2}\, \cancel{\epsilon}\, \mathbb{Q} \nonumber
+	\end{flalign}
+	As we have found from lecture and previous homeworks, the following belong holds. \\
+	This is a constructive proof.
+
+	% problem 4
+	\item[] {4) \large}
+	\begin{flalign}
+		let\;\;\; S = \mathbb{N} \cup \{0\}& \nonumber \\
+		n\, \epsilon\, S \rightarrow \exists\, m\, &\epsilon\, S\; s.t.\; m^2 \leq n < (m+1)^2 \nonumber \\
+		m^2 &\leq n < (m+1)^2 \nonumber \\
+		m &\leq \sqrt{n} < m + 1 \nonumber
+	\end{flalign}
+	Existence: \\
+	Case 1: $n$ is a square
+	\begin{flalign}
+		let\;\;\; n=k^2\;\; k\, \epsilon\, S \nonumber \\
+		m \leq k < m+1 \wedge k, m\, \epsilon\, S &\rightarrow k = m \nonumber \\
+		k = m &\rightarrow m = \sqrt{n} \nonumber
+	\end{flalign}
+	Case 2: $n$ is not a square
+	\begin{flalign}
+		let\;\;\; n \neq k^2\;\; k\, \epsilon\, S \nonumber
+	\end{flalign}
+	Based off the definition of the floor function:
+	\begin{flalign}
+		\sqrt{n}\, \cancel{\epsilon}\, &S \rightarrow \left \lfloor \sqrt{n} \right \rfloor < \sqrt{n} < \left \lfloor \sqrt{n} \right \rfloor+1 \nonumber \\
+		\left \lfloor \sqrt{n} \right \rfloor\, \epsilon\, &S \wedge \left \lfloor \sqrt{n} \right \rfloor < \sqrt{n} < \left \lfloor \sqrt{n} \right \rfloor+1 \rightarrow m = \left \lfloor \sqrt{n} \right \rfloor \nonumber
+	\end{flalign}
+	Uniqueness: \\
+	Assume there is another value $m_2 \neq m_1$
+	\begin{flalign}
+		let\;\;\; \sqrt{n} = m_1 + k_1 = m_2 + k_2&\;\;\; m_1, m_2\, \epsilon\, S,\; k_1, k_2\, \epsilon\, \mathbb{R},\, 0 \leq k < 1 \nonumber \\
+		m_1 + k_1 &= m_2 + k_2 \nonumber \\
+		m_1 - m_2 &= k_2 - k_1 \nonumber \\
+		m_ 1 - m_2\, \epsilon\, \mathbb{Z} \wedge m_1 - m_2 = k_2 - k_1 &\rightarrow k_2 - k_1\, \epsilon\, \mathbb{Z} \nonumber \\
+		0 \leq k_1 < 1 \wedge 0 \leq k_2 < 1 &\rightarrow -1 < k_2 - k_1 < 1 \nonumber \\
+		-1 < k_2 - k_1 < 1 \wedge k_2 - k_1\, \epsilon\, \mathbb{Z} &\rightarrow k_2 - k_1 = 0 \nonumber \\
+		k_2 - k_1 = 0 &\rightarrow m_1 - m_2 = 0 \nonumber \\
+		m_1 - m_2 = 0 &\rightarrow m_1 = m_2 \nonumber
+	\end{flalign}
+	Condradiction $m_1 = m_2$ \\
+	This is a non-constructive proof.
+
+	% problem 5
+	\item[] {5) \large}
+	Contradiction: lets assume the sum of every $3$ consecutive values are less than $17$
+	\begin{flalign}
+		a_1 + a_2 + a_3 &\leq 16 \nonumber \\
+		a_2 + a_3 + a_4 &\leq 16 \nonumber \\
+		a_3 + a_4 + a_5 &\leq 16 \nonumber \\
+		&\ddots \nonumber \\
+		a_9 + a_{10} + a_1 &\leq 16 \nonumber \\
+		a_{10} + a_1 + a_2 &\leq 16 \nonumber
+	\end{flalign}
+	\begin{flalign}
+		\noindent\rule{4cm}{0.4pt} \nonumber \\
+	\end{flalign}
+	\begin{flalign}
+		3(a_1 + a_2 + a_3 + \hdots + a_{10}) &\leq 160 \nonumber \\
+		3 \cdot \frac{10(10+1)}{2} &\leq 160 \nonumber \\
+		165 &\leq 160 \nonumber
+	\end{flalign}
+	A contradiction, therefore there must always exist a consecutive $3$ values whose sum is greater than or equal to $17$. \\
+	This is a non-constructive proof.
+
+	% problem 6
+	\item[] {6 \large}
+	
+\end{itemize}
+
+\end{document}

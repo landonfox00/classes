@@ -1,0 +1,219 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage[margin=0.5in]{geometry}
+\footskip = -0.75in
+\lstset{
+    tabsize=2
+}
+
+\begin{document}
+
+% title page
+\title{%
+	Homework 6 \\
+	\large CS 477 Analysis of Algorithims \\
+	Section 1001}
+\author{Landon Fox}
+\date{April 16, 2020}
+\maketitle
+\newpage
+
+\begin{itemize}
+	% problem 1
+	\item[] {\large 1)}
+	\begin{itemize}
+		% problem 1a
+		\item[] {\large 1a)}
+		\[
+			opt(i,\,j) =
+			\begin{cases} 
+				0 & i > n \\
+				max[\, min( x_i,\, f(j) ) + opt( i+1,\, 1 ),\, opt(i+1,\, j+1)\, ] & elsewise
+			\end{cases}
+		\]
+		$i$: The current second, increments from $1$ to $n$. \\
+		$j$: The amount of seconds that have passed since the last fire of the laser. \\
+		$opt(i,\,j)$: The optimal value of alien drones that can be made harmless. \\
+		$n$: The last second of the alien drone swarm. \\
+		$x_i$: The sequence of alien drone attacks per second. \\
+
+		To find the optimal value of alien drones made harmless during the entire sequence of attacks, $opt(1,\,1)$ is computed.
+		In the case that $i \leq n$, the function returns the maximum between $min( x_i,\, f(j) ) + opt( i+1,\, 1 )$ and $opt(i+1,\, j+1)$.
+		The first represents the optimal amount of drones if the laser were to be fired at this instance $i$ then makes the problem smaller
+		by adding the optimal amount of drones from the interval after $i$ where we reset the the charge of the laser. The second term represents
+		the option of saving the charge of the laser for the current second by adding no additional terms, simply finding the optimal value of the
+		next interval after $i$ where we have an additional second to our laser's charge. Finally we have the base case where $i>n$ and is beyond
+		the defined sequence thus returns zero. \\
+		\newpage
+
+		% problem 1b
+		\item[] {\large 1b)}
+		\begin{lstlisting}[language=C]
+int opt_b( int i, int j, int n, int x[ n ], int c[ n ][ n ], 
+	int ( *f )( int ) )
+{
+	if ( i <= n && j <= n )
+	{
+		if ( !c[ i - 1 ][ j - 1 ] )
+			c[ i - 1 ][ j - 1 ] = MAX( MIN( x[ i - 1 ], f( j ) ) +
+				opt_b( i + 1, 1, n, x, c, f ), opt_b( i + 1, j + 1, n, x, c, f ) );
+		return c[ i - 1 ][ j - 1 ];
+	}
+	return 0;
+}
+
+int opt_val_b( int n, int x[ n ], int count[ n ][ n ] )
+{
+	for ( int i = 0; i < n; ++i )
+	{
+		for ( int j = 0; j < n; ++j )
+			count[ i ][ j ] = 0;
+	}
+	return opt_b( 1, 1, n, x, count, f );
+}
+
+int main()
+{
+	int count[ 4 ][ 4 ];
+	int time[ 4 ][ 4 ];
+	const int x[ 4 ] = { 1, 10, 10, 1 };
+
+	printf( "1a) optimal value: %d\n", opt_val_b( 4, x, count ) );
+	printf( "table of values for subproblems:\n" );
+	print_2d_array( 4, 4, count );
+}
+		\end{lstlisting}
+		\begin{center}
+		$count[n][n]$:
+			\begin{tabular}{ |cc|cccc| }
+			\hline
+			  &   &   & j &   &   \\
+			  &   & 1 & 2 & 3 & 4 \\
+			\hline
+			  & 1 & 5 & 0 & 0 & 0 \\ 
+			i & 2 & 3 & 5 & 0 & 0 \\
+			  & 3 & 2 & 3 & 5 & 0 \\
+			  & 4 & 1 & 1 & 1 & 1 \\
+			\hline
+			\end{tabular}
+		\end{center}
+		\newpage
+
+		% problem 1c
+		\item[] {\large 1c)}
+		\begin{lstlisting}[language=C]
+int opt_c( int i, int j, int n, int x[ n ], int c[ n ][ n ],
+	int t[ n ][ n ], int ( *f )( int ) )
+{
+	if ( i <= n && j <= n )
+	{
+		if ( !c[ i - 1 ][ j - 1 ] )
+		{
+			int u = MIN( x[ i - 1 ], f( j ) ) +
+				opt_c( i + 1, 1, n, x, c, t, f );
+			int v = opt_c( i + 1, j + 1, n, x, c, t, f );
+			c[ i - 1 ][ j - 1 ] = MAX( u, v );
+			t[ i - 1 ][ j - 1 ] = u > v ? i : t[ i ][ j ];
+		}
+		return c[ i - 1 ][ j - 1 ];
+	}
+	return 0;
+}
+
+int opt_val_c( int n, int x[ n ], int count[ n ][ n ],
+	int time[ n ][ n ] )
+{
+	for ( int i = 0; i < n; ++i )
+	{
+		for ( int j = 0; j < n; ++j )
+		{
+			count[ i ][ j ] = 0;
+			time[ i ][ j ] = 0;
+		}
+	}
+	return opt_c( 1, 1, n, x, count, time, f );
+}
+
+int main()
+{
+	int count[ 4 ][ 4 ];
+	int time[ 4 ][ 4 ];
+	const int x[ 4 ] = { 1, 10, 10, 1 };
+
+	opt_val_c( 4, x, count, time );
+	printf( "1b) table of times:\n" );
+	print_2d_array( 4, 4, time );
+}
+		\end{lstlisting}
+		\begin{center}
+		$time[n][n]$:
+			\begin{tabular}{ |cc|cccc| }
+			\hline
+			  &   &   & j &   &   \\
+			  &   & 1 & 2 & 3 & 4 \\
+			\hline
+			  & 1 & 3 & 0 & 0 & 0 \\ 
+			i & 2 & 3 & 3 & 0 & 0 \\
+			  & 3 & 3 & 3 & 3 & 0 \\
+			  & 4 & 4 & 4 & 4 & 4 \\
+			\hline
+			\end{tabular}
+			\newline
+		\end{center}
+
+		% problem 1d
+		\item[] {\large 1d)}
+		First fill $t[n][n]$ with time values from $opt\_val\_c$. Run via $opt\_sol(1,1,4,time)$ for optimal times during sequence.
+		\begin{lstlisting}[language=C]
+void opt_sol( int i, int j, int n, int t[ n ][ n ] )
+{
+	if ( i <= n && t[ i - 1 ][ j - 1 ] )
+	{
+		printf( "%d, ", t[ i - 1 ][ j - 1 ] );
+		opt_sol( t[ i - 1 ][ j - 1 ] + 1, 1, n, t );
+	}
+}
+
+int main()
+{
+	int count[ 4 ][ 4 ];
+	int time[ 4 ][ 4 ];
+	const int x[ 4 ] = { 1, 10, 10, 1 };
+
+	opt_val_c( 4, x, count, time );
+	printf( "1c) optimal seconds to shoot lazer: " );
+	opt_sol( 1, 1, 4, time );
+	printf( "\n" );
+}
+		\end{lstlisting}
+		Outputs seconds 3, 4. \\
+	\end{itemize}
+
+	% problem 3
+	\item[] {\large 3)}
+	\begin{itemize}
+		% problem 3a
+		\item[] {\large 3a)}
+		This is true, all possible longest common subsequences of $X$ and $Y$ should contain $A$ if it is both their first character.
+		We know that $A$ is common to both sequences so the longest common subsequence of both $X$ and $Y$ will be $A + lcs(X_{2..n}, Y_{2..n})$.
+		If this were not true it would imply that $A$ is not in any longest common subsequence therefore choosing $A$ must prevent it from
+		gaining the longest subsequences. A fallacy, $lcs(X_{2..n}, Y_{2..n})$ is completely independent of $A$. Therefore $A$ must be in
+		all longest common subsequences. \\
+
+		\item[] {\large 3b)}
+		This is not necessarily true, all possible longest common subsequences of $X$ and $Y$ should contain $A$ if it is both
+		their last character. If this were not true it would imply that $A$ is not in any longest common subsequence. We know
+		that $A$ is common to both sequences so then choosing $A$ must prevent it from gaining the longest subsequences. A
+		fallacy, there is no other characters being prevented since $A$ is the last character in both $X$ and $Y$. Therefore
+		$A$ must be in all longest common subsequences.
+
+	\end{itemize}
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,197 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, mathtools}
+\usepackage[margin=0.5in]{geometry}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 330 \\
+\noindent July 21, 2020
+
+\begin{center}
+\Large Homework 1
+\end{center}
+
+\begin{enumerate}
+	\item[\textbf{1.}] Find the equation of the parabola that passes through the points $(1,1)$, $(2,2)$, and $(3,0)$.
+
+	\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+		Suppose we have a parabola in the form $y = ax^2 + bx + c$ that passes through the points $(1,1)$, $(2,2)$, and $(3,0)$. Then we can see that the following equations
+		hold
+		\begin{align*}
+			(1)^2a + (1)b + c &= a + b + c = 1 \\
+			(2)^2a + (2)b + c &= 4a + 2b + c = 2 \\
+			(3)^2a + (3)b + c &= 9a + 3b + c = 0.
+		\end{align*}
+		Let us now convert the system into matrix form to solve for $a$, $b$, $c$.
+		\begin{align*}
+			\begin{bmatrix} 1 & 1 & 1 & 1 \\ 4 & 2 & 1 & 2 \\ 9 & 3 & 1 & 0 \end{bmatrix}
+			&\sim \begin{bmatrix} 1 & 1 & 1 & 1 \\ 0 & -2 & -3 & -2 \\ 0 & -6 & -8 & -9 \end{bmatrix}
+			\sim \begin{bmatrix} 1 & 1 & 1 & 1 \\ 0 & 2 & 3 & 2 \\ 0 & 0 & 1 & -3 \end{bmatrix}
+			\sim \begin{bmatrix} 1 & 1 & 0 & 4 \\ 0 & 2 & 0 & 11 \\ 0 & 0 & 1 & -3 \end{bmatrix}
+			\sim \begin{bmatrix} 1 & 1 & 0 & 4 \\ 0 & 1 & 0 & \frac{11}{2} \\ 0 & 0 & 1 & -3 \end{bmatrix} \\
+			&\sim \begin{bmatrix} 1 & 0 & 0 & -\frac{3}{2} \\ 0 & 1 & 0 & \frac{11}{2} \\ 0 & 0 & 1 & -3 \end{bmatrix}
+		\end{align*}
+		The reduced row echelon form of the matrix illustrates that $a=-\frac{3}{2}$, $b=\frac{11}{2}$, $c=-3$. Thus we can see that the parabola that passes through 
+		$(1,1)$, $(2,2)$, and $(3,0)$ is $y = -\frac{3}{2}x^2 + \frac{11}{2}x - 3$.
+	\end{proof}
+
+
+	\item[\textbf{2.}] Determine the conditions for which the following system:
+		\begin{align*}
+			x + y + z &= 1 \\
+			x + 2y - z &= b \\
+			5x + 7y + az &= b^2
+		\end{align*}
+		admits \textbf{(i)} no solution, \textbf{(ii)} unique solution, \textbf{(iii)} infinitely many solutions.
+
+	\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+		Let us place the given system into matrix form and compute the row echelon form.
+		\begin{align*}
+			\begin{bmatrix} 1 & 1 & 1 & 1 \\ 1 & 2 & -1 & b \\ 5 & 7 & a & b^2 \end{bmatrix}
+			\sim \begin{bmatrix} 1 & 1 & 1 & 1 \\ 0 & 1 & -2 & b-1 \\ 0 & 2 & a-5 & b^2-5 \end{bmatrix}
+			\sim \begin{bmatrix} 1 & 1 & 1 & 1 \\ 0 & 1 & -2 & b-1 \\ 0 & 0 & a-1 & (b-3)(b+1) \end{bmatrix}
+		\end{align*}
+		\begin{enumerate}
+			\item[\textbf{(i).}] If $a=1$ and $b \notin \{-1, 3\}$ we can see that the 3rd row creates an inconsistent system, thus no solution exists.
+			\item[\textbf{(ii).}] Observe that if $a \neq 1$ a pivot can be found in each column (disregarding the last), illustrating a unique solution.
+			\item[\textbf{(iii).}] Suppose $a=1$ and $b \in \{-1, 3\}$ we can see that the 3rd row is a tautology and the 3rd column has no pivot, thus infinitely many
+				solutions exists.
+		\end{enumerate}
+	\end{proof}
+
+
+	\item[\textbf{3.}] In order to grow a certain crop, it is recommended that each square foot of the ground be treated with 10 units of phosphorus, 9 units of potassium
+		and 19 units of nitrogen. Suppose that there are three brands of fertilizer on the market - $X$; $Y$ and $Z$. One pound of $X$ contains 2; 3; 5 units of phosphorus,
+		potassium and nitrogen respectively. One pound of $Y$ contains 1; 3; 4 units of phosphorus, potassium and nitrogen respectively. One pound of $Z$ contains 1; 0; 1
+		units of phosphorus, potassium and nitrogen respectively.
+		\begin{enumerate}
+			\item[\textbf{(i).}] Determine whether or not it is possible to meet exactly the recommendations by applying some combination of the three brands of fertilizer?
+			\item[\textbf{(ii).}] Take into account that a negative number of pounds of any brand cannot be applied, and suppose that each brand is sold only in integral
+				amounts. Under these conditions, determine all possible combinations of the three brands that can be applied to satisfy the recommendations exactly.
+			\item[\textbf{(iii).}] Suppose $X$ costs \$1 per pound, $Y$ costs \$6 per pound and $Z$ costs \$3 per pound. Determine the least expensive solution that will
+				satisfy the recommendations exactly as well as the constraints in \textbf{(ii)}.
+		\end{enumerate}
+
+	\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+		\begin{enumerate}
+			\item[\textbf{(i).}] Let $x$, $y$, $z$ represent the number of pounds purchased from the products $X$, $Y$, $Z$ respectively. For each square foot we require
+				10, 9, and 19 units of phosphorus, potassium, and nitrogen repectively. To obtain an appropiate amount, the following equations must hold
+				\begin{align*}
+					2x + y + z &= 10 \\
+					3x + 3y &= 9 \\
+					5x + 4y + z &= 19.
+				\end{align*}
+				Let us place the given system into matrix form and compute the reduced row echelon form.
+				\begin{align*}
+					\begin{bmatrix} 2 & 1 & 1 & 10 \\ 3 & 3 & 0 & 9 \\ 5 & 4 & 1 & 19 \end{bmatrix}
+					\sim \begin{bmatrix} 1 & 1 & 0 & 3 \\ 2 & 1 & 1 & 10 \\ 5 & 4 & 1 & 19 \end{bmatrix}
+					\sim \begin{bmatrix} 1 & 1 & 0 & 3 \\ 0 & -1 & 1 & 4 \\ 0 & -1 & 1 & 4 \end{bmatrix}
+					\sim \begin{bmatrix} 1 & 1 & 0 & 3 \\ 0 & 1 & -1 & -4 \\ 0 & 0 & 0 & 0 \end{bmatrix}
+					\sim \begin{bmatrix} 1 & 0 & 1 & 7 \\ 0 & 1 & -1 & -4 \\ 0 & 0 & 0 & 0 \end{bmatrix}
+				\end{align*}
+				Now we can see the system is consistent and the solution is as follows
+				$$\begin{pmatrix} x \\ y \\ z \end{pmatrix} = \begin{pmatrix} 7 \\ -4 \\ 0 \end{pmatrix} + z\begin{pmatrix} -1 \\ 1 \\ 1 \end{pmatrix}$$
+				for all $z \in \mathbb{R}$.
+			\item[\textbf{(ii).}] Suppose negative number of pounds of any brand cannot be applied and that each brand is sold only in integral amounts. Moreover,
+				$x, y, z \in \mathbb{N} \cup \{ 0 \}$. So then,
+				\begin{align*}
+					7-z=x &\geq 0 \\
+					-4+z=y &\geq 0 \\
+					z &\geq 0
+				\end{align*}
+				illustrating that $z \in \{ 4, 5, 6, 7 \}$; thus $$\begin{pmatrix} x \\ y \\ z \end{pmatrix}  = \begin{pmatrix} 7 \\ -4 \\ 0 \end{pmatrix} +
+				z\begin{pmatrix} -1 \\ 1 \\ 1 \end{pmatrix} \in \left \{ \begin{pmatrix} 3 \\ 0 \\ 4 \end{pmatrix}, \begin{pmatrix} 2 \\ 1 \\ 5 \end{pmatrix},
+				\begin{pmatrix} 1 \\ 2 \\ 6 \end{pmatrix}, \begin{pmatrix} 0 \\ 3 \\ 7 \end{pmatrix} \right \}.$$
+			\item[\textbf{(iii).}] Suppose that the products $X$, $Y$, $Z$ have costs \$1, \$6, \$3 respectively. Due to the conditions of \textbf{(ii)}, we have a finite
+				amount of solutions so we can find the cost of each combination of products. $\left(\begin{smallmatrix} 3 \\ 0 \\ 4 \end{smallmatrix}\right)$ costs \$15;
+				$\left(\begin{smallmatrix} 2 \\ 1 \\ 5 \end{smallmatrix}\right)$ costs \$23; $\left(\begin{smallmatrix} 1 \\ 2 \\ 6 \end{smallmatrix}\right)$ costs \$31;
+				$\left(\begin{smallmatrix} 0 \\ 3 \\ 7 \end{smallmatrix}\right)$ costs \$39. Clearly we can see that $\left(\begin{smallmatrix} 3 \\ 0 \\ 4 \end{smallmatrix}
+				\right)$ is the least expensive option.
+		\end{enumerate}
+	\end{proof}
+
+
+	\item[\textbf{4.}] Suppose that 100 insects are distributed in an enclosure consisting of 4 chambers with passageways between them. At the end of one minute, the
+		insects have redistributed themselves. Assume that a minute is not enough time for an insect to visit more than one chamber and that at the end of a minute 40\%
+		of the insects in each chamber have not left the chamber they occupied at the beginning of the minute. The insects that leave a chamber disperse uniformly among
+		the chambers that are directly accessible from the one they initially occupied.
+		\begin{enumerate}
+			\item[\textbf{(i).}] If at the end of one minute, there are 12, 25, 26, 37 insects in chambers \#1, \#2, \#3, \#4 respectively. Determine the initial distribution.
+			\item[\textbf{(ii).}] If the initial distribution is 20, 20, 20, 40, what is the distribution at the end of one minute.
+		\end{enumerate}
+
+	\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+		\begin{enumerate}
+			\item[\textbf{(i).}] Suppose at the end of one minute there are 12, 25, 26, 37 insects in chambers \#1, \#2, \#3, \#4 respectively. Let $x_i$ be the amount of
+				insects in the $i$th chamber at the begining of the minute. Since we are aware of the general distribution of the insects, the following equations must hold
+				\begin{align*}
+					\frac{2}{5}x_1+\frac{1}{3}\cdot\frac{3}{5}x_4 &= 12 \\
+					\frac{2}{5}x_2+\frac{1}{2}\cdot\frac{3}{5}x_3+\frac{1}{3}\cdot\frac{3}{5}x_4 &= 25 \\
+					\frac{1}{2}\cdot\frac{3}{5}x_2+\frac{2}{5}x_3+\frac{1}{3}\cdot\frac{3}{5}x_4 &= 26 \\
+					1\cdot\frac{3}{5}x_1+\frac{1}{2}\cdot\frac{3}{5}x_2+\frac{1}{2}\cdot\frac{3}{5}x_3+\frac{2}{5}x_4 &= 37. \\
+				\end{align*}
+				Let us place the given system into matrix form and compute the reduced row echelon form.
+				\begin{align*}
+					\begin{bmatrix} \frac{2}{5} & 0 & 0 & \frac{1}{5} & 12 \\ 0 & \frac{2}{5} & \frac{3}{10} & \frac{1}{5} & 25 \\ 0 & \frac{3}{10} & \frac{2}{5} & \frac{1}{5} & 26 \\ \frac{3}{5} & \frac{3}{10} & \frac{3}{10} & \frac{2}{5} & 37 \end{bmatrix}
+					&\sim \begin{bmatrix} 2 & 0 & 0 & 1 & 60 \\ 0 & 4 & 3 & 2 & 250 \\ 0 & 3 & 4 & 2 & 260 \\ 6 & 3 & 3 & 4 & 370 \end{bmatrix}
+					\sim \begin{bmatrix} 2 & 0 & 0 & 1 & 60 \\ 0 & 4 & 3 & 2 & 250 \\ 0 & 3 & 4 & 2 & 260 \\ 0 & 3 & 3 & 1 & 190 \end{bmatrix}
+					\sim \begin{bmatrix} 2 & 0 & 0 & 1 & 60 \\ 0 & 1 & -1 & 0 & -10 \\ 0 & 3 & 4 & 2 & 260 \\ 0 & 0 & -1 & -1 & -70 \end{bmatrix} \\
+					&\sim \begin{bmatrix} 2 & 0 & 0 & 1 & 60 \\ 0 & 1 & -1 & 0 & -10 \\ 0 & 0 & 7 & 2 & 290 \\ 0 & 0 & 1 & 1 & 70 \end{bmatrix}
+					\sim \begin{bmatrix} 2 & 0 & 0 & 1 & 60 \\ 0 & 1 & 0 & 1 & 60 \\ 0 & 0 & 0 & -5 & -200 \\ 0 & 0 & 1 & 1 & 70 \end{bmatrix}
+					\sim \begin{bmatrix} 1 & 0 & 0 & 0 & 10 \\ 0 & 1 & 0 & 0 & 20 \\ 0 & 0 & 1 & 0 & 30 \\ 0 & 0 & 0 & 1 & 40 \end{bmatrix}
+				\end{align*}
+				The reduced row echelon form of the matrix illustrates that $\left (\begin{smallmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{smallmatrix}\right) = 
+				\left (\begin{smallmatrix} 10 \\ 20 \\ 30 \\ 40 \end{smallmatrix}\right)$.
+				\newpage
+			\item[\textbf{(ii).}] Suppose we have an initial distribution of 20, 20, 20, 40. By using the same (unaugmented) matrix constructed in \textbf{(i)} we can see
+				that the product $$\begin{bmatrix} \frac{2}{5} & 0 & 0 & \frac{1}{5} \\ 0 & \frac{2}{5} & \frac{3}{10} & \frac{1}{5} \\ 0 & \frac{3}{10} & \frac{2}{5} & \frac{1}{5} \\ \frac{3}{5} & \frac{3}{10} & \frac{3}{10} & \frac{2}{5} \end{bmatrix}
+				\begin{pmatrix} 20 \\ 20 \\ 20 \\ 40 \end{pmatrix} = \begin{pmatrix} 16 \\ 22 \\ 22 \\ 40 \end{pmatrix}$$ depicts the final distribution.
+		\end{enumerate}
+	\end{proof}
+
+
+	\item[\textbf{5.}] Suppose that $\left \{\vec{v_1}, \vec{v_2}, \vec{v_3} \right \}$ is linear independent in $\mathbb{R}^n$, then show that $\left \{\vec{v_1}, \vec{v_1}+\vec{v_2},
+		\vec{v_1}+\vec{v_2}+\vec{v_3} \right \}$ is also linearly independent in $\mathbb{R}^n$.
+
+	\begin{proof}
+		Suppose that $\left \{\vec{v_1}, \vec{v_2}, \vec{v_3}\right \}$ is linear independent in $\mathbb{R}^n$. Further, suppose by contradiction that $\left \{\vec{v_1}, \vec{v_1}+\vec{v_2},
+		\vec{v_1}+\vec{v_2}+\vec{v_3} \right \}$ are linearly dependent in $\mathbb{R}^n$. Observe that the linear combination $c_1\vec{v_1} + c_2\vec{v_2} + c_3\vec{v_3} =
+		\vec{0}$ has only the trivial solution for the constants $c_1$, $c_2$, $c_3$. Let $c_1=k_1+k_2+k_3$, $c_2=k_2+k_3$, and $c_3=k_3$ where all $k_i \in \mathbb{R}$.
+		We can see that $$k_1\vec{v_1} + k_2(\vec{v_1}+\vec{v_2}) + k_3(\vec{v_1}+\vec{v_2}+\vec{v_3}) = (k_1+k_2+k_3)\vec{v_1} + (k_2+k_3)\vec{v_2} + k_3\vec{v_3} =
+		c_1\vec{v_1} + c_2\vec{v_2} + c_3\vec{v_3} = \vec{0}$$ has only the trivial solution which is a contradiction. The vectors $\left \{\vec{v_1}, \vec{v_1}+\vec{v_2},
+		\vec{v_1}+\vec{v_2}+\vec{v_3} \right \}$ were said to have a nontrivial solution, thus illustrating that $\left \{\vec{v_1}, \vec{v_1}+\vec{v_2}, \vec{v_1}+\vec{v_2}+\vec{v_3} \right \}$
+		are linearly independent in $\mathbb{R}^n$.
+	\end{proof}
+
+
+	\item[\textbf{6.}] Let $T : \mathbb{R}^2 \to \mathbb{R}^2$ be a linear transformation such that each point in $\mathbb{R}^2$ is rotated counterclockwise about the origin
+		by an angle $\alpha$.
+		\begin{enumerate}
+			\item[\textbf{(i).}] Find the standard matrix of $T$, and thus find $T(\vec{x})$ for any $\vec{x} \in \mathbb{R}^2$.
+			\item[\textbf{(ii).}] Find $\alpha$ such that $T\left (\begin{smallmatrix}4 \\ 3\end{smallmatrix} \right ) = \left (\begin{smallmatrix}5 \\ 0\end{smallmatrix} \right )$.
+		\end{enumerate}
+
+	\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+		\begin{enumerate}
+			\item[\textbf{(i).}] Suppose a counterclockwise rotation of angle $\alpha$ occured on $\mathbb{R}^2$. By assuming it's a linear transformation we can see that
+				$T_\alpha(\vec{e_1}) = \begin{pmatrix} \cos \alpha \\ \sin \alpha \end{pmatrix}$ and $T_\alpha(\vec{e_1}) = \begin{pmatrix} \cos \left (\alpha +
+				\frac{\pi}{2}\right ) \\ \sin \left (\alpha + \frac{\pi}{2}\right ) \end{pmatrix} = \begin{pmatrix} -\sin \alpha \\ \cos \alpha \end{pmatrix}$. Thus
+				$$T_\alpha(\vec{x}) = \begin{bmatrix} \cos \alpha & -\sin \alpha \\ \sin \alpha & \cos \alpha \end{bmatrix}.$$
+			\item[\textbf{(ii).}] Suppose $T_\alpha \left (\begin{smallmatrix}4 \\ 3\end{smallmatrix} \right ) = \left (\begin{smallmatrix}5 \\ 0\end{smallmatrix} \right )$.
+				It follows that $$\begin{bmatrix} \cos \alpha & -\sin \alpha \\ \sin \alpha & \cos \alpha \end{bmatrix} \begin{pmatrix}4 \\ 3\end{pmatrix} =
+				\begin{pmatrix} 4\cos \alpha -3\sin \alpha \\ 3\cos \alpha + 4\sin \alpha \end{pmatrix} = \begin{pmatrix}5 \\ 0\end{pmatrix}.$$
+				Now we have a system of equations where the unknows are $\cos \alpha$ and $\sin \alpha$. Creating an augmented matrix, we have
+				\begin{align*}
+					\begin{bmatrix} 4 & -3 & 5 \\ 3 & 4 & 0 \end{bmatrix}
+					\sim \begin{bmatrix} 1 & -7 & 5 \\ 3 & 4 & 0 \end{bmatrix}
+					\sim \begin{bmatrix} 1 & -7 & 5 \\ 0 & 25 & -15 \end{bmatrix}
+					\sim \begin{bmatrix} 1 & -7 & 5 \\ 0 & 1 & -\frac{3}{5} \end{bmatrix}
+					\sim \begin{bmatrix} 1 & 0 & \frac{4}{5} \\ 0 & 1 & -\frac{3}{5} \end{bmatrix}
+				\end{align*}
+				In reduced row echelon form we can see that $\cos \alpha = \frac{4}{5}$ and $\sin \alpha = -\frac{3}{5}$ illustrating that $\alpha = -\sin^{-1}\frac{3}{5}$.
+		\end{enumerate}
+	\end{proof}
+\end{enumerate}
+
+\end{document}

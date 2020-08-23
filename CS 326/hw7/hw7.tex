@@ -1,0 +1,143 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{mathtools}
+\footskip = -0.75in
+\lstset{
+    tabsize=2
+}
+
+\begin{document}
+
+% title page
+\title{Homework 7}
+\author{Landon Fox}
+\date{April 28, 2020}
+
+\begin{flushleft}
+Landon Fox \\
+CS 326 \\
+Section 1001 \\
+April 28, 2020
+\end{flushleft}
+\begin{center}
+\Large Homework 7
+\end{center}
+
+\begin{itemize}
+	% problem 1
+	\item[] {\large 1)}
+	\begin{itemize}
+		% problem 1a
+		\item[] {\large 1a)}
+		\begin{center}
+		\begin{lstlisting}
+isSet( [] ).
+isSet( [ H | T ] ) :-
+	not( member( H, T ) ),
+	isSet( T ).
+		\end{lstlisting}
+		\end{center}
+
+		% problem 1b
+		\item[] {\large 1b)}
+		\begin{center}
+		\begin{lstlisting}
+% assuming we do not need to check if set
+subset( [], _ ).
+subset( [ H | T ], S ) :-
+	member( H, S ),
+	subset( T, S ).
+		\end{lstlisting}
+		\end{center}
+
+		% problem 1c
+		\item[] {\large 1c)}
+		\begin{center}
+		\begin{lstlisting}
+union( [], B, C ) :-
+	subset( B, C ),
+	subset( C, B ).
+union( [ H | T ], B, C ) :-
+	D = [ H | B ],
+	union( T, D, C ).
+		\end{lstlisting}
+		\end{center}
+
+		% problem 1d
+		\item[] {\large 1d)}
+		\begin{center}
+		\begin{lstlisting}
+intersection( [], _, [] ).
+intersection( [ H1 | T1 ], B, [ H2 | T2 ] ) :-
+	member( H1, B ),
+	H1 = H2,
+	intersection( T1, B, T2 ).
+intersection( [ _ | T ], B, C ) :-
+	intersection( T, B, C ).
+		\end{lstlisting}
+		\end{center}
+	\end{itemize}
+	\newpage
+
+	% problem 2
+	\item[] {\large 2)}
+	\begin{center}
+	\begin{lstlisting}
+tally( _, [], 0 ).
+tally( E, [ E | T ], N ) :-
+    tally( E, T, M ),
+	N is M + 1.
+tally( E, [ _ | T ], N ) :-
+	tally( E, T, N ).
+	\end{lstlisting}
+	\end{center}
+
+	% problem 3
+	\item[] {\large 3)}
+	\begin{center}
+	\begin{lstlisting}
+subst( _, _, [], [] ).
+subst( X, Y, [ X | T1 ], [ Y | T2 ] ) :-
+	subst( X, Y, T1, T2 ).
+subst( X, Y, [ H | T1 ], [ H | T2 ] ) :-
+	subst( X, Y, T1, T2 ).
+	\end{lstlisting}
+	\end{center}
+
+	% problem 4
+	\item[] {\large 4)}
+	\begin{center}
+	\begin{lstlisting}
+insert( 1.0Inf, L, L ).
+insert( X, [], [ X ] ) :-
+	X < 1.0Inf.
+insert( X, [ H | T1 ], [ X, H | T2 ] ) :-
+	X =< H,
+	insert( 1.0Inf, T1, T2 ).
+insert( X, [ H | T1 ], [ H | T2 ] ) :-
+	insert( X, T1, T2 ).
+	\end{lstlisting}
+	\end{center}
+
+	% problem 5
+	\item[] {\large 5)}
+	\begin{center}
+	\begin{lstlisting}
+flatten( [], [] ).
+flatten( [ H | T ], B ) :-
+	flatten( H, C ),
+	flatten( T, D ),
+	append( C, D, B ).
+flatten( H, [ H ] ).
+	\end{lstlisting}
+	\end{center}
+\end{itemize}
+
+\end{document}

@@ -1,0 +1,264 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+
+\begin{document}
+
+% title page
+\title{Homework 2}
+\author{Landon Fox}
+\date{February 12, 2020}
+
+\begin{flushleft}
+Landon Fox \\
+STAT 461 \\
+Section 1001 \\
+February 12, 2020
+\end{flushleft}
+\begin{center}
+Homework 2
+\end{center}
+
+% problem 2.4.2
+\section{2.4.2}
+\begin{flalign}
+P(A) &= 0.2 \\
+P(B) &= 0.4 \\
+P(A|B) + P(B|A) &= 0.75
+\end{flalign}
+Find:
+\begin{flalign}
+P(A \cap B)
+\end{flalign}
+\begin{flalign}
+P(A|B) + P(B|A) &= 0.75 \\
+\frac{P(A \cap B)}{P(B)} + \frac{P(A \cap B)}{P(A)} &= 0.75 \\
+P(A \cap B) &= \frac{0.75}{\frac{1}{P(A)} + \frac{1}{P(B)}} \\
+&= \frac{0.75}{\frac{1}{0.2} + \frac{1}{0.4}} \\
+P(A \cap B) &= 0.1
+\end{flalign}
+\newpage
+
+% problem 2.4.3
+\section{2.4.3}
+\begin{flalign}
+if\;\;\; &P(A|B) < P(A) \\
+show\;\;\; &P(B|A) < P(B)
+\end{flalign}
+\begin{flalign}
+P(A|B) &< P(A) \\
+\frac{P(A \cap B)}{P(B)} &< P(A) \\
+P(A \cap B) &< P(A)P(B) \\
+\frac{P(A \cap B)}{P(A)} &< P(B) \\
+P(B|A) &< P(B)
+\end{flalign}
+
+% problem 2.4.7
+\section{2.4.7}
+\begin{flalign}
+&if\, red:\; place\, red\, back\, along\, with\, two\, more \\
+&if\, white:\; place\, white\, back
+\end{flalign}
+Find:
+\begin{flalign}
+P(R_1 \cap R_2)
+\end{flalign}
+\begin{flalign}
+P(R_1 \cap R_2) &= P(R_2|R_1)P(R_1) \\
+&= \frac{3}{4} \cdot \frac{1}{2} \\
+P(R_1 \cap R_2) &= \frac{3}{8}
+\end{flalign}
+\newpage
+
+% problem 2.4.13
+\section{2.4.13}
+\begin{flalign}
+A &= \{ 4, 5, 6 \} \times \{ 1, 2, 3, 4, 5, 6 \} \\
+B &= \{ (2,6), (3,5), (4,4), (5,3), (6,2) \} \\
+A \cap B &= \{(4,4), (5,3), (6,2) \}
+\end{flalign}
+Find:
+\begin{flalign}
+P(A|B)
+\end{flalign}
+\begin{flalign}
+P(A|B) &= \frac{P(A \cap B)}{P(B)} \\
+P(A|B) &= \frac{3}{5}
+\end{flalign}
+
+% problem 2.4.28
+\section{2.4.28}
+\begin{flalign}
+C:\; &Contirbutor \\
+B:\; &Belle\, Meade,\, 1000 \\
+H:\; &Oak\, Hill,\, 1000 \\
+A:\; &Antioch,\, 2000
+\end{flalign}
+\begin{flalign}
+P(C) &= P(C|B)P(B) + P(C|H)P(H) + P(C|A)P(A) \\
+&= \frac{60}{100} \cdot \frac{1000}{4000} + \frac{55}{100} \cdot \frac{1000}{4000} + \frac{35}{100} \cdot \frac{2000}{4000} \\
+P(C) &= \frac{37}{80}
+\end{flalign}
+\newpage
+
+% problem 2.4.31
+\section{2.4.31}
+\begin{flalign}
+P(HIV) &= 0.0001 \\
+P(+|HIV) &= 0.999 \\
+P(-|HIV) &= 0.9999
+\end{flalign}
+Find:
+\begin{flalign}
+P(+)
+\end{flalign}
+\begin{flalign}
+P(+) &= P(+|HIV)P(HIV) + P(+|HIV^c)P(HIV^c) \\
+&= (0.999)(0.0001) + (0.0001)(0.9999) \\
+&= 0.00019989 \\
+P(+) &= \sim 0.0002
+\end{flalign}
+
+% problem 2.4.40
+\section{2.4.40}
+\begin{flalign}
+A:\; &the\, transfered\, chip\, is\, W \\
+B:\; &the\, final\, chip\, is\, R
+\end{flalign}
+Find:
+\begin{flalign}
+P(A|B)
+\end{flalign}
+\begin{flalign}
+P(A|B) &= \frac{P(B|A)P(A)}{P(B|A)P(A) + P(B|A^c)P(A^c)} \\
+&= \frac{ \frac{1}{2} \cdot \frac{2}{3} }{ \frac{1}{2} \cdot \frac{2}{3} + \frac{3}{4} \cdot \frac{1}{3} } \\
+P(A|B) &= \frac{4}{7}
+\end{flalign}
+
+% problem 2.4.53
+\section{2.4.53}
+\begin{flalign}
+A_i:\; &the\, ith\, drawer\, is\, chosen \\
+B:\; &the\, chosen\, coin\, is\, silver
+\end{flalign}
+Find:
+\begin{flalign}
+P(A_3|B)
+\end{flalign}
+\begin{flalign}
+P(A_3|B) &= \frac{P(B|A_3)P(A_3)}{P(B|A_1)P(A_1) + P(B|A_2)P(A_2) + P(B|A_3)P(A_3)} \\
+&= \frac{ \frac{1}{2} \cdot \frac{1}{3} }{ 0 \cdot \frac{1}{3} + 1 \cdot \frac{1}{3} + \frac{1}{2} \cdot \frac{1}{3} } \\
+P(A_3|B) &= \frac{1}{3}
+\end{flalign}
+
+% problem 2.5.1
+\section{2.5.1}
+\begin{flalign}
+P(A \cap B) &= 0.2 \\
+P(A) &= 0.6 \\
+P(B) &= 0.5
+\end{flalign}
+
+\subsection{}
+Are A, B mutually exclusive?
+\begin{flalign}
+P(A \cap B) &\neq 0 \\
+\therefore A,\, B\, are\, not&\, mutually\, exclusive
+\end{flalign}
+
+\subsection{}
+Are A, B independent?
+\begin{flalign}
+P(A)P(B) &= 0.3 \\
+P(A \cap B) &\neq P(A)P(B) \\
+\therefore A,\, B\, &are\, dependent
+\end{flalign}
+
+\subsection{}
+Find:
+\begin{flalign}
+P(A^c \cap B^c)
+\end{flalign}
+\begin{flalign}
+P(A^c \cap B^c) &= 1 - P( (A^c \cup B^c)^c ) \\
+&= 1 - P(A \cap B) \\
+&= 1 - 0.2 \\
+P(A^c \cap B^c) &= 0.8
+\end{flalign}
+
+% problem 2.5.2
+\section{2.5.2}
+\begin{flalign}
+P(C) &= 0.35 \\
+P(M) &= 0.4 \\
+P(C \cap M) &= 0.12
+\end{flalign}
+\begin{flalign}
+P(C)P(M) &= 0.14 \\
+P(C \cap M) &\neq P(C)P(M) \\
+\therefore C,\, M\, are&\, dependent
+\end{flalign}
+
+% problem 2.5.7
+\section{2.5.7}
+\begin{flalign}
+P(A) &= \frac{1}{4} \\
+P(B) &= \frac{1}{8}
+\end{flalign}
+
+\subsection{}
+A, B are mutually exclusive
+\begin{flalign}
+P(A \cup B) &= P(A) + P(B) \\
+&= \frac{1}{4} + \frac{1}{8} \\
+P(A \cup B) &= \frac{3}{8}
+\end{flalign}
+
+\subsection{}
+A, B are independent
+\begin{flalign}
+P(A \cup B) &= 1 - P(A^c \ cap B^c) \\
+&= 1 - P(A^c)P(B^c) \\
+&= 1 - (1 - \frac{1}{4})(1 - \frac{1}{8}) \\
+P(A \cup B) &= \frac{11}{32}
+\end{flalign}
+
+\subsection{}
+A, B are mutually exclusive
+\begin{flalign}
+P(A | B) &= \frac{P(A \cap B)}{P(B)} \\
+&= \frac{0}{P(B)} \\
+P(A | B) &= 0
+\end{flalign}
+
+\subsection{}
+A, B are independent
+\begin{flalign}
+P(A | B) &= \frac{P(A \cap B)}{P(B)} \\
+&= \frac{P(A)P(B)}{P(B)} \\
+&= P(A) \\
+&= \frac{1}{4}
+\end{flalign}
+\newpage
+
+% problem 2.5.9
+\section{2.5.9}
+16 total posibilities of tossing four fair coins. This can be found by all permuations of two items for four instances, giving $2^4$. \\
+Of the 16, we are interested when the first half of the coin flips have the same amount of heads as the last two.
+\begin{flalign}
+A &= \{ TTTT \} \\
+B &= \{ THTH, THHT, HTTH, HTHT \} \\
+C &= \{ HHHH \}
+\end{flalign}
+Find:
+\begin{flalign}
+P(A \cup B \cup C)
+\end{flalign}
+\begin{flalign}
+P(A \cup B \cup C) = \frac{6}{16}
+\end{flalign}
+
+\end{document}

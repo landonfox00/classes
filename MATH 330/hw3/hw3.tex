@@ -1,0 +1,254 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, mathtools}
+\usepackage[margin=0.5in]{geometry}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 330 \\
+\noindent August 7, 2020
+
+\begin{center}
+\Large Homework 3
+\end{center}
+
+\begin{enumerate}
+	\item[\textbf{1.}] Let $a$, $b$, $c$ be distinct real numbers. Show that the following set is a basis of $\mathbb{P}_2$. $$\{ (x-a)(x-b), (x-b)(x-c), (x-c)(x-a) \}$$
+
+		\begin{proof}
+			Suppose $a, b, c \in \mathbb{R}$ are distinct values and
+			\begin{align*}
+				B &= \{ (x-a)(x-b), (x-b)(x-c), (x-c)(x-a) \} \\
+				&= \{ x^2 - (a+b)x + ab, x^2 - (b+c)x + bc, x^2 - (c+a)x + ca \}.
+			\end{align*}
+			Observe that the elements of $B$ can be expressed as the columns of the matrix $$A = \begin{bmatrix} ab & bc & ca \\ -a-b & -b-c & -c-a \\ 1 & 1 & 1 \end{bmatrix}.$$
+			Let us now show that $|A| \neq 0$.
+			\begin{align*}
+				|A| &= ab(-b-c + c+a) - bc(-a-b + c+a) + ca(-a-b + b+c) \\
+				&= (a-b)(a-c)(b-c)
+			\end{align*}
+			Since each value is distinct, we can see that $|A| \neq 0$. Thus, $B$ is linearly independent. Additionally, we know that $\dim \mathbb{P}_2 = |B| = 3$. Hence,
+			$B$ is a basis of $\mathbb{P}_2$.
+		\end{proof}
+
+
+	\item[\textbf{2.}] Let $T : \mathbb{M}_{n \times n} \to \mathbb{M}_{n \times n}$ be such that $T(A) = A + A^T$.
+		\begin{enumerate}
+			\item[\textbf{(i)}] Show that T is a linear transformation.
+			\item[\textbf{(ii)}] Find $\ker T$.
+			\item[\textbf{(iii)}] Find $\mathrm{range} T$.
+		\end{enumerate}
+
+		\begin{proof}
+			Suppose $T : \mathbb{M}_{n \times n} \to \mathbb{M}_{n \times n}$ such that $T(A) = A + A^T$.
+			\begin{enumerate}
+				\item[\textbf{(i)}] To show that $T$ is a linear transformation, we need to show additivity and homogeneity. Let $A, B \in \mathbb{M}_{2 \times 2}$ and
+					$\alpha, \beta \in \mathbb{R}$. Observe that
+					\begin{align*}
+						T(\alpha A + \beta B) &= (\alpha A + \beta B) + (\alpha A + \beta B)^T \\
+						&= \alpha A + \beta B + \alpha A^T + \beta B^T \\
+						&= \alpha(A + A^T) + \beta(B + B^T) \\
+						T(\alpha A + \beta B) &= \alpha T(A) + \beta T(B).
+					\end{align*}
+					Thus, $T$ is a linear transformation.
+
+				\item[\textbf{(ii)}] To find $\ker T$, we need to find the set of all matrices $A \in \mathbb{M}_{2 \times 2}$ such that $T(A) = A + A^T = 0_{2 \times 2}$, where
+					$0_{2 \times 2}$ is clearly the additive indentity of $\mathbb{M}_{2 \times 2}$. For $A$ to satisfy this equation, the following must hold $-A = A^T$. Furthermore,
+					we can see that $A$ must be skew-symmetric. Thus, $\ker T = \{ A \in \mathbb{M}_{2 \times 2} : -A = A^T \}$.
+
+				\item[\textbf{(iii)}] Observe that $T(A) = A + A^T$ produces symmetric matrices from $\mathbb{M}_{2 \times 2}$. Let $B \in \mathbb{M}_{2 \times 2}$ be a symmetric
+					matrix. Notice that $$T \left ( \frac{1}{2} B \right ) = \frac{1}{2} B + \frac{1}{2}B^T = \frac{1}{2} B + \frac{1}{2}B = B.$$ Then it can be seen that the range of
+					$T$ is exclusively symmetric matrices and every symmetric matrix has a corresponding pre-image. Thus, $\mathrm{range} T = \{ B \in \mathbb{M}_{2 \times 2} :
+					B = B^T \}$.
+			\end{enumerate}
+		\end{proof}
+
+
+	\item[\textbf{3.}] State true or false. Justify your answer.
+		\begin{enumerate}
+			\item[\textbf{(i)}] Let $H = \{ f : f(a) = f(b) \}$. $H$ is a subspace of $\mathbb{C}[a,b]$.
+			\item[\textbf{(ii)}] Let $H = \{ p : p \in \mathbb{P}_n,\; p(0) = 0 \}$. $H$ is a subspace of $\mathbb{P}_n$.
+			\item[\textbf{(iii)}] Trace $\mathrm{tr} : \mathbb{M}_{n \times n} \to \mathbb{R}$ is a linear transformation.
+			\item[\textbf{(iv)}] Let $H_1$, $H_2$ be two subspaces of $V$, then $H = H_1 \cap H_2$ is a subspace of $V$.
+			\item[\textbf{(v)}] Let $H_1$, $H_2$ be two subspaces of $V$, then $H = H_1 \cup H_2$ is a subspace of $V$.
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{(i)}] True. Suppose $H = \{ f : f(a) = f(b) \}$. The additive identity of $\mathbb{C}[a,b]$ is 0; clearly, $0 \in H$. Additionally, if $f, g \in H$ and
+					$\alpha, \beta \in \mathbb{R}$, then we can see that $\alpha f(a) + \beta g(a) = \alpha f(b) + \beta g(b)$ and $\alpha f(x) + \beta g(x) \in H$ since $f(a) = f(b)$
+					and $g(a) = g(b)$. Thus, both operations of $H$ have closure illustrating that $H$ is a subspace of $\mathbb{C}[a,b]$.
+
+				\item[\textbf{(ii)}] True. Suppose $H = \{ p : p \in \mathbb{P}_n,\; p(0) = 0 \}$. Clearly $0 \in H$, the additive identity of $\mathbb{P}_n$. Additionally, if
+					$p, q \in H$ and $\alpha, \beta \in \mathbb{R}$, then we can see that $0 = \alpha p(0) + \beta q(0) \in H$ since $p(0) = q(0) = 0$. Thus, both operations of
+					$H$ have closure illustrating that $H$ is a subspace of $\mathbb{P}_n$.
+
+				\item[\textbf{(iii)}] True. The function $\mathrm{tr}$ can be expressed as $\mathrm{tr}[a_{ij}]_{n \times n} = \sum_{m=1}^n a_{mm}$. Let us now illustrate additivity
+					and homogeneity. Let $\alpha, \beta \in \mathbb{R}$. Observe that
+					\begin{align*}
+						\mathrm{tr}[\alpha a_{ij} + \beta b_{ij}]_{n \times n} &= \sum_{m=1}^n (\alpha a_{mm} + \beta b_{mm}) \\
+						&= \alpha \sum_{m=1}^n a_{mm} + \beta \sum_{m=1}^n b_{mm} \\
+						\mathrm{tr}[\alpha a_{ij} + \beta b_{ij}] &= \alpha\mathrm{tr}[a_{ij}] + \beta \mathrm{tr}[b_{ij}].
+					\end{align*}
+					Thus, $\mathrm{tr}$ is a linear transformation.
+
+				\item[\textbf{(iv)}] True. Let $H_1$, $H_2$ be two subspaces of $V$. We know that the identity element of $V$ must be contained in all subspaces. Then it follows that
+					both $H_1$ and $H_2$ contain the identity element and so must their intersection. If $h, g \in H_1$ and $h, g \in H_2$ then we can see that $\alpha h + \beta g
+					\in H_1$ and $\alpha h + \beta g \in H_2$ where $\alpha, \beta \in \mathbb{F}$. Thus, $H = H_1 \cap H_2$ is a subspace of $V$.
+
+				\item[\textbf{(v)}] False. Let $V = \mathbb{P}_1$, $H_1 = \left ( \mathbb{P}_1 \setminus \mathbb{P}_0 \right ) \cup \{ 0 \}$, and $H_2 = \mathbb{P}_0$. Clearly we can
+					see that $x \in H_1$ and $1 \in H_2$; however, $x+1 \notin H_1 \cup H_2$. Thus, $H_1 \cup H_2$ is not a subspace of $V$.
+			\end{enumerate}
+		\end{proof}
+		\newpage
+
+
+	\item[\textbf{4.}] Let $T : V \to W$ be a linear transformation.
+		\begin{enumerate}
+			\item[\textbf{(i)}] Show that if $\left \{ \vec{v_1}, \vec{v_2}, \hdots, \vec{v_n} \right \}$ is linearly dependent in $V$, then $\left \{ T \left ( \vec{v_1} \right ),
+				T \left ( \vec{v_2} \right ), \hdots, T \left ( \vec{v_n} \right ) \right \}$ is linearly dependent in $W$.
+			\item[\textbf{(ii)}] Show that if $T$ is injective and $\left \{ \vec{v_1}, \vec{v_2}, \hdots, \vec{v_n} \right \}$ is linearly independent in $V$, then \\
+				$\left \{ T \left ( \vec{v_1} \right ), T \left ( \vec{v_2} \right ), \hdots, T \left ( \vec{v_n} \right ) \right \}$ is linearly independent in $W$.
+		\end{enumerate}
+
+		\begin{proof}
+			Let $T : V \to W$ be a linear transformation.
+			\begin{enumerate}
+				\item[\textbf{(i)}] Suppose $\left \{ \vec{v_1}, \vec{v_1}, \hdots, \vec{v_n} \right \}$ is a linearly dependent set in $V$. Then it follows that
+					$$c_1\vec{v_1} + c_2\vec{v_2} + \hdots + c_n\vec{v_n} = \vec{0_V}$$ where all $c_i \in \mathbb{F}$ has a non-trivial solution. By applying the transformation
+					$T$ to the equality we have
+					\begin{align*}
+						T \left ( c_1\vec{v_1} + c_2\vec{v_2} + \hdots + c_n\vec{v_n} \right ) &= T \left ( \vec{0_V} \right ) \\
+						c_1 T \left ( \vec{v_1} \right ) + c_2 T \left ( \vec{v_2} \right ) + \hdots + c_n T \left ( \vec{v_n} \right ) &= \vec{0_W}
+					\end{align*}
+					Hence, there is a non-trivial solution to $\left \{ T \left ( \vec{v_1} \right ), T \left ( \vec{v_2} \right ), \hdots, T \left ( \vec{v_n} \right )\right \}$
+					illustrating that the set is linearly dependent.
+
+				\item[\textbf{(ii)}] Suppose $T$ is injective. Further, suppose by contradiction that $\left \{ \vec{v_1}, \vec{v_1}, \hdots, \vec{v_n} \right \}$ is a linearly
+					independent set in $V$ and $\left \{ T \left ( \vec{v_1} \right ), T \left ( \vec{v_2} \right ), \hdots, T \left ( \vec{v_n} \right )\right \}$ is
+					linearly dependent. Then it follows that
+					\begin{align*}
+						c_1 T \left ( \vec{v_1} \right ) + c_2 T \left ( \vec{v_2} \right ) + \hdots + c_n T \left ( \vec{v_n} \right ) &= \vec{0_W} \\
+						T \left ( c_1\vec{v_1} + c_2\vec{v_2} + \hdots + c_n\vec{v_n} \right ) &= T \left ( \vec{0_V} \right )
+					\end{align*}
+					has a non-trivial solution. Since $T$ is injective, $\vec{0_V}$ is uniquely mapped to $\vec{0_W}$. Thus, the trivial solution must uniquely satisfy the above
+					equality which is a contradiction.
+			\end{enumerate}
+		\end{proof}
+
+
+	\item[\textbf{5.}]
+		\begin{enumerate}
+			\item[\textbf{(i)}] For matrices $A$, $B$, show that $\mathrm{rank} AB \leq \mathrm{rank} A$.
+			\item[\textbf{(ii)}] Use \textbf{(i)} to show that $\mathrm{rank} AB \leq \mathrm{rank} B$, and thus $\mathrm{rank} AB \leq \min \{ \mathrm{rank} A, \mathrm{rank} B \}$.
+			\item[\textbf{(iii)}] If $P$, $Q$ are invertible matrices, then $\mathrm{rank} PA = \mathrm{rank} A$ and $\mathrm{rank} AQ = \mathrm{rank} A$.
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{(i)}] Suppose we have matrices $A$, $B$ such that $AB$ is defined. Further, suppose $$B = \begin{bmatrix} \vec{b_1} & \vec{b_2} & \hdots & \vec{b_n}
+					\end{bmatrix}.$$ Then it follows that $$AB = \begin{bmatrix} A\vec{b_1} & A\vec{b_2} & \hdots & A\vec{b_n} \end{bmatrix}.$$ It is clear that the columns of $AB$
+					belong to the column space of $A$; in other words, for all $1 \leq i \leq n$, $A\vec{b_i} \in \mathrm{col} A$. Thus, $\mathrm{col} AB$ is a subspace of
+					$\mathrm{col} A$ illustrating that the dimension of the span or rank of the matrix $A$ is always greater than or equal to the rank of $AB$.
+
+				\item[\textbf{(ii)}] Suppose we have matrices $A$, $B$ such that $AB$ is defined. Using \textbf{(i)}, we can see that $\mathrm{rank} AB \leq \mathrm{rank} A$.
+					Observe that $\mathrm{rank} AB = \mathrm{rank} (AB)^T = \mathrm{rank} B^T A^T$. Applying \textbf{(i)} once again, we have $$\mathrm{rank} AB =
+					\mathrm{rank} B^T A^T \leq \mathrm{rank} B^T = \mathrm{rank} B.$$ Thus, $\mathrm{rank} AB \leq \min \{ \mathrm{rank} A, \mathrm{rank} B\}$.
+
+				\item[\textbf{(iii)}] Suppose we have matrices $A_{m \times n}$, $P_{m \times m}$, $Q_{n \times n}$. Further, suppose $P$ and $Q$ are invertiable. Then it follows that
+					$P$ and $Q$ are of full rank. Via \textbf{(ii)} we know that $$\mathrm{rank} PA \leq \min \{ \mathrm{rank} A, \mathrm{rank} P \} = \min \{ \mathrm{rank} A, m \}$$
+					and $$\mathrm{rank} AQ \leq \min \{ \mathrm{rank} A, \mathrm{rank} Q \} = \min \{ \mathrm{rank} A, n \}.$$ Additionally, it is clear that $\mathrm{rank} \leq
+					\min \{ m, n \}$. Thus $$\mathrm{rank} PA \leq \min \{ \mathrm{rank} A, m \} = \mathrm{rank} A$$ and $$\mathrm{rank} AQ \leq \min \{ \mathrm{rank} A, n \} =
+					\mathrm{rank} A.$$
+			\end{enumerate}
+		\end{proof}
+
+
+	\item[\textbf{6.}] Let $\mathbb{S}$ be the vector space of all infinite sequences $\{ x_n \} = \{ x_0, x_1, \hdots \}$ with the usual $+$ and $\cdot$ operations. Consider the
+		Hemachandra-Fibonacci sequence $\{ F_n \}$ given by $$F_{n+2} = F_{n+1} + F_n;\; F_0 = 0,\; F_1 = 1.$$
+		\begin{enumerate}
+			\item[\textbf{(i)}] Let $H = \left \{ \{ x_n \} : x_{n+2} = x_{n+1} + x_n;\; n \in \mathbb{N} \cup \{ 0 \} \right \}$. Show that $H$ is a subspace of $\mathbb{S}$.
+			\item[\textbf{(ii)}] Find the standard basis of $B$ and dimension of $H$.
+			\item[\textbf{(iii)}] Find a different basis $B'$ of $H$ such that sequences of $B'$ have the form $\{ \tau^n \}$, where $\tau \in \mathbb{R}$.
+			\item[\textbf{(iv)}] Find the coordinates of $\{ F_n \}$ with respect to $B'$ and thus find a closed formula for $\{ F_n \}$.
+		\end{enumerate}
+
+		\begin{proof}
+			Let $\mathbb{S}$ be the vector space of all infinite sequences with indicies belonging to $\mathbb{N} \cup \{ 0 \}$. Let $H = \left \{ \{ x_n \} : x_{n+2} = x_{n+1} +
+			x_n;\; n \in \mathbb{N} \cup \{ 0 \} \right \}$.
+			\begin{enumerate}
+				\item[\textbf{(i)}]  It is clear that $\{ 0 \}_{n \in \mathbb{N} \cup \{ 0 \} }$ is the additive identity element of $\mathbb{S}$. Additionally, we can see that
+					$\{ 0 \} \in H$. To show closure, suppose $\{ x_n \}, \{ y_n \} \in H$ and $\alpha, \beta \in \mathbb{R}$. Then it follows that $\{ \alpha x_n + \beta y_n \} \in H$
+					since $x_{n+2} = x_{n+1} + x_n$ and $y_{n+2} = y_{n+1} + y_n$ implies $\alpha x_{n+2} + \beta y_{n+2} = \alpha x_{n+1} + \beta y_{n+1} + \alpha x_n + \beta y_n$.
+					Thus, $H$ is a subspace of $\mathbb{S}$.
+
+				\item[\textbf{(ii)}] Observe that the basis of $H$ can be expressed as the initial conditions, $x_0$ and $x_1$. Suppose by contradiction that all possible combinations
+					of $x_0$ and $x_1$ could not describe all elements within $H$; immediately we can see that this is a contradiction since all sequences in $H$ must have initial
+					conditions that dictate the reccurence relation. Let $\left ( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix} \right )$ and $\left ( \begin{smallmatrix} 0 \\ 1
+					\end{smallmatrix} \right )$ denote the sequences $\{ 1, 0, 1, 1, \hdots \} \in H$ and $\{ 0, 1, 1, 2, \hdots \} \in H$ respectively.
+					Therefore, it can be seen that $$c_1\begin{pmatrix} 1 \\ 0 \end{pmatrix}+ c_2\begin{pmatrix} 0 \\ 1 \end{pmatrix},$$ or
+					$\mathrm{span}\left \{  \left ( \begin{smallmatrix} 1 \\ 0 \end{smallmatrix} \right ), \left ( \begin{smallmatrix} 0 \\ 1 \end{smallmatrix} \right ) \right \}$, represents
+					all possible sequences in $H$. Clearly the two sequences are linearly independent and span $H$, thus $$B = \left \{ \begin{pmatrix} 1 \\ 0 \end{pmatrix},
+					\begin{pmatrix} 0 \\ 1 \end{pmatrix} \right \}$$ is a basis of $H$ with dimension two.
+
+				\item[\textbf{(iii)}] Suppose there exists a basis $B'$ of $H$ such that sequences of $B'$ have the form $\{ \tau^n \} \in H$, where $\tau \in \mathbb{R}$. Then
+					we can see that $\tau$ must satisfy $\tau^{n+2} = \tau^{n+1} + \tau^n$ for all $n \in \mathbb{N} \cup \{ 0 \}$. Moreover,
+					\begin{align*}
+						\tau^{n+2} &= \tau^{n+1} + \tau^n \\
+						\tau^2 &= \tau + 1
+					\end{align*}
+					illustrating that $\tau_1 = \frac{1}{2}(1 + \sqrt{5})$, $\tau_2 = \frac{1}{2}(1 - \sqrt{5})$. Furthermore, $$B' = \left \{ \left \{ \left ( \frac{1 + \sqrt{5}}{2} 
+					\right )^n \right \}, \left \{ \left ( \frac{1 - \sqrt{5}}{2} \right )^n \right \}\right \}$$ or using our previous convention in \textbf{(ii)},
+					$$B' = \left \{ \frac{1}{2} \begin{pmatrix} 2 \\ 1 + \sqrt{5} \end{pmatrix}, \frac{1}{2} \begin{pmatrix} 2 \\ 1 - \sqrt{5} \end{pmatrix} \right \}.$$ Clearly we
+					can see that $B'$ is composed of linearly independent sequences and its dimension is two, thus $B'$ is a basis of $H$.
+
+				\item[\textbf{(iv)}] In respect to the standard basis $B$, we can see that $\{ F_n \} = \left ( \begin{smallmatrix} 0 \\ 1 \end{smallmatrix} \right )$. To perform a change
+					of basis
+					from $B$ to $B'$ let us consider the matrix constructed from $B'$ augmented with $\{ F_n \}$. $$\begin{bmatrix} 1 & 1 & 0 \\ \frac{1}{2}(1 + \sqrt{5})
+					& \frac{1}{2}(1 - \sqrt{5}) & 1 \end{bmatrix} \sim \begin{bmatrix} 1 & 0 & \frac{1}{\sqrt{5}} \\ 0 & 1 & -\frac{1}{\sqrt{5}} \end{bmatrix}$$
+					Thus, $\{ F_n \}_{B'} = \frac{1}{\sqrt{5}} \left ( \begin{smallmatrix} 1 \\ -1 \end{smallmatrix} \right )$, or rather, $$\{ F_n \} = \frac{1}{\sqrt{5}}
+					\left ( \left ( \frac{1+\sqrt{5}}{2} \right )^n - \left ( \frac{1-\sqrt{5}}{2} \right )^n \right ).$$
+			\end{enumerate}
+		\end{proof}
+
+
+	\item[\textbf{7.}] Let $V$ be the vector space of all real-valued functions of a real variable. Let $S = \{ f_1, f_2, \hdots, f_n \} \subseteq V$ be a set of functions that are
+		$n-1$ times differentiable. The Wronskian is defined as $$W(x) = \begin{bmatrix} f_1(x) & f_2(x) & \hdots & f_n(x) \\ f_1'(x) & f_2'(x) & \hdots & f_n'(x) \\
+		\vdots & \vdots & \ddots & \vdots \\ f_1^{(n-1)}(x) & f_2^{(n-1)}(x) & \hdots & f_n^{(n-1)}(x) \end{bmatrix}.$$
+		\begin{enumerate}
+			\item[\textbf{(i)}] Show that if there exists $x_0 \in \mathbb{R}$ such that $|W(x_0)| \neq 0$, then $S$ is linearly independent.
+			\item[\textbf{(ii)}] Use \textbf{(i)} to show that $S = \{ 1, x, x^2, \hdots, x_n \}$ is linearly independent.
+			\item[\textbf{(iii)}] Use \textbf{(i)} to show that $S = \{ \sin x, \cos x, \sin 2x, \cos 2x \}$ is linearly independent.
+		\end{enumerate}
+
+		\begin{proof}
+			Let $V$ be the vector space of all real-valued functions of a real variable. Let $S = \{ f_1, f_2, \hdots, f_n \} \subseteq V$ be a set of functions that are
+			$n-1$ times differentiable.
+			\begin{enumerate}
+				\item[\textbf{(i)}] Suppose by contradiction that there exists $x_0 \in \mathbb{R}$ such that $|W(x_0)| \neq 0$ and that $S$ is linearly dependent. Then it follows that
+					$$\sum_{i=1}^n c_i f_i(x) = 0$$ has a non-trivial solution for all $x$. By repeatedly differentiating the equality, we have the $n$ expressions
+					\begin{align*}
+						\sum_{i=1}^n c_i f_i(x) &= 0 \\
+						\sum_{i=1}^n c_i f_i'(x) &= 0 \\ 
+						&\vdots \\
+						\sum_{i=1}^n c_i f_i^{(n-1)}(x) &= 0.
+					\end{align*}
+					Furthermore, if $x = x_0$, then $$\sum_{i=1}^n c_i \begin{pmatrix} f_i(x_0) \\ f_i'(x_0) \\ \vdots \\ f_i^{(n-1)}(x_0) \end{pmatrix} = \vec{0}$$ has a non-trivial
+					solution which is a contradiction to the fact that $|W(x_0)| \neq 0$. Thus, $S$ is linearly independent.
+
+				\item[\textbf{(ii)}] Let $S = \{ 1, x, x^2, \hdots, x_n \}$. Then, $$W(x) = \begin{bmatrix} 1 & x & x^2 & \hdots & x^n \\ 0 & 1 & 2x & \hdots & nx^{n-1} \\
+					0 & 0 & 2 & \hdots & n(n-1)x^{n-2} \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & 0 & \hdots & n! \end{bmatrix}.$$ Let $x = 0$, it follows that
+					$$W(0) = \begin{bmatrix} 1 & 0 & 0 & \hdots & 0 \\ 0 & 1 & 0 & \hdots & 0 \\ 0 & 0 & 2 & \hdots & 0 \\ \vdots & \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & 0 &
+					\hdots & n! \end{bmatrix}$$ is a diagonal matrix with full rank. Moreover, $|W(0)| = \mathrm{tr}W(0)$ which is clearly non-zero. Hence, \textbf{(i)} illstrates that
+					$S$ is linearly independent.
+
+				\item[\textbf{(iii)}] Let $S = \{ \sin x, \cos x, \sin 2x, \cos 2x \}$. Then $$W(x) = \begin{bmatrix} \sin x & \cos x & \sin 2x & \cos 2x \\ \cos x & -\sin x & 2\cos 2x
+					& -2\sin 2x \\ -\sin x & -\cos x & -4\sin 2x & -4\cos 2x \\ -\cos x & \sin x & -8\cos 2x & 8\sin 2x \end{bmatrix}.$$ Inspecting the determinant of
+					$W\left ( \frac{\pi}{2} \right )$, we have $$\left | W\left ( \frac{\pi}{2} \right ) \right | = \begin{vmatrix} 1 & 0 & 0 & -1 \\ 0 & -1 & -2 & 0 \\ -1 & 0 & 0 & 4 \\ 0 & 1 & 8 & 0
+					\end{vmatrix} = 18 \neq 0.$$ Thus, by \textbf{(i)} we can see that $S$ is linearly independent.
+			\end{enumerate}
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

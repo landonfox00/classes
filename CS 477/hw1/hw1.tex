@@ -1,0 +1,245 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+
+\begin{document}
+
+% title page
+\title{%
+	Homework 1 \\
+	\large CS 477 Analysis of Algorithims \\
+	Section 1001}
+\author{Landon Fox}
+\date{February 4, 2020}
+\maketitle
+\newpage
+
+% problem 1
+\section{}
+Assuming the argument of the log from (1) has power 10 so it can become a coefficient
+\begin{flalign}
+&f_{2}(n) = 5lg( n+100 )^{10} &&= O( lgn ) \\
+&f_{5}(n) = ln^2n &&= O( lg^kn )&& \\
+&f_{6}(n) = \sqrt[3]{n} &&= O( \sqrt[3]{n} ) \\
+&f_{4}(n) = 0.001n^4+3n^3+1 &&= O( n^4 ) \\
+&f_{7}(n) = 3^n &&= O( 3^n ) \\
+&f_{3}(n) = 2^{2n} &&= O( 4^n ) \\
+&f_{1}(n) = (n-2)! &&= O( n! )
+\end{flalign}
+
+% problem 2
+\section{}
+
+% problem 2a
+\subsection{}
+Prove:
+\begin{flalign}
+\sum_{i=1}^{n}(-1)^{i+1}i^2 &= \frac{(-1)^{n+1}n(n+1)}{2}\;\;\forall n\geq1 \\
+let\;\;\; P(n):\: \sum_{i=1}^{n}(-1)^{i+1}i^2 &= \frac{(-1)^{n+1}n(n+1)}{2}
+\end{flalign}
+Base Case:
+\begin{flalign}
+P(1):\; \sum_{i=1}^{1}(-1)^{i+1}i^2 &= \frac{(-1)^{1+1}(1)(1+1)}{2} \\
+(-1)^2(1)^2 &= \frac{(-1)^2(2)}{2} \\
+1 &= 1
+\end{flalign}
+Inductive Step:
+\begin{flalign}
+assume\;\;\; P(n):\; \sum_{i=1}^{n}(-1)^{i+1}i^2 &= \frac{(-1)^{n+1}n(n+1)}{2} \\
+P(n+1):\; \sum_{i=1}^{n+1}(-1)^{i+1}i^2 &= \frac{(-1)^{n+2}(n+1)(n+2)}{2} \\
+\sum_{i=1}^{n}(-1)^{i+1}i^2 + (-1)^{n+2}(n+1)^2 &= \frac{(-1)^n(n+1)(n+2)}{2} \\
+\frac{(-1)^{n+1}n(n+1)}{2} + (-1)^{n}(n+1)^2 &= \frac{(-1)^n(n+1)(n+2)}{2} \\
+(n+1)^2 &= \frac{(n+1)(n+2)}{2} + \frac{n(n+1)}{2} \\
+(n+1)^2 &= \frac{2n^2+4n+2}{2} \\
+(n+1)^2 &= (n+1)^2
+\end{flalign}\begin{center}
+$$P(1): T$$
+$$P(n) \rightarrow P(n+1): T$$
+$$\therefore P(n)\; \forall n\geq1\; \square$$
+\end{center}
+
+% problem 2b
+\subsection{}
+Prove:
+\begin{flalign}
+\sum_{i=1}^{n-1}\frac{1}{i(i+1)} &= 1-\frac{1}{n}\;\;\forall n\geq1 \\
+let\;\;\; P(n):\: \sum_{i=1}^{n-1}\frac{1}{i(i+1)} &= 1-\frac{1}{n}
+\end{flalign}
+Base Case:
+\begin{flalign}
+P(1):\: \sum_{i=1}^{0}\frac{1}{i(i+1)} &= 1-\frac{1}{1} \\
+0 &= 0
+\end{flalign}
+Inductive Step:
+\begin{flalign}
+assume\;\;\; P(n):\; \sum_{i=1}^{n-1}\frac{1}{i(i+1)} &= 1 - \frac{1}{n} \\
+P(n+1):\; \sum_{i=1}^{n}\frac{1}{i(i+1)} &= 1-\frac{1}{n+1} \\
+\sum_{i=1}^{n-1}\frac{1}{i(i+1)} + \frac{1}{n(n+1)} &= 1 - \frac{1}{n+1} \\
+1-\frac{1}{n} + \frac{1}{n(n+1)} &= 1 - \frac{1}{n+1} \\
+\frac{1}{n(n+1)} &= \frac{1}{n} - \frac{1}{n+1} \\
+\frac{1}{n(n+1)} &= \frac{1}{n(n+1)}
+\end{flalign}\begin{center}
+$$P(1): T$$
+$$P(n) \rightarrow P(n+1): T$$
+$$\therefore P(n)\: \forall n\geq1\; \square$$
+\end{center}
+
+% problem 3
+\section{}
+Note:
+\begin{flalign}
+\sum_{i=1}^{n}i &= \frac{n(n+1)}{2} \\
+\sum_{i=1}^{n}i^2 &= \frac{n(n+1)(2n+1)}{6}
+\end{flalign}
+
+% problem 3a
+\subsection{}
+\begin{flalign}
+f(n) &= \sum_{i=1}^{n}(2i-1) \\
+&= 2\sum_{i=1}^{n}i-\sum_{i=1}^{n}1 \\
+&= n(n+1)-n \\
+&= n^2 \\
+f(n) &= O(n^2)
+\end{flalign}
+
+% problem 3b
+\subsection{}
+\begin{flalign}
+f(n) &= \sum_{i=1}^{n}i(i+1) \\
+&= \sum_{i=1}^{n}i^2 + \sum_{i=1}^{n}i \\
+&= \frac{n(n+1)(2n+1)}{6} + \frac{n(n+1)}{2} \\
+&= \frac{n^3+3n^2+2n}{3} \\
+f(n) &= O(n^3)
+\end{flalign}
+
+% problem 4
+\section{}
+
+% problem 4a
+\subsection{}
+\begin{flalign}
+f(n) &= (n^3+3)^{20} \\
+f(n) &= \Theta(n^{60})
+\end{flalign}
+
+% problem 4b
+\subsection{}
+\begin{flalign}
+f(n) &= \sqrt[3]{5n^6+2} \\
+f(n) &= \Theta(n^2)
+\end{flalign}
+
+% problem 4c
+\subsection{}
+\begin{flalign}
+f(n) &= 4n^2lg\frac{(n+1)^2}{2}+n^3 \\
+f(n) &= \Theta(n^3)
+\end{flalign}
+
+% problem 4b
+\subsection{}
+\begin{flalign}
+f(n) &= \frac{8^{n+1}}{2^n} \\
+&= 8\frac{2^{3n}}{2^n} \\
+&= 8\cdot2^{2n} \\
+&= 8\cdot4^n \\
+f(n) &= \Theta(4^n)
+\end{flalign}
+
+% problem 5
+\section{}
+Know:
+\begin{flalign}
+f(n) &= O(g(n)) \\
+f(n) &\leq cg(n)\;\; \exists c \forall n>n_0
+\end{flalign}
+%
+% problem 5a
+\subsection{}
+Prove or Disprove:
+\begin{flalign}
+2^{f(n)} &= O(2^{g(n)})
+\end{flalign}
+Counter-example:
+\begin{flalign}
+let\;\;\; f(n)=&2n,\; g(n)=n \\
+satisfies\;\;\; &2n = O(n) \\
+&2^{2n} \leq c2^n \\
+&4^n \leq c2^n \\
+&2^n \leq c \\
+\therefore\cancel{\exists}c\; &\forall n>n_0(2^n \leq c)
+\end{flalign}
+%
+% problem 5b
+\subsection{}
+Prove or Disprove:
+\begin{flalign}
+f(n)^2 &= O(g(n)^2)
+\end{flalign}
+Proof: \\
+Assuming both f(n) and g(n) are positive functions for all values of n, \\
+the square function is one to one and always increasing for positive inputs therefore it can be applied to the inequality
+\begin{flalign}
+f(n) &\leq cg(n) \\
+\therefore 0 \leq f(n)^2 &\leq c^2g(n)^2
+\end{flalign}\begin{flalign}
+0 \leq f(n)^2 &\leq dg(n)^2 \\
+\therefore f(n)^2 &= O(g(n)^2)
+\end{flalign}
+
+% problem 6
+\section{}
+
+% problem 6a
+\subsection{}
+\begin{flalign}
+f(n) &= n^2 \\
+f(2n) &= 4n^2 \\
+&= O(n^2) \\
+f(n+1) &= n^2+2n+1 \\
+&= O(n^2)
+\end{flalign}
+
+% problem 6b
+\subsection{}
+\begin{flalign}
+f(n) &= n^3 \\
+f(2n) &= 8n^3 \\
+&= O(n^3) \\
+f(n+1) &= n^3+3n^2+3n+1 \\
+&= O(n^3)
+\end{flalign}
+
+% problem 6c
+\subsection{}
+\begin{flalign}
+f(n) &= 100n^2 \\
+f(2n) &= 400n^2 \\
+&= O(n^2) \\
+f(n+1) &= 100n^2+200n+100 \\
+&= O(n^2)
+\end{flalign}
+
+% problem 6d
+\subsection{}
+\begin{flalign}
+f(n) &= nlgn \\
+f(2n) &= 2n(lgn+1) \\
+&= O(nlgn) \\
+f(n+1) &= (n+1)lg(n+1) \\
+&= O(nlgn)
+\end{flalign}
+
+% problem 6e
+\subsection{}
+\begin{flalign}
+f(n) &= 2^n \\
+f(2n) &= 4^n \\
+&= O(4^n) \\
+f(n+1) &= 2^{n+1} \\
+&= O(2^n)
+\end{flalign}
+
+\end{document}

@@ -1,0 +1,175 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amssymb, cancel}
+\usepackage[margin=0.5in]{geometry}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 310 \\
+\noindent June 10, 2020
+
+\begin{center}
+\Large Homework 1
+\end{center}
+
+\noindent \textbf{1}. Let $a,b \in \mathbb{R}$. Prove that if $0 \leq a < b$, then
+	$0 \leq a^2 < b^2$. \\
+
+\noindent \textbf{Proof}: Suppose $0 \leq a < b$. Via the multiplicative property
+	we have $0 \leq a^2 < ab$ when multiplying by $a$. Similarly by multipling by
+	$b$, we obtain $0 \leq ab < b^2$. Now we can see that $0 \leq a^2 < ab < b^2$.
+	Thus illustrating $0 \leq a^2 < b^2$ by the transitive property.
+	$\blacksquare$ \\ \\
+
+
+\noindent \textbf{Lemma (i)}. Let $x \in \mathbb{R}$. If $x > 1$ then
+	$\sqrt{x} > 1$. \\
+
+\noindent \textbf{Proof}: Suppose $x > 1$ and $\sqrt{x} \leq 1$. With the
+	assumption that the codomain of $\sqrt{x}$ is strictly nonnegative real
+	numbers, we have $0 \leq \sqrt{x} \leq 1$. Via the multplicative property
+	we obtain $0 \leq x \leq \sqrt{x}$ when multiplying by $\sqrt{x}$. Moreover
+	we know that $x > 1$, implying $0 < 1 < x \leq \sqrt{x}$. Thus
+	$\sqrt{x} > 1$ by the transitive property, a contradiction since 
+	$\sqrt{x} \leq 1$ was assumed true. $\blacksquare$ \\
+
+\noindent \textbf{2}. Let $a,b \in \mathbb{R}$. Prove that if $a > 2$ and
+	$b = 1 + \sqrt{a - 1}$, then $2 < b < a$. \\
+
+\noindent \textbf{Proof}: Suppose $a > 2$ and $b = 1 + \sqrt{a - 1}$. Via the
+	additive property, subtracting $1$, we obtain $a - 1 > 1$. By lemma (i),
+	we can see that $\sqrt{a - 1} > 1$. Additionally, by the additive property we
+	have $b = 1 + \sqrt{a - 1} > 2$. Thus $b > 2$ by the transitive property. \\
+
+\noindent Let us now prove that $b < a$ knowing $2 < b$. Suppose $2 < b$ and
+	$b \geq a$. Moreover, $\sqrt{a - 1} \geq a - 1 > 1$ via the additive
+	property. Then by the multiplicative property,
+	$a - 1 \geq (a - 1)\sqrt{a - 1} > \sqrt{a - 1}$ when multiplied by
+	$\sqrt{a - 1}$. We see that both $\sqrt{a - 1} \geq a - 1$ and
+	$a - 1 > \sqrt{a - 1}$ (via transitive property) must both hold. Implying
+	$\sqrt{a - 1} > \sqrt{a - 1}$, a fallacy. Thus $2 < b < a$. $\blacksquare$ \\ \\
+
+
+\noindent \textbf{Lemma (ii)}. Let $x \in \mathbb{R}$. Then $0 \leq x^2$. \\
+
+\noindent \textbf{Proof}: Via the trichotomy property we have three cases.
+	If $x < 0$, then $x^2 > 0$ by the multiplicative property. Thus $0 \leq x^2$.
+	If $x = 0$, then $x^2 = 0$. Thus $0 \leq x^2$.
+	Otherwise if $x > 0$, then $x^2 > 0$ by the multiplicative property. Thus
+	$0 \leq x^2$. $\blacksquare$ \\
+
+\noindent \textbf{3}. Prove that $\forall a,b,c,d \in \mathbb{R}$,
+	$(ab + cd)^2 \leq (a^2 + c^2)(b^2 + d^2)$. \\
+
+\noindent \textbf{Proof}: Suppose $(ab + cd)^2 \leq (a^2 + c^2)(b^2 + d^2)$.
+	Illustrating
+	$a^2 b^2 + 2abcd + c^2 d^2 \leq a^2 b^2 + a^2 d^2 + b^2 c^2 + c^2 d^2$ and
+	$0 \leq a^2 d^2 - 2abcd + c^2 d^2$ by the additive property.
+	Then by factoring, $0 \leq (ad - cd)^2$. Let $x = ad - cd \in \mathbb{R}$,
+	via closure of the real numbers under addition and multiplication. By lemma
+	(ii) $0 \leq x^2$ is a tautology. $\blacksquare$ \\ \\
+\newpage
+
+
+\noindent \textbf{4}. Find the set of upper bounds for each of the following
+	sets. Then determine if the set is bounded above, and if so, find its
+	supremum. \\
+
+\noindent \textbf{4 (a)}. $A = \{ 4, 2, 0 \}$. \\
+
+\noindent \textbf{Claim}: $A$ is bounded by $4$ from above. Its supremum
+	$supA = 4$. \\
+
+\noindent \textbf{Proof}: Clearly $A$ is nonempty; similarly, $4$ can be seen to
+	be the largest element. Thus by the completeness axiom, there exists a
+	supremum $supA$. \\
+
+\noindent Let's now show that $4$ is the supremum of $A$. Suppose $4$ is not the
+	supremum. Then $\exists M < 4$ s.t. $\forall a \in A$ $M > a$. However,
+	$4 \in A$, implying that $M$ is not an upper bound of $A$. Thus $supA = 4$.
+	$\blacksquare$ \\
+
+\noindent \textbf{4 (b)}. $B = \{ \frac{2n - 1}{n}: n \in \mathbb{N} \}$. \\
+
+\noindent \textbf{Claim}: $B$ is bounded by $2$ from above. Its supremum
+	$supB = 2$. \\
+
+\noindent \textbf{Proof}: Clearly $B$ is nonempty, i.e. $1 \in B$.
+	Let's now show that $B$ is bounded from above by $2$. Suppose $2$ is not the
+	upper bound of $B$. This would imply $\exists n \in \mathbb{N}$ s.t.
+	$\frac{2n - 1}{n} > 2$. Moreover, by the multiplicative and addition
+	properties we obtain $-1 > 0$. A fallacy, implying $2$ is an upper bound of
+	$B$. Thus by the completeness axiom, there exists a supremum $supB$. \\
+
+\noindent Let's show that $2$ is the supremum of $B$. Suppose $2$ is not the supremum.
+	Then $\exists M < 2$ s.t. $\forall b \in B$ $M > b$. By the additive
+	property, we obtain $0 < 2 - M$, implying $\frac{1}{2 - M} \in \mathbb{R}$.
+	The archimedean princple states that $\exists n > \frac{1}{2 - M}$. We can
+	obtain $\frac{2n-1}{n} > M$ by the multiplicative and additive properties.
+	However it can be seen that $\frac{2n-1}{n} \in B$. Thus an element is $B$
+	escapes the upper bound $M$, implying $supB = 2$. $\blacksquare$ \\
+
+\noindent \textbf{4 (c)}. $C = \{ e^{-x}: x \geq 0 \}$. \\
+
+\noindent \textbf{Claim}: $C$ is bounded by $1$ from above. Its supremum
+	$supC = 1$. \\
+
+\noindent \textbf{Proof}: Clearly $C$ is nonempty, i.e. $1 \in C$.
+	Let's now show that $C$ is bounded from above by $1$. Morevoer, let's show
+	that $e^{-x}$ is decreasing for greater values of $x$. In other words,
+	$\forall x, x_0$ s.t. $x > x_0$ we want the following $e^{-x} < e^{-x_0}$.
+	By the multiplicative property, we have $1 < e^{x-x_0}$. We know that
+	$x - x_0 > 0$ by the additive property, implying that $1 < e^{x-x_0}$
+	must always hold since $\forall y > 0$, $e^y > 1$. Thus $C$ must be bounded
+	by its lowest value of $x = 0$ which provides $1$. By the completeness
+	axiom, there exists a supremum $supC$. \\
+
+\noindent Let's now show that $1$ is the supremum of $C$. Suppose $1$ is not the
+	supremum. Then $\exists M < 1$ s.t. $\forall c \in C$ $M > c$. However,
+	$1 \in C$, implying that $M$ is not an upper bound of $C$. Thus $supC = 1$.
+	$\blacksquare$ \\
+
+\noindent \textbf{4 (d)}. $D = \mathbb{N}$. \\
+
+\noindent \textbf{Claim}: There does not exist an upper bound for $D$. \\
+
+\noindent \textbf{Proof}: Suppose $D$ is bounded from above. This would imply
+	that $\exists N$ s.t. $\forall n \in D$ $n \leq N$. Observe that
+	$\lceil N \rceil + 1 \in \mathbb{N}, D$ based on the definition of the
+	natural numbers. Thus no $N$ can bound $D$ from above. $\blacksquare$
+\newpage
+
+\noindent \textbf{4 (e)}. $E = \{ q \in \mathbb{Q}: q^2 < 2 \}$. \\
+
+\noindent \textbf{Claim}: $E$ is bounded by $\sqrt{2}$ from above. Its supremum
+	$supE = \sqrt{2}$. \\
+
+\noindent \textbf{Proof}: Clearly $E$ is nonempty, i.e. $1 \in E$.
+	Let's now show that $E$ is bounded from above by $\sqrt{2}$. This would
+	imply $\exists q \in E$ s.t. $q > \sqrt{2}$. Moreover, by the
+	multiplicative property when multiplying by $q$, $q^2 > \sqrt{2}q$.
+	Additionally $q > \sqrt{2}$, implying $q^2 > \sqrt{2}q > 2$. By the
+	transitive property, $q^2 > 2$, a contradiction since $q^2 < 2$,
+	implying $\sqrt{2}$ is an upper bound of $E$. Thus by the completeness
+	axiom, there exists a supremum $supE$. \\
+
+\noindent Let's show that $\sqrt{2}$ is the supremum of $E$. Suppose $\sqrt{2}$ is
+	not the supremum. Then $\exists M < \sqrt{2}$ s.t. $\forall q \in E$
+	$M > q$. Let $M$ be a real number, by Thm 1.18 $\exists q$ s.t.
+	$M < q < \sqrt{2}$. By the multplicative property we obtain
+	$Mq < q^2 < \sqrt{2}q < 2$. The transitive property illustrates
+	$q^2 < 2$. Implying that an element escapes the upper bound $M$, thus
+	a contradiction, implying $supE = \sqrt{2}$. $\blacksquare$ \\
+
+
+\noindent \textbf{5}. Let $E \subset \mathbb{R}$. Prove that if $x$ is an upper
+	bound of $E$ and $x \in E$, then $x$ is the supremum of $E$. \\
+
+\noindent \textbf{Proof}: Clearly $E$ is nonempty since $x \in E$. We know that
+	$E$ is bounded by $x$. Thus by the completeness axiom, a supremum exists. \\
+
+\noindent Suppose $\exists M < x$ s.t. $\forall y \in E$, $y \leq M$. However if
+	$M < x$ then an element escaped the upper bound of $M$ since $x \in E$,
+	a contradiction. Thus the supremum $supE = x$. $\blacksquare$
+
+\end{document}

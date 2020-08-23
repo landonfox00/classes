@@ -1,0 +1,126 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{listings}
+\usepackage{enumerate}
+\usepackage[margin=0.5in]{geometry}
+\usepackage{mathtools}
+
+\newcommand\Myperm[2][^n]{\prescript{#1\mkern-2.5mu}{}P_{#2}}
+\newcommand\Mycomb[2][^n]{\prescript{#1\mkern-0.5mu}{}C_{#2}}
+\footskip = -0.75in
+
+\begin{document}
+
+% title page
+\title{Homework 8}
+\author{Landon Fox}
+\date{April 20, 2020}
+
+\begin{flushleft}
+Landon Fox \\
+Math 295 \\
+Section 1001 \\
+April 20, 2020
+\end{flushleft}
+\begin{center}
+\Large Homework 8
+\end{center}
+
+\begin{itemize}
+	% problem 1
+	\item[] {\large 1)}
+	Let us consider the negation of the statment, how many ways can we choose 3 persons so at least two are neighbors?
+	The first case is that all three are neighbors, this is the same as asking how many ways can we group 3
+	consecutive people? There are $20$ ways if we were to traverse around the circle. The second case is that
+	two people are neighbors, similiar to the last case there are also $20$ consecutive pairs however we must
+	also account for the third individual we choose who is not a neighbor; giving us $20 \cdot (20-4)=320$.
+	All beyond these two cases must be non-neighboring individuals. The total possible ways to choose 3
+	individuals is $\Mycomb[20]{3}=1140$, therefore we can choose 3 non-neighboring individuals in
+	$1140-20-320=800$ ways.
+
+	% problem 2
+	\item[] {\large 2)}
+	Let us first seat the men and dog around the table. For a circular table this can be done in $\frac{6!}{6}=120$
+	ways. Now to seat the women, we must prevent the men and women sitting one another so the women must be placed
+	in the $6$ placements created from the men and dog. This would provide $5!=120$ ways if there was only $5$ gaps;
+	however, the last women to be seated has the option of sitting to the left or right of the dog, thus there is 
+	$2 \cdot 120=240$ ways the women can be placed. Therefore there are $120 \cdot 240=28800$ ways to place the
+	individuals.
+
+	% problem 3
+	\item[] {\large 3)}
+	Show that the product $n$ consecutive numbers is divisible by $n!$. \\
+	Let $m$ be any natural number, the product of $n$ consecutive numbers after $m$ is
+	$\frac{(m+n)!}{m!}=\Myperm[m+n]{m}$. We know that $\forall n \geq k,\; \Mycomb[n]{k} \in \mathbb{N}$
+	and that $\Mycomb[n]{k} = \frac{1}{n!} \cdot \Myperm[n]{k}$. This would imply that
+	$\Mycomb[m+n]{m}=\frac{1}{(m+n-m)!} \cdot \Myperm[m+n]{m} = \frac{1}{n!} \cdot \Myperm[m+n]{m} \in \mathbb{N}$
+	therefore $\forall m,n\; n! | \Myperm[m+n]{m}$. $\blacksquare$
+
+	% problem 4
+	\item[] {\large 4)}
+	Assuming $k \geq n$.
+	\begin{itemize}
+		% problem 4i
+		\item[] {\large 4i)}
+		We want to send one postcard to all $n$ friends, there are $k$ options. Therefore $k^n$ ways.
+
+		% problem 4ii
+		\item[] {\large 4ii)}
+		We want to send a unique postcard to all $n$ friends, there are $k$ options. Therefore $\Myperm[k]{n}$ ways.
+
+		% problem 4iii
+		\item[] {\large 4iii)}
+		We want to send one or more postcards to all $n$ friends, there are $k$ options. There are $2^k - 1$ ways to send
+		$1$ to $k$ postcards to one individual. Therefore $(2^k - 1)^n$ ways.
+
+		% problem 4iv
+		\item[] {\large 4iv)}
+		We want to send two unique postcards to all $n$ friends, there are $k$ options. There are $\Mycomb[k]{n}$
+		ways to send two unique cards to one individual. Therefore $\Mycomb[k]{n}^n$ ways.
+
+		% problem 4v
+		\item[] {\large 4v)}
+		We are given a limited amount $a_i$ of postcards and want to send all to $n$ friends, there are $k$ options. For
+		each postcard option we can use the stars and bars method to place $a_i$ postcards into $n$ categories; thus
+		$\Mycomb[a_i+n-1]{n}$. Therefore $\prod_{i=1}^k \Mycomb[a_i+n-1]{n}$ ways.
+	\end{itemize}
+
+	% problem 5
+	\item[] {\large 5)}
+	Given $m$ horizontal and $n$ vertical lines in a grid, count all positive rectangles. \\
+	For a single rectangle we need two $x$ and two $y$ values if placed in an $xy$ plane. Therefore there is
+	$\Mycomb[m]{2}\Mycomb[n]{2}$ rectangles.
+	\newpage
+
+	% problem 6
+	\item[] {\large 6)}
+	Show that the number of all positive rectangles in a grid of $n$ horizontal and vertical lines is $\Mycomb[n]{2}^2$. \\
+	Base case $n = 2$ forms a single square, $1= \Mycomb[2]{2}^2$. \\
+	Inductive step, assume that a $n \times n$ grid forms $\Mycomb[n]{2}^2$ positive rectangles. Show that a grid of \\
+	$(n+1)\times(n+1)$ forms $\Mycomb[n+1]{2}^2$ positive rectangles. \\
+	We can assume the upper left of our $(n+1)\times(n+1)$ grid is a $n \times n$ grid that forms $\Mycomb[n]{2}^2$ rectangles.
+	Now we need to find all new additions of rectangles. There are $\Mycomb[n]{1}\Mycomb[n]{2}$ rectangles found in the bottom row
+	Since we have two corners in the bottom row and the upper two in the $n \times n$ grid. Similarily there are
+	$\Mycomb[n]{2}\Mycomb[n]{1}$ rectangles in the last column. Finally there are $\Mycomb[n]{1}^2$ rectangles that have only one corner in the
+	upper grid. Thus we have
+	\begin{flalign}
+		\Mycomb[n]{2}^2 + \Mycomb[n]{1}\Mycomb[n]{2} + \Mycomb[n]{2}\Mycomb[n]{1} + \Mycomb[n]{1}^2 &= \Mycomb[n+1]{2}^2 \nonumber \\
+		\left ( \Mycomb[n]{2} + \Mycomb[n]{1} \right )^2 &= \nonumber \\
+		\left ( \frac{1}{2}n(n-1) + n \right )^2 &= \nonumber \\
+		\left ( \frac{1}{2}n^2 + \frac{1}{2}n \right )^2 &= \nonumber \\
+		\left ( \frac{1}{2}n(n + 1) \right )^2 &= \nonumber \\
+		\Mycomb[n+1]{2}^2 &= \Mycomb[n+1]{2}^2 \nonumber
+	\end{flalign}
+	Both the base case and inductive step hold therefore
+	\begin{flalign}
+		\therefore P(2) \wedge &P(n) \rightarrow P(n+1) \nonumber \\
+		&\forall n \geq 2,\; P(n)\;\;\; \blacksquare \nonumber
+	\end{flalign}
+
+\end{itemize}
+
+\end{document}

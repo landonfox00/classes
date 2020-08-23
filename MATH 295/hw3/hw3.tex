@@ -1,0 +1,234 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{enumerate}
+\usepackage[margin=.5in]{geometry}
+
+\begin{document}
+
+% title page
+\title{Homework 3}
+\author{Landon Fox}
+\date{February 12, 2020}
+
+\begin{flushleft}
+Landon Fox \\
+MATH 295 \\
+Section 1001 \\
+February 12, 2020
+\end{flushleft}
+\begin{center}
+Homework 3
+\end{center}
+
+\begin{enumerate}[\hspace{30pt}]
+	% problem 1
+	\item 1)
+	\begin{enumerate}[\hspace{30pt}]
+		% problem 1i
+		\item 1i)
+		\begin{flalign}
+			\lnot p \rightarrow (q \rightarrow r) &\equiv q \rightarrow (p \vee r) \nonumber \\
+			p \vee (q \rightarrow r) &\equiv \lnot q \vee (p \vee r) \nonumber \\
+			p \vee (\lnot q \vee r) &\equiv \lnot q \vee (p \vee r) \nonumber \\
+			p \vee \lnot q \vee r &\equiv p \vee \lnot q \vee r \nonumber
+		\end{flalign}
+
+		% problem 1ii
+		\item 1ii)
+		\begin{center}
+			$$p \rightarrow (q \rightarrow r) \not\equiv (p \rightarrow q) \rightarrow r$$
+			\begin{tabular}{ |c|c|c|c|c|c|c| } 
+				 \hline
+				 p & q & r & p $\rightarrow$ q & q $\rightarrow$ r & p $\rightarrow$ (q $\rightarrow$ r) & (p $\rightarrow$ q) $\rightarrow$ r \\ 
+				 F & F & F & T & T & T & F \\
+				 F & F & T & T & T & T & T \\
+				 F & T & F & T & F & T & F \\
+				 F & T & T & T & T & T & T \\
+				 T & F & F & F & T & T & T \\
+				 T & F & T & F & T & T & T \\
+				 T & T & F & T & F & F & F \\
+				 T & T & T & T & T & T & T \\
+				 \hline
+			\end{tabular}
+		\newline
+		\newline
+		Based off the truth table, the statements are not equiviliant. 
+		\end{center}
+	\end{enumerate}
+
+	% problem 2
+	\item 2)
+	\begin{enumerate}[\hspace{30pt}]
+		% problem 2i
+		\item 2i)
+		\begin{flalign}
+			P(\delta): &0 < |x - a| < \delta \nonumber \\
+			Q(\epsilon): &|f(x) - l| < \epsilon \nonumber
+		\end{flalign}
+		\begin{center}
+			$$\forall \epsilon > 0, \exists \delta > 0, (P(\delta) \rightarrow Q(\epsilon)) \nonumber$$
+		\end{center}
+
+		% problem 2ii
+		\item 2ii)
+		\begin{center}
+			$$\forall l, \exists \epsilon > 0, \forall \delta > 0, (P(\delta) \wedge \lnot Q(\epsilon))$$
+		\end{center}
+	\end{enumerate}
+	\newpage
+
+	% problem 3
+	\item 3)
+	\begin{enumerate}[\hspace{30pt}]
+		% problem 3i
+		\item 3i)
+		\begin{flalign}
+			p:\, &you\, do\, every\, problem\, in\, the\, book \nonumber \\
+			m:\, &you\, will\, learn\, mathematics \nonumber
+		\end{flalign}
+
+		\begin{flalign}
+			&p \rightarrow m \nonumber \\
+			&m \nonumber \\
+			&\noindent\rule{2cm}{0.4pt} \nonumber \\
+			&\therefore p \nonumber
+		\end{flalign}
+
+		\begin{center}
+			\begin{tabular}{ |c|c|c|c|c| } 
+				 \hline
+				 p & m & p $\rightarrow$ m & (p $\rightarrow$ m) $\wedge$ m & (p $\rightarrow$ m) $\wedge$ m $\rightarrow$ p \\ 
+				 F & F & T & F & T \\
+				 F & T & T & T & T \\
+				 T & F & F & F & T \\
+				 T & T & T & T & T \\
+				 \hline
+				\end{tabular}
+			\newline
+			\newline
+			Based off the truth table, the statement is a tautology. Therefore the argument is correct.
+		\end{center}
+
+		% problem 3ii
+		\item 3ii)
+		\begin{flalign}
+			&p \rightarrow m \nonumber \\
+			&\lnot p \nonumber \\
+			&\noindent\rule{2cm}{0.4pt} \nonumber \\
+			&\therefore \lnot m \nonumber
+		\end{flalign}
+
+		\begin{center}
+			\begin{tabular}{ |c|c|c|c|c| } 
+				 \hline
+				 p & m & p $\rightarrow$ m & (p $\rightarrow$ m) $\wedge$ $\lnot$ p & (p $\rightarrow$ m) $\wedge$ $\not$ p $\rightarrow$ $\lnot$ m \\ 
+				 F & F & T & T & T \\
+				 F & T & T & T & F \\
+				 T & F & F & F & T \\
+				 T & T & T & F & T \\
+				 \hline
+				\end{tabular}
+			\newline
+			\newline
+		Based off the truth table, the statement is not a tautology. Therefore the argument is incorrect.
+		\end{center}
+	\end{enumerate}
+	\newpage
+
+	% problem 4
+	\item 4)
+	\newline
+	For the following problem, I used a unique rule of inference that I was not aware of. It will be proven a tautology.
+	\begin{flalign}
+		&p \wedge q \nonumber \\
+		&p \rightarrow r \nonumber \\
+		&q \rightarrow s \nonumber \\
+		&\noindent\rule{2cm}{0.4pt} \nonumber \\
+		&\therefore r \vee s \nonumber
+	\end{flalign}
+	\begin{center}
+		\begin{tabular}{ |c|c|c|c|c|c|c|c|c| }
+			 \hline
+			 p & q & r & s & p $\vee$ q & p $\rightarrow$ r & q $\rightarrow$ s & r $\vee$ s & (p $\vee$ q) $\wedge$ (p $\rightarrow$ r) $\wedge$ (q $\rightarrow$ s) $\rightarrow$ r $\vee$ s \\ 
+			 F & F & F & F & F & T & T & F & T \\
+			 F & F & F & T & F & T & T & T & T \\
+			 F & F & T & F & F & T & T & T & T \\
+			 F & F & T & T & F & T & T & T & T \\
+			 F & T & F & F & T & T & F & F & T \\
+			 F & T & F & T & T & T & T & T & T \\
+			 F & T & T & F & T & T & F & T & T \\
+			 F & T & T & T & T & T & T & T & T \\
+			 T & F & F & F & T & F & T & F & T \\
+			 T & F & F & T & T & F & T & T & T \\
+			 T & F & T & F & T & T & T & T & T \\
+			 T & F & T & T & T & T & T & T & T \\
+			 T & T & F & F & T & F & F & F & T \\
+			 T & T & F & T & T & F & T & T & T \\
+			 T & T & T & F & T & T & F & T & T \\
+			 T & T & T & T & T & T & T & T & T \\
+			 \hline
+			\end{tabular}
+		\newline
+		\newline
+		Based off the truth table, the statement is a tautology. 
+	\end{center}
+
+	\begin{flalign}
+		a:\, &God\, is\, able\, to\, prevent\, evil \nonumber \\
+		b:\, &God\, is\, willing\, to\, prevent\, evil \nonumber \\
+		c:\, &God\, prevents\, evil \nonumber \\
+		d:\, &God\, is\, weak \nonumber \\
+		e:\, &God\, is\, unkind \nonumber \\
+		g:\, &God\, exists \nonumber
+	\end{flalign}
+
+	\begin{flalign}
+		&a \wedge b \rightarrow c \\
+		&\lnot a \rightarrow d \\
+		&\lnot b \rightarrow e \\
+		&\lnot c \\
+		&g \rightarrow \lnot d \wedge \lnot e \\
+		&\noindent\rule{2cm}{0.4pt} \nonumber \\
+		&\therefore \lnot g
+	\end{flalign}
+
+	\begin{flalign}
+		&\lnot (a \wedge b) &&Modus\, Tollen\, (4)\, (1) \\
+		&\lnot a \vee \lnot b &&Demorgan's\, Law\, (4) \\
+		&d \vee e &&Via\, Proven\, Identity\, (8)\, (2)\, (1) \\
+		&\lnot (\lnot d \wedge \lnot e) &&Demorgan's\, Law\, (9) \\
+		&\lnot g &&Modus\, Tollen\, (10)\, (5)
+	\end{flalign}
+
+	% problem 5
+	\item 5)
+	\begin{flalign}
+		&B(x):\, x\, is\, a\, humming\, bird \nonumber \\
+		&C(x):\, x\, is\, richly\, colored \nonumber \\
+		&H(x):\, x\, lives\, on\, honey \nonumber \\
+		&S(x):\, x\, is\, a\, small\, bird \nonumber \\
+		&x: x\, belongs\, to\, the\, set\, of\, all\, birds \nonumber
+	\end{flalign}
+
+	\begin{flalign}
+		&\forall x, (B(x) \rightarrow C(x)) \\
+		&\forall x, (\lnot S(x) \rightarrow \lnot H(x)) \\
+		&\forall x, (\lnot H(x) \rightarrow \lnot C(x)) \\
+		&\noindent\rule{4cm}{0.4pt} \nonumber \\
+		&\therefore \forall x, (B(x) \rightarrow S(x))
+	\end{flalign}
+
+	\begin{flalign}
+		&\forall x, (\lnot S(x) \rightarrow \lnot C(x)) &&Hypothetical\, Syllogism\, (13)\, (14) \\
+		&\forall x, (C(x) \vee \lnot B(x)) &&Definition\, of\, Implication\, (12) \\
+		&\forall x, (\lnot C(x) \vee S(x)) &&Definition\, of\, Implication\, (16) \\
+		&\forall x, (\lnot B(x) \vee S(x)) &&Resolution\, (17)\, (18) \\
+		&\forall x, (B(x) \rightarrow S(x)) &&Definition\, of\, Implication\, (19)
+	\end{flalign}
+
+\end{enumerate}
+\end{document}

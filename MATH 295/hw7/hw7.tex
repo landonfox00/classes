@@ -1,0 +1,296 @@
+\documentclass[ 12pt ]{article}
+
+\usepackage{amsmath}
+\usepackage{amssymb}
+\usepackage{cancel}
+\usepackage{tikz}
+\usepackage{enumerate}
+\usepackage[margin=0.5in]{geometry}
+\footskip = -0.75in
+
+\begin{document}
+
+% title page
+\title{Homework 7}
+\author{Landon Fox}
+\date{April 1, 2020}
+
+\begin{flushleft}
+Landon Fox \\
+MATH 295 \\
+Section 1001 \\
+April 1, 2020
+\end{flushleft}
+\begin{center}
+\Large Homework 7
+\end{center}
+
+\begin{itemize}
+	% problem 1
+	\item[] {\large 1)}
+	\begin{itemize}
+		% problem 1i
+		\item[] {\large 1i)}
+		Show that
+		\begin{flalign}
+			1^2 + 2^2 + 3^2 + \hdots + n^2 &= \frac{n(n+1)(2n+1)}{6}\;\; \forall n \geq 1 \nonumber \\
+			\sum_{k=1}^n k^2 &= \frac{n(n+1)(2n+1)}{6} \nonumber
+		\end{flalign}
+		$Base\; Case\; n=1$:
+		\begin{flalign}
+			\sum_{k=1}^1 k^2 &= \frac{1(1+1)(2+1)}{6} \nonumber \\
+			1 &= 1 \nonumber
+		\end{flalign}
+		$Inductive\; Step$:
+		\begin{flalign}
+			assume\;\;\; \sum_{k=1}^n k^2 &= \frac{n(n+1)(2n+1)}{6} \nonumber \\
+			show\; that\;\;\; \sum_{k=1}^{n+1} k^2 &= \frac{(n+1)(n+2)(2n+3)}{6} \nonumber \\
+			\sum_{k=1}^{n} k^2 + (n+1)^2 &= \frac{(n+1)(n+2)(2n+3)}{6} \nonumber \\
+			\frac{n(n+1)(2n+1)}{6} + (n+1)^2 &= \nonumber \\
+			\frac{2n^3 + 3n^2 + n + 6n^2 + 12n + 6}{6} &= \nonumber \\
+			\frac{2n^3 + 9n^2 + 13n + 6}{6} &= \nonumber \\
+			\frac{(n+1)(n+2)(2n+3)}{6} &= \frac{(n+1)(n+2)(2n+3)}{6} \nonumber
+		\end{flalign}
+		Both the base case and inductive hypothesis hold, therefore
+		\begin{flalign}
+			\therefore \sum_{k=1}^n k^2 &= \frac{n(n+1)(2n+1)}{6}\;\; \forall n \geq 1\; \blacksquare \nonumber
+		\end{flalign}
+		\newpage
+
+		% problem 1ii
+		\item[] {\large 1ii)}
+		Show that
+		\begin{flalign}
+			1^3 + 2^3 + 3^3 + \hdots + n^3 &= \frac{n^2(n+1)^2}{4}\;\; \forall n \geq 1 \nonumber \\
+			\sum_{k=1}^n k^3 &= \frac{n^2(n+1)^2}{4} \nonumber
+		\end{flalign}
+		$Base\; Case\; n=1$:
+		\begin{flalign}
+			\sum_{k=1}^1 k^3 &= \frac{1(1+1)^2}{4} \nonumber \\
+			1 &= 1 \nonumber
+		\end{flalign}
+		$Inductive\; Step$:
+		\begin{flalign}
+			assume\;\;\; \sum_{k=1}^n k^4 &= \frac{n^2(n+1)^2}{4} \nonumber \\
+			show\; that\;\;\; \sum_{k=1}^{n+1} k^3 &= \frac{(n+1)^2(n+2)^2}{4} \nonumber \\
+			\sum_{k=1}^{n} k^3 + (n+1)^3 &= \frac{(n+1)^2(n+2)^2}{4} \nonumber \\
+			\frac{n^2(n+1)^2}{4} + (n+1)^3 &= \nonumber \\
+			\frac{n^4 + 2n^3 + n^2 + 4n^3 + 12n^2 + 12n + 4}{4} &= \nonumber \\
+			\frac{n^4 + 6n^3 + 13n^2 + 12n + 4}{4} &= \nonumber \\
+			\frac{(n+1)^2(n+2)^2}{4} &= \frac{(n+1)^2(n+2)^2}{4} \nonumber
+		\end{flalign}
+		Both the base case and inductive hypothesis hold, therefore
+		\begin{flalign}
+			\therefore \sum_{k=1}^n k^3 &= \frac{n^2(n+1)^2}{4}\;\; \forall n \geq 1\; \blacksquare \nonumber
+		\end{flalign}
+	\end{itemize}
+	\newpage
+
+	% problem 2
+	\item[] {\large 2)}
+	\begin{itemize}
+		% problem 2i
+		\item[] {\large 2i)}
+		Show that
+		\begin{flalign}
+			\left | \{ A \in \mathcal{P}(B): |A|=2,\; |B|=n \} \right | = \frac{n(n-1)}{2}\;\; \forall n \geq 2 \nonumber
+		\end{flalign}
+		$Base\; Case\; n=2$:
+		\begin{flalign}
+			B &= \{ b_1, b_2 \} \nonumber \\
+			\mathcal{P}(B) &= \{ \phi, \{ b_1 \}, \{ b_2 \}, \{ b_1, b_2 \} \} \nonumber \\
+			\left | \{ A \in \mathcal{P}(B): |A|=2,\; |B|=2 \} \right | &= \frac{2(2-1)}{2} \nonumber \\
+			1 &= 1 \nonumber
+		\end{flalign}
+		$Inductive\; Step$:
+		\begin{flalign}
+			assume\;\;\; \left | \{ A \in \mathcal{P}(B): |A|=2,\; |B|=n \} \right | &= \frac{n(n-1)}{2} \nonumber \\
+			show\; that\;\;\; \left | \{ A \in \mathcal{P}(B): |A|=2,\; |B|=n+1 \} \right | &= \frac{n(n+1)}{2} \nonumber
+		\end{flalign}
+		All possible pairs that can be formed from the set $B$ is the cardinality of the set of interest.
+		The cardinality of the set can be rephrased as all possible ways of obtaining pairs with $n$ elements
+		and all possible ways the newly added element can be paired with all others.
+		\begin{flalign}
+			\left | \{ A \in \mathcal{P}(B): |A|=2,\; |B|=n \} \right | + \binom{n}{1} &= \frac{n(n+1)}{2} \nonumber \\
+			\frac{n(n-1)}{2} + n &= \nonumber \\
+			\frac{n^2 - n + 2n}{2} &= \nonumber \\
+			\frac{n(n+1)}{2} &= \frac{n(n+1)}{2} \nonumber
+		\end{flalign}
+		Both the base case and inductive hypothesis hold, therefore
+		\begin{flalign}
+			\therefore \left | \{ A \in \mathcal{P}(B): |A|=2,\; |B|=n \} \right | = \frac{n(n-1)}{2}\;\; \forall n \geq 2\; \blacksquare \nonumber
+		\end{flalign}
+		\newpage
+
+		% problem 2ii
+		\item[] {\large 2ii)}
+		Show that
+		\begin{flalign}
+			\left | \{ A \in \mathcal{P}(B): |A|=3,\; |B|=n \} \right | = \frac{n(n-1)(n-2)}{6}\;\; \forall n \geq 3 \nonumber
+		\end{flalign}
+		$Base\; Case\; n=3$:
+		\begin{flalign}
+			B &= \{ b_1, b_2, b_3 \} \nonumber \\
+			\mathcal{P}(B) &= \{\; \phi, \{ b_1 \}, \{ b_2 \}, \{ b_3 \}, \nonumber \\
+			&\;\;\;\;\; \{ b_1, b_2 \}, \{ b_1, b_3 \}, \{ b_2, b_3 \} \nonumber \\
+			&\;\;\;\;\; \{ b_1, b_2, b_3 \}\; \} \nonumber \\
+			\left | \{ A \in \mathcal{P}(B): |A|=3,\; |B|=3 \} \right | &= \frac{3(3-1)(3-2)}{6} \nonumber \\
+			1 &= 1 \nonumber
+		\end{flalign}
+		$Inductive\; Step$:
+		\begin{flalign}
+			assume\;\;\; \left | \{ A \in \mathcal{P}(B): |A|=3,\; |B|=n \} \right | &= \frac{n(n-1)(n-2)}{6} \nonumber \\
+			show\; that\;\;\; \left | \{ A \in \mathcal{P}(B): |A|=3,\; |B|=n+1 \} \right | &= \frac{n(n-1)(n+1)}{6} \nonumber
+		\end{flalign}
+		Similiar to $2i$ the cardinality of the set can be rephrased as all possible ways of obtaining sets of three with $n$ elements
+		and all possible ways the newly added element can be grouped with all others.
+		\begin{flalign}
+			\left | \{ A \in \mathcal{P}(B): |A|=3,\; |B|=n \} \right | + \binom{n}{2} &= \frac{n(n+1)(n-1)}{6} \nonumber \\
+			\frac{n(n-1)(n-2)}{6} + \frac{n(n-1)}{2} &= \nonumber \\
+			\frac{n^3 - 3n^2 + 2n + 3n^2 - 3n}{2} &= \nonumber \\
+			\frac{n(n-1)(n+1)}{6} &= \frac{n(n-1)(n+1)}{6} \nonumber
+		\end{flalign}
+		Both the base case and inductive hypothesis hold, therefore
+		\begin{flalign}
+			\therefore \left | \{ A \in \mathcal{P}(B): |A|=3,\; |B|=n \} \right | = \frac{n(n-1)(n-2)}{6}\;\; \forall n \geq 3\; \blacksquare \nonumber
+		\end{flalign}
+	\end{itemize}
+
+	% problem 3
+	\item[] {\large 3)}
+	Show that by removing a tile out of a $2^n \times 2^n$ board, it can be tiled via L-shaped trominos. \\
+	$Base\; Case\; n=2$: if we were to remove any tile of a $2 \times 2$ board clearly we can tile it with a single L-shaped tromino. \\
+	$Inductive\; Step$: let's assume that our original premise is true for some arbitrary $n$. Let us now show that this is also true for the next increment of $n$. \\
+	With a square board of length $2^{n+1}$, we can show that this is four times the size of the original board of length $2^n$, $2^{n+1} \cdot 2^{n+1} = 4 \cdot 2^n$. \\
+	WLOG, let us assume the upper left quadrant has the missing tile. Therefore it can be tiled via the assumption. Now we must show that we can tile the other three quadrants.
+	Next let us place a L-shaped tromino in the bottom right corner of the upper left quadrant so that a single tile of the tromino lies in each remaining quadrant. \\
+	Now that a tile is removed from each of the remaining quadrants, via the assumption we will be able to tile each with L-shaped trominos filling the $2^{n+1}$ board. $\blacksquare$ \\
+
+	% problem 4
+	\item[] {\large 4)}
+	Show for any configuration of $n$ 1s and $n$ 0s around a circle that there exists a 0 such that there is always at least as many 0s as 1s
+	when traversing clockwise around the circle. \\
+	$Base\; Case\; n=1$: in any configuration there exists only 1 0 as a starting point, trivally the amount of 0s exceed the amount of 1s at this location.
+	As we traverse the circle clockwise, the only other number that can be came upon is a 1 for which the amount of 1s and 0s are now equal, the base case holds. \\
+	$Inductive\; Step$: let's assume that our original premise is true for some arbitrary $n$, whereas the circle's general configuration is described by the sequence $a_n$. \\
+	Let us now show that the premise is also true for the next increment of $n$. Our new Larger circle associated with $n+1$ can be written as the sequence $a_n$
+	with an additional 1 and 0 placed within the sequence. WLOG let's assume our 0 is atop the circle then followed by the sequence segment $a_m\; \forall 1 \leq m \leq k$,
+	followed by our 1, finally followed by the rest of the sequence $a_m\; \forall k \leq m \leq 2n$. Let's attempt to adopt the starting 0 from the assumption to the new
+	circle. This implies two cases of the starting 0. \\
+	$Case\; 1$: the starting 0 lies within $a_m\; \forall 1 \leq m \leq k$. Proceeding this sequence is our newly placed 1, if we have seen more 0s than 1s once we reach the
+	new 1 then our starting 0 is valid. Otherwise the newly placed 1 exceeded the amount of 0s which would imply our new starting 0 is $a_{k+1}$, if this were not true then
+	it would imply that we have not seen at least as 0s as 1s proceeding in our clockwise path from the original starting 0. \\
+	$Case\; 2$: the starting 0 lies within $a_m\; \forall k+1 \leq m \leq 2n$. In this case our original starting 0 is also our new starting 0 because it sees the newly placed 0
+	before any new 1s. \\
+	In either case we can see that there always exists a starting 0 such that we always encounter at least an equal amount of 0s and 1s in a clockwise traversal. $\blacksquare$
+
+	% problem 5
+	\item[] {\large 5)}
+	Show that any $n$ straight lines in general position divide the plane into $\frac{1}{2}(n^2 + n + 2)$ regions. \\
+	$Base\; Case\; n=1$: clearly a single line will divide a plane into two regions. $\frac{1}{2}(1 + 1 + 2) = 2$ illustrating that the base case holds. \\
+	$Inductive\; Step$: let's assume $r_n = \frac{1}{2}(n^2 + n + 2)$ is true for some arbitrary $n$. Let us now show that this is also true for the next increment of $n$. \\
+	Let us add another line in general position to our exisiting $n$ lines within a plane. That implies that the newly added line will intersect with all other lines at
+	unique locations. Every new finite region created will be the result of two consecutive intersections which implies that there will be $n-1$ finite regions since the line
+	intersects with all others. Additionally it is clear that there will always be two infinite regions. Therefore with the existing and the newly created regions it implies that 
+	\begin{flalign}
+		r_{n+1} &= r_n + (n-1) + 2 \nonumber \\
+		&= \frac{1}{2}(n^2 + n + 2) + n + 1 \nonumber \\
+		r_{n+1} &= \frac{1}{2}(n^2 + 3n + 4) \nonumber
+	\end{flalign}
+	Finally if we were to increment $n$ for the expression $\frac{1}{2}(n^2 + n + 2)$, we would obtain $\frac{1}{2}(n^2 + 3n + 4)$ validating the inductive step. $\blacksquare$
+	\newpage
+
+	% problem 6
+	\item[] {\large 6)}
+	Given $n$ people who each have unique scandals, show that the least amount of calls required to spread all scandals, $G(n)$, is less than or equal to $2n-4$ for $n \geq 4$. \\
+	Let us attempt to show that $G(n)$ and $2n-4$ are in fact equal. \\
+	$Base\; Case\; n=4$: let us have four individuals $a-d$. Now let the individuals call in the following order: $a \sim b$, $c \sim d$, $a \sim d$, $b \sim c$.
+	After the second call, both $a$ and $b$ along with $c$ and $d$ have spread their rumors respectively. After the fourth,
+	each individual recieves the other two rumors they were not aware of. With a total of four calls the scandals have been spread, $2(4)-4=4$ \\
+	$Inductive\; Step$: let's assume that our original premise is true for some arbitrary $n$. Let us now show that this is also true for the next increment of $n$. \\
+	Now we have a community of $n$ people who we know can spread each other's scandals in $2n-4$ calls, lets add a new individual with their own scandal.
+	This individual has two objectives, to spread their rumor and to hear all others. Before the community calls begin, let our new individual call an arbitrary
+	individual, only then let the $2n-4$ calls of the community proceed. This permits the new individual's scandal to be spread to the entire community,
+	if this were not true then that would imply that the called individual within the community had their rumor not spread which contradicts our assumption.
+	Next after all community calls, let the new individual call yet another individual of the community now that everyone within it knows all scandals.
+	This allows the new individual to be caught up on all scandals so that all $n+1$ people know of all scandals. This implies that
+	\begin{flalign}
+		G(n+1) &= G(n) + 2 \nonumber \\
+		&= 2n - 4 + 2 \nonumber \\
+		G(n+1) &= 2n - 2 \nonumber
+	\end{flalign}
+	Which is in fact equal to $2(n+1) - 4 = 2n - 2$ validating the inductive step. $\blacksquare$
+
+	% problem 7
+	\item[] {\large 7)}
+	\begin{itemize}
+		% problem 7i
+		\item[] {\large 7i)}
+		For the given set $A_k = \{1,2,3, \hdots, 2^k\}$ show that it is possible to arrange them in a row in such a way that the average of any two never appears in between them. \\
+		$Base\; Case\; k=1$: this provides the set $A_1 = \{1,2\}$, as there is only two values clearly the average cannot be between them. \\
+		$Inductive\; Step$: let's assume that our original premise is true for some arbitrary $k$. Let us now show that this is also true for the next increment of $k$. \\
+		Now we are given the new set $A_{k+1} = \{1,2,3, \hdots, 2^k-1,2^k, 2^k+1, \hdots, 2^{k+1}\}$. Let's rearrange $A_{k+1}$ in regard to parity. Now we have the set \\
+		$A_{k+1} = \{1,3,5, \hdots, 2^k-1,2^k+1, \hdots, 2^{k+1}-1, 2,4,6, \hdots, 2^k-2,2^k,2^k+2, \hdots, 2^{k+1}\}$ \\
+		When choosing pairs for an average, we now have three cases. \\
+		$Case\; 1$ different parity: if we were to find the average of two terms of different parity it will not be within the integers
+		\begin{flalign}
+			let\;\;\; &p, q \in A_{k+1};\; even(p) \wedge odd(q) \nonumber \\
+			\rightarrow\; &p = 2m,\, q = 2n + 1;\; m,n \in \mathbb{Z} \nonumber \\
+			\rightarrow\; &\frac{2m + 2n + 1}{2} = m + n + \frac{1}{2} \nonumber \\
+			\rightarrow\; &\frac{2m + 2n + 1}{2} \notin \mathbb{Z} \nonumber \\
+			\rightarrow\; &\frac{2m + 2n + 1}{2} \notin A_{k+1} \nonumber
+		\end{flalign}
+		\newpage
+		This implies that the average is not in the $A_{k+1}$ nor would it be between the two values. \\
+		$Case\; 2$ both odd: let us consider the set $\{2m-1: 1 \leq m \leq 2^k, m \in A_k \}$ that describes all odd values within $A_{k+1}$.
+		Based off the assumption, we know that the average of two elements in $A_k$ will not be between the two elements therefore
+		\begin{flalign}
+			let\;\;\; &m,n \in A_k;\; m < n \nonumber \\
+			know\;\;\; &\frac{m+n}{2} \notin (m,n) \cap A_k \nonumber \\
+			\rightarrow\; &\frac{m+n}{2} < m < n \rightarrow m+n-1 < 2m-1 < 2n-1 \nonumber \\
+			or\;\;\; &m < n < \frac{m+n}{2} \rightarrow 2m-1 < 2n-1 < m+n-1 \nonumber \\
+			where\;\;\; &2m-1, 2n-1 \in A_{k+1} \wedge avg(2m-1,2n-1) = m+n-1 \nonumber \\
+			\rightarrow\; &avg(2m-1,2n-1) \notin (2m-1, 2n-1) \cap A_{k+1} \nonumber
+		\end{flalign}
+		This implies that the average of two odd elements from $A_{k+1}$ is not between them. \\
+		$Case\; 3$ both even: similiar to Case 2, let's consider the set $\{2m: 1 \leq m \leq 2^k, m \in A_k \}$ that describes all even values within $A_{k+1}$
+		Let us repeat the same process as Case 2 with even values.
+		\begin{flalign}
+			let\;\;\; &m,n \in A_k;\; m < n \nonumber \\
+			know\;\;\; &\frac{m+n}{2} \notin (m,n) \cap A_k \nonumber \\
+			\rightarrow\; &\frac{m+n}{2} < m < n \rightarrow m+n < 2m < 2n \nonumber \\
+			or\;\;\; &m < n < \frac{m+n}{2} \rightarrow 2m < 2n < m+n \nonumber \\
+			where\;\;\; &2m, 2n \in A_{k+1} \wedge avg(2m,2n) = m+n \nonumber \\
+			\rightarrow\; &avg(2m,2n) \notin (2m, 2n) \cap A_{k+1} \nonumber
+		\end{flalign}
+		This implies that we come to the same conclusion that the average of two elements from $A_{k+1}$ is not between them now for even values. \\
+		In each case we see that the average of two values can always be placed outside the interval of the two values. $\blacksquare$ \\
+		\newpage
+
+		% problem 7ii
+		\item[] {\large 7ii)}
+		For the given set $B_n = \{1,2,3, \hdots, n\}$ show that it is possible to arrange them in a row in such a way that the average of any two never appears in between them. \\
+		Using $7i$, clearly we can say that any subset of $A_k$ can also be arranged to satisify the condition. If $n \leq 2^k$, obviously we could say that $B_n \subseteq A_k$.
+		Let us now show $\forall n\, \exists k\; s.t.\; n \leq 2^k$ \\
+		$Base\; Case\; n=1$: $1 \leq 2^0$, therefore $k=0$. \\
+		$Inductive\; Step$: let us assume for some arbitrary $n$, $\exists k_1\; s.t.\; n \leq 2^{k_1}$ to show that \\
+		$\exists k_2\; s.t.\; n+1 \leq 2^{k_2}$. \\
+		\begin{flalign}
+			know\;\;\; &n \leq 2^{k_1} \nonumber \\
+			\rightarrow\; &n+1 \leq 2^{k_1} + 1 \leq 2^{k_1+1} \nonumber \\
+			\rightarrow\; &n+1 \leq 2^{k_1+1} \nonumber \\
+			let\;\;\; &k_2 = k_1 + 1 \nonumber \\
+			&\therefore \exists k_2\; s.t.\; n+1 \leq 2^{k_2} \nonumber
+		\end{flalign}
+		As stated before, this then implies
+		\begin{flalign}
+			&\exists k_2\; s.t.\; n+1 \leq 2^{k_2} \nonumber \\
+			\rightarrow\; &\forall n\, \exists k\; s.t.\; n \leq 2^k \nonumber \\
+			\rightarrow\; &\therefore B_n \subseteq A_k \nonumber
+		\end{flalign}
+		$B_n$ being a subset of $A_k$ then implies that $B_n$ can arranged such that the average of any two values can be placed outside the interval created between them. $\blacksquare$
+	\end{itemize}
+
+\end{itemize}
+
+\end{document}
