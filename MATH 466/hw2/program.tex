@@ -1,0 +1,27 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize, numbers=left, tabsize=4, frame=single]
+using LinearAlgebra
+for i in 1:3
+	A = 2 * rand( 7, 4 ).-1
+	println( "||A|| : ", opnorm( A ) )
+	println( "||A'|| : ", opnorm( A' ) )
+end
+\end{lstlisting}
+
+Program output:
+\begin{lstlisting}[basicstyle=\ttfamily\footnotesize, numbers=left, tabsize=4, frame=single]
+2.3482886011318413
+2.348288601131841
+2.4041579048920325
+2.4041579048920334
+1.959461907665938
+1.9594619076659383
+\end{lstlisting}
+
+\end{document}

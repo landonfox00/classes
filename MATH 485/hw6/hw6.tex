@@ -1,0 +1,127 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 485 \\
+\noindent October 10, 2020 \\
+\noindent \textbf{Collaborated with Logan Leavitt}
+
+\begin{center}
+	\Large Homework 6
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}]
+		\begin{enumerate}
+			\item[\textbf{i.}] Prove that for any $n + 1$ integers $a_1, a_2, \hdots, a_{n+1}$ there exists some $a_i$ and $a_j$ such that $n|(a_i - a_j)$.
+			\item[\textbf{ii.}] Prove that for any 52 integers $a_1, a_2, \hdots, a_{52}$ there exists some $a_i$ and $a_j$ such that $100|(a_i - a_j)$ or $100|(a_i + a_j)$.
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{i.}] Suppose we have $n+1$ integers $a_1, a_2, \hdots, a_{n+1}$. Clearly there are $n$ equivalence classes belonging to modulo $n$. Then by the pigeonhole
+					principle, there must exist two integers $a_i$ and $a_j$ such that they belong to the same equivalence class. Thus, their difference, $a_i - a_j$, must belong to
+					class 0 illustrating that $n | (a_i - a_j)$.
+
+				\item[\textbf{ii.}] Suppose we have 52 integers $a_1, a_2, \hdots, a_{52}$. Let us consider two cases regarding the equivalence classes of 100. \\
+					Let there be two integers $a_i$ and $a_j$ such that they belong to the same equivalence class of 100. Then, we can see that their difference, $a_i - a_j$ must
+					belong to class 0 which implies that $100 | (a_i - a_j)$. \\
+					Now suppose that all 52 integers belong to distinct equivalence classes of 100. Observe that there are 49 pairs of distinct values that sum to 100 that exclude values
+					such as 0 and 50 (i.e. 1, 99 and 4, 96). Provided that we have 52 integers, the pigeonhole principle illustrates that there must exist two values $a_i$ and $a_j$ such
+					that they sum to 100. Thus, $100 | (a_i + a_j)$.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}]
+		\begin{enumerate}
+			\item[\textbf{i.}] Show that every sequence of $mn + 1$ distinct numbers has an increasing subsequence of length $m + 1$ or a decreasing subsequence of length $n + 1$.
+				Show that $mn + 1$ is tight.
+			\item[\textbf{ii.}] Show that in any set of at least $mn + 1$ points in $\mathbb{R}^2$, we can find a polygonal path of either $m$ positive-slope edges or $n$ negative-slope
+				edges.
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{i.}] Suppose we have a sequence $\{ x_s \}_{s \in [mn + 1]}$ of distinct values. Further, suppose we have $(i_s, d_s)$ where $i_s$ the largest increasing
+					subsequence beginning with $x_s$ and $d_s$ is the largest decreasing subsequence ending with $x_s$. Now, by contradiction let $1 \leq i_s \leq m$ and $1 \leq d_s$ for
+					all $s \in [mn + 1]$. Then by the pigeonhole principle there must exist some indices $j < k$ such that $(i_j, d_j) = (i_k, d_k)$ since there are $mn$ possibilities
+					for $(i_s, d_s)$ and $mn + 1$ terms in the sequence. \\
+					If $x_j < x_k$ then it follows that $x_k$ can be inserted into the largest increasing sequence beginning with $x_j$ contradicting the value of $i_j$. Furthermore,
+					$x_j > x_k$ must hold; if this were the case, we can see that a similar contradiction occurs with $d_k$ where $x_j$ can be inserted into te decreasing sequence
+					ending with $x_k$ which proves the claim. \\
+					In regard to tightness, observe the ordered sequence $\{ 1, 4, 2, 3 \}$ where $m = n = 2$. No increasing or decreasing subsequence of length three can be constructed.
+
+				\item[\textbf{ii.}] Suppose we have $mn + 1$ points in $\mathbb{R}^2$ and we enumerate them in increasing order from left to right. Observe that we can rule out cases of
+					points having strictly horizontal or vertical slopes since they can be thought of as positive or negative to our convenience. Now applying \textbf{2i} we can
+					construct either an increasing of decreasing subsequence of length $m+1$ or $n+1$, respectively, creating our desired polygonal path.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Let $x_1, x_2, \hdots, x_{19}$ be positive integers no greater than 93. Let $y_1, y_2, \hdots, y_{93}$ be positive integers no greater than 19. Prove that there
+		exists a sum of certain $x_i$’s that is equal to a sum of certain $y_i$’s.
+
+		\begin{proof}
+			Suppose we have two sequences $x_1, x_2, \hdots, x_{19}$, positive integers no greater than 93 and $y_1, y_2, \hdots, y_{93}$, positive integers no greater than 19.
+			Consider the partial sums $$X_m =  x_1 + x_2 + \hdots + x_m$$ and $$Y_n =  y_1 + y_2 + \hdots + y_n.$$ Without loss of generality, let $X_{19} \leq Y_{93}$. Consider
+			$W_n = X_{m(n)} - Y_n$ such that $m(n)$ is the most minimal index such that $X_{m(n)}$ is minimal yet still greater than $Y_n$. Suppose $X_{m(n)} \geq Y_n + 19$ then
+			it follows that $X_{m(n)-1} \geq Y_n$ contradicting the minimality of $m(n)$. If $W_n = 0$ for any $n$ then we are done. Otherwise, there is all values of $W_n$ must
+			be between 1 and 18. Thus, by the pidgeonhole principle, there must exist two indices $n_1 > n_2$ such that $X_{m(n_1)} - Y_{n_1} = X_{m(n_2)} - Y_{n_2}$ which illustrates
+			that $X_{m(n_1) - m(n_2)} = Y_{n_1 - n_2}$. \\
+			\textbf{Note}: This proof was assisted by the following website. https://prase.cz/kalva/putnam/psoln/psol934.html
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Show that for every irrational $\alpha$ there exists infinitely many rationals $\frac{p}{q}$, such that $\left | \alpha - \frac{p}{q} \right | < \frac{1}{q^2}$.
+
+		\begin{proof}
+			Suppose we have arbitrary values $\alpha \in \mathbb{R} \setminus \mathbb{Q}$ and $n \in \mathbb{N} \cup \{ 0 \}$. Further, suppose, we have a partition $P = \left \{
+			\frac{k}{n} : k \in [n] \cup \{ 0 \} \right \}$ and a set $A = \{ \{ k \alpha \} : k \in [n] \cup \{ 0 \} \}$. Then it follows by the pigeonhole principle that at least
+			two values of $A$ must fall into the same interval of $P$; moreover, there exists $k_1, k_2 \in [n] \cup \{ 0 \}$ such that $$|(k_1 - k_2) \alpha - \lfloor k_1 \alpha
+			\rfloor - \lfloor k_2 \alpha \rfloor| = |\{ k_1 \alpha \} - \{ k_2 \alpha \}| < \frac{1}{n}.$$ Since $0 \leq k_1, k_2 \leq n$ it must hold that
+			$$\left | \alpha - \frac{\lfloor k_1 \alpha \rfloor + \lfloor k_2 \alpha \rfloor}{k_1 - k_2} \right | < \frac{1}{n(k_1 - k_2)} < \frac{1}{(k_1 - k_2)^2}.$$ After the
+			substitution $p = \lfloor k_1 \alpha \rfloor + \lfloor k_2 \alpha \rfloor$ and $q = k_1 - k_2$ it follows that there is an infinite family of $\frac{p}{q} \in \mathbb{Q}$
+			values that satisfy $$\left | \alpha - \frac{p}{q} \right | < \frac{1}{q^2}.$$
+		\end{proof}
+
+
+	% problem 5
+	\item[\textbf{5.}] Given any positive integer $m$ show that there exists a Hemachandra-Fibonacci number which is a multiple of $m$.
+
+		\begin{proof}
+			Suppose $m \in \mathbb{N}$. Consider the first $m^2 + 1$ Hemachandra-Fibonacci numbers viewed as pairs under modulo $m$, $(F_1, F_2), (F_3, F_4), \hdots, (F_{m^2}, F_{m^2+1})$.
+			We can see that there are $m^2$ possible pairs, hence by the pigeonhole principle there must exist two pairs with the same values; moreover, there exists $i$ and $j$ such
+			that $(F_i, F_{i+1}) = (F_j, F_{j+1})$. Furthermore, it must follow that our sequence is periodic since two terms can dictate the entirety of the sequence. Thus, any value
+			to appear, must appear again later in the sequence. Observe that $F_0 = 0$ belongs to equivalence class 0. Therefore, a value must appear later in the sequence that is
+			equivilant to $F_0$ proving the claim.
+		\end{proof}
+
+
+	% problem 6
+	\item[\textbf{6.}] A car must circuit through towns $T_1, T_2, \hdots, T_n$ starting from a town and traveling in a cyclic order and back to where it started. At the start of the
+		journey, the fuel tank is empty. It can fill amount $p_i$ at town $T_i$. If $\sum p_i$ is precisely the amount needed to make the tour, show that there is a town, such that it
+		can complete the circuit without running out of fuel.
+
+		\begin{proof}
+			Suppose we have $n$ locations about a circuit such that $p_i$ is the amount of fuel given at location $i$ and $f_i$ is the fuel required to travel from town $i$ to $i+1$.
+			Further, suppose $\sum p_i$ is percisely enough to travel about the circuit. Let $c_i = p_i - f_i$. Then it follows that $$\sum_{i \in [k, k)} a_i = 0$$ assuming that
+			all indices have modulo $n$ applied to them. Suppose by contradicition that it is not possible to travel about the circuit from any particular location. Then we can
+			see that for every $k$ there exists an $\ell < k$ (mod $n$) such that $$\sum_{i \in [k, l)} a_i < 0,$$ in other words, for every city there exists a path between two
+			cities where the driver will run out of gas before the circuit is over. Now let us consider all incomplete paths $[k_0, k_1)$, $[k_1, k_2)$, $\hdots$. We can see that there
+			are an infinite amount, otherwise it would imply that a driver can travel across the entire circut. Furthermore, by the pigeonhole principle there must exist two values
+			$k_i$ and $k_j$ such that $i < j$ and $k_i = k_j$. Observe that a path taken from $k_i$ to $k_j$ makes $m$ laps around the circuit. Moreover,
+			$$0 > \sum_{i \in [k_i, k_{i+1})} a_i + \sum_{i \in [k_{i+2}, k_{i+3})} a_i + \hdots + \sum_{i \in [k_{j-1}, k_j)} a_i = m \sum_{i \in [n]} a_i = 0$$ which is a contradiction.
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

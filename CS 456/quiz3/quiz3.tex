@@ -1,0 +1,126 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs, tabularx}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent CS 456 \\
+\noindent October 4, 2020
+
+\begin{center}
+	\Large Quiz 3
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Is $L(r_1) = L(r_2)$ where $r_1 = (ab^* + c)(\lambda + \emptyset)$ and $r_2 = (a + c)(b^* + \emptyset)$? What are the languages of $L(r_1)$ and $L(r_2)$?
+
+		\begin{proof}
+			Suppose we have an alphabet $\Sigma = \{ a, b, c \}$. Further, suppose we have regular expressions $r_1 = (ab^* + c)(\lambda + \emptyset)$ and $r_2 = (a + c)(b^* +
+			\emptyset)$. It is obvious that $r_1$ and $r_2$ are in fact regular expressions by Definition 3.1; moreover, observe that they stem from primitive regular expressions $a$,
+			$b$, $c$, $\lambda$, and $\emptyset$, applying well defined operations upon them that guarantee closure. \\
+
+			I claim that $L(r_1) \neq L(r_2)$. To show that two languages are not equal, it suffices to provide an element that belongs to one set but not the other. Furthermore,
+			it is easy to see that the string $cb$ belongs to $L(r_2)$ but does not belong to $L(r_1)$ (this will be further illustrated below). \\
+
+			Let us now compute $L(r_1)$ and $L(r_2)$. Since $r_1$ and $r_2$ are regular expressions, we can apply Definition 3.2. Then it follows that
+			\begin{align*}
+				L(r_1) &= L( (ab^* + c)(\lambda + \emptyset) ) \\
+				&= L(ab^* + c) L(\lambda + \emptyset) \\
+				&= ( L(ab^*) \cup L(c) ) ( L(\lambda) \cup L(\emptyset) ) \\
+				&= ( L(a)L(b^*) \cup \{ c \} ) ( \{ \lambda \} \cup \emptyset ) \\
+				&= ( \{ a \} L(b)^* \cup \{ c \} ) \{ \lambda \} \\
+				&= ( \{ a \} \{ b \}^* \cup \{ c \} ) \{ \lambda \} \\
+				&= ( \{ a, ab, abb, \hdots \} \cup \{ c \} ) \{ \lambda \} \\
+				&= \{ c, a, ab, abb, \hdots \} \{ \lambda \} \\
+				L(r_1) &= \{ c, a, ab, abb, \hdots \}
+			\end{align*}
+			and also,
+			\begin{align*}
+				L(r_2) &= L( (a + c)(b^* + \emptyset) ) \\
+				&= L(a + c) L(b^* + \emptyset) \\
+				&= ( L(a) \cup L(c) ) ( L(b^*) \cup L(\emptyset) ) \\
+				&= ( \{ a \} \cup \{ c \} ) ( L(b)^* \cup \emptyset ) \\
+				&= \{ a, c \} ( \{ b \}^* \cup \emptyset ) \\
+				&= \{ a, c \} \{ b \}^* \\
+				L(r_2) &= \{ a, ab, abb, \hdots, c, cb, cbb, \hdots \}.
+			\end{align*}
+			Now we can clearly see that $cb$, as well as $cbb$, $cbbb$, $\hdots$ all belong to $L(r_2)$ but not $L(r_1)$.
+		\end{proof}
+		\newpage
+
+
+	% problem 2
+	\item[\textbf{2.}]
+		\begin{enumerate}
+			\item[\textbf{a.}] Explain the four formal steps used in \textit{nfa} $\to$ \textit{dfa} conversions.
+			\item[\textbf{b.}] Convert the given \textit{nfa} $$M_n = (\{q_0, q_1, q_2, q_3\}, \{a, b\}, \delta_n, q_0, \{q_1\})$$
+				to a \textit{dfa} using the shortcut conversion technique.
+		\end{enumerate}
+
+		\begin{proof}[Solution]
+			\begin{enumerate}
+				\item[\textbf{a.}] To convert a nfa to a dfa, perform the following algorithm:
+					\begin{enumerate}
+						\item[\textbf{i.}] Create a vertex $\{ q_0 \}$ which will act as the initial vertex of our dfa.
+						\item[\textbf{ii.}] For a missing edge of a vertex $\{ q_i, q_j, \hdots, q_k \}$ (i.e if $\Sigma = \{ a, b\}$ then vertex $\{ q_i, q_j, \hdots, q_k \}$ needs a
+							transition for both $a$ and $b$),
+							\begin{itemize}
+								\item Compute $\delta^*\left( \{ q_i, q_j, \hdots, q_k \}, a \right)$ = $\{ q_\ell, q_m, \hdots, q_n \}$, where $a$ is the missing transition.
+								\item Create the vertex $\{ q_\ell, q_m, \hdots, q_n \}$ if it doesn't already exist.
+								\item Draw the edge $a$ from $\{ q_i, q_j, \hdots, q_k \}$ to $\{ q_\ell, q_m, \hdots, q_n \}$.
+							\end{itemize}
+							Repeat this process until all edges of all vertices exist.
+						\item[\textbf{iii.}] For every vertex in our dfa that contains a final vertex of the nfa, assign that vertex in our dfa as a final vertex.
+						\item[\textbf{iv.}] If the nfa accepts $\lambda$, then make the vertex $\{ q_0 \}$, the initial vertex, a final vertex as well.
+					\end{enumerate}
+
+				\item[\textbf{b.}] Observe that
+					\begin{center}
+					\begin{tabularx}{0.5\textwidth}{
+						>{\raggedright\arraybackslash}X
+						>{\raggedright\arraybackslash}X }
+						$\delta^* \left( \{ q_0 \}, a \right) = \{ q_1, q_2 \}$ & $\delta^* \left( \{ q_0 \}, b \right) = \{ q_0, q_3 \}$ \\
+						$\delta^* \left( \{ q_1 \}, a \right) = \{ q_1, q_2 \}$ & $\delta^* \left( \{ q_1 \}, b \right) = \{ q_0, q_1 \}$ \\
+						$\delta^* \left( \{ q_2 \}, a \right) = \{ q_1, q_3 \}$ & $\delta^* \left( \{ q_2 \}, b \right) = \emptyset$ \\
+						$\delta^* \left( \{ q_3 \}, a \right) = \emptyset$ & $\delta^* \left( \{ q_3 \}, b \right) = \emptyset$.
+					\end{tabularx}
+					\end{center}
+					Now considering the newly added states $\{ q_0, q_1 \}$, $\{ q_0, q_3 \}$, $\{ q_1, q_2 \}$, $\{ q_1, q_3 \}$, and $\emptyset$, we have
+					\begin{center}
+					\begin{tabularx}{1\textwidth}{
+						>{\raggedright\arraybackslash}X
+						>{\raggedright\arraybackslash}X }
+						$\delta^* \left( \{ q_0, q_1 \}, a \right) = \{ q_1, q_2 \} \cup \{ q_1, q_2 \} = \{ q_1, q_2 \}$ & $\delta^* \left( \{ q_0, q_1 \}, b \right) = \{ q_0, q_3 \} \cup \{ q_0, q_1 \} = \{ q_0, q_1, q_3 \}$ \\
+						$\delta^* \left( \{ q_0, q_3 \}, a \right) = \{ q_1, q_2 \} \cup \emptyset = \{ q_1, q_2 \}$ & $\delta^* \left( \{ q_0, q_3 \}, b \right) = \{ q_0, q_3 \} \cup \emptyset = \{ q_0, q_3 \}$ \\
+						$\delta^* \left( \{ q_1, q_2 \}, a \right) = \{ q_1, q_2 \} \cup \{ q_1, q_3 \} = \{ q_1, q_2, q_3 \}$ & $\delta^* \left( \{ q_1, q_2 \}, b \right) = \{ q_0, q_3 \} \cup \emptyset = \{ q_0, q_1 \}$ \\
+						$\delta^* \left( \{ q_1, q_3 \}, a \right) = \{ q_1, q_2 \} \cup \emptyset = \{ q_1, q_2 \}$ & $\delta^* \left( \{ q_1, q_3 \}, b \right) = \{ q_0, q_1 \} \cup \emptyset = \{ q_0, q_1 \}$ \\
+						$\delta^* \left( \emptyset, a \right) = \emptyset$ & $\delta^* \left( \emptyset, b \right) = \emptyset$.
+					\end{tabularx}
+					\end{center}
+					Again, with the new states $\{ q_0, q_1, q_3 \}$, $\{ q_1, q_2, q_3 \}$, we obtain
+					\begin{center}
+					\begin{tabularx}{1\textwidth}{
+						>{\raggedright\arraybackslash}X
+						>{\raggedright\arraybackslash}X }
+						$\delta^* \left( \{ q_0, q_1, q_3 \}, a \right) = \{ q_1, q_2 \} \cup \{ q_1, q_2 \} \cup \emptyset = \{ q_1, q_2 \}$ & $\delta^* \left( \{ q_0, q_1, q_3 \}, b \right) = \{ q_0, q_3 \} \cup \{ q_0, q_1 \} \cup \emptyset = \{ q_0, q_1, q_3 \}$ \\
+						$\delta^* \left( \{ q_1, q_2, q_3 \}, a \right) = \{ q_1, q_2 \} \cup \{ q_1, q_3 \} \cup \emptyset = \{ q_1, q_2, q_3 \}$ & $\delta^* \left( \{ q_1, q_2, q_3 \}, b \right) = \{ q_0, q_1 \} \cup \emptyset \cup \emptyset = \{ q_0, q_1 \}$.
+					\end{tabularx}
+					\end{center}
+					We can then see that our dfa is
+					\begin{align*}
+						M_d = (\;& \\
+						&\{ \{q_0\}, \{q_0, q_1\}, \{q_0, q_3\}, \{q_1, q_2\}, \{q_0, q_1, q_3\}, \{q_1, q_2, q_3\} \}, \\
+						&\{ a, b \}, \\
+						&\delta_d, \\
+						&\{ q_0 \}, \\
+						&\{ \{q_0\}, \{q_0, q_1\}, \{q_1, q_2\}, \{q_0, q_1, q_3\}, \{q_1, q_2, q_3\} \} \\
+						).\;&
+					\end{align*}
+			\end{enumerate}
+		\end{proof}
+\end{enumerate}
+
+\end{document}

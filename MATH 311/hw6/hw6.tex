@@ -1,0 +1,65 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 311 \\
+\noindent November 3, 2020
+
+\begin{center}
+	\Large Homework 6
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Suppose that $\textbf{f}: \mathbb{R}^n \to \mathbb{R}^m$ and $K \subseteq \mathbb{R}^n$, where $K$ is compact and connected. Suppose that for each $\textbf{x} \in
+		K$, there is a $\delta_\textbf{x} > 0$ such that $\textbf{f}(\textbf{x}) = \textbf{f}(\textbf{y})$ for all $\textbf{y} \in B_{\delta_\textbf{x}}(\textbf{x})$. Prove that
+		$\textbf{f}$ is constant on $K$; that is, if $\textbf{a} \in K$, then $\textbf{f}(\textbf{x}) = \textbf{f}(\textbf{a})$ for all $\textbf{x} \in K$.
+
+		\begin{proof}
+			Suppose $\textbf{f} : \mathbb{R}^n \to \mathbb{R}^m$ and $K \subseteq \mathbb{R}^n$ are defined as above. Further, suppose by contradiction that $\textbf{f}$ is not constant
+			on $K$; that is, there exist an $\textbf{a}, \textbf{x} \in K$ such that $\textbf{f}(\textbf{x}) \neq \textbf{f}(\textbf{a})$. Due to the fact that $K$ is compact, the
+			Borel Covering Lemma states that there exists values $\textbf{y}_1, \textbf{y}_2, \hdots, \textbf{y}_N \in K$ such that $$K \subseteq \bigcup_{j = 1}^N
+			B_{\delta_{\textbf{y}_j}} (\textbf{y}_j).$$ Consider the open ball $B$ that contains $\textbf{x}$, we know that $\textbf{f}(\textbf{x}) = \textbf{f}(\textbf{k})$ for all
+			$\textbf{k} \in B$. Similarly, $\textbf{f}(\textbf{x}) = \textbf{f}(\textbf{k})$ must hold for all $\textbf{k}$ in the open balls with a nonempty intersection with $B$ and
+			the open balls with a nonempty intersection with those sets and so forth. Therefore, for $\textbf{f}$ to be non-constant on $K$ would imply that $\textbf{x}$ and
+			$\textbf{a}$ belong to distinct open sets that separate $K$ which is a contradiction to the fact that $K$ is connected.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] The \textit{distance} between two nonempty subsets $A, B \subseteq \mathbb{R}^n$ is defined as $$\mathrm{dist}(A, B) = \inf \{ || \textbf{x} - \textbf{y} ||:
+		\textbf{x} \in A, \textbf{y} \in B \}.$$ Prove that if $A$ and $B$ are compact sets with $A \cap B = \varnothing$, then dist$(A, B) > 0$.
+
+		\begin{proof}
+			Suppose $A, B \subseteq \mathbb{R}^n$ are compact sets with $A \cap B = \varnothing$. Further, suppose by contradiction that dist$(A, B) = 0$. Clearly dist$(A, B)$ exists,
+			by the Approximation of Infima we know that for any $\epsilon > 0$ there exists $\textbf{x} \in A$ and $\textbf{y} \in B$ such that
+			\begin{align*}
+				0 \leq &||\textbf{x} - \textbf{y}|| - \mathrm{dist}(A, B) < \epsilon \\
+				0 \leq &||\textbf{x} - \textbf{y}|| < \epsilon.
+			\end{align*}
+			Suppose $\epsilon = \frac{1}{k}$ where $k \in \mathbb{N}$ which provides sequences $\textbf{a}_k \in A$ and $\textbf{b}_k \in B$. Additionally, the Heine-Borel Theorem
+			illustrates that both $A$ and $B$ are closed and and bounded. Furthermore, $\textbf{a}_k$ and $\textbf{b}_k$ must have subsequences $\textbf{a}_{k_j} \to \textbf{a} \in A$
+			and $\textbf{b}_{k_j} \to \textbf{b} \in B$, respectively, via the Bolzano-Weierstrass Theorem and Theorem 9.8 that satisfy $$0 \leq ||\textbf{a}_{k_j} - \textbf{b}_{k_j}||
+			< \frac{1}{k_j}.$$ Taking the limit of this inequality as $j \to \infty$ provides $||\textbf{a} - \textbf{b}|| = 0$ and so $\textbf{a} = \textbf{b}$ which is a contradiction
+			to the assumption $A \cap B = \varnothing$.
+		\end{proof}
+		\newpage
+
+
+	% problem 3
+	\item[\textbf{3.}] Prove that $$\lim_{(x, y) \to \textbf{0}} \frac{x^3 - y^3}{x^2 + y^2} = 0.$$
+
+		\begin{proof}
+			Observe that $$\left | \frac{x^3 - y^3}{x^2 + y^2} \right | \leq \left | \frac{x^3}{x^2 + y^2} \right | + \left | \frac{y^3}{x^2 + y^2} \right | =
+			|x|\left | \frac{x^2}{x^2 + y^2} \right | + |y|\left | \frac{y^2}{x^2 + y^2} \right | \leq |x| + |y|$$ and so $$-|x| - |y| \leq \left | \frac{x^3 - y^3}{x^2 + y^2} \right |
+			\leq |x| + |y|$$ for all $(x, y) \in \mathbb{R}^2 \setminus \{ \textbf{0} \}$. We can see that $$\lim_{(x,y) \to \textbf{0}} (-|x| - |y|) = \lim_{(x,y) \to \textbf{0}}
+			(|x| + |y|) = 0$$ by Theorem 9.15. Thus, $$\lim_{(x,y) \to \textbf{0}} \frac{x^3 - y^3}{x^2 + y^2} = 0$$ by the Squeeze Theorem.
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

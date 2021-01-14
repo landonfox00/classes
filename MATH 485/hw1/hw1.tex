@@ -1,0 +1,167 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 485 \\
+\noindent August 31, 2020
+
+\begin{center}
+\Large Homework 1
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Given an $8 \times 8$ checkerboard.
+		\begin{enumerate}
+			\item[\textbf{i.}] If we remove the upper left and upper right corner, can we tile it with dominos?
+			\item[\textbf{ii.}] If we remove the upper left and lower right corner, can we tile it with dominos?
+			\item[\textbf{iii.}] If we remove any one corner, can we tile it with straight triominos?
+		\end{enumerate}
+
+		\begin{proof}
+			Suppose we have an $8 \times 8$ checkerboard.
+			\begin{enumerate}
+				\item[\textbf{i.}] True. Suppose we remove the upper left and upper right corner of the checkerboard. Place all dominos horizontally such that each row has four dominos,
+					except for the first which has exactly three.
+				\item[\textbf{ii.}] False. Suppose we remove the upper left and lower right corner of the checkerboard. Further, suppose by contradiction that we can tile the board
+					with dominos. Let $x_n$ and $y_n$ denote the horizontal and vertical dominos in the $n$th row such that $y_8 = 0$. Then the following equations
+					\begin{align*}
+						2x_1 + y_1 &= 7 \\
+						2x_2 + y_2 + y_1 &= 8 \\
+						&\vdots \\
+						2x_7 + y_7 + y_6 &= 8 \\
+						2x_8 + y_7 &= 7
+					\end{align*}
+					represents our particular board. Applying mod 2 to each equation we have
+					\begin{align*}
+						y_1 &\equiv 1\; (\mathrm{mod}\; 2) \\
+						y_2 + y_1 &\equiv 0\; (\mathrm{mod}\; 2) \\
+						&\vdots \\
+						y_7 + y_6 &\equiv 0\; (\mathrm{mod}\; 2) \\
+						y_7 &\equiv 1\; (\mathrm{mod}\; 2).
+					\end{align*}
+					By examining the equations, we can see that $y_n$ is of odd parity for all $n \in [7]$. Similarly, $x_n$ must be even for all $n \in [8]$ since the total number of
+					dominos is 31. Let us now rotate the board by $90^\circ$ such that horizontal and vertical dominos swap. By the same logic, we will see that $y_n$ is also even for
+					all $n \in [7]$, which is a contradiction.
+				\item[\textbf{iii.}] False. Suppose we remove an upper corner of the checkerboard. Further, suppose by contradiction that we can tile the board with straight triominos.
+					Let us use similar conventions as \textbf{(ii)} by letting $x_n$ and $y_n$ denote the horizontal and vertical dominos in the $n$th row such that $y_7 = y_8 = 0$.
+					Then the equations
+					\begin{align*}
+						3x_1 + y_1 &= 7 \\
+						3x_2 + y_2 + y_1 &= 8 \\
+						3x_3 + y_3 + y_2 + y_1 &= 8 \\
+						&\vdots \\
+						3x_7 + y_6 + y_5 &= 8 \\
+						3x_8 + y_6 &= 8
+					\end{align*}
+					represents our particular board. Applying mod 3 to each equation we have
+					\begin{align*}
+						y_1 &\equiv 1\; (\mathrm{mod}\; 3) \\
+						y_2 + y_1 &\equiv 2\; (\mathrm{mod}\; 3) \\
+						y_3 + y_2 + y_1 &\equiv 2\; (\mathrm{mod}\; 3) \\
+						&\vdots \\
+						y_6 + y_5 &\equiv 2\; (\mathrm{mod}\; 3) \\
+						y_6 &\equiv 2\; (\mathrm{mod}\; 3).
+					\end{align*}
+					By examining the first six equations we can conclude that $y_6 \equiv 0\; (\mathrm{mod}\; 3)$ which is a contradiction to equation eight.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Let $n$ be any positive odd integer. Write the numbers $1, 2, \hdots, 2n$ on paper. Pick any two numbers $i$ and $j$ and write down $|i - j|$ on the paper and
+		erase $i$ and $j$. Now with this new set of numbers repeat the process until we have only one number left on the paper. Prove that this last number must be odd.
+
+		\begin{proof}
+			Suppose we initially have $2n$ natural numbers, $n$ numbers are even and $n$ are odd, where $n$ itself is odd, written on paper and we proceed with the directions depicted
+			above. Observe that only the subtraction between numbers of different pairity will give an odd result. Hence, if there is an odd without another odd to complement it,
+			the result must be odd, no matter what $i$s and $j$s where chosen. Furthermore, since there are initially an odd number of odd values, the result must be odd.
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}]
+		\begin{enumerate}
+			\item[\textbf{i.}] Prove using induction that a set with $n$ elements has $\frac{n(n-1)}{2}$ subsets containing exactly two elements, whenever $n \geq 2$.
+			\item[\textbf{ii.}] Prove using induction that a set with $n$ elements has $\frac{n(n-1)(n-2)}{6}$ subsets containing exactly three elements whenever $n \geq 3$.
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{i.}] As a base case, let $n=1$. Clearly, no subsets of cardinality two can be created; thus, $0 = \frac{1(1-1)}{2}$ subsets exist. For the inductive step,
+					assume we have a set $A$ consisting of $n$ elements with exactly $\frac{n(n-1)}{2}$ subsets of length two. Let us now append a unique element $k$ to create a set
+					$A \cup \{ k \}$ of cardinality $n+1$. To calculate the new number of subsets with length two, we can see that all previous subsets still remain; additionally, all
+					subsets with $k$ must also be included. Hence, $$|A \cup \{ k \}| = \frac{n(n-1)}{2} + \binom{n}{1} = \frac{n(n+1)}{2}.$$
+				\item[\textbf{ii.}] As a base case, let $n=2$. Clearly, no subsets of cardinality three can be created; thus, $0 = \frac{2(2-1)(2-2)}{6}$ subsets exist. For the
+					inductive step, assume we have a set $A$ consisting of $n$ elements with exactly $\frac{n(n-1)(n-2)}{6}$ subsets of length three. Let us now append a unique element
+					$k$ to create a set $A \cup \{ k \}$ of cardinality $n+1$. To calculate the new number of subsets with length three, we can see that all previous subsets still
+					remain; additionally, all subsets with $k$ must also be included. Hence, $$|A \cup \{ k \}| = \frac{n(n-1)(n-2)}{6} + \binom{n}{2} = \frac{n(n-1)(n+1)}{6}.$$
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Suppose there is a group of $n$ people, and each person is aware of a scandal no one else knows about. When two people communicate by telephone, they both know
+		about all the scandals each knows about at that given time. Let $G(n)$ be the minimum number of phone calls needed so that everyone knows about all the scandals.  Show that
+		$G(n) \leq 2n-4$ for $n \geq 4$.
+
+		\begin{proof}
+			Suppose we have a community of $n \geq 4$ individuals where communication takes place as depicted above. Observe that it sufficies to construct an example where the
+			community can spread all scandals in $2n-4$ calls. As a base case, let $n=4$. The base case is trivial, let the first and second individuals call as well as the third and
+			fourth, afterwards let the first call the third and the second call the fourth. For the inductive step, suppose we have a community of $n$ individuals which can spread all
+			rumors in $2n-4$ calls. Now, let us introduce a new member. Before the community commences in their $2n-4$ calls, let the new member call any other individual in the
+			community to introduce their scandal. Afterwards, let the community perform their calls, then the new individual can call another random community member to \textit{catch
+			up} on all unknown rumors. Hence, $2n-4+2 = 2(n+1)-4$ calls were required to spread all scandals.
+		\end{proof}
+
+
+	% problem 5
+	\item[\textbf{5.}] Consider the numbers $\{ 1, 2, 3, \hdots, 2^k \}$. Show that it is possible to arrange them in a row in such a way that the average of any two never appears in
+		between them.
+		\begin{enumerate}
+			\item[\textbf{i.}] Give a constructive proof using induction on k.
+			\item[\textbf{ii.}] Show that the above proof can be extended for $\{ 1, 2, 3, \hdots, n \}$, when $n$ is not a power of 2.
+		\end{enumerate}
+
+		\textbf{Lemma}: If $f \in \mathbb{P}_1$ and $x_1,\, x_2 \in \mathbb{R}$, then avg$( f(x_1), f(x_2) ) = f(\mathrm{avg}(x_1, x_2))$.
+
+		\begin{proof}[Lemma Proof]
+			Suppose $f \in \mathbb{P}_1$ and $x_1,\, x_2 \in \mathbb{R}$. Observe that $$\mathrm{avg}(f(x_1), f(x_2)) = \frac{ax_1+b + ax_2+b}{2} = a\frac{x_1+x_2}{2} + b =
+			f(\mathrm{avg}(x_1, x_2)).$$
+		\end{proof}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{i.}] Suppose $A_k = [2^k]$. As a base case, let $k = 1$. Since there are only two elements the assertion is obvious. For the inductive step, assume
+					there exists a configuration of $A_k$ where no average of two elements can be found between them. Now consider $A_{k+1}$. Let's begin by sorting the set by parity
+					such that $$A_{k+1} = \{ 1, 3, \hdots, 2^{k+1} - 3, 2^{k+1} - 1, 2, 4, \hdots, 2^{k+1} - 2, 2^{k+1} \}.$$ In this configuration, if two elements of different parity
+					were chosen, we can see that their result will not belong to the integers nor $A_{k+1}$. In regard to elements of the same parity, we can arrange both the even and
+					odd elements as the inductive hypothesis arranges $A_k$; observe that even and odd numbers $2n,\, 2n-1 \in \mathbb{P}_1(n)$, thus by our lemma averages between
+					values of the same parity will not be found between them if and only if they are not found between values $n$.
+				\item[\textbf{ii.}] Observe that as a direct consequence of \textbf{(ii)}, any subset of $[2^k]$ can also be sufficiently arranged. Additionally, it is obvious that
+					there always exists a $k \in \mathbb{N}$ for any $n \in \mathbb{N}$ such that $n \leq 2^k$. Thus, the set $[n] \subseteq [2^k]$ can be arranged such that an average
+					of two elements can never be found between them.
+			\end{enumerate}
+		\end{proof}
+		\newpage
+
+
+	% problem 6
+	\item[\textbf{6.}] Given a positive integer $n$, two players play a game. They take turns in choosing distinct divisors of $n$ according to the following rules:
+		\begin{enumerate}
+			\item[\textbf{i.}] No divisor of $n$ that is a multiple of a previously mentioned number can be chosen.
+			\item[\textbf{ii.}] The player who is forced to choose 1 loses the game.
+		\end{enumerate}
+		Show that the first player always has a winning strategy.
+
+		\begin{proof}
+			Suppose $n \in \mathbb{N} \setminus \{ 1 \}$ and two individuals play the game depicted above. Further, suppose by contradiction that the individual who plays first does not
+			have a winning strategy; in other words, for a particular $n$ the second player can always win preventing the first player from ever winning. Now, let the first player steal
+			the second player's strategy illustrating that both will simultaneously win which is a contradiction.
+		\end{proof}
+\end{enumerate}
+
+\end{document}

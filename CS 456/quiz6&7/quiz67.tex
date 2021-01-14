@@ -1,0 +1,124 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent CS 456 \\
+\noindent November 1, 2020
+
+\begin{center}
+	\Large Quiz 6/7
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Convert the following context-free grammar $G = (\{ S, A, B, C, D \}, \{ a, b, d \}, S, P)$ where $P$ is defined as
+		\begin{align*}
+			S &\to aA\, |\, abBBC\, |\, B\, |\, \lambda, \\
+			A &\to aaA\, |\, B\, |\, \lambda, \\
+			B &\to bB\, |\, bbC\, |\, D, \\
+			C &\to \lambda, \\
+			D &\to d,
+		\end{align*}
+		into an equivalent grammar in Chomsky Normal Form.
+
+		\begin{proof}[Solution]
+			Suppose we have the grammar $G$ as defined above. Observe that $\lambda$ is accepted by $G$, let us temporarily remove it by altering our initial production such that
+			$S \to aA\, |\, abBBC\, |\, B$. \\
+
+			We can see that both $A$ and $C$ are nullable; by Theorem 6.3 we can remove the $\lambda$-productions without consequence via the following substitutions
+			\begin{alignat*}{2}
+				S &\to a(A\, |\, \lambda)\, |\, abBB \lambda\, |\, B &&= a\, |\, aA\, |\, abBB\, |\, B, \\
+				A &\to aa(A\, |\, \lambda)\, |\, B &&= aa\, |\, aaA\, |\, B, \\
+				B &\to bB\, |\, bb \lambda\, |\, D &&= bb\, |\, bB\, |\, D
+			\end{alignat*}
+			which eliminates $C$ from the grammar entirely. Now that we have removed the $\lambda$-productions, our current set of productions is defined as
+			\begin{align*}
+				S &\to a\, |\, aA\, |\, abBB\, |\, B, \\
+				A &\to aa\, |\, aaA\, |\, B, \\
+				B &\to bb\, |\, bB\, |\, D, \\
+				D &\to d.
+			\end{align*}
+
+			The following productions $S \to B$, $A \to B$, and $B \to D$ are clearly unit productions in our grammar. Removing the unit productions provides
+			\begin{align*}
+				S &\to a\, |\, aA\, |\, abBB, \\
+				A &\to aa\, |\, aaA, \\
+				B &\to bb\, |\, bB, \\
+				D &\to d.
+			\end{align*}
+			Observing our unit dependency graph, we obtain new productions
+			\begin{align*}
+				S &\to d\, |\, bb\, |\, bB, \\
+				A &\to d\, |\, bb\, |\, bB, \\
+				B &\to d,
+			\end{align*}
+			when paired with our unitless productions it yields our new set of productions $P$,
+			\begin{align*}
+				S &\to a\, |\, d\, |\, bb\, |\, aA\, |\, bB\, |\, abBB, \\
+				A &\to d\, |\, aa\, |\, bb\, |\, bB\, |\, aaA, \\
+				B &\to d\, |\, bb\, |\, bB, \\
+				D &\to d
+			\end{align*}
+			via Theorem 6.4. \\
+
+			Clearly, all productions can produce a terminal string; however, the dependency graph and Theorem 6.2 illustrate that $D$ is useless and can be removed from the grammar
+			without consequence. The resulting grammar $G = (\{ S, A, B \}, \{ a, b, d \}, S, P)$, where $P$ is defined as
+			\begin{align*}
+				S &\to a\, |\, d\, |\, bb\, |\, aA\, |\, bB\, |\, abBB, \\
+				A &\to d\, |\, aa\, |\, bb\, |\, bB\, |\, aaA, \\
+				B &\to d\, |\, bb\, |\, bB,
+			\end{align*}
+			is then simplified. \\
+
+			To begin the process of converting our grammar to Chomsky Normal Form, notice that $S \to a$, $S \to d$, $A \to d$, and $B \to d$ are the only productions in CNF. Let's
+			now introduce variables $X_a, X_b, X_{aa}, X_{ab}, X_{BB}$ into our grammar. With the following substitutions
+			\begin{align*}
+				S &\to a\, |\, d\, |\, X_bX_b\, |\, X_aA\, |\, X_bB\, |\, X_{ab}X_{BB}\, |\, \lambda, \\
+				A &\to d\, |\, X_aX_a\, |\, X_bX_b\, |\, X_bX_B\, |\, X_{aa}A, \\
+				B &\to d\, |\, X_bX_b\, |\, X_bX_B, \\
+				X_{BB} &\to BB, \\
+				X_{aa} &\to X_aX_a, \\
+				X_{ab} &\to X_aX_b, \\
+				X_a &\to a, \\
+				X_b &\to b
+			\end{align*}
+			we can see that our modified grammar $G = (\{ S, A, B, X_a, X_b, X_{aa}, X_{ab}, X_{BB} \}, \{ a, b, d \}, S, P)$ is in CNF (with the exception of the $\lambda$-production
+			from $S$ which is used to compensate for the removal of $\lambda$ in our grammar) and remains equivalent by Theorem 6.6.
+		\end{proof}
+		\newpage
+
+
+	% problem 2
+	\item[\textbf{2.}] Construct a npda for the following language $L = \{ a^{2n} b^{n+1} : n \geq 0 \}$ where $\Sigma = \{ a, b \}$.
+
+		\begin{proof}[Solution]
+			Suppose $\Sigma = \{ a, b \}$ and $L = \{ a^{2n} b^{n+1} : n \geq 0 \}$. Further, suppose we have a grammar $G = (\{ S, A, B \}, \{ a, b \}, S, P)$ where $P$ is defined as
+			\begin{align*}
+				S &\to aASB\, |\, b, \\
+				A &\to a, \\
+				B &\to b
+			\end{align*}
+			which is clearly in Greibach Normal Form. I claim that $L = L(G)$. To prove this claim, let us simplify the productions of $G$ via a substitution providing $S \to aaSb\,
+			|\, b$ (GNF is by no means required for this demonstration). Consider a string that belongs to $L(G)$, observe that it must begin with an even number, say $2n$, of $a$'s
+			proceeded by $n + 1$ $b$'s where $n$ is the number of iterations of $S$; this is because every time $b$ is not selected, two $a$'s are appended to the beginning of the
+			string and a single $b$ is concatenated to the end of it, finally the string is terminated with an additional $b$. Hence, all strings in $L$ share the properties of $L(G)$
+			and vice versa and so any element in one set is also in the other illustrating that the languages must be equal. \\
+
+			Now that we have a grammar in GNF that accepts $L$, we can apply Theorem 7.1 which provides the npda $M = (\{ q_0, q_1, q_f \}, \Sigma, \{ S, A, B, z \}, \delta, q_0, z,
+			\{ q_f \})$ where $\delta$ is defined as
+			\begin{align*}
+				\delta (q_0, \lambda, z) &= \{(q_1, Sz)\}, \\
+				\delta (q_1, a, S) &= \{(q_1, ASB)\}, \\
+				\delta (q_1, b, S) &= \{(q_1, \lambda)\}, \\
+				\delta (q_1, a, A) &= \{(q_1, \lambda)\}, \\
+				\delta (q_1, b, B) &= \{(q_1, \lambda)\}, \\
+				\delta (q_1, \lambda, z) &= \{(q_f, z)\}.
+			\end{align*}
+		\end{proof}
+\end{enumerate}
+
+\end{document}

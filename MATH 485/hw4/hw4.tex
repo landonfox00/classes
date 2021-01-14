@@ -1,0 +1,131 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 485 \\
+\noindent September 23, 2020 \\
+\noindent \textbf{Collaborated with Logan Leavitt}
+
+\begin{center}
+	\Large Homework 4
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] A six-sided die is rolled repeatedly until all the numbers one through six have appeared at least once each. What is the probability that this happens in the first
+		$n$ rolls? Find the first $n$ where the probability exceeds $\frac{1}{2}$.
+
+		\begin{proof}[Solution]
+			Suppose a die is rolled $n$ times. Let us consider $S$ the set of all possible strings generated from the die. Additionally, let $A_i$ for $i \in [6]$ denote the set of all
+			strings where the $i$th face does not occur. We can then see that
+			\begin{align*}
+				|S| &= 6^n \\
+				|A_i| &= 5^n;\;\;\; \mathrm{for\; all}\; i \in [6] \\
+				|A_{i_1} \cap A_{i_2}| &= 4^n;\;\;\; \mathrm{for\; all}\; i_1 \neq i_2 \in [6] \\
+				&\vdots \\
+				|A_{i_1} \cap \hdots \cap A_{i_k}| &= (6 - k)^n;\;\;\; \mathrm{for\; all}\; i_1 \neq \hdots \neq i_k \in [6].
+			\end{align*}
+			Now we seek the cardinality of $\bigcap_{i \in [6]} \bar{A_i}$, where all strings must include all six faces of the die. By the Principle of Inclusion-Exclusion
+			we obtain $$\left | \bigcap_{i \in [n]} \bar{A_i} \right | = \sum_{k = 0}^6 (-1)^k \binom{6}{k} (6-k)^n = 6^n - 6 \cdot 5^n + 15 \cdot 4^n - 20 \cdot 3^n + 15 \cdot 2^n - 6.$$
+			To obtain the likelyhood of this occuring, we divide by the cardinality of the sample space which provides $$\frac{1}{6^n} \sum_{k = 0}^6 (-1)^k \binom{6}{k} (6-k)^n =
+			\frac{6^n - 6 \cdot 5^n + 15 \cdot 4^n - 20 \cdot 3^n + 15 \cdot 2^n - 6}{6^n}.$$ \\
+
+			After inspection of the given probability density function, we can see that the probability will exceed $\frac{1}{2}$ after $n \geq 13$.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Suppose that $n$ soldiers march in a single column such that everyone (except the front one) can see only the person in front of him/her. How many ways are there
+		to arrange them the next day such that everyone sees someone different than the one they saw today?
+
+		\begin{proof}[Solution]
+			Suppose $n$ soldiers march in a line such that no individual can see anyone other than the person directly in front of them. Let us now consider the marching arrangements
+			they can make the next day. Let $A_i$ for $i \in [n]$ denote the arrangements such that the $i$th solider can see the individual that was in front of them previously.
+			Now we seek to find the cardinality of $\bigcap_{i \in [n]} \bar{A_i}$, where all soldiers do not see the individual they did last. Observe that $|A_1| = 0$ since the first
+			solider had no individual standing in front of them. Additionally, notice that if we desire the $i$th individual to stand behind the person they were previously, then there
+			are $(n-1)$ positions for the individual in front to stand in and $(n-2)!$ ways to permute all others. Furthermore, if we group the $i$th individual and the person in front
+			of them as a inserperable unit, then we can see that $$|A_{i_1} \cap \hdots \cap A_{i_k}| = (n-k)!$$ for all not equal $i_j \in [n] \setminus \{ 1 \}$. Then by the
+			Principle of Inclusion-Exclusion we obtain $$\left | \bigcap_{i \in [n]} \bar{A_i} \right | = \sum_{k = 0}^{n-1} (-1)^k \binom{n-1}{k} (n-k)!$$ where we remove 1st individual
+			since the first individual can be placed behind any other person.
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] A mathematics department has $n$ professors and $2n$ courses, two assigned to each professor each semester.
+		\begin{enumerate}
+			\item[\textbf{i.}] How many ways are there to assign them in the Fall semester?
+			\item[\textbf{ii.}] How many ways are there to assign them in the Spring semester so that no professor teaches the same two courses in the Spring as in the Fall?
+		\end{enumerate}
+
+		\begin{proof}[Solution]
+			Suppose there are $n$ professors and $2n$ courses to be taught where two are given to each professor.
+			\begin{enumerate}
+				\item[\textbf{i.}] Let us imagine that the professors write each of the $2n$ courses onto a piece of paper and let the first professor take the first two, the second take
+					the next two, and so on. Since it makes no difference to any professor whether they take courses $A$ and $B$ or $B$ and $A$, it is clear that the number of ways
+					classes can be assigned is $\frac{(2n)!}{2^n}$.
+
+				\item[\textbf{ii.}] Suppose the professors were assigned courses in the Fall and they were to be assigned courses again in the Spring. Let $A_i$ for $i \in [n]$ denote
+					the set of course assignments such that the $i$th professor teaches the same courses. Clearly we can see that $$|A_{i_1} \cap \hdots \cap A_{i_k}| =
+					\frac{(2n - 2k)!}{2^{n-k}}$$ for all not equal $i_j \in [n]$ since we are not arranging the $k$ specified professors' classes. For each professor to teach
+					different courses we seek the set $\bigcap_{i \in [n]} \bar{A_i}$. By the Principle of Inclusion-Exclusion we obtain $$\left | \bigcap_{i \in [n]} \bar{A_i} \right |
+					= \sum_{k = 0}^n (-1)^k \binom{n}{k} \frac{(2n - 2k)!}{2^{n - k}}.$$
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] At a circular table there are $n$ students taking an exam. The exam has four versions. How many ways are there to assign the exams so that no two neighboring
+		students get the same version?
+
+		\begin{proof}[Solution]
+			Suppose we have a circular table with $n$ students taking an exam with four distinct versions. Let $A_i$ for $i \in [n]$ denote the set of seating arrangments such that the
+			student sitting in the $i$th chair will have the same exam as the student to their right. Assuming that student distinction will not be counted, we can see that $|A_i| =
+			4^{n - 1}$ for all $i \in [n]$ since the $i$th individual has four options and all others except $i$ and his neighbor have $4^{n-2}$ Furthermore, we can see that
+			$$|A_{i_1} \cap \hdots \cap A_{i_k}| = 4^{n - k}$$ for all not equal $i_j \in [n]$. For each student to not have neighbors with the same exam, then we seek the
+			set $\bigcap_{i \in [n]} \bar{A_i}$. By the Principle of Inclusion-Exclusion we obtain $$\left | \bigcap_{i \in [n]} \bar{A_i} \right | = \sum_{k = 0}^n (-1)^k \binom{n}{k}
+			4^{n - k}.$$ We can then simplify the sum by using Principle of Inclusion-Exclusion once again, noticing that it is equiviliant to number of strings of base four but without
+			a fourth character; in other words, we are counting the number of ternary strings. Thus, the count is $3^n$.
+		\end{proof}
+
+
+	% problem 5
+	\item[\textbf{5.}]
+		\begin{enumerate}
+			\item[\textbf{i.}] Prove that $$\sum_{k = 0}^n (-1)^k \binom{n}{k}(n-k)^n = n!.$$
+			\item[\textbf{ii.}] Evaluate $\sum_{k = 0}^n (-1)^i \binom{n}{i}(n-i)^k$, when $0 \leq k < n$, $k = n$, and $k > n$.
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{i.}] Suppose we have base $n$ strings with length $n$. Let $A_i$ for $i \in [n]$ denote the set of all strings where the $i$th character does not occur.
+					Clearly, we can see that $|A_i| = (n - 1)^n$ and also, $$|A_{i_1} \cap \hdots \cap A_{i_k}| = (n-k)^n$$ for all not equal $i_j \in [n]$ which gives the number strings
+					absent of $k$ specified characters. Then by the Principle of Inclusion-Exclusion, we can see that $\sum_{k = 0}^n (-1)^k \binom{n}{k}(n-k)^n$ represents the number
+					of strings with all $n$ characters which is clearly a permutation of $n$ characters. Thus, $$\sum_{k = 0}^n (-1)^k \binom{n}{k}(n-k)^n = n!.$$
+
+				\item[\textbf{ii.}] As we did in \textbf{i}, let us adopt the same sets of strings but generalize the string length to $k$. Then we can see that $\sum_{k = 0}^n
+					(-1)^i \binom{n}{i}(n-i)^k$ has a similar connotation but with string length $k$. If $0 \leq k < n$ then we can see that we need to have all $n$ characters
+					but we are limited to $k$, thus the sum must evaluate to zero. In the case that $k = n$, then we have the sum seen in \textbf{i} which provides $n!$. Finally,
+					if $k > n$, then we must have all $n$ characters with the addition of $k - n$ repeats which is a description of the Stirling numbers of the second kind when
+					permutations are accounted for. Hence, the sum evaluates to $n! \begin{Bmatrix} k \\ n \end{Bmatrix}$ in this last case.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 6
+	\item[\textbf{6.}] How many ways are there to seat $n$ married couples at a rotating round table with $2n$ chairs in such a way that no person sits next to their spouse?
+
+		\begin{proof}[Solution]
+			Suppose there are $n$ couples to be seated at a round table with $2n$ chairs. Let us consider the set of all seating arrangements. Let $A_i$ for $i \in [n]$ denote the set
+			of all arrangements where the $i$th couple sit next to one another. We can then see that $|A_i| = \frac{2(2n - 1)!}{2n}$ for all $i \in [n]$ because there are two ways the
+			couple can sit aside one another, $(2n-1)!$ for all to be seated, and finally we divide by $2n$ to remove all rotations. Furthermore, this scales accordingly,
+			$$|A_{i_1} \cap \hdots \cap A_{i_k}| = \frac{2^{k-1}}{n} (2n - k)!$$ for all not equal $i_j \in [n]$. Thus, by the Principle of Inclusion-Exclusion we obtain
+			$$\frac{1}{n} \sum_{k = 0}^n (-1)^k \binom{n}{k} 2^{k-1} (2n - k)!.$$
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

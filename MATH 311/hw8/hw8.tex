@@ -1,0 +1,107 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 311 \\
+\noindent December 1, 2020
+
+\begin{center}
+	\Large Homework 8
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Suppose $f, g : \mathbb{R} \to \mathbb{R}$ are continuously differentiable on the interval $(-1, 1)$. Prove that $h(x, y) = f(x)g(y)$ is differentiable on $(-1,
+		1)^2$. \\
+
+		\textbf{Lemma}: Let $V \subseteq \mathbb{R}^n$ be an open set and $f, g : V \to \mathbb{R}$ be continuous on $V$. Then $fg$ is continuous on $V$.
+
+		\begin{proof}[Lemma Proof]
+			Suppose $V \subseteq \mathbb{R}^n$ is an open set and $f, g : V \to \mathbb{R}$ are continuous on $V$. Consider an element $\textbf{a} \in V$. Let $\epsilon > 0$,
+			$\epsilon_0 = \min \left \{ \frac{\epsilon}{2|g(\textbf{a})|}, \frac{\epsilon}{2\epsilon + 2|f(\textbf{a})|} \right \}$, and choose a $\delta$ such that $||\textbf{x} -
+			\textbf{a}|| < \delta$ and $\textbf{x} \in V$ implies that both $|f(\textbf{x}) - f(\textbf{a})| < \min \{ \epsilon, \epsilon_0 \}$ and $|g(\textbf{x}) - g(\textbf{a})| <
+			\min \{ \epsilon, \epsilon_0 \}$. Since $|f(\textbf{x})| < \epsilon + |f(\textbf{a})|$, we can see that $$\epsilon_0 |f(\textbf{x})| < \epsilon_0(\epsilon + |f(\textbf{a})|)
+			\leq \frac{\epsilon}{2\epsilon + 2|f(\textbf{a})|}(\epsilon + |f(\textbf{a})|) = \frac{\epsilon}{2}.$$ Furthermore, observe that 
+			\begin{align*}
+				|f(\textbf{x}) g(\textbf{x}) - f(\textbf{a}) g(\textbf{a})| &= |f(\textbf{x}) g(\textbf{x}) - f(\textbf{x}) g(\textbf{a}) + f(\textbf{x}) g(\textbf{a}) + f(\textbf{a}) g(\textbf{a})| \\
+				&\leq |f(\textbf{x})| |g(\textbf{x}) - g(\textbf{a})| + |g(\textbf{a})||f(\textbf{x}) - f(\textbf{a})| \\
+				&< \epsilon_0 |f(\textbf{x})| + \epsilon_0 |g(\textbf{a})| \\
+				&\leq \frac{\epsilon}{2} + \frac{\epsilon}{2} \\
+				&= \epsilon.
+			\end{align*}
+			Thus, $fg$ is continuous on $V$ by definition.
+		\end{proof}
+
+		\begin{proof}
+			Let $f, g : \mathbb{R} \to \mathbb{R}$ be functions such that $f, g : \mathcal{C}^1(-1, 1)$. Furthermore, let $h(x, y) = f(x)g(y)$. For any $(x, y) \in (-1, 1)^2$, observe
+			that $$\frac{\partial h}{\partial x}(x, y) = g(y) \frac{\partial f}{\partial x}(x)\;\;\; \mathrm{and}\;\;\; \frac{\partial h}{\partial y}(x, y) = f(x) \frac{\partial g}{
+			\partial y}(y)$$ are both continuous as a result of our lemma and so $h \in \mathcal{C}^1(-1, 1)^2$. Then by Theorem 11.15, $h$ is differentiable on $(-1, 1)^2$.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Let $\textbf{T} : \mathbb{R}^n \to \mathbb{R}^m$ be a linear function. Prove that $\textbf{T}$ is differentiable on $\mathbb{R}^n$ with $D\textbf{T}(\textbf{x}) =
+		T$ for all $\textbf{x} \in \mathbb{R}^n$.
+
+		\begin{proof}
+			Let $\textbf{T} \in \mathcal{L}( \mathbb{R}^n; \mathbb{R}^m )$ be defined as $\textbf{T}(\textbf{x}) = T\textbf{x}$. If $\textbf{x} \in \mathbb{R}^n$, notice that
+			$$\lim_{\textbf{h} \to \textbf{0}} \frac{\textbf{T}(\textbf{x} + \textbf{h}) - \textbf{T}(\textbf{x}) - T\textbf{h}}{||\textbf{h}||} = \lim_{\textbf{h} \to \textbf{0}}
+			\frac{T\textbf{x} + T\textbf{h} - T\textbf{x} - T\textbf{h}}{||\textbf{h}||} = \lim_{\textbf{h} \to \textbf{0}} \frac{\textbf{0}}{||\textbf{h}||} = \textbf{0}.$$
+			Therefore, $\textbf{T}$ is differentiable on $\mathbb{R}^n$ by definition and by the uniqueness of the total derivative, $D\textbf{T}(\textbf{x}) = T$ for all $\textbf{x}
+			\in \mathbb{R}^n$.
+		\end{proof}
+
+
+		% problem 3
+		\item[\textbf{3.}] Let $\textbf{f}, \textbf{g} : \mathbb{R}^2 \to \mathbb{R}^3$ be defined by $\textbf{f}(x, y) = (x^2 + \cos(xy), xy^2, y^3)$ and $\textbf{g}(x, y) = \left (
+			3xy, \sqrt{x^2 + 1}, x \sin x - \cos y \right )$. Prove that $\textbf{f}$ and $\textbf{g}$ are differentiable on their domains and find $D(\textbf{f} + \textbf{g})(x, y)$ and
+			$D(\textbf{f} \cdot \textbf{g})(x, y)$.
+
+			\begin{proof}
+				Suppose $\textbf{f}, \textbf{g} : \mathbb{R}^2 \to \mathbb{R}^3$ are defined as $$\textbf{f}(x, y) = \left (x^2 + \cos(xy), xy^2, y^3 \right )\;\;\; \mathrm{and}\;\;\;
+				\textbf{g}(x, y) = \left ( 3xy, \sqrt{x^2 + 1}, x \sin x - \cos y \right ).$$ Observe that
+				\begin{align*}
+					\frac{\partial f}{\partial x}(x, y) &= \left ( 2x - y \sin(xy), y^2, 0 \right ), \\
+					\frac{\partial f}{\partial y}(x, y) &= \left ( -x \sin(xy), 2xy, 3y^2 \right ), \\
+					\frac{\partial g}{\partial x}(x, y) &= \left ( 3y, \frac{x}{\sqrt{x^2 + 1}}, \sin x + x \cos x \right ), \\
+					\frac{\partial g}{\partial y}(x, y) &= \left ( 3x, 0, \sin y \right )
+				\end{align*}
+				are all continuous on $\mathbb{R}^2$. Then by Theorem 11.15, both $\textbf{f}$ and $\textbf{g}$ are differentiable on $\mathbb{R}^2$. \\ \\
+				Provided that $\textbf{f}$ and $\textbf{g}$ are differentiable on $\mathbb{R}^2$, it follows that $$D\textbf{f}(x, y) = \begin{bmatrix} \partial f_1 / \partial x(x,
+				y) & \partial f_1 / \partial y(x, y) \\ \partial f_2 / \partial x (x, y) & \partial f_2 / \partial y (x, y) \\ \partial f_3 / \partial x (x, y) & \partial f_3 /
+				\partial y(x, y) \end{bmatrix} = \begin{bmatrix} 2x - y \sin(xy) & -x \sin(xy) \\ y^2 & 2xy \\ 0 & 3y^2 \end{bmatrix}$$ and $$D\textbf{g}(x, y) =
+				\begin{bmatrix} \partial g_1 / \partial x(x, y) & \partial g_1 / \partial y(x, y) \\ \partial g_2 / \partial x (x, y) & \partial g_2 / \partial y (x, y) \\
+				\partial g_3 / \partial x (x, y) & \partial g_3 / \partial y(x, y) \end{bmatrix} = \begin{bmatrix} 3y & 3x \\ x / \sqrt{x^2 + 1} & 0 \\ \sin x + x\cos x & \sin y
+				\end{bmatrix}$$ by Theorem 11.14.
+				Furthermore, $$D(\textbf{f} + \textbf{g})(x, y) = D\textbf{f}(x, y) + D\textbf{g}(x, y) = \begin{bmatrix} 2x + 3y - y \sin(xy) &
+				3x - x \sin(xy) \\ x / \sqrt{x^2 + 1} + y^2 & 2xy \\ \sin x + x \cos x & 3y^2 + \sin y \end{bmatrix}$$ and
+				\begin{align*}
+					D(\textbf{f} \cdot \textbf{g}) &= \textbf{g}(x, y) D\textbf{f}(x, y) + \textbf{f}(x, y) D\textbf{g}(x, y) \\
+					&= \left ( 3xy, \sqrt{x^2 + 1}, x\sin x - \cos y \right ) \begin{bmatrix} 2x - y \sin(xy) & -x \sin(xy) \\ y^2 & 2xy \\ 0 & 3y^2 \end{bmatrix} + \\
+					&\;\;\;\;\; \left ( x^2 + \cos(xy), xy^2, y^3 \right ) \begin{bmatrix} 3y & 3x \\ x / \sqrt{x^2 + 1} & 0 \\ \sin x + \cos x & \sin y \end{bmatrix} \\
+					D(\textbf{f} \cdot \textbf{g}) &= [ 9x^2y + xy^3 \cos x + y^3 \sin x - 3xy^2 \sin(xy) + 3y \cos(xy) + (2x^2 + 1)y^2 / \sqrt{x^2 + 1} \\
+					&\;\;\;\;\; 3x^3 + y^3 \sin y + 3xy^2 \sin x - 3y^2 \cos y - 3x^2y \sin(xy) + 3x \cos(xy) + 2xy\sqrt{x^2 + 1} ].
+				\end{align*}
+				via Theorem 11.20.
+			\end{proof}
+
+
+		% problem 4
+		\item[\textbf{4.}] Let $\textbf{f} : \mathbb{R}^2 \to \mathbb{R}^2$ be defined by $\textbf{f}(x, y) = (xy, x^2 - y^2)$. Prove that $\textbf{f}^{-1}$ exists and is differentiable
+			in some nonempty, open set containing the point $(0, 4)$ and compute $D\textbf{f}^{-1}(0, 4)$.
+
+			\begin{proof}
+				Let $\textbf{f} : \mathbb{R}^2 \setminus \{ \textbf{0} \} \to \mathbb{R}^2$ be defined as $\textbf{f}(x, y) = (xy, x^2 - y^2)$. Then we can see that $$\frac{\partial
+				f}{\partial x}(x, y) = (y, 2x)\;\;\; \mathrm{and}\;\;\; \frac{\partial f}{\partial y}(x, y) = (x, -2y)$$ are continuous on $\mathbb{R}^2 \setminus \{ \textbf{0} \}$
+				which implies that $\textbf{f} \in \mathcal{C}^1(\mathbb{R}^2 \setminus \{ \textbf{0} \})$ and so $$D\textbf{f}(x, y) = \begin{bmatrix} y & x \\ 2x & -2y \end{bmatrix}$$
+				via Theorem 11.14. Additionally, $$\Delta_f = \det \begin{bmatrix} y & x \\ 2x & -2y \end{bmatrix} = -2x^2 - 2y^2 \neq 0$$ when $(x, y) \neq \textbf{0}$. Therefore,
+				by the Inverse Function Theorem, $\textbf{f}^{-1} \in \mathcal{C}^1(\textbf{f}(\mathbb{R}^2 \setminus \{ \textbf{0} \} ))$ and $$D(\textbf{f}^{-1}) = [D\textbf{f}(
+				\textbf{f}^{-1}(0, 4))]^{-1} = [D\textbf{f}(2, 0)]^{-1} = \begin{bmatrix} 0 & 2 \\ 4 & 0 \end{bmatrix}^{-1} = \frac{1}{4}\begin{bmatrix} 0 & 1 \\ 2 & 0 \end{bmatrix}.$$
+			\end{proof}
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,84 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 311 \\
+\noindent September 29, 2020
+
+\begin{center}
+	\Large Homework 3
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Find a closed form for the series $$\sum_{k \geq 0} (-1)^{k+1}kx^{k-1}$$ and find the largest set on which this formula is valid.
+
+		\begin{proof}
+			Suppose $f(x) = \sum_{k \geq 0} (-1)^{k}kx^{k-1}$. Observe that by Lemma 7.29, we have $$r = \limsup_{k \to \infty} |(-1)^k k|^{1/k} = \limsup_{k \to \infty} k^{1/k} = 1$$
+			and so by the Root Test the interval of convergence is $(-1, 1)$ since the series $\sum_{k \geq 0} k$ and $\sum_{k \geq 0} (-1)^k k$ clearly diverge. \\
+
+			Let $|x| < 1$. Then by Theorem 7.32 and the Geometric Series,
+			\begin{align*}
+				\int_0^x f(t)\; \mathrm{d}t &= \sum_{k \geq 0} (-1)^k k \int_0^x t^{k-1}\; \mathrm{d}t \\
+				&= \sum_{k \geq 0} (-1)^k x^k \\
+				\int_0^x f(t)\; \mathrm{d}t &= \frac{1}{1 + x}.
+			\end{align*}
+			Hence, by the Fundamental Theorem of Calculus $$f(x) = \frac{\mathrm{d}}{\mathrm{d}x} \int_0^x f(t)\; \mathrm{d}t = \frac{\mathrm{d}}{\mathrm{d}x} \frac{1}{1 + x} =
+			-\frac{1}{(1 + x)^2}.$$ Thus, by Theorem 6.10 $$\sum_{k \geq 0} (-1)^{k+1} kx^{k-1} = -f(x) = \frac{1}{(1 + x)^2}$$ with an interval of convergence $(-1, 1)$.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Prove that cos$\,x$ is analytic on $\mathbb{R}$ and find its Maclaurin expansion.
+
+		\begin{proof}
+			Observe that $\cos$ is infinitely continuously differentiable on $\mathbb{R}$. Additionally, notice that its derivatives are exclusively $\pm \cos x$ and $\pm \sin x$ which
+			we know to be bounded by 1. Furthermore, $|\cos^{(n)}x| \leq 1$ for all $x \in \mathbb{R}$ and $n \in \mathbb{N}$. Hence, by Theorem 7.43 $\cos x$ is analytic on $\mathbb{R}$.
+			\\
+
+			Let us now compute the Maclaurin expansion of $\cos$ provided that it is analytic. Notice that \[ \cos^{(n)} x = \begin{cases} \cos x; & n = 4k \\ -\sin x; & n = 4k + 1 \\
+			-\cos x; & n = 4k + 2 \\ \sin x; & n = 4k + 3 \end{cases}. \] We can then conclude that $\cos^{(2k)} x = (-1)^k \cos x$ and $\cos^{(2k + 1)} x = (-1)^{k+1} \sin x$ for all
+			$k \in \mathbb{N} \cup \{ 0 \}$; then it follows that $\cos^{(2n)} 0 = (-1)^k$ and $\cos^{(2n + 1)} 0 = 0$ illustrating that the odd terms in our Maclaurin expansion will vanish.
+			Thus, $$\cos x = \sum_{k \geq 0} \frac{(-1)^k}{(2k)!} x^{2k}$$ for all $x \in \mathbb{R}$.
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Prove that $x2^x$ is analytic on $\mathbb{R}$ and find its Maclaurin expansion.
+
+		\begin{proof}
+			Suppose $f(x) = x2^x$. I claim that $f^{(n)}(x) = x2^x \ln^n 2 + n 2^x \ln^{n-1} 2$. Clearly we can see that $f'(x) = x2^x \ln 2 + 2^x$. For the inductive step, let us assume
+			for an arbitrary $n-1 \in \mathbb{N}$ that $f^{(n-1)}(x) = x2^x \ln^{n-1} 2 + (n-1)2^x \ln^{n-2} 2$. Then it follows that $$f^{(n)}(x) = \frac{\mathrm{d}}{\mathrm{d}x}(x2^x
+			\ln^{n-1}2 + (n-1)2^x \ln^{n-2}2) = x2^x \ln^n 2 + n2^x \ln^{n-1}2$$ proving the claim. \\
+
+			Let $x \in [-c, c]$ for a fixed $c \in \mathbb{R}^+$. Further, suppose $n \in \mathbb{N}$. We can see that $x$, $2^x$, and $f$ are all increasing on $\mathbb{R}^+$; therefore,
+			\begin{align*}
+				|f^{(n)}(x)| &= |x2^x \ln^n 2 + n 2^x \ln^{n-1} 2| \\
+				&\leq c2^c \ln^n 2 + n 2^c \ln^{n-1} 2 \\
+				&\leq (c + n) 2^c \ln^n 2 \\
+				&\leq 2^{2c + n} \ln^n 2 \\
+				|f^{(n)}(x)| &\leq ( 2^{2c + 1} \ln 2 )^n := M^n.
+			\end{align*}
+			Since $c$ was chosen arbitrarily, by Theorem 7.43 $f$ is analytic on $\mathbb{R}$. \\
+
+			Let us now compute the Maclaurin expansion of $f$ provided that it is analytic. Given that $f^{(n)}(x) = x2^x \ln^n 2 + n 2^x \ln^{n-1} 2$, it follows that $f^{(n)}(0) =
+			n \ln^{n-1} 2$. Thus, $$f(x) = f(0) + \sum_{k \geq 1} \frac{k \ln^{k-1} 2}{k!}x^k = \sum_{k \geq 1} \frac{\ln^{k-1} 2}{(k-1)!} x^k$$ for all $x \in \mathbb{R}$.
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Let $f \in \mathcal{C}^\infty (-1, 1)$ and suppose $f$ is even. Prove that the Maclaurin series of $f(x)$ only contains even powers of $x$.
+
+		\begin{proof}
+			Suppose $f \in \mathcal{C}^\infty (-1, 1)$ and that $f$ is even. Then we can see that $f(x) = f(-x)$. Differentiating the expression gives $f'(x) = -f'(-x)$; similarly, we
+			can conclude that $f^{(n)}(x) = (-1)^n f^{(n)}(-x)$. Now examining odd parity of $n$, we have $$f^{(2k-1)}(x) = (-1)^{2k-1}f^{(2k-1)}(-x) = -f^{(2k-1)}(x)$$
+			illustrating that $f^{(2k-1)}(x) = 0$ for all $x \in (-1, 1)$ and $k \in \mathbb{N}$. Thus, all odd terms in the Maclaurin series will vanish.
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

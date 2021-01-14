@@ -1,0 +1,85 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 311 \\
+\noindent September 22, 2020
+
+\begin{center}
+	\Large Homework 2
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Prove that $\frac{x}{n} \to 0$ uniformly as $n \to \infty$ on any closed interval $[a, b]$.
+
+		\begin{proof}
+			Suppose $E = [a, b]$ is a nondegenerate interval where $a, b \in \mathbb{R}$. Further, suppose $f_n : E \to \mathbb{R}$ is defined as $f_n(x) = \frac{x}{n}$. Observe that
+			$E \subset \mathbb{R}$ is a closed interval; we can then conclude that $\max \{ |t| : t \in E \}$ must exist. Let $\epsilon > 0$ and $N = \left \lceil \frac{\max \{ |t| : t
+			\in E \}}{\epsilon} \right \rceil \in \mathbb{N}$. Then it follows that $N < n$ implies $$\frac{|x|}{\epsilon} \leq \frac{\max \{ |t| : t \in E \}}{\epsilon} \leq N < n$$
+			for any $x \in E$. Furthermore, $\frac{|x|}{\epsilon} < n$ illustrates that $|f_n(x) - 0| = \frac{|x|}{n} < \epsilon$. Thus, $f_n \to 0$ uniformly on any closed interval by
+			the definition uniform convergence.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Suppose that for each $n \in \mathbb{N}$ that $f_n : E \to \mathbb{R}$ is bounded. Prove that if $f_n \to f$ uniformly on $E$, then $\{f_n\}$ is uniformly bounded
+		on $E$ and $f$ is a bounded function on $E$.
+
+		\begin{proof}
+			Suppose that for each $n \in \mathbb{N}$ that $f_n : E \to \mathbb{R}$ is bounded and that $f_n \to f$ uniformly on $E$. \\
+
+			Let us first show that $f$ is bounded on $E$. Let $\epsilon = 1$. Then fix an $n \in \mathbb{N}$ such that $|f(x) - f_n(x)| < \epsilon = 1$. Since $f_n$ is bounded by
+			some $L \in \mathbb{R}$ for all $x \in E$, we can see that $$-1-L \leq -1 + f_n(x) < f(x) < 1 + f_n(x) \leq 1 + L.$$ Furthermore, $|f(x)| < 1 + L = M$ illustrating that
+			$f$ is bounded for all $x \in E$. \\
+
+			To show uniform boundedness of $\{ f_n \}$, let us fix $\epsilon > 0$ and choose an $N \in \mathbb{N}$ such that $|f_N(x) - f(x)| < \epsilon$. Observe that
+			$$-\epsilon - M \leq -\epsilon + f(x) < f_N(x) < \epsilon + f(x) \leq \epsilon + M.$$ Therefore, $|f_n(x)| < M + \epsilon$ for all $n \geq N$ and $x \in E$. Now consider
+			the fact that for all $0 < n < N$, $f_n$ can be bounded. Hence, $\{ f_n \}$ is bounded by the supremum of all the bounds of $f_n$ where $0 < n < N$ in addition to $M +
+			\epsilon$ for all $n \in \mathbb{N}$ and $x \in E$. Thus, $f_n$ is uniformly bounded by definition.
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Find the interval of convergence for each of the following power series.
+		\begin{enumerate}
+			\item[\textbf{a.}] $\sum_{k \geq 0} \frac{(x-2)^k}{4^k}$
+			\item[\textbf{b.}] $\sum_{k \geq 0} (5 + 2(-1)^k)^k (x + 3)^k$
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{a.}] By Theorem 7.22 the radius of convergence of the series $\sum_{k \geq 0} \frac{1}{4^k}(x-2)^k$ is $$R = \lim_{k \to \infty} \frac{1/4^k}{1/4^{k+1}}
+					= 4.$$ Then it follows that the interval of convergence must include the interval $(-2, 6)$ with the end points in question. Now substituting -2 and 6 for $x$, we
+					have $$\sum_{k \geq 0} (-1)^k\;\;\;\;\; \mathrm{and}\;\;\;\;\; \sum_{k \geq 0} (1)^k,$$ respecively. Both series clearly diverge by the Divergence Test; thus, the
+					interval of convergence is $(-2, 6)$.
+
+				\item[\textbf{b.}] Observe that the sequence $5 + 2(-1)^k$ oscillates exclusively between the values 3 and 7. Hence by Theorem 7.21, $$R = \frac{1}{\limsup_{k \to
+					\infty} |(5 + 2(-1)^k)^k|^{1/k}} = \frac{1}{\limsup_{k \to \infty} (5 + 2(-1)^k)} = \frac{1}{7}.$$ Then it follows that the interval of convergence must include the
+					interval $\left (-\frac{22}{7}, -\frac{20}{7} \right )$ with the end points in question. Now substituting $-\frac{22}{7}$ and $-\frac{20}{7}$ for $x$, we have
+					$$\sum_{k \geq 0} (-1)^k \frac{(5 + 2(-1)^k)^k}{7^k}\;\;\;\;\; \mathrm{and}\;\;\;\;\; \sum_{k \geq 0} \frac{(5 + 2(-1)^k)^k}{7^k},$$ respecively. Notice that for
+					both sequences of the series, even indicies result in 1 and odd indicies result in a geometric sequence where $|x| < 1$ (more specifically, $\left | -\frac{3}{7}
+					\right | < 1$ and $\left | \frac{3}{7} \right | < 1$, respectively). Moreover, for both sequences we can then conclude that the limit of the even indicies will
+					converge to 1 and 0 for the odd indicies. Furthermore, the difference between terms with large indicies of different parity cannot be bounded by some threshold
+					illustrating that both sequences are not Cauchy; hence, the sequences are not convergent. Thus, by the Divergence Test both series must diverge informing us that
+					the interval of convergence is $\left (-\frac{22}{7}, -\frac{20}{7} \right )$.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Find a closed form for the series $\sum_{k \geq 1} 4x^{4k - 2}$ and find the largest set on which this formula is valid.
+
+		\begin{proof}
+			Suppose $f(x) = \sum_{k \geq 1} 4x^{4k - 2}$. By Theorem 7.22 the radius of convergence of $f$ is $$R = \lim_{k \to \infty} \frac{4}{4} = 1.$$ Additonally, we can clearly see
+			that the series will diverge when $x = 1$ and $x = -1$ by the Divergence Test; thus, the interval of convergence is $(-1, 1)$. By the Geometric Series, observe that
+			$$x^2f(x) = \sum_{k \geq 1} 4x^{4k} = \frac{4x^4}{1 - x^4}.$$ Then it follows that $f(x) = \frac{4x^2}{1 - x^4}$ for all $x \in (-1, 1)$.
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

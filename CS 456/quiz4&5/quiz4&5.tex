@@ -1,0 +1,65 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent CS 456 \\
+\noindent October 11, 2020
+
+\begin{center}
+	\Large Quiz 4/5
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Find a regular grammar for $L = \{ a^n b^m : mn = 2k, k \in \mathbb{N} \cup \{ 0 \} \}$ given $\Sigma = \{ a, b \}$ and justify your answer.
+
+		\begin{proof}
+			Suppose $\Sigma = \{ a, b \}$ and let $L =\{ a^n b^m : mn = 2k, k \in \mathbb{N} \cup \{ 0 \} \}$. Now consider the following regular grammar $G = ( \{ S, A, B, C, D \},
+			\Sigma, S, P )$ where $P$ is defined as the set of productions
+			\begin{align*}
+				S &\to A | C \\
+				A &\to aaA | B \\
+				B &\to bB | \lambda \\
+				C &\to aC | D \\
+				D &\to bbD | \lambda.
+			\end{align*}
+			Clearly we can see that $G$ is a regular grammar because it is a right-linear grammar. \\
+			Let us now show that $L = L(G)$. Beginning with production $S$, there is a choice between $A$ and $C$ which both lead to a sequence of $a$'s followed by $b$'s. Observe that
+			for $mn$ to be even, either $m$ or $n$ must be even. Furthermore, by choosing $A$, an even number of $a$'s must be chosen then an arbitrary number of $b$'s follow. Similarly,
+			$C$ takes an arbitrary number of $a$'s then an even number of $b$'s. Hence, any string in $L$ must also belong to $L(G)$ and vice versa illustrating with $L = L(G)$.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}]
+		\begin{enumerate}
+			\item[\textbf{i.}] Explain the pumping lemma for regular languages.
+			\item[\textbf{ii.}] Suppose $\Sigma = \{ a, b, c \}$, prove or disprove that $L = \{ a^n b^m c^{m + n} : m, n \geq 0 \}$ is regular.
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{i.}] An extention of the pigeonhole principle, the pumping lemma for infinite regular languages, states that for any infinite regular language $L$, there
+					exists a $p \in \mathbb{N}$ (labeled the pumping length) such that for any string $w \in L$ with $|w| \geq p$ then $w = xyz$ where $|xy| \leq p$ and $|y| \geq 1$ such
+					that $w_k = xy^kz$ is also a member of $L$ for all $k \in \mathbb{N} \cup \{ 0 \}$. \\
+					The pumping lemma states that for any infinite regular language then a very specific string $w$ that belongs to the language can be used to generate more string in
+					the language by \textit{pumping up} or \textit{pumping down} the $y$ substring within the decomposition $w = xyz$ to $w_k = xy^kz$ for any value of $k$. The pumping
+					lemma is based on the principle that infinite regular languages must have cycles such that it can either be skipped or repeated any number of times. Additionlly,
+					the lemma is a foundational result regarding identification of nonregular languages; using a proof by contradiction, the pumping lemma can be used to show that pumped
+					strings do not in fact belong to the language which illustrates that the given infinite regular language is not regular by assumption.
+
+				\item[\textbf{ii.}] Suppose $\Sigma = \{ a, b, c \}$ and let $L = \{ a^n b^m c^{m + n} : m, n \geq 0 \}$. I claim that $L$ is not regular. Suppose by contradiction that
+					$L$ is in fact regular. Clearly $L$ is an infinite language and regular by assumption, then by the pumping lemma there must exist a pumping length $p \in \mathbb{N}$
+					for any string in our language. Let $w = b^p c^p \in L$ where $|w| = 2p \geq p$. Then it follows that $y = b^k$ for $1 \leq k \leq p$ since $|xy| \leq p$ and $|y|
+					\geq 1$. Now, observe that a defining feature of $L$ is the fact that for any $s \in L$, $n_a(s) + n_b(s) = n_c(s)$. If we were to pump $w$ down to $w_0 = b^{p - k}
+					c^p$ we can then see that $$n_a(w_0) + n_b(w_0) = p - k \neq p = n_c(w_0).$$ Thus, $w_0 \notin L$ which is a contradiction.
+			\end{enumerate}
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

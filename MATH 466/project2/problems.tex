@@ -1,0 +1,46 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\begin{enumerate}
+	% problem 2
+	\item[\textbf{2.}] Let $x_1, x_2 \in \mathbb{R}$ be distinct. The corresponding Lagrange basis functions are given by $$\ell_1(x) = \frac{x - x_2}{x_1 - x_2}\;\;\; \mathrm{and}\;\;\; \ell_2(x) = \frac{x - x_1}{x_2 - x_1}.$$ Consider the following polynomials $\eta_1(x) = \ell_1^2(x) \ell_2(x)$ and $\eta_2(x) = \ell_1(x) \ell_2^2(x)$. Find $\eta_i(x_j)$ and $\eta_i'(x_j)$ for $i = 1, 2$ and $j = 1, 2$.
+
+	\begin{proof}
+		Suppose $x_1 \neq x_2 \in \mathbb{R}$, $\ell_1(x) = (x-x_2) / (x_1 - x_2)$, and $\ell_2(x) = (x - x_1) / (x_2 - x_1)$. Further, let $\eta_1(x) = \ell_1^2(x) \ell_2(x)$ and $\eta_2(x) = \ell_1(x) \ell_2^2(x)$ and so $$\eta_1(x) = \left ( \frac{x - x_2}{x_1 - x_2} \right )^2 \left ( \frac{x - x_1}{x_2 - x_1} \right )\;\;\; \mathrm{and}\;\;\; \eta_2(x) = \left ( \frac{x - x_2}{x_1 - x_2} \right ) \left ( \frac{x - x_1}{x_2 - x_1} \right )^2.$$ Inputing the values $x_1$ and $x_2$ into the functions we can see that $$\eta_1(x_1) = \eta_1(x_2) = \eta_2(x_1) = \eta_2(x_2) = 0;$$ in other words, $\eta_i(x_j) = 0$ for $i = 1, 2$ and $j = 1, 2$. \\
+		Now taking the derivative of $\eta_1(x)$ and $\eta_2(x)$ we obtain $$\eta_1'(x) = \frac{(x - x_2)^2 + 2(x - x_1)(x - x_2)}{(x_2 - x_1)^3}\;\;\; \mathrm{and}\;\;\; \eta_2'(x) = \frac{(x - x_1)^2 + 2(x - x_1)(x - x_2)}{(x_1 - x_2)^3}.$$ Furthermore, $$\eta_1'(x_1) = \frac{1}{x_2 - x_1},\;\; \eta_1'(x_2) = 0,\;\; \eta_2'(x_1) = 0,\;\; \eta_2'(x_2) = \frac{1}{x_1 - x_2}.$$ To find $\eta_i'(x_j)$, we can first combine $\eta_1'(x_1)$ and $\eta_2'(x_1)$ as well as $\eta_1'(x_2)$ and $\eta_2'(x_2)$ which provides $$\eta_i'(x_1) = \frac{i - 2}{x_1 - x_2}\;\;\; \mathrm{and}\;\;\; \eta_i'(x_1) = \frac{i - 1}{x_1 - x_2}.$$ Finally, uniting the last expressions yields $$\eta_i'(x_j) = \frac{i + j - 3}{x_1 - x_2}.$$
+	\end{proof}
+
+	% problem 3
+	\item[\textbf{3.}] Let $A, B \in \mathbb{R}$ be constants and define $g_1(x) = A\eta_1(x)$ and $g_2(x) = B\eta_2(x)$. Solve for $A$ and $B$ such that $$g_1(x_1) = 0,\;\; g_1(x_2) = 0,\;\; g_1'(x_1) = 1,\;\; g_1'(x_2) = 0$$ and $$g_2(x_1) = 0,\;\; g_2(x_2) = 0,\;\; g_2'(x_1) = 0,\;\; g_2'(x_2) = 1.$$
+
+	\begin{proof}
+		Let $A, B \in \mathbb{R}$, $g_1(x) = A\eta_1(x)$, and $g_2(x) = B\eta_2(x)$. Given the result of \textbf{2}, we can see that $g_i(x_j) = 0$ for $i = 1, 2$ and $j = 1, 2$ for any values of $A$ and $B$. Similarly, by the same conclusion it must hold that $g_i'(x_j) = 0$ where $i \neq j$ for $i = 1, 2$ and $j = 1, 2$. Lastly, we must assert that $g_1'(x_1) = g_2'(x_2) = 1$ and so $A / (x_2 - x_1) = B / (x_1 - x_2) = 1$. Therefore, $A = x_2 - x_1$ and $B = x_1 - x_2$.
+	\end{proof}
+
+	% problem 4
+	\item[\textbf{4.}] Let $a, b \in \mathbb{R}$ be constants and consider the polynomials $$h_1(x) = \ell_1(x) + a(g_1(x) + g_2(x))\;\;\; \mathrm{and}\;\;\; h_2(x) = \ell_2(x) + b(g_1(x) + g_2(x)).$$ Solve for $a$ and $b$ such that $$h_1(x_1) = 1,\;\; h_1(x_2) = 0,\;\; h_1'(x_1) = 0,\;\; h_1'(x_2) = 0$$ and $$h_2(x_1) = 0,\;\; h_2(x_2) = 1,\;\; h_2'(x_1) = 0,\;\; h_2'(x_2) = 0.$$
+
+	\begin{proof}
+		Suppose $a, b \in \mathbb{R}$, $h_1(x) = \ell_1(x) + a(g_1(x) + g_2(x))$, and $h_2(x) = \ell_2(x) + b(g_1(x) + g_2(x))$. Based on our results of \textbf{3} and the definition of $\ell_i(x)$, we can see that $h_1(x_1) = h_2(x_2) = 1$ as well as $h_1(x_2) = h_2(x_1) = 0$. Taking the derivative of our functions, we obtain $$h_1'(x) = \frac{1}{x_1 - x_2} + a(g_1'(x) + g_2'(x))\;\;\; \mathrm{and}\;\;\; h_1'(x) = \frac{1}{x_2 - x_1} + b(g_1'(x) + g_2'(x)).$$ For $h_1'(x_1) = 0$, it must hold that $$0 = \frac{1}{x_1 - x_2} + a(g_1'(x_1) + g_2'(x_1)) = \frac{1}{x_1 - x_2} + a$$ implying that $a = 1/(x_2 - x_1)$. Similarly, we can see that $b = 1 / (x_1 - x_2)$ from the assumption that $h_2'(x_2) = 0$. Given our newly found values of $a$ and $b$ we can conclude that $h_1'(x_2) = h_2'(x_1) = 0$ is also satisfied by evaluating the expressions.
+	\end{proof}
+
+	% problem 5
+	\item[\textbf{5.}] Let $y_i, z_i \in \mathbb{R}$ fro $i = 1, 2$ for constants. Show that the polynomial given by $$p(x) = \sum_{i=1}^2 \left ( y_i h_i(x) + z_i g_i(x) \right )$$ satisfies the conditions $p(x_i) = y_i$ and $p'(x_i) = z_i$ for $i = 1, 2$ and explain why $p(x)$ is the unique polynomial of minimal degree that satisfies those conditions.
+
+	\begin{proof}
+		Suppose $y_i, z_i \in \mathbb{R}$ for $i = 1, 2$ and $$p(x) = \sum_{i = 1}^2 ( y_i h_i(x) + z_i g_i(x) ).$$ Consider $p(x_i)$ where $i = 1, 2$; we know that $g_i(x_j) = 0$ for
+		$i = 1, 2$ and $j = 1, 2$ and $h_i(x_j) = 0$ for $i \neq j$ which implies that $p(x_1) = y_1$ and $p(x_2) = y_2$ since all other terms vanish. Similarly, we can see that
+		$g_i'(x_j) = 0$ for $i \neq j$ and $h_i'(x_j) = 0$ for $i = 1, 2$ and $j = 1, 2$. Therefore, $$p'(x) = \sum_{i = 1}^2 ( y_i h_i'(x) + z_i g_i'(x) )$$ provides $p'(x_1) = z_1$
+		and $p'(x_2) = z_2$ by the same argument. Clearly, $p$ is a Hermite Interpolating Polynomial by definition. Because of this, it follows that $p$ is unique in regard to its minimal
+		degree while maintaining the conditions above [USM].
+	\end{proof}
+
+	% problem 6
+	\item[\textbf{6.}] Let $f(x) = e^x - 13 / x$ and define $y_i = f(x_i)$ and $z_i = f'(x_i)$ for $i = 1, 2$ where $x_1 = 1.3$ and $x_2 = 2.7$. Write a computer program that computes $p(x)$ for any values of $x$, verify $p(2) \approx 0.939363169383250$ and then compute the size of the error $e = |f(2) - p(2)|$.
+\end{enumerate}
+
+\end{document}

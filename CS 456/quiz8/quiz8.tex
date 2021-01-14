@@ -1,0 +1,36 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent CS 456 \\
+\noindent November 15, 2020
+
+\begin{center}
+	\Large Quiz 8
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Prove that $L = \{ a^n b^m c^q : q > n \geq 0, q > m \geq 0\}$ is not context-free given that $\Sigma = \{ a, b, c \}$.
+
+		\begin{proof}
+			Suppose $\Sigma = \{ a, b, c \}$ and let $L = \{ a^n b^m c^q : q > n \geq 0, q > m \geq 0\}$. Further, suppose by contradiction that $L$ is a context-free language.
+			Clearly $L$ is an infinite language so the Pumping Lemma for context-free languages can be applied; moreover, if $w = a^m b^m c^{m+1}$ then $|w| = 3m + 1 \geq m$ illustrates
+			that $w$ can be decomposed to $w = uvxyz$ with $|vxy| \leq m$ and $|vy| \geq 1$ such that $w_i = uv^ixy^iz \in L$ for all $i \in \mathbb{N} \cup \{ 0 \}$. \\
+
+			Let us consider two cases regarding $v$ and $y$. In the case that $n_c(v) > 0$ or $n_c(y) > 0$, at least one of them contains $c$, let us pump $w$ down to $w_0 = uxz$. Since
+			$|vxy| \leq m$, it follows that $a$ cannot be a substring of $vxy$ and so $n_a(w_0) \geq n_c(w_0)$ which is a contradiction to the assumption that $w_0 \in L$. \\
+
+			Otherwise, let $n_c(v) = 0$ and $n_c(y) = 0$, in other words, $v$ and $y$ are entirely composed of $a$'s and/or $b$'s (with the possibility that $v = \lambda$ or $y =
+			\lambda$, but not both). Without loss of generality, suppose $v$ contains at least one $a$. Then it follows that $1 \leq n_a(v) < n_c(w)$. Furthermore, by the Archimedean
+			Principle there exists an $i \in \mathbb{N}$ such that $n_a(w_i) \geq i \cdot n_a(v) > n_c(w) = n_c(w_i)$ and so $w_i \notin L$ which is a contradiction. \\
+
+			Provided that all cases lead to a contradiction, we can see that $L$ is not a context-free language.
+		\end{proof}
+\end{enumerate}
+
+\end{document}

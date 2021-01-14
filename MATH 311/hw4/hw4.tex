@@ -1,0 +1,95 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 311 \\
+\noindent October 15, 2020
+
+\begin{center}
+	\Large Homework 4
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Let $\textbf{x}, \textbf{y} \in \mathbb{R}^n$. Prove that if $||2\textbf{x} - \textbf{y}|| < 2$ and $||\textbf{y}|| < 1$, then $$|\, ||\textbf{x} - \textbf{y}|| -
+		\textbf{x} \cdot \textbf{x}| < 2.$$
+
+		\begin{proof}
+			Suppose $\textbf{x}, \textbf{y} \in \mathbb{R}^n$ such that $||2\textbf{x} - \textbf{y}|| < 2$ and $||\textbf{y}|| < 1$. Then it follows by Theorem 8.2, $$| \textbf{y}
+			\cdot (2\textbf{x} - \textbf{y}) | = | \textbf{y} \cdot (\textbf{y} - 2\textbf{x}) | = |\textbf{x} \cdot \textbf{x} - 2 \textbf{x} \cdot \textbf{y} + \textbf{y} \cdot
+			\textbf{y} - \textbf{x} \cdot \textbf{x}| = |(\textbf{x} - \textbf{y}) \cdot (\textbf{x} - \textbf{y}) - \textbf{x} \cdot \textbf{x}| = |\, ||\textbf{x} - \textbf{y}||^2 -
+			\textbf{x} \cdot \textbf{x} |.$$ Now by the Cauchy-Schwarz Inequality we have $$|\, ||\textbf{x} - \textbf{y}||^2 - \textbf{x} \cdot \textbf{x} | = | \textbf{y} \cdot
+			(2\textbf{x} - \textbf{y}) | \leq ||\textbf{y}||\, ||2\textbf{x} - \textbf{y}|| < 2.$$
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Let $T: \mathbb{R}^4 \to \mathbb{R}^5$ be given by $$T(x_1, x_2, x_3, x_4) = (x_1 + x_4, 2x_2 - x_3, 0, x_1 + x_2 + x_3 - x_4, x_1 + 3x_2).$$ Find the matrix
+		representative of $T$.
+
+		\begin{proof}
+			Suppose $T$ is defined as above. Let us first show $T$ is a linear function. Suppose $\textbf{x}, \textbf{y} \in \mathbb{R}^4$ and $\alpha \in \mathbb{R}$. In regard to
+			homogeneity, observe that $$T(\alpha \textbf{x}) = (\alpha x_1 + \alpha x_4, 2\alpha x_2 - \alpha x_3, 0, \alpha x_1 + \alpha x_2 + \alpha x_3 - \alpha x_4, \alpha x_1 +
+			3\alpha x_2) = \alpha T(\textbf{x}).$$ For additivity, we can see that
+			\begin{align*}
+				T(\textbf{x} + \textbf{y}) &= (\, (x_1 + y_1) + (x_4 + y_4), 2(x_2 + y_2) - (x_3 + y_3), 0, (x_1 + y_1) + (x_2 + y_2) + (x_3 + y_3) - (x_4 + y_4), \\
+				&\;\;\;\;\;\;(x_1 + y_1) + 3(x_2 + y_2)\, ) \\
+				&= (x_1 + x_4, 2x_2 - x_3, 0, x_1 + x_2 + x_3 - x_4, x_1 + 3x_2) + (y_1 + y_4, 2y_2 - y_3, 0, y_1 + y_2 + y_3 - y_4, \\
+				&\;\;\;\;\;\;y_1 + 3y_2) \\
+				&= T(\textbf{x}) + T(\textbf{y}).
+			\end{align*}
+			Hence, $T$ is linear by definition. \\
+
+			Provided that $T \in \mathcal{L}(\mathbb{R}^4, \mathbb{R}^5)$, we can apply Theorem 8.15 which provides $$T(x_1, x_2, x_3, x_4) =
+			\begin{bmatrix}
+				1 & 0 & 0 & 1 \\
+				0 & 2 & -1 & 0 \\
+				0 & 0 & 0 & 0 \\
+				1 & 1 & 1 & -1 \\
+				1 & 3 & 0 & 0
+			\end{bmatrix}
+			\begin{bmatrix} x_1 \\ x_2 \\ x_3 \\ x_4 \end{bmatrix}.$$
+		\end{proof}
+
+	% problem 3
+	\item[\textbf{3.}] Let $f(x) = (x^3, x^2, \sin x)$. Find the matrix representative of a linear transformation $T \in \mathcal{L}(\mathbb{R}, \mathbb{R}^3)$ which satisfies
+		$$\lim_{h \to 0} \frac{||f(x + h) - f(x) - T(h)||}{h} = 0.$$
+
+		\begin{proof}
+			Suppose $f(x) = (x^3, x^2, \sin x)$ and let $T \in \mathcal{L}(\mathbb{R}, \mathbb{R}^3)$ be defined as $$T(h) = \begin{bmatrix} 3x^2 \\ 2x \\ \cos x \end{bmatrix}
+			\begin{bmatrix} h \end{bmatrix} = (3x^2h, 2xh, h\cos x).$$ I claim $T$ satifies the equality above. Observe that
+			\begin{align*}
+				L &= \lim_{h \to 0} \frac{||f(x + h) - f(x) - T(h)||}{h} \\
+				&= \lim_{h \to 0} \frac{||( (x + h)^3, (x + h)^2, \sin(x + h) ) - (x^3, x^2, \sin x) - (3x^2h, 2xh, h\cos x) ||}{h} \\
+				&= \lim_{h \to 0} \left | \left | 3xh + h^2, h, \frac{\sin(x+h) - \sin x}{h} - \cos x \right | \right | \\
+				&= \sqrt{\lim_{h \to 0} \left ( (3xh + h^2)^2 + h^2 + \left ( \frac{\sin(x+h) - \sin x}{h} - \cos x \right )^2 \right )} \\
+				&= \lim_{h \to 0} \frac{\sin(x+h) - \sin x}{h} - \cos x \\
+				&= \cos x - \cos x \\
+				L &= 0
+			\end{align*}
+			proving the claim.
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Let $V \subseteq \mathbb{R}^n$. Prove that $V$ is open if and only if there is a collection of open balls $\{ B_\alpha : \alpha \in A \}$ such that $$V =
+		\bigcup_{\alpha \in A} B_\alpha.$$
+
+		\begin{proof}
+			Suppose $V \subseteq \mathbb{R}^n$ is open. Then by definition, for every $\textbf{a} \in V$ there is an $\epsilon > 0$ such that $B_\epsilon(\textbf{a}) \subseteq V$.
+			I claim that, $$V = \bigcup_{\textbf{a} \in V} B_{\epsilon(\textbf{a})} (\textbf{a})$$ where $\epsilon(\textbf{a})$ is the corresponding $\epsilon > 0$ for a given $\textbf{a}
+			\in V$. Suppose by contradiction that this is not the case, then either a value $\textbf{a} \in V$ yet $\textbf{a} \notin \bigcup_{\textbf{a} \in V} B_{\epsilon(\textbf{a})}
+			(\textbf{a})$ or there exists an element $\textbf{b} \in \bigcup_{\textbf{a} \in V} B_{\epsilon(\textbf{a})} (\textbf{a})$ but $\textbf{b} \notin V$. Immediately we can see
+			that this is a contradiction since every $\textbf{a} \in B_{\epsilon}(\textbf{a})$ for any $\epsilon > 0$ and $B_{\epsilon(\textbf{a})}(\textbf{a}) \subseteq V$ for any
+			$\textbf{a} \in V$. \\ \\
+			Conversely, given $$V = \bigcup_{\alpha \in A} B_\alpha$$ where $\{ B_\alpha \in \mathbb{R}^n: \alpha \in A \}$ is a set of open balls. Then it follows by Theorem 8.24i that
+			$V \subseteq \mathbb{R}^n$ is also open.
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

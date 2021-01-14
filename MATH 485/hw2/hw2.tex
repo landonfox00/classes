@@ -1,0 +1,145 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 485 \\
+\noindent September 7, 2020
+
+\begin{center}
+\Large Homework 2
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Consider a $8 \times 8$ chessboard.
+		\begin{enumerate}
+			\item[\textbf{i.}] How many ways can you place 8 identical rooks so that no two attack each other?
+			\item[\textbf{ii.}] How many ways can you do this if you have 4 identical wooden and 4 identical marble rooks?
+			\item[\textbf{iii.}] How many ways can you do this if all 8 rooks are distinguishable?
+		\end{enumerate}
+
+		\begin{proof}[Solution]
+			Suppose we have an ordinary $8 \times 8$ chessboard.
+			\begin{enumerate}
+				\item[\textbf{i.}] Observe that once a rook is placed in a particular tile, that row and column can no longer host another rook. Thus, the count is
+					$$8 \cdot 8 \cdot 7 \cdot 7 \cdot \hdots \cdot 1 \cdot 1 = (8!)^2.$$
+				\item[\textbf{ii.}] As a result of \textbf{i}, we can see that the count is similar; however, for each position we need to choose which of the rook
+					positions will be wooden. Hence, the count is $\binom{8}{4}(8!)^2$.
+				\item[\textbf{iii.}] Again, from \textbf{i}, the count will be similar, yet we need to account for all permutations of the 8 rooks. Thus, the count is
+					$(8!)^3$.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}]
+		\begin{enumerate}
+			\item[\textbf{i.}] Count all rectangles of positive area formed by segments in a grid of horizontal and vertical lines.
+			\item[\textbf{ii.}] Use induction to prove the answer obtained in \textbf{i.} when $m = n$.
+		\end{enumerate}
+
+		\begin{proof}
+			Suppose we have a grid consisting of $m$ and $n$ horizontal and vertical lines respectively.
+			\begin{enumerate}
+				\item[\textbf{i.}] Observe that counting all rectangles of positive area is identical to counting all pairs of horizontal and vertical lines. Moreover,
+					a rectangle can be uniquely represented by the lines that construct it. Then it follows that the number of all possible rectanges must be $\binom{m}{2}\binom{n}{2}$.
+
+				\item[\textbf{ii.}] Let $m = n$. I claim that the count of all rectanges formed by the grid is precisely $\binom{n}{2}^2$. As a base case, let $n=2$, clearly one square
+					is formed which is illustrated by $1 = \binom{2}{2}^2$. For the inductive step, suppose we have a grid of $n$ horizontal and $n$ vertical lines with
+					$\binom{n}{2}^2$ rectangles. Let us now append both a horizontal and vertical line to the grid. In this new grid, we can see that all previous $\binom{n}{2}^2$
+					still remain with the addition of all rectangles formed from the new lines. By inspecting the new grid we can see that $2\binom{n}{2}\binom{n}{1} + \binom{n}{1}^2$
+					new rectangles are formed by ensuring one of the new lines are included or both of the new lines are included. Hence, the new count is
+					$$\binom{n}{2}^2 + 2\binom{n}{2}\binom{n}{1} + \binom{n}{1}^2 = \left ( \binom{n}{2} + \binom{n}{1} \right )^2 = \binom{n+1}{2}^2.$$
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Alice has $n$ different balls. First, she splits them into two piles, then she picks one of the piles with at least two elements, and splits it into two;
+		she repeats this until each pile has only one element left. How many steps does this take? Find the number of ways she can carry out this procedure.
+
+		\begin{proof}[Solution]
+			Suppose Alice has $n$ distinct balls and follows the procedure depicted above. It is clear that the process will take $n-1$ if she were to continue until each pile
+			consists of only one ball. Observe that it is sufficient to count the number of procedures where they are reversed. Moreover, suppose all $n$ distinct balls are already
+			seperated into $n$ piles of one and we were to combine each respective pile until only one remains. Repeatedly, Alice must choose two piles to combine to one; thus, the
+			count is $$\prod_{k \in [n] \setminus \{ 1 \}} \binom{k}{2} = \binom{n}{2}\binom{n-1}{2} \hdots \binom{3}{2}\binom{2}{2} = \frac{2^{1-n}(n!)^2}{n}.$$
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] In a shop there are $k$ different kinds of postcards. We want to send postcards to $n$ friends. In how many ways can you send the postcards if,
+		\begin{enumerate}
+			\item[\textbf{i.}] there is an unlimited supply for each kind of postcard, and you want to send one card to each friend.
+			\item[\textbf{ii.}] there is an unlimited supply for each kind of postcard, and you want to send one card to each friend so that everyone receives different cards.
+			\item[\textbf{iii.}] there is an unlimited supply for each kind of postcard, and you want to send two different cards to each friend.
+			\item[\textbf{iv.}] there are $k$ distinct postcards and want to distribute all of them to our $n$ friends. How many ways can this be done? What happens if we want to send
+				at least one card to each friend?
+			\item[\textbf{v.}] there is a limited supply, there being $a_i$ copies of the $i^{th}$ kind, and you want to distribute all of them.
+		\end{enumerate}
+
+		\begin{proof}[Solution]
+			Suppose we have $k$ distinct types of postcards and $n$ friends.
+			\begin{enumerate}
+				\item[\textbf{i.}] Each friend has $k$ possible postcards that can be sent to them. Thus, there are $k^n$ ways to send the postcards.
+				\item[\textbf{ii.}] The first friend has $k$ options, the second has $k-1$, and so forth. Thus, there are $\binom{k}{n}n!$ ways to send the postcards.
+				\item[\textbf{iii.}] Each friend has $\binom{k}{2}$ possible postcards that can be sent to them. Thus, there are $\binom{k}{2}^2$ ways to send the postcards.
+				\item[\textbf{iv.}] For each postcard, there are $n$ friends they can be sent to. Hence, there are $n^k$ ways to send the postcards. If each friend must recieve at
+					least one postcard, then let us subtract all accounts where individuals did not recieve cards. To remove such instances we must use the inclusion-exclusion
+					principle since there are non-empty intersections between occurences of individuals not recieving postcards. To further illustrate, suppose we sought to remove
+					instances where only one or two individuals did not recieve cards, we would obtain $$n^k - n(n-1)^k + \binom{n}{2}(n-2)^k = \binom{n}{0}n^k - \binom{n}{1}(n-1)^k +
+					\binom{n}{2}(n-2)^k$$ due to double counting. Furthermore, to remove all instances of individuals not recieving postcards we can see that the count must be
+					$$\sum_{m \in [n] \cup \{ 0 \}} (-1)^m \binom{n}{m}(n-m)^k = n!\begin{Bmatrix}k \\ n\end{Bmatrix}.$$ This problem can be rephrased as the count of all mappings
+					and surjective mappings, respectively, from $[k]$ to $[n]$.
+				\item[\textbf{v.}] Observe that for each $a_i$ we can apply the stars and bars method providing $\binom{a_i + n - 1}{a_i}$ ways to send the particular postcard type.
+					Furthermore, we can see that there are $$\prod_{\forall i} \binom{a_i + n - 1}{a_i}$$ ways to send the postcards.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 5
+	\item[\textbf{5.}] The chords of a convex $n$-gon are the segments that join two corners.
+		\begin{enumerate}
+			\item[\textbf{i.}] Count the pairs of chords that cross inside the $n$-gon.
+			\item[\textbf{ii.}] Count all triangles formed by drawing all chords of the convex $n$-gon, given that no three chords have a common internal point.
+		\end{enumerate}
+
+		\begin{proof}[Solution]
+			\begin{enumerate}
+				\item[\textbf{i.}] Clearly we can see that there are $\binom{n}{2}$ chords and $\binom{n}{2} - n = \frac{n^2-3n}{2}$ chords strictly within the shape.
+				\item[\textbf{ii.}] To count all triangles within the $n$-gon, let us consider a few disjoint cases determined by the number of interal points of a triangle within the
+					shape. Suppose no corners of our triangle lie within our shape; in other words, they lie entirely on the boarder of our $n$-gon. Then we can see that there are
+					$\binom{n}{3}$ triangles of this kind. If we have a triangle with one internal point, then we can see that our triangle does not uniquely share this point. Exactly
+					four other triangles of this kind share this internal point. Additionally, two chords intersect at this point. Thus, there are $4\binom{n}{4}$ triangles with one
+					internal point. If we have a triangle with two internal points, there must be a single vertex used from our $n$-gon. Furthermore, our triangle must use two other
+					chords created by four other vertices from our $n$-gon, generating $5\binom{n}{5}$ triangles since any of the other four vertices can act as the corner of our
+					triangle. Finally, if all three points of our triangle lie internally, then a unique triangle is formed from three chords giving $\binom{n}{6}$. Thus, there are
+					$$\binom{n}{3} + 4\binom{n}{4} + 5\binom{n}{5} + \binom{n}{6}$$ triangles formed from the chords of a convex $n$-gon.
+			\end{enumerate}
+		\end{proof}
+		\newpage
+
+
+	% problem 6
+	\item[\textbf{6.}]
+		\begin{enumerate}
+			\item[\textbf{i.}] Count the number of compositions of $n$ such that every part is even.
+			\item[\textbf{ii.}] Show bijectively that the number of compositions of $n$ into an even number of parts is equal to the number of compositions of $n$ into an odd number of
+				parts.
+			\item[\textbf{iii.}] Show bijectively that the number of compositions of $n$ into an even number of even parts is equal to the number of compositions of $n$ into an odd
+				number of even parts.
+		\end{enumerate}
+
+		\begin{proof}[Solution]
+			\begin{enumerate}
+				\item[\textbf{i.}] Suppose $n$ is an even natural number. Observe that the number of compositions of $n$ in even parts is equiviliant to the number of compositions
+					of $\frac{n}{2}$. To count the number of compositions of $\frac{n}{2}$, we can represent every composition as a sequence of $\frac{n}{2}$ elements:
+					$$\{ 1\, \square\, 1\, \square \hdots \square\, 1 \},$$ where each square can either be a '+' or ',' providing $2^{\frac{n}{2} - 1}$ possible compositions. \\
+					This counting regarding a sequence consisting of '+' or ',' is not my own; rather, I recall seeing this from a coworker at Math Center.
+			\end{enumerate}
+		\end{proof}
+\end{enumerate}
+
+\end{document}

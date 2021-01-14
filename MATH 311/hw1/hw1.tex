@@ -1,0 +1,84 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 311 \\
+\noindent September 15, 2020
+
+\begin{center}
+\Large Homework 1
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Consider the partition $P = \left \{ 0, \frac{1}{3}, 1, 2 \right \}$ of the interval $[0, 2]$ and let $f(x) = x^2 + 1$. Find the upper and lower sums of $U(f, P)$
+		and $L(f, P)$. Which sum is a better approximation of the integral $\int_0^2 f(x)\; \mathrm{d}x$?
+
+		\begin{proof}[Solution]
+			Suppose $P = \left \{ 0, \frac{1}{3}, 1, 2 \right \}$ is a partition of the interval $[0, 2]$ and let $f(x) = x^2 + 1$. Observe that $f'(x) = 2x \geq 0$ for all $x \geq 0$.
+			Then it follows that $f$ is increasing on $[0, 2]$ by Theorem 4.17; moreover, the supremum and infimum of $f$ on every interval within $[0, 2]$ is the rightmost and leftmost
+			endpoint, respectively. Hence,
+			\begin{align*}
+				U(f, P) &= \sum_{j \in [3]} M_j(f) \Delta x_j \\
+				&= \sum_{j \in [3]} f(x_j) \Delta x_j \\
+				&= f \left ( \frac{1}{3} \right ) \cdot \frac{1}{3} + f(1) \cdot \frac{2}{3} + f(2) \cdot 1 \\
+				U(f, P) &= \frac{181}{27}
+			\end{align*}
+			and also,
+			\begin{align*}
+				L(f, P) &= \sum_{j \in [3]} m_j(f) \Delta x_j \\
+				&= \sum_{j \in [3]} f(x_{j-1}) \Delta x_j \\
+				&= f(0) \cdot \frac{1}{3} + f \left ( \frac{1}{3} \right ) \cdot \frac{1}{3} + f(1) \cdot \frac{2}{3} \\
+				L(f, P) &= \frac{55}{27}.
+			\end{align*}
+			Now applying the Fundamental Theorem of Calculus, we can see that $$\int_0^2 f(x)\; \mathrm{d}x = \int_0^2 (x^2 + 1)\; \mathrm{d}x = \frac{14}{3},$$ illustrating that
+			the the upper sum is a better approximation.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Prove that the series $\sum_{k \geq 1} \frac{(-1)^{k+2}}{e^{k-1}}$ converges and find its sum.
+
+		\begin{proof}
+			First observe that $$\sum_{k \geq 1} \frac{(-1)^{k+2}}{e^{k-1}} = -\sum_{k \geq 1} \frac{(-1)^{k-1}}{e^{k-1}} = -\sum_{k \geq 0} \left ( \frac{-1}{e} \right )^k$$
+			Let $b_k = -\left ( \frac{-1}{e} \right )^k$ and $a_k = -b_k$. Observe that $a_k$ is a geometric sequence where $|x| = \left |
+			\frac{-1}{e} \right | < 1$. Hence, by the Geometric Series, $\sum_{k \geq 1} a_n$ converges to $\frac{1}{1-\left (\frac{-1}{e} \right )} = \frac{e}{1 + e}$. Thus by
+			Theorem 6.10, $\sum_{k \geq 1} -a_k = \sum_{k \geq 1} b_k$ converges to the value $-\frac{e}{1 + e}$.
+		\end{proof}
+		\newpage
+
+
+	% problem 3
+	\item[\textbf{3.}] Prove that if $\sum_{k \geq 1} a_k$ converges, then its sequence of partial sums $s_n$ are bounded.
+
+		\begin{proof}
+			Suppose that $\sum_{k \geq 1} a_k$ converges and its sequence of partial sums is denoted by $s_n$. Then it follows that $\lim_{n \to \infty} s_n$ exists by the definition
+			of convergence of an infinite series. Thus by Theorem 2.8, $s_n$ is a bounded sequence.
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Determine whether the following series converge or diverge, prove your answer for each.
+		\begin{enumerate}
+			\item[\textbf{a.}] $\sum_{k \geq 1} \frac{4k^2 + 1}{3k^5 - 2k^2 + 1}$
+			\item[\textbf{b.}] $\sum_{k \geq 1} \frac{k^3}{e^k}$
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{a.}] Let $a_k = \frac{4k^2 + 1}{3k^5 - 2k^2 + 1}$ and $b_k = \frac{5}{k^3}$. Clearly, we can see that $a_k \geq 0$ for all $k \in \mathbb{N}$. Observe that
+					$$a_k = \frac{4k^2 + 1}{3k^5 - 2k^2 + 1} \leq \frac{4k^2 + 1}{3k^5 - 2k^2} \leq \frac{4k^2 + 1}{3k^5 - 2k^5} \leq \frac{4k^2 + k^2}{k^5} = \frac{5}{k^3} = b_k.$$
+					Further, notice that $\sum_{k \geq 1} b_k$ converges by the p-Series Test. Thus by the Comparison Test part one, $\sum_{k \geq 1} a_k$ converges.
+
+				\item[\textbf{b.}] Let $a_k = \frac{k^3}{e^k}$ and $b_k = \frac{1}{k^2}$. Clearly, we can see that both $a_k > 0$ and $b_k > 0$ for all $k \in \mathbb{N}$. Then we can
+					see that $$L = \lim_{k \to \infty} \frac{a_k}{b_k} = \lim_{k \to \infty} \frac{k^3 / e^k}{1 / k^2} = \lim_{k \to \infty} \frac{k^5}{e^k} = 0.$$ Additionally, by the
+					p-Series Test the series $\sum_{k \geq 1} b_k$ must converge. Thus by the Limit Comparison Test part two, $\sum_{k \geq 1} a_k$ must also converge.
+			\end{enumerate}
+		\end{proof}
+\end{enumerate}
+
+\end{document}

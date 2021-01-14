@@ -1,0 +1,77 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 311 \\
+\noindent October 22, 2020
+
+\begin{center}
+	\Large Homework 5
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Let $A, B$ be connected subsets of $\mathbb{R}^n$ with $A \cap B \neq \varnothing$. Prove that $A \cup B$ is connected.
+
+		\begin{proof}
+			Suppose $A, B$ are connected subsets of $\mathbb{R}^n$ where $A \cap B \neq \varnothing$. Further, suppose by contradiction that $A \cup B$ is separable by relatively
+			open sets $U, V$. Provided that there is a nonempty intersection between $A$ and $B$, we can see that both $U$ and $V$ must have a nonempty intersection with either
+			$A$ or $B$; moreover, this is because particular elements in $A \cap B$ must belong to one of the seperating sets which illustrates that $U$ or $V$ must have an intersection
+			with both sets while the other is nonempty implying that it must contain elements of at least one set. Without loss of generality, suppose $C = A \cap U \neq \varnothing$ and
+			$D = A \cap V \neq \varnothing$. Observe that both $C \subseteq U$ and $D \subseteq V$ are relatively open in $A$ because the underlying open sets that create $U$ and $V$ can
+			be used to intersect with $A \subseteq A \cup B$ rather than $A \cup B$. Additionally, notice that $A = C \cup D$ and $C \cap D = \varnothing$ which immediately follow from
+			the fact that $U$ and $V$ are seperating sets of $A \cup B$. Thus, $A$ is separable by sets $C, D$ which is a contradiction.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Let $A \subseteq B \subseteq \mathbb{R}^n$. Prove that
+		\begin{enumerate}
+			\item[\textbf{a.}] $A^\circ \subseteq B^\circ$.
+			\item[\textbf{b.}] $\overline{A} \subseteq \overline{B}$.
+		\end{enumerate}
+
+		\begin{proof}
+			Suppose $A \subseteq B \subseteq \mathbb{R}^n$. Then it follows by Theorem 8.32i that $A^\circ \subseteq A \subseteq B \subseteq \overline{B}$.
+			\begin{enumerate}
+				\item[\textbf{a.}] Observe that $A^\circ$ is open by definition and Theorem 8.24. Therefore, Theorem 8.32ii states that $A^\circ \subseteq B^\circ$.
+
+				\item[\textbf{b.}] Similarly, notice that $\overline{B}$ is closed by definition and Theorem 8.24. Hence, Theorem 8.32iii states that $\overline{A} \subseteq \overline{B}$.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Suppose $E \subseteq \mathbb{R}^n$ is connected and $E \subseteq A \subseteq \overline{E}$. Prove that $A$ is connected.
+
+		\begin{proof}
+			Suppose $E \subseteq \mathbb{R}^n$ is connected and $E \subseteq A \subseteq \overline{E}$. Further, suppose by contradiction that $A$ is separable by sets $U, V$. \\ \\
+			Let us consider the intersection between our seperating sets and $E$. I claim that $E \cap U \neq \varnothing$. Suppose by contradiction that $E \cap U = \varnothing$.
+			Since $U \subseteq U \cup V = A \subseteq \overline{E}$ it must hold that $U \subseteq \partial E$. Now consider a particular $\textbf{x} \in U$, we can see that for all
+			$r > 0$, $B_r(x) \cap A \nsubseteq U$ because $\textbf{x}$ lies on the boundary of $E$ and $B_r(\textbf{x})$ will always contain elements outside $\overline{E}$. Therefore,
+			$U$ cannot be relatively open in $A$ by Remark 8.27i which is a contradiction and illustrates that $E \cap U \neq \varnothing$ as claimed. By similar argument, $E \cap V \neq
+			\varnothing$ must hold since $U$ was arbitrarily choosen. \\ \\
+			Let $B = E \cap U$ and $C = E \cap V$. Observe that both $B \subseteq U$ and $C \subseteq V$ are relatively open
+			in $E$ because the underlying open sets that create $U$ and $V$ can be used to intersect with $E \subseteq A$ rather than $A$. Additionally, notice that $A = B \cup C$ and
+			$B \cap C = \varnothing$ which immediately follow from the fact that $U$ and $V$ are seperating sets of $A$. Thus, $E$ is separable by sets $B, C$ which is a
+			contradiction.
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Prove that $x_k = \left( \frac{k}{k+1}, \frac{1}{k} \right)$ converges.
+
+		\begin{proof}
+			Suppose $x_k = \left( \frac{k}{k+1}, \frac{1}{k} \right) \in \mathbb{R}^2$ for all $k \in \mathbb{N}$. Let $\epsilon > 0$ and $N \in \mathbb{N}$ where $N >
+			\frac{\sqrt{2}}{\epsilon}$. Then it follows that $k \geq N$ implies $$\left | \left | \left( \frac{k}{k+1}, \frac{1}{k} \right) - (1, 0) \right | \right | =
+			\left | \left | \left( -\frac{1}{k+1}, \frac{1}{k} \right) \right | \right | = \sqrt{ \frac{1}{(k+1)^2} + \frac{1}{k^2} } \leq \sqrt{ \frac{1}{k^2} + \frac{1}{k^2} } =
+			\frac{\sqrt{2}}{k} \leq \frac{\sqrt{2}}{N} < \epsilon.$$ Hence, $x_k \to (1, 0)$ as $k \to \infty$ by definition.
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

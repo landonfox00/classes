@@ -1,0 +1,175 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 485 \\
+\noindent October 3, 2020
+
+\begin{center}
+	\Large Homework 5
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Let $a_n = 3a_{n-1} - 2a_{n-2} + 1$ for $n \geq 2$, $a_0 = 2$, $a_1 = 4$. Obtain a simple formula for an using
+		\begin{enumerate}
+			\item[\textbf{i.}] Characteristic equation method.
+			\item[\textbf{ii.}] Generating function method.
+		\end{enumerate}
+
+		\begin{proof}
+			Suppose $a_n = 3a_{n-1} - 2a_{n-2} + 1$ for $n \geq 2$ where $a_0 = 2$ and $a_1 = 4$.
+			\begin{enumerate}
+				\item[\textbf{i.}] Consider the homogeneous recurrence, $h_n = 3h_{n-1} - 2h_{n-2}$. Suppose $h_n = x^n$ where $x \in \mathbb{R}$. Then it follows that
+					\begin{align*}
+						x^n &= 3x^{n-1} - 2x^{n-2} \\
+						x^2 &= 3x - 2,
+					\end{align*}
+					which provides the solutions $x_1 = 1$ and $x_2 = 2$. Furthermore, $h_n = c_1 + c_2 2^n$. \\
+
+					Let us now guess a particular solution $p_n = cn$ and so
+					\begin{align*}
+						p_n &= 3p_{n-1} - 2p_{n-2} + 1 \\
+						cn &= 3c(n-1) - 2c(n-2) + 1 \\
+						c &= -1.
+					\end{align*}
+					Therefore, $p_n = -n$ which illustrates that $a_n = h_n + p_n = c_1 + c_2 2^n - n$. Now considering the initial conditions we have the system
+					\begin{align*}
+						2 &= c_1 + c_2 \\
+						4 &= c_1 + c_2 - 1.
+					\end{align*}
+					Solving the system gives $c_1 = -1$ and $c_2 = 3$. Thus, $a_n = 3 \cdot 2^n - n -1$.
+
+				\item[\textbf{ii.}] Suppose $A(x) = \sum_{n \geq 0} a_n x^n$ where $x$ lies in an arbitrarily small interval about the origin. Let us now apply $\sum_{n \geq 2} x^n$
+					to our recurrence,
+					\begin{align*}
+						\sum_{n \geq 2} a_n x^n &= 3 \sum_{n \geq 2} a_{n-1} x^n - 2 \sum_{n \geq 2} a_{n-2} x^n + \sum_{n \geq 2} x^n \\
+						A(x) - 4x - 2 &= 3x(A(x) - 2) -2x^2A(x) + \frac{x^2}{1 - x} \\
+						A(x) &= \frac{3x^2 - 4x + 2}{(1-x)^2(1-2x)} \\
+						A(x) &= \frac{3}{1-2x} - \frac{1}{(1-x)^2}
+					\end{align*}
+					Then applying the coefficient operator, we have
+					\begin{align*}
+						[x^n]A(x) &= [x^n] \frac{3}{1-2x} - [x^n] \frac{1}{(1-x)^2} \\
+						a_n &= 3 \cdot 2^n - n - 1.
+					\end{align*}
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Consider a set of $n$ circles in the plane such that every pair of circles meet exactly twice and no three meet at a common point. Obtain and solve recurrence
+		for the number of regions into which the circles partition the plane.
+
+		\begin{proof}
+			Suppose we have $n-1$ circles in a plane as depicted above providing us $a_{n-1}$ regions. Additionally, suppose we add another circle of the same kind. Then it follows
+			that $2(n-1)$ regions are added to the existing $a_{n-1}$. Thus, $a_n = a_{n-1} + 2(n-1)$. \\
+
+			Consider the homogeneous recurrence $h_n = h_{n-1}$. Clearly $x = 1$ is the only non-zero solution to the characteristic equation. Hence, $h_n = c$. Let us now guess
+			a particular solution $p_n = c_1 n^2 + c_2 n$ and so,
+			\begin{align*}
+				c_1 n^2 + c_2 n &= c_1 (n - 1)^2 + c_2 (n - 1) + 2(n - 1) \\
+				2c_1n &= 2n - 2 + c_1 - c_2.
+			\end{align*}
+			Then it can be seen that $c_1 = 1$ and $c_2 = -1$; moreover, $p_n = n^2 - n$ which illustrates that $a_n = n^2 - n + c$. For an initial condition, we can see that $a_1 = 2$.
+			Thus, $a_n = n^2 - n + 2$ for all $n \geq 1$.
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] For $n \geq 1$, let $a_n$ be the number of binary $(n - 1)$ tuples with no consecutive 1s. Give two proofs that $a_n$ equals the Fibonacci number $F_n$ as
+		follows:
+		\begin{enumerate}
+			\item[\textbf{i.}] Show that $\{a_n\}$ satisfies the same recurrence as $\{F_n\}$.
+			\item[\textbf{ii.}] Establish a bijection from the set of binary $(n - 1)$ tuples with no consecutive 1s to the set of $\{1, 2\}$ lists summing to $n$.
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{i.}] Suppose $a_n$ is the number of binary $(n-1)$ tuples with no consecutive 1s for $n \geq 1$. Beginnning with the initial conditions, we can clearly
+					see that $a_1 = 1$ and $a_2 = 2$. For the recurrence, suppose we have an $(n-2)$ with the above conditions and we are to append an element to it. If we were to
+					append a 0 then no restrictions must be entertained, providing $a_{n-1}$ ways. If we were to append a 1, then we must also assert that the last digit is a 0 giving
+					$a_{n-2}$ possibilities. Thus, $a_n = a_{n-1} + a_{n-2}$ with $a_1 = 1$ and $a_2 = 2$ illustrating that $a_n = F_n$ for all $n \geq 1$.
+
+				\item[\textbf{ii.}] To define a bijection it should suffice to devise a reversible algorithm to convert elements between sets. Starting with the binary tuple, the
+					algorithm is defined as follows:
+					\begin{itemize}
+						\item Append a 0 to the end of the tuple.
+						\item Substitute all consecutive (0, 1)s for 2s.
+						\item Substitute all remaining 0s with 1s.
+					\end{itemize}
+					We can see that this process is easily reversible. Furthermore, observe that every element in the tuple is worth one unit of value after the conversion. Thus, by
+					appending the 0 to the end allows the result to sum to $n$.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}]
+		\begin{enumerate}
+			\item[\textbf{i.}] A child has some money to spend on candy. There are four types of candies with prices two cents, one cent, two cents and five cents per piece,
+				respectively. Find the ordinary generating funtion for the number of ways to spend the money indexed by the total cost.
+			\item[\textbf{ii.}] How many ways are there to distribute $n$ identical balls among 2 boys and 2 girls so that each boy gets at least 1 ball and each girl gets at least 2
+				balls? Express your answer as the coefficient of a suitable term in a certain ordinary generating function.
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{i.}] If we have four distinct items with the respective costs two, one, two, and five cents, respectively, then we can see that the generating function in
+					regard to cost is
+					\begin{align*}
+						f(x) &= (1 + x + x^2 + \hdots) (1 + x^2 + x^4 + \hdots) (1 + x^2 + x^4 + \hdots) (1 + x^5 + x^{10} + \hdots) \\
+						&= \frac{1}{(1 - x)(1 - x^2)^2(1 - x^5)}.
+					\end{align*}
+
+				\item[\textbf{ii.}] If we have $n$ indentical balls to be given to two boys and two girls where each boy and girl is guarenteed one and two balls, respectively,
+					then it follows that
+					\begin{align*}
+						f(x) &= (x + x^2 + x^3 + \hdots) (x + x^2 + x^3 + \hdots) (x^2 + x^3 + x^4 + \hdots) (x^2 + x^3 + x^4 + \hdots) \\
+						&= \left ( \frac{x}{1 - x} \right )^2 \left ( \frac{x^2}{1 - x} \right )^2 \\
+						f(x) &= \frac{x^6}{(1 - x)^4}.
+					\end{align*}
+					Now extracting the $n$th coefficient, we have $$[x^n] f(x) = [x^n] \frac{x^6}{(1-x)^4} = [x^{n-6}] \frac{1}{(1-x)^4} = \binom{n - 3}{3}.$$
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 5
+	\item[\textbf{5.}] Choose $n$ points on a circle so that no three chords meet at a common point inside the circle. Let $a_n$ be the number of regions formed inside the circle by all
+		the $\binom{n}{2}$ chords.
+		\begin{enumerate}
+			\item[\textbf{i.}] Obtain a recurrence $a_n = a_{n-1} + f(n)$, where $f(n) = (n - 1) + \sum_{i \in [n-1]} (i - 1)(n - 1 - i)$ with $a_0 = 1$.
+			\item[\textbf{ii.}] Solve the recurrence in \textbf{i} to obtain a formula for $a_n$ as a sum of three binomial coefficients.
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{i.}] Suppose we have $a_{n-1}$ regions defined as above for an arbitrary $n \geq 1$. If we were to add another point, we can see that new regions will
+					appear by counting how many intersections a newly created line will make with previous lines in addition to $n-1$ since there is an additional region for each line.
+					Observe that we can choose two points to specify an existing line then picking another to draw a new line to our $n$th point. Hence, $$a_n = a_{n-1} + n - 1 +
+					\binom{n-1}{3}.$$
+
+					Let us now turn to the binomial coefficient $\binom{n}{3}$. Suppose we have a set of $n$ items and we seek to count how many ways we can choose three of them.
+					Clearly we can choose three via $\binom{n}{3}$. Consider another method by selecting an arbitrary element $i$ and choosing one element to its left and another to
+					its right. Therefore, $$\binom{n}{3} = \sum_{i \in [n]} (i - 1)(n - i)$$. \\
+
+					Thus, $$a_n = a_{n-1} + n - 1 + \sum_{i \in [n-1]} (i - 1)(n - 1 - i).$$
+
+				\item[\textbf{ii.}] To solve the recurrence $a_n = a_{n-1} + n - 1 + \binom{n-1}{3}$, consider the homogeneous recurrence $h_n = h_{n-1}$. Clearly $x = 1$ is the
+					non-zero solution to the characteristic equation which implies that $h_n = c$. \\
+
+					Now, let us guess a particular solution, $p_n = c_1 n + c_2 n^2 + c_3 n^3 + c_4 n^4$. Then with the aid of Wolfram Alpha, substituting it into the recurrence
+					provides $$p_n = \frac{n^4}{24} - \frac{n^3}{4} + \frac{23n^2}{24} - \frac{3n}{4}.$$
+
+					Hence, $a_n = \frac{n^4}{24} - \frac{n^3}{4} + \frac{23n^2}{24} - \frac{3n}{4} + c$. Accounting for the initial condition, we can see that $c = 1$. Finally,
+					by noticing similarities to binomial coefficients and some trial and error, notice that $$a_n = \binom{n}{4} + \binom{n}{2} + 1.$$
+			\end{enumerate}
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,159 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 311 \\
+\noindent December 15, 2020
+
+\begin{center}
+	\Large Final Exam
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Let $f : \mathbb{R}^2 \to \mathbb{R}$ be given by \[ f(x, y) = \begin{cases} \frac{x^2y - y^3}{x^2 + y^2}; &(x, y) \neq \textbf{0} \\ 0; &(x, y) =
+		\textbf{0}. \end{cases} \] Prove that $f$ is continuous on $\mathbb{R}^2$, has first-order partial derivatives on $\mathbb{R}^2$, but is not differentiable on
+		$\textbf{0}$.
+
+		\begin{proof}
+			Suppose $f : \mathbb{R}^2 \to \mathbb{R}$ is defined as stated above. Clearly, we can see that $f$ is continuous on $\mathbb{R}^2 \setminus \{ \textbf{0} \}$ with
+			$\textbf{0}$ in question. Furthermore, observe that $$0 \leq \left | \frac{x^2y - y^3}{x^2 + y^2} \right | = \left | \frac{y(x^2 - y^2)}{x^2 + y^2} \right |
+			\leq |y| \frac{|x^2| + |y^2|}{x^2 + y^2} = |y| \to 0 = f(0, 0)$$ as $(x, y) \to \textbf{0}$ and so $\lim_{(x, y) \to \textbf{0}} f(x, y) = 0$ by the Squeeze
+			Theorem. Hence, $f$ is continuous on $\mathbb{R}^2$. \\
+
+			In regard to differentiability, for $(x, y) \neq \textbf{0}$ notice that $$\frac{\partial f}{\partial x}(x, y) = \frac{ (x^2 + y^2)\frac{\partial}{\partial x}
+			(x^2y - y^3) - (x^2y - y^3)\frac{\partial}{\partial x}(x^2 + y^2)}{(x^2 + y^2)^2} = \frac{4xy^3}{(x^2 + y^2)^2}$$ and $$\frac{\partial f}{\partial x}(x, y) =
+			\frac{ (x^2 + y^2)\frac{\partial}{\partial y}(x^2y - y^3) - (x^2y - y^3)\frac{\partial}{\partial y}(x^2 + y^2)}{(x^2 + y^2)^2} = \frac{x^4 - 4x^2y^2 - y^4}{(x^2 +
+			y^2)^2}$$ are both existing on $\mathbb{R}^2 \setminus \{ \textbf{0} \}$. Now, for $(x, y) = \textbf{0}$ it follows that $$\frac{\partial f}{\partial x}(0, 0) =
+			\lim_{h \to 0} \frac{f(h, 0) - f(0, 0)}{h} = \lim_{h \to 0} \frac{0}{h} = 0$$ and $$\frac{\partial f}{\partial y}(0, 0) = \lim_{h \to 0} \frac{f(0, h) -
+			f(0, 0)}{h} = \lim_{h \to 0} -\frac{h^3}{h^3} = -1.$$ Therefore, both first-order partial derivatives of $f$ exist on $\mathbb{R}^2$. \\
+
+			I claim that $f$ is not differentiable at $\textbf{0}$. Suppose by contradiction that $f$ is differentiable at $\textbf{0}$. Then $Df(0, 0) = \nabla f(0, 0) =
+			(0, -1)$ by Theorem 11.14. Additionally, $$\lim_{(h, k) \to \textbf{0}} \frac{f(h, k) - f(0, 0) - \nabla f(0, 0) \cdot (h, k)}{||(h, k)||} = 0$$ by definition.
+			However, the linear path $h = k$ provides $$\lim_{(h, h) \to \textbf{0}} \frac{f(h, h) - f(0, 0) - \nabla f(0, 0) \cdot (h, h)}{||(h, h)||} = \lim_{h \to 0}
+			\frac{\frac{h^3 - h^3}{2h^2} - 0 + h}{\sqrt{2} h} = \frac{1}{\sqrt{2}}$$ which is a contradiction.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Let $E \subseteq \textbf{R}^n$ be a compact set and suppose for each $\textbf{x} \in E$, there is an $r_{\textbf{x}} > 0$ such that $E \cap
+		B_{r_{\textbf{x}}}(\textbf{x}) = \{ \textbf{x} \}$. Prove that $E$ is finite.
+
+		\begin{proof}
+			Suppose $E \subseteq \mathbb{R}^n$ is a compact set. Further, suppose for each $\textbf{x} \in E$, there is an $r_{\textbf{x}} > 0$ such that $E \cap
+			B_{r_{\textbf{x}}}(\textbf{x}) = \{ \textbf{x} \}$. Furthermore, since $\textbf{x} \in B_{r_{\textbf{x}}}(\textbf{x})$ for every $\textbf{x} \in E$, it must
+			hold that $$E \subseteq \bigcup_{\textbf{x} \in E} B_{r_{\textbf{x}}}(\textbf{x}).$$ Therefore, $\{ B_{r_{\textbf{x}}} \}_{\textbf{x} \in E}$ is an open covering
+			by definition and Theorem 8.24i. Then there exists a finite subset $E_0 \subseteq E$ such that $$E \subseteq \bigcup_{\textbf{x} \in E_0}
+			B_{r_{\textbf{x}}}(\textbf{x})$$ due to the assumption that $E$ is compact. Because of this, as well as the fact that $E_0$ is finite and $B_{r_{\textbf{x}}}
+			(\textbf{x})$ contains precisely one element in $E$ for every $\textbf{x} \in E$, it must hold that $|E| \leq |E_0|$ and so $E$ is finite.
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Determine the interval of convergence of the power series $$\sum_{k \geq 0} \frac{(x+1)^k}{(k+1)2^k}.$$
+
+		\begin{proof}
+			Consider the series stated above. By Theorem 7.22, we can see that the radius of convergence is $$R = \lim_{k \to \infty} \frac{|a_k|}{|a_{k+1}|} = \lim_{k \to
+			\infty} \frac{\left | \frac{1}{(k+1)2^k} \right |}{\left | \frac{1}{(k+2)2^{k+1}} \right |} = \lim_{k \to \infty} 2\frac{k+2}{k+1} = 2.$$ Furthermore, the series
+			converges on the interval $(x_0 - R, x_0 + R) = (-3, 1)$ with the endpoints in question; moreover, we must determine whether the series $$\sum_{k \geq 0}
+			\frac{(-3 + 1)^k}{(k+1)2^k} = \sum_{k \geq 0} \frac{(-1)^k}{(k+1)2^{k-1}}\;\;\; \mathrm{and}\;\;\; \sum_{k \geq 0} \frac{(1 + 1)^k}{(k+1)2^k} = \sum_{k \geq 0}
+			\frac{1}{(k+1)2^{k-1}}$$ converge. \\
+
+			I claim that both series converge. Observe that it suffices to show that the latter of the two series converges by Remark 6.20. Consider the series $$\sum_{k
+			\geq 0} \frac{1}{2^{k-1}} = 2 \sum_{k \geq 0} \frac{1}{2^k} = \frac{2}{1 - \frac{1}{2}} = 4$$ which converges by the Geometric Series. Additionally, notice that
+			for all $k \in \mathbb{N}$,
+			\begin{align*}
+				2^{k - 1} &\leq (k + 1)2^{k - 1} \\
+				\frac{1}{(k+1)2^{k-1}} &\leq \frac{1}{2^{k-1}}.
+			\end{align*}
+			Hence, $\sum_{k \geq 0} \frac{1}{(k+1)2^{k-1}}$ converges by the Comparison Test. Therefore, the interval of convergence of the series $$\sum_{k \geq 0}
+			\frac{(x+1)^k}{(k+1)2^k}$$ is $[-3, 1]$.
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Let $E \subseteq \mathbb{R}^n$ be a nonempty set and $A \subseteq E$. Prove that $A$ is relatively closed in $E$ if and only if every sequence
+		$\textbf{x}_k \in A$ which converges to a point in $E$ satisfies $\lim_{k \to \infty} \textbf{x}_k \in A$. \\
+
+		\textbf{Lemma}: Let $A \subseteq \mathbb{R}^n$ where $A \neq \varnothing$. The closed set $\overline{A}$ is equal to $A$ unioned with all of its limit points.
+
+		\begin{proof}[Lemma Proof]
+			Suppose $\varnothing \neq A \subseteq \mathbb{R}^n$. By Theorems 8.32i and 9.8 it follows that $A \subseteq \overline{A}$ and all limit points of $A$ belong to
+			$\overline{A}$ since it is closed in $\mathbb{R}^n$. Conversely, suppose by contradiction that there exists a point $\textbf{a} \in \overline{A}$ where
+			$\textbf{a}$ is not a limit point of $A$. Then it must hold that $\textbf{a} \in \partial A$ since $\overline{A} = A \cup \partial A$ by Theorem 8.36. Consider
+			a sequence $\textbf{x}_k$ where $\textbf{x}_k \in B_{1/k}(\textbf{a}) \cap A$ for all $k \in \mathbb{N}$. Observe that for all $k \in \mathbb{N}$, $0 \leq
+			||\textbf{x}_k - \textbf{a}|| \leq \frac{1}{k}$ and so $\lim_{k \to \infty} \textbf{x}_k = \textbf{a}$ by the Squeeze Theorem which is a contradiction. Hence,
+			$\overline{A}$ is equivalent to the collection of all limit points of $A$.
+		\end{proof}
+
+		\begin{proof}
+			Suppose $A \subseteq E \subseteq \mathbb{R}^n$ with $E \neq \varnothing$ Further, suppose $A$ is relatively closed in $E$. Then by definition, there
+			exists a closed set $V \subseteq \mathbb{R}^n$ such that $A = E \cap V$. Since $V$ is closed, it follows by Theorem 9.8 that $V$ contains all of its limit points.
+			Now, consider an arbitrary sequence $\textbf{x}_k \in A \subseteq V$ which converges to a point in $E$. Due to the fact that $\lim_{k \to \infty} \textbf{x}_k
+			\in V$, it must hold that $\lim_{k \to \infty} \textbf{x}_k \in E \cap V = A$. \\
+
+			Conversely, suppose that every sequence $\textbf{x}_k \in A$ which converges to a point in $E$ satisfies $\lim_{k \to \infty} \textbf{x}_k \in A$. In the case
+			that $A = \varnothing$, then $A$ is closed by Remark 8.23 and so $A$ is relatively closed in $E$. Otherwise, let $A \neq \varnothing$. I claim that $A = E \cap
+			\overline{A}$. Since $A \subseteq E$ and $A \subseteq \overline{A}$ by Theorem 8.32i, it must hold that $A \subseteq E \cap \overline{A}$. To show that $A
+			\supseteq E \cap \overline{A}$, consider an arbitrary point $\textbf{a} \in E \cap \overline{A}$. Observe that $\textbf{a}$ must belong to $E$ and $\textbf{a}$
+			must also be a limit point of $A$ by our lemma. Thus, $\textbf{a} \in A$ by our initial assumption of $A$. Therefore, $A = E \cap \overline{A}$ and so $A$ is
+			relatively closed in $E$ by definition.
+		\end{proof}
+
+
+	% problem 5
+	\item[\textbf{5.}] Let $\textbf{a} \in \mathbb{R}^n$ and suppose $\textbf{f}, \textbf{g} : \mathbb{R}^n \to \mathbb{R}^m$ are differentiable at $\textbf{a}$. Prove that
+		$\textbf{f} + \textbf{g}$ is differentiable at $\textbf{a}$ and that $$D(\textbf{f} + \textbf{g})(\textbf{a}) = D\textbf{f}(\textbf{a}) + D\textbf{g}(\textbf{a}).$$
+
+		\begin{proof}
+			Suppose $\textbf{a} \in \mathbb{R}^n$ and that $\textbf{f}, \textbf{g} : \mathbb{R}^n \to \mathbb{R}^m$ are differentiable at $\textbf{a}$. Observe that
+			$$\lim_{\textbf{h} \to \textbf{0}} \frac{(\textbf{f} + \textbf{g})(\textbf{a} + \textbf{h}) - (\textbf{f} + \textbf{g})(\textbf{a}) - (D\textbf{f} +
+			D\textbf{g})(\textbf{a})(\textbf{h})}{||\textbf{h}||} =$$
+			$$=\lim_{\textbf{h} \to \textbf{0}} \frac{\textbf{f}(\textbf{a} + \textbf{h}) + \textbf{g}(\textbf{a} + \textbf{h}) - \textbf{f}(\textbf{a}) -
+			\textbf{g}(\textbf{a}) - D\textbf{f}(\textbf{a})(\textbf{h}) - D\textbf{g}(\textbf{a})(\textbf{h})}{||\textbf{h}||} =$$
+			$$= \lim_{\textbf{h} \to \textbf{0}} \frac{\textbf{f}(\textbf{a} + \textbf{h}) - \textbf{f}(\textbf{a}) - D\textbf{f}(\textbf{a})(\textbf{h})}{||\textbf{h}||} +
+			\lim_{\textbf{h} \to \textbf{0}} \frac{\textbf{g}(\textbf{a} + \textbf{h}) - \textbf{g}(\textbf{a}) - D\textbf{g}(\textbf{a})(\textbf{h})}{||\textbf{h}||} = \textbf{0} +
+			\textbf{0} = \textbf{0}.$$ Hence, $\textbf{f} + \textbf{g}$ is differentiable at $\textbf{a}$ by definition. Then by the uniqueness of the total derivative,
+			it follows that $$D(\textbf{f} + \textbf{g})(\textbf{a}) = D\textbf{f}(\textbf{a}) + D\textbf{g}(\textbf{a}).$$
+		\end{proof}
+		\newpage
+
+
+	% problem 6
+	\item[\textbf{6.}] Let $A, B \subseteq \mathbb{R}^n$ be Jordan regions and suppose $A \subseteq B$ and that $f : B \to \mathbb{R}$ is integrable on $B$. Prove that $f$
+		integrable on $A$.
+
+		\begin{proof}
+			Suppose $A \subseteq B \subseteq \mathbb{R}^n$ are Jordan regions and that $f : B \to \mathbb{R}$ is integrable on $B$. Let $R$ be an $n$-dimensional
+			rectangle with $B \subseteq R$ and let $\mathcal{G} = \{ R_1, \hdots, R_p \}$ be a grid on $R$. Finally, let us extend $f$ to $\mathbb{R}^n$ by setting 
+			$f(\textbf{x}) = 0$ for all $\textbf{x} \in \mathbb{R}^n \setminus B$. Clearly, we can see that the number of rectangles in $\mathcal{G}$ that intersect with
+			$A$ cannot exceed the number of rectangles that intersect with $B$ since $A \subseteq B$. Additionally, observe that for every $R_j \in \mathcal{G}$ it holds
+			that $m_j |R_j| \leq M_j |R_j|$. Then it follows for every $\epsilon > 0$,
+			\begin{align*}
+				\sum_{R_j \cap A \neq \varnothing} ( M_j|R_j| - m_j|R_j| ) &\leq \sum_{R_j \cap A \neq \varnothing} ( M_j|R_j| - m_j|R_j| ) + \sum_{\substack{R_j \cap A = \varnothing \\ R_j \cap B \neq \varnothing}} ( M_j|R_j| - m_j|R_j| ) \\
+				&= \sum_{R_j \cap B \neq \varnothing} ( M_j|R_j| - m_j|R_j| ) \\
+				&= U(f, \mathcal{G}) - L(f, \mathcal{G}) \\
+				&< \epsilon
+			\end{align*}
+			and so $f$ is integrable on $A$ by definition.
+		\end{proof}
+
+
+	% problem 7
+	\item[\textbf{7.}] Let $\textbf{a} \in \mathbb{R}^n$ and $r > 0$. Prove that the open ball $B_r(\textbf{a}) \subseteq \mathbb{R}^n$ is a Jordan region.
+
+		\begin{proof}
+			Suppose $\textbf{a} \in \mathbb{R}^n$ and $r > 0$. Let us first show that $\partial B_r(\textbf{a})$ is of volume zero. Clearly, we can see that a finite
+			collection of cubes $Q_k$ of side length $s > 0$ can be used to cover $\partial B_r(\textbf{a})$; let $|Q_k| = p > 0$ denote the minimum number of cubes of length
+			$s$ required to cover $\partial B_r(\textbf{a})$. Additionally, let $\epsilon > 0$ and $s = \sqrt{\frac{\epsilon}{2p}}$. Then it follows that $$\sum_{k = 1}^p
+			|Q_k| = ps^2 = p \frac{\epsilon}{2p} = \frac{\epsilon}{2} < \epsilon$$ and so $\mathrm{Vol}(\partial B_r(\textbf{a})) = 0$ via Theorem 12.4. Now, observe that
+			an $n$-dimensional rectangle $R$ with side lengths 2, centered at $\textbf{a}$ covers $B_r(\textbf{a})$; in other words, there exists an $R$ such that $B_r
+			(\textbf{a}) \subseteq R$. Thus, $B_r(\textbf{a})$ is a Jordan region by definition.
+		\end{proof}
+\end{enumerate}
+
+\end{document}

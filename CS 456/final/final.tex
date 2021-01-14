@@ -1,0 +1,192 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs, xcolor}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent CS 456 \\
+\noindent December 15, 2020
+
+\begin{center}
+	\Large Final Exam
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Define these finite state machines: deterministic (dfa) and nondeterministic finite automata (nfa); nondeterministic pushdown automata (npda); Turing machines
+		(tm). Explain each component and describe the differences between machines.
+
+		\begin{proof}[Solution]
+			Let us begin by stating the definition of each machine.
+			\begin{enumerate}
+				\item[\textbf{dfa.}] A deterministic finite automata is defined by $$M = (Q, \Sigma, \delta, q_0, F),$$ where
+					\begin{itemize}
+						\item $Q$ is the finite set of internal states.
+						\item $\Sigma$ is the finite set of symbols called the input alphabet.
+						\item $\delta : Q \times \Sigma \to Q$ is a total function called the transition function.
+						\item $q_0 \in Q$ is the initial state.
+						\item $F \subseteq Q$ is the set of final states.
+					\end{itemize}
+
+				\item[\textbf{nfa.}] A nondeterministic finite automata is defined by $$M = (Q, \Sigma, \delta, q_0, F),$$ where
+					\begin{itemize}
+						\item $Q$ is the finite set of internal states.
+						\item $\Sigma$ is the finite input alphabet.
+						\item $\delta : Q \times (\Sigma \textcolor{red}{\cup \{ \lambda \}}) \to \textcolor{red}{2^Q}$ is the transition function.
+						\item $q_0 \in Q$ is the initial state.
+						\item $F \subseteq Q$ is the set of final states.
+					\end{itemize}
+
+				\item[\textbf{npda.}] A nondeterministic pushdown automata is defined by $$M = (Q, \Sigma, \Gamma, \delta, q_0, z, F),$$ where
+					\begin{itemize}
+						\item $Q$ is the finite set of internal states of the control unit.
+						\item $\Sigma$ is the finite input alphabet.
+						\item $\textcolor{red}{\Gamma}$ is the finite \textcolor{red}{stack} alphabet.
+						\item $\delta : Q \times (\Sigma \cup \{ \lambda \}) \textcolor{red}{\times \Gamma} \to$ \textcolor{red}{set of finite subsets of $Q \times \Gamma^*$} is the
+							transition function.
+						\item $q_0 \in Q$ is the initial state of the control unit.
+						\item $\textcolor{red}{z} \in \Gamma$ is the stack start symbol.
+						\item $F \subseteq Q$ is the set of final states.
+					\end{itemize}
+
+				\item[\textbf{tm.}] A Turing machine is defined by $$M = (Q, \Sigma, \Gamma, \delta, q_0, \square, F),$$ where
+					\begin{itemize}
+						\item $Q$ is the set of internal states.
+						\item $\Sigma \textcolor{red}{\subseteq \Gamma \setminus \{ \square \}}$ is the finite input alphabet.
+						\item $\Gamma$ is the finite \textcolor{red}{tape} alphabet.
+						\item $\delta : \textcolor{red}{Q \times \Gamma} \to \textcolor{red}{Q \times \Gamma \times \{ L, R \}}$ is the transition function ($\textcolor{red}{L}$ and
+							$\textcolor{red}{R}$ represent the left and right movement of the \textcolor{red}{read-write head}, respectively).
+						\item $q_0 \in Q$ is the initial state.
+						\item $\textcolor{red}{\square} \in \Gamma$ is referred to as the blank.
+						\item $F \subseteq Q$ is the set of final states.
+					\end{itemize}
+			\end{enumerate}
+
+			Overall, the main differences between these machines is their methods of memory storage and their levels of determinism. The dfa is the the simplest of all listed machines;
+			this is because it has no memory other than its finite states. Similarly, an nfa also uses only its finite states as memory. What distinguishes these two machines is the
+			determinism of how the machines will react to a given input; for a dfa, we can determine the exact course of action for any given string while it is unclear how an nfa may
+			react since it may transition to a variety of finite states at any step. What is interesting specifically between these two is that they generate the same languages despite
+			their varying levels of determinism. In regard to the more sophisticated machines, both the npda and tm utilize data structures to store infinite memory which allows them to
+			generate far more complex languages. Moreover, an npda uses a stack while a tm uses a tape. Additionally, it is notable that the npda is nondeterministic which is a
+			similarity both the nfa and npda share. A unique detail of tms is that they have both an input and output (although the lines between them are often blurred) unlike all other
+			listed machines since they are simply acceptors.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Prove that not all languages are regular.
+
+		\begin{proof}
+			Let $\Sigma = \{ a, b \}$ and consider the language $L = \{ a^n b^n : n \in \mathbb{N} \cup \{ 0 \} \}$. Suppose by contradiction that all languages are regular and so $L$
+			must also. Clearly, $L$ is an infinite language. Let $w = a^m b^m$ where $m \in \mathbb{N}$ is the pumping length. We can see that $|w| = 2m \geq m$ which implies that $w$
+			can be decomposed into $w = xyz$ with $|xy| \leq m$ and $|y| \geq 1$ such that $w_i = xy^iz \in L$ for all $i \in \mathbb{N} \cup \{ 0 \}$ by the pumping lemma. Consider
+			the string $w_2 = xy^2z$ where $|y| = k \in \mathbb{N}$. If $y$ is entirely composed of a single character (i.e. $y = a^k$ or $y = b^k$), then $$n_a(w_2) = m + k > m =
+			n_b(w_2)$$ or $$n_a(w_2) = m < m + k = n_b(w_2)$$ and so $w_2 \notin L$. In the case that $y$ contains both $a$'s and $b$'s; in other words, $y = a^{k_1}b^{k_2}$ where $k_1
+			+ k_2 = k$, then $w_2 = a^m b^{k_2} a^{k_1} b^{k_2 + m} \notin L$ which is a contradiction. Thus, not all languages are regular and $L$ is an example of such.
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Design a Turing machine that accepts the language $L = \{ w \in \{ a, b \}^+ : n_a(w) = 2k, k \in \mathbb{N} \cup \{ 0 \} \}$.
+
+		\begin{proof}[Solution]
+			Suppose $\Sigma = \{ a, b \}$ and $L = \{ w \in \{ a, b \}^+ : n_a(w) = 2k, k \in \mathbb{N} \cup \{ 0 \} \}$. Let us being by developing a strategy to construct a Turing
+			machine that accepts $L$. With the assumption that we ban the null string, our machine must accept a string that is unaffected by the number of $b$'s present and will
+			reject all strings with an odd number of $a$'s. Furthermore, for every $a$ encountered, we shall cycle between two states, only allowing a transition to the final state
+			from the initial state since zero $a$'s is acceptable. Then we will remain at the current state for every $b$ that is witnessed. Additionally, let us move the read-write
+			head to the right after every character that is read. \\
+
+			Consider the Turing machine $$M = (\{ q_0, q_1, q_f \}, \{ a, b \}, \{ a, b, \square \}, \delta, q_0, \square, \{ q_f \}).$$ For $\delta$ to suit our needs, we need $q_0$
+			to act as the \textit{even} state and $q_1$ the \textit{odd} state. Then, $q_0$ must be able to transition to itself via $b$, transition to the odd state via $a$, and
+			transition to the final state via a blank. Hence,
+			\begin{align*}
+				\delta( q_0, a ) &= ( q_1, a, R ), \\
+				\delta( q_0, b ) &= ( q_0, b, R ), \\
+				\delta( q_0, \square ) &= ( q_f, \square, R ).
+			\end{align*}
+			Now, for the odd state, we need to transition to the even state via $a$ and remain in its current state if a $b$ is encountered. We need to ensure that there is no
+			transition from the odd state to the final state. This provides
+			\begin{align*}
+				\delta( q_1, a ) &= ( q_0, a, R ), \\
+				\delta( q_1, b ) &= ( q_1, b, R ).
+			\end{align*}
+
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Explain the Universal Turing machine and how it works.
+
+		\begin{proof}[Solution]
+			A Universal Turing machine is essentially a reprogrammable Turing machine. Moreover, a Universal Turing machine $M_u$ is a three tape Turing machine such that, given a
+			description of a Turing machine $M$ and an input string $w$, $M_u$ can perform the computation of $M$ on $w$. The three tapes of $M_u$ are designed to act as the
+			description, internal state, and tape contents of $M$. For these to tapes to hold this information, we must have an encoding of $\delta_M$, the current internal state
+			of $M$, as well as any input string $w$. We can make use of an encoding using 1s and 0s for every state in $Q_M$ and every character in $\Gamma_M$ and place each of the
+			binary expressions on their respective tape. Then $M_u$ can read all three tapes, reading the description and internal state to determine the next action given the current
+			character from the input string.
+		\end{proof}
+
+
+	% problem 5
+	\item[\textbf{5.}] Turing's thesis states that a Turing machine can compute any effective procedure. The implication is that there exists languages that are not computable. Justify
+		this claim. \\
+
+		\textbf{Lemma}: \textbf{[Cantor's Theorem]}. For any set $A$, it holds that $|A| < |2^A|$.
+
+		\begin{proof}[Lemma Proof]
+			First we want to show that we can injectively map a set $A$ to $2^A$. This is easy to show, map every element of $A$ to the singleton containing themselves (i.e. let $f(a) =
+			\{ a \}$ for all $a \in A$). Then it must hold that $|A| \leq |2^A|$. Now let us show that $A$ cannot bijectively map to $2^A$. Suppose by contradiction that there does
+			exist a bijective mapping of $A$ to $2^A$, denoted $f : A \to 2^A$. Consider a set $B \subseteq A$ that is defined as the elements of $A$ that do not map to a subset of $A$
+			in $2^A$ that they are apart of; in other words, $B = \{ a : a \in A, a \notin f(a) \}$. Since $f$ is bijective and $B \subseteq A$, there must exist an element $b \in A$
+			such that $f(b) = B$. If $b \in B$, then $f(b) \neq B$ which is a contradiction. Then it must hold that $b \notin B$; however, if that is the case then it must also hold
+			that $b \in B$ by definition, again, a contradiction. Thus, $|A| \neq |2^A|$ and so $|A| < |2^A|$.
+		\end{proof}
+
+		\begin{proof}
+			Since algorithms are equivalent to languages in regard to Turing machines and Turing machines have an injective correspondence to languages, it suffices to show that there
+			are more languages than Turing machines then apply Turing's thesis. \\
+
+			Consider an alphabet $\Sigma = \{ a, b \}$. Further, consider the set of all languages constructed from $\Sigma$. It follows that the set of languages from $\Sigma$ is 
+			$2^{\Sigma^*}$. As a bijective mapping, for every string in $\Sigma^*$ convert every $a$ to 0 and $b$ to 1, then translate the resulting binary value to decimal. The
+			resulting set will be an infinite subset of $\mathbb{N}$ and so $\Sigma^*$ is countable by definition. \\
+
+			Provided that $\Sigma^*$ is countable, it follows by Cantor's Theorem that $2^{\Sigma^*}$ has strictly greater cardinality of $\Sigma^*$. Moreover, $|\mathbb{N}| =
+			|\Sigma^*| < |2^{\Sigma^*}|$; therefore, $2^{\Sigma^*}$ is uncountable. \\
+
+			Now, let us turn to the set of all Turing machines. We know that Turing machines have an encoding to binary values (encode $\Gamma$ using 1s, then create a scheme to encode
+			every transition of $\delta$, as referenced \textbf{4}). Let this encoding along with the conversion of binary to decimal be a bijection to a subset of natural numbers.
+			Then it follows that the set of all Turing machines are countable. \\
+
+			Due to the fact that the set of all Turing machines is countable, its cardinality must not exceed $|\mathbb{N}|$. However, the set of all languages on $\Sigma$ has
+			cardinality exceeding $|\mathbb{N}|$ because it is uncountable. Thus, there exists languages that do not have a corresponding Turing machine by the Pigeon Hole Principle.
+			Then by Turing's strong thesis, it follows that those languages that do not have a Turing machine are uncomputable. 
+		\end{proof}
+
+
+	% problem 6
+	\item[\textbf{6.}]
+		\begin{enumerate}
+			\item[\textbf{a.}] Define recursive and recursively enumerable languages and their associated finite state machines.
+			\item[\textbf{b.}] State the Halting Problem and explain how it is related to computability.
+		\end{enumerate}
+
+		\begin{proof}[Solution]
+			\begin{enumerate}
+				\item[\textbf{a.}] Recursively enumerable languages are all languages that are accepted by Turing machines. Recursive languages are similarly generated by Turing
+					machines; however, a language $L$ on $\Sigma$ is said to be recursive if and only if there exists a Turing machine $M$ such that $M$ generates $L$ and every string
+					$w \in \Sigma^+$ halts in $M$, regardless of whether $w \in L$. The main distinction between these two types of languages is the fact that a Turing machine for a
+					recursively enumerable language may not halt for a string that belongs to its complement; whereas, a Turing machine for a recursive language will halt for all
+					strings constructed from the language's alphabet.
+
+				\item[\textbf{b.}] The Halting Problem is defined as: Given a description of a Turing machine $M$ and a string $w$, does $M$, given the initial configuration $q_0w$,
+					perform a computation on $w$ that eventually halts? What is interesting about this question is that it is undecidable; in other words, there does not exist a Turing
+					machine such that it can determine whether a given Turing machine and string will halt in computation. Observe that this problem cannot be answered by directly
+					performing the computation of $M$ on $w$ as we cannot be guarantee that it has not entered an infinite loop. A remarkable result of this question is that there does
+					exist problems which are undecidable and so there exists algorithms that are not computable.
+			\end{enumerate}
+		\end{proof}
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,70 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 311 \\
+\noindent November 19, 2020
+
+\begin{center}
+	\Large Homework 7
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Let $E \subseteq \mathbb{R}^n$ be connected. Prove that if $f : E \to \mathbb{R}$ is continuous, $f( \textbf{a} ) \neq f( \textbf{b} )$ for some $\textbf{a},
+		\textbf{b} \in E$, and $y \in \mathbb{R}$ lies between $f( \textbf{a} )$ and $f( \textbf{b} )$, then there is an $\textbf{x} \in E$ such that $f( \textbf{x} ) = y$.
+
+		\begin{proof}
+			Suppose $E \subseteq \mathbb{R}^n$ is connected, $f : E \to \mathbb{R}$ is continuous, $f( \textbf{a} ) < f( \textbf{b} )$ for some $\textbf{a}, \textbf{b} \in E$, and
+			$f( \textbf{a} ) \leq y \leq f( \textbf{b} )$ for a given $y \in \mathbb{R}$. Then it follows by Theorem 9.30 that the image $f( E )$ is also connected in $\mathbb{R}$.
+			Additionally, we can conclude by Theorem 8.30 that $f( E )$ is an interval in $\mathbb{R}$ and so $y \in ( f( \textbf{a} ), f( \textbf{b} ) ) \subseteq f( E )$. Furthermore,
+			we can see that $y \in f( E )$ implies that there exists a pre-image $\textbf{x}$ such that $f( \textbf{x} ) = y$.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Let $f : \mathbb{R}^2 \to \mathbb{R}$ be given by \[ f( x, y ) = \begin{cases} \frac{x^4 + y^4}{x^2 + y^2}; & (x, y) \neq \textbf{0} \\ 0; & (x, y) = \textbf{0}.
+		\end{cases} \] Find $\partial f / \partial x$ and determine where it is continuous.
+
+		\begin{proof}
+			Suppose $f : \mathbb{R}^2 \to \mathbb{R}$ is defined as above. For $(x, y) \neq \textbf{0}$, we have $$\frac{\partial f}{\partial x} = \frac{\partial}{\partial x}
+			\left ( \frac{x^4 + y^4}{x^2 + y^2} \right ) = \frac{2x^5 + 4x^3y^2 - 2xy^4}{(x^2 + y^2)^2}.$$ Otherwise, if $(x, y) = \textbf{0}$, then $$\frac{\partial f}{\partial x}(0, 0)
+			= \lim_{h \to 0} \frac{f(h, 0) - f(0, 0)}{h} = \lim_{h \to 0} \frac{h^2}{h} = 0.$$ Provided that  \[ \frac{\partial f}{\partial x}( x, y ) = \begin{cases}
+			\frac{2x^5 + 4x^3y^2 - 2xy^4}{(x^2 + y^2)^2}; & (x, y) \neq \textbf{0} \\ 0; & (x, y) = \textbf{0} \end{cases} \] we can see that $\partial f / \partial x$ is continuous on
+			$\mathbb{R}^2 \setminus \{ \textbf{0} \}$ with $\textbf{0}$ in question. Furthermore, observe that $$\left | \frac{2x^5 + 4x^3y^2 - 2xy^4}{(x^2 + y^2)^2} \right | = 2|x|
+			\frac{|x^4 + 2x^2y^2 - y^4|}{(x^2 + y^2)^2} \leq 2|x| \frac{|x^4| + 2|x^2y^2| + |y^4|}{(x^2 + y^2)^2} = 2|x| \frac{(x^2 + y^2)^2}{(x^2 + y^2)^2} = 2|x| \to 0$$ as $(x, y)
+			\to \textbf{0}$ and so $$\frac{2x^5 + 4x^3y^2 - 2xy^4}{(x^2 + y^2)^2} \to 0 = \frac{\partial f}{\partial x}(0, 0)$$ as $(x, y) \to \textbf{0}$ by the Squeeze Theorem. Thus,
+			$\partial f / \partial x$ is continuous on $\mathbb{R}^2$.
+		\end{proof}
+		\newpage
+
+
+	% problem 3
+	\item[\textbf{3.}] Evaluate $$\lim_{y \to 0} \int_0^{\pi/2} \sin( xy^2 + x )\, \mathrm{d}x.$$
+
+		\begin{proof}
+			Suppose $H = \left [0, \frac{\pi}{2} \right ] \times [0, 1]$ and $f : H \to \mathbb{R}$ be defined as $f(x, y) = \sin( xy^2 + x )$. Clearly $f$ is continuous on $H$.
+			Then it follows by Theorem 11.4 and the Fundamental Theorem of Calculus, $$\lim_{y \to 0} \int_0^{\pi / 2} \sin ( xy^2 + x )\, \mathrm{d}x = \int_0^{\pi / 2} \lim_{y \to 0}
+			\sin ( xy^2 + x )\, \mathrm{d}x = \int_0^{\pi / 2} \sin x\, \mathrm{d}x = \cos 0 - \cos \frac{\pi}{2} = 1.$$
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Evaluate $$\frac{\partial}{\partial y} \int_1^2 \sqrt{x^3 + y^3 + z^3 - 1}\, \mathrm{d}z$$ at the point $(x, y) = (0, 1)$.
+
+		\begin{proof}
+			Let $H = [0, 1] \times [1, 2]^2$ and $f : H \to \mathbb{R}$ be defined as $f(x, y, z) = \sqrt{x^3 + y^3 + z^3 - 1}$. It is easy to see that $f$ is continuous on $H$; because
+			of this, we can conclude that $f(x, y, \cdot)$ is integrable on $[1, 2]$. Additionally, notice that $$\frac{\partial f}{\partial y} = \frac{\partial}{\partial y}\left (
+			\sqrt{x^3 + y^3 + z^3 - 1} \right ) = \frac{3y^2}{2\sqrt{x^3 + y^3 + z^3 - 1}}$$ is also continuous on $H$. Then by Theorem 11.5, $$\frac{\partial}{\partial y} \int_1^2
+			\sqrt{x^3 + y^3 + z^3 - 1}\, \mathrm{d}z = \int_1^2 \frac{\partial}{\partial y} \sqrt{x^3 + y^3 + z^3 - 1}\, \mathrm{d}z = \int_1^2 \frac{3y^2}{2\sqrt{x^3 + y^3 + z^3 - 1}}
+			\, \mathrm{d}z.$$ Now considering the point $(x, y) = (0, 1)$, we have $$\int_1^2 \frac{3y^2}{2\sqrt{x^3 + y^3 + z^3 - 1}}\, \mathrm{d}z = \int_1^2 \frac{3}{2z\sqrt{z}}
+			\, \mathrm{d}z = 3 - \frac{3}{\sqrt{2}}$$ by the Fundamental Theorem of Calculus.
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

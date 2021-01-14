@@ -1,0 +1,374 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent \textbf{Group 3}: Kyle Shelton, Landon Fox, Luke Heinrichs, Ryan Walker \\
+\noindent Math 466 \\
+\noindent October 4, 2020
+
+\begin{center}
+	\Large Programming Project 1: Foias Constant
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] \textit{Group collaboration} \\
+		We distributed the work required for this project by questions. Kyle and Ryan worked on problems \textbf{2}-\textbf{4} and Landon and Luke worked on \textbf{6}-\textbf{10}.
+		We all collaborated together to work on the extra credit questions. As a group we held a total of three meetings for this project where we met on Zoom. The meetings were
+		conducted as follows:
+		\begin{enumerate}
+			\item[\textbf{Meeting 1.}] Our first meeting was September 12th, where we first met and divided up the work amongst us. We also took time to look over and discuss all
+				questions. We gave suggestions and tips on how certain questions could be approached.
+			\item[\textbf{Meeting 2.}] Our second meeting was on September 19th, where we checked the progress that everyone had made. For the most part, both pairs of groupings had
+				all but a one or two questions finished already and the others were in progress. A few questions were asked such as how to take limits of recurrences and how many
+				iterations were needed to obtain a sufficient approximation using the bisection method.
+			\item[\textbf{Meeting 3.}] At this point we had finished all questions and were looking to optimize them. Our third meeting was our final meeting where we went over our
+				code and explained how it performed. A few small adjustments were made but nothing substantial.
+		\end{enumerate}
+		The submitted report represents the original efforts of the team members listed (Kyle, Landon, Luke, and Ryan) and, in particular, does NOT contain the work of other students
+		in the class.
+
+	% problem 2
+	\item[\textbf{2.}] Given $\alpha \in [1, 2]$ consider the recurrence relation $$x_{n+1} = \left ( 1 + \frac{1}{x_n} \right )^n;\;\; x_1 = \alpha.$$
+		Set $\alpha = 1$ and write a program that computes and outputs $x_n$ for $n = 1, 2, \hdots, 50$.
+
+		\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+			Observe the following Julia code under the module \verb|Sequence|.
+			\begin{lstlisting}[basicstyle=\ttfamily\footnotesize, numbers=left, tabsize=4, frame=single]
+module Sequence
+
+	export x, x_even, x_odd, output
+
+	# x_init: global initial value of sequence.
+	# 	used to varify if initial value has changed
+	x_init = 1
+	# x_values: used to store all values of sequence.
+	# 	nth value of x_values is the nth term of sequence
+	x_values = []
+
+	# x: returns the nth term of sequence with initial condition x_1
+	#	also stores all terms into x_values
+	function x( x_1, n )
+		global x_init, x_values
+		# if initial value changes, remove all perviously computed values
+		# 	to avoid conflicts
+		if x_init != x_1
+			x_init = x_1
+			x_values = []
+		end
+		len = length( x_values )
+		# if length of x_values exceeds n, then nth term already lies in x_values
+		if len >= n
+			return x_values[ n ]
+		end
+		# if x_values is empty, append initial value
+		if len == 0
+			push!( x_values, x_1 )
+			len = 1
+		end
+		# let recursive helper return computed value
+		return x_helper( n, len )
+	end
+
+	# x_helper: recursive helper to x function
+	# 	computes nth term and stores all into x_values
+	function x_helper( n, len )
+		# base case: if length of x_values is equal to n, then return the value
+		if n == len
+			return x_values[ n ]
+		end
+		# value does not exist in x_values, compute (len + 1)th term and repeat
+		push!( x_values, ( 1 + 1/x_values[ len ] )^len )
+		return x_helper( n, len + 1 )
+	end
+
+	# x_even: returns (2n)th term of sequence
+	x_even( x_1, n ) = x( x_1, 2 * n )
+
+	# x_odd: returns (2n-1)th term of sequence
+	x_odd( x_1, n ) = x( x_1, 2 * n - 1 )
+
+	# output: prints n terms of sequence with initial condition x_1
+	function output( x_1, n )
+		x( x_1, n )
+		for i in 1:n
+			println( i, " : ", x_values[ i ] )
+		end
+	end
+
+end
+			\end{lstlisting}
+			In the above code, the function \verb|x| uses a recursive helper function \verb|x_helper| and a list \verb|x_values| to compute the $n$th term of the sequence given
+			the initial condition \verb|x_1|. More specifically, \verb|x_values| is used to store previously calculated values to ensure a complexity of $O(n)$ as opposed to a higher
+			complexity when listing all values of the sequence upto $n$. Additionally, functions \verb|x_even| and \verb|x_odd| return $x_{2n}$ and $x_{2n - 1}$, respectively, for any
+			$n \geq 1$. To output all values upto index $n$, the function \verb|output| can be used; computing the values of $x_n$ where $x_1 = 1$ for $n = 1, 2, \hdots, 50$, can be
+			done via \verb|Sequence.output( 1, 50 )| which provides:
+			\begin{lstlisting}[basicstyle=\ttfamily\footnotesize, tabsize=4, frame=single]
+ 1 : 1
+ 2 : 2.0
+ 3 : 2.25
+ 4 : 3.0137174211248285
+ 5 : 3.1461328651361042
+ 6 : 3.9749418398300125
+ 7 : 3.8436459461081727
+ 8 : 5.0466489745895124
+ 9 : 4.2471077065229235
+10 : 6.705641594809635
+11 : 4.014991943105427
+12 : 11.546255851437039
+13 : 2.7094151558090824
+14 : 59.37293543097047
+15 : 1.2634346914781713
+16 : 6283.875266743144
+17 : 1.0025492407161776
+18 : 128267.71346883844
+19 : 1.0001403407948934
+20 : 523589.5387780858
+21 : 1.0000381985532598
+22 : 2.0963110569382557e6
+23 : 1.000010494678316
+24 : 8.387595658020036e6
+25 : 1.0000028613721854
+26 : 3.355323187755784e7
+27 : 1.0000007748883877
+28 : 1.3421632395741531e8
+29 : 1.00000020861846
+30 : 5.3686928798555815e8
+31 : 1.0000000558795226
+32 : 2.1474817879952881e9
+33 : 1.0000000149011754
+34 : 8.589932479998269e9
+35 : 1.000000003958121
+36 : 3.435973598800008e10
+37 : 1.000000001047738
+38 : 1.3743895080800003e11
+39 : 1.0000000002764864
+40 : 5.49755810924e11
+41 : 1.0000000000727596
+42 : 2.199023252272e12
+43 : 1.0000000000190994
+44 : 8.796093018596e12
+45 : 1.0000000000050022
+46 : 3.5184372084872e13
+47 : 1.0000000000013074
+48 : 1.40737488351004e14
+49 : 1.000000000000341
+50 : 5.62949953416608e14
+			\end{lstlisting}
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Based on the numerical evidence in the previous step, make a conjecture regarding the value of the limits $$\lim_{n \to \infty} x_{2n}\;\;\;\;\; \mathrm{and}
+		\;\;\;\;\; \lim_{n \to \infty} x_{2n+1}\;\;\;\;\; \mathrm{when}\;\; x_1 = 1.$$ Explain your reasoning in as much mathematical detail as possible.
+
+		\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+			By inspecting the values above, it would appear as if $$\lim_{n \to \infty} x_{2n} = \infty \;\;\;\;\; \mathrm{and}\;\;\;\;\; \lim_{n \to \infty} x_{2n+1} = 1\;\;\;\;\;
+			\mathrm{when}\;\; x_1 = 1.$$ Observe that for any index $n > 1$, $x_n$ takes the multiplicative reciprocal of the last value, adds one to it, and raises it to the power of
+			$n$. Suppose the previous value, $x_{n-1}$, is very large, then we can see that $1 + \frac{1}{x_{n-1}}$ will become very close to 1 implying that $x_n = \left ( 1 +
+			\frac{1}{x_n} \right )^n$ will not increase greatly from 1. Now consider the case where $x_{n-1}$ is very small, it is easy to see that $1 + \frac{1}{x_{n-1}}$ will exceed
+			1 which illustrates that it will become very substantial when raised to the $n$th power. For our particular sequence, it can be seen that $x_n$ slowly increases until
+			roughly index $n=12$ where this oscillation begins to take place; to enumerate, $x_{12} \approx 11.5$ which results in $x_{13} \approx 2.7$ then in turn leads $x_{14}
+			\approx 59.4$ where this pattern of increasing and decreasing continues ensuring $x_{2n}$ and $x_{2n+1}$ diverges to infinity and converges to 1, respectively.
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Change the program in the previous step to compute the values of $x_n$ when $\alpha = 2$. Look at the output and now make a conjecture regarding the value of
+		the limits $$\lim_{n \to \infty} x_{2n}\;\;\;\;\; \mathrm{and}\;\;\;\;\; \lim_{n \to \infty} x_{2n+1}\;\;\;\;\; \mathrm{when}\;\; x_1 = 2.$$ Explain the reasoning behind your
+		conjecture.
+
+		\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+			Due to the generality of the \verb|x| function under the \verb|Sequence| module, no changes are needed from its original design. To change the initial value of the sequence,
+			simply change the value of the \verb|x_1| parameter. Computing and presenting the first fifty values of the sequence $x_n$ where $x_1 = 2$ can be done via
+			\verb|Sequence.output( 2, 50 )| which provides:
+			\begin{lstlisting}[basicstyle=\ttfamily\footnotesize, tabsize=4, frame=single]
+ 1 : 2
+ 2 : 1.5
+ 3 : 2.7777777777777772
+ 4 : 2.515456000000001
+ 5 : 3.8146945245827055
+ 6 : 3.202910914929112
+ 7 : 5.105425602411104
+ 8 : 3.4977433630005117
+ 9 : 7.475734025618049
+10 : 3.0953609877250656
+11 : 16.436481006193045
+12 : 1.9149171433392773
+13 : 154.77995881694767
+14 : 1.0873244478087112
+15 : 9230.628993458884
+16 : 1.001626257595803
+17 : 64689.92026265085
+18 : 1.0002628246012701
+19 : 261524.77368382475
+20 : 1.0000726533613016
+21 : 1.0478144924485891e6
+22 : 1.0000200419068173
+23 : 4.193379435467222e6
+24 : 1.0000054848507496
+25 : 1.6776111794572083e7
+26 : 1.0000014902152625
+27 : 6.710756392755206e7
+28 : 1.000000402339224
+29 : 2.6843394397513205e8
+30 : 1.000000108034036
+31 : 1.0737400839916067e9
+32 : 1.0000000288710484
+33 : 4.2949653119971633e9
+34 : 1.0000000076834112
+35 : 1.7179866940000143e10
+36 : 1.0000000020372681
+37 : 6.8719474216000046e10
+38 : 1.0000000005384209
+39 : 2.74877904132e11
+40 : 1.0000000001418812
+41 : 1.099511624656e12
+42 : 1.0000000000372893
+43 : 4.39804650766e12
+44 : 1.000000000009777
+45 : 1.7592186040632e13
+46 : 1.000000000002558
+47 : 7.0368744173524e13
+48 : 1.000000000000668
+49 : 2.81474976706144e14
+50 : 1.000000000000174
+			\end{lstlisting}
+			By inspecting the values above, it would appear as if $$\lim_{n \to \infty} x_{2n} = 1 \;\;\;\;\; \mathrm{and} \;\;\;\;\; \lim_{n \to \infty} x_{2n+1} = \infty\;\;\;\;\;
+			\mathrm{when}\;\; x_1 = 2.$$ Similar to \textbf{3}, if the sequence creates a somewhat large value then we can conlude that an oscillation will likely occur resulting
+			in the subsequence of one parity to diverge and the other to converge to 1. Now observe that for index $n=11$, $x_{11} \approx 16.4$ exceeds most previous values and starts
+			the visible difference the subsequences. Consequently, this can be seen around index $n=50$ where odd indices are extremely large and even indices approach 1 from above.
+		\end{proof}
+
+
+	% problem 5
+	\item[\textbf{5.}] Use rigorous mathematical analysis to prove the conjectures made in \textbf{3} and \textbf{4}.
+
+		\begin{proof}
+			Since $x_{n+1}=(1+\frac{1}{x_n})^n$, then we can begin by looking at $\frac{1}{x_n}$. Knowing that $n\rightarrow\infty$ we know that $x_n$ keeps changing, and we will initially assume that it continues to increase. If $x_n$ increases, then by taking the recipricole, $\frac{1}{x_n}$ decreases and by the definition of convergence we know that it will converge to $0$. Thus pluging this into the initial equation, we know that as $x_n$ increases, $\frac{1}{x_n}\rightarrow0$, and thus $(1+\frac{1}{x_n})\rightarrow1$ and taking these to the $n^{th}$ power still shows $(1+\frac{1}{x_n})^n\rightarrow1$. Alternatively, if $x_n$ decreases (specifically as $x_n\rightarrow1$) then the recipricole $\frac{1}{x_n}\rightarrow1$ and thus $(1+\frac{1}{x_n})\rightarrow2)$. Then, taking the $n^{th}$ power of $2$ as $n\rightarrow\infty$ gives us an increasing sequence that diverges to $\infty$. Plugging these back into the original equation, we see that $x_{n+1}$ becomes an alternating series, with each $x_n$ term that is small producing a large $x_{n+1}$ term and each $x_n$ term that is large producing a small $x_{n+1}$ term. Thus by taking all the even terms, $x_{2n}$, of this sequence we will only collect a subset that has the smallest terms that are decreasing (due to the increasing terms we aren't collecting), and as proven above they must converge to $1$. Similarly we collect all the odd, $x_{2n+1}$, terms which gives us all the largest values that are diverging to $\infty$. Thus the $\lim_{n\rightarrow\infty}x_{2n}=1$ and $\lim_{n\rightarrow\infty}x_{2n+1}=\infty$.
+		\end{proof}
+
+
+	% problem 6
+	\item[\textbf{6.}] Define $$\alpha_* = \sup \{ \alpha : |x_{2n+1}|\; \mathrm{is\; bounded\; as}\; n \to \infty \}.$$ Intuitively $\alpha_*$ is the largest value of $\alpha$ such
+		that $|x_{2n+1}|$ is bounded. Explain in details how the interval bisection method could be used to approximate $\alpha_*$.
+
+		\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+			Suppose that $|x_{2n+1}|$ is bounded for the entirety of a nondegenerate interval of $\alpha$. Further, suppose we obtain two particular values of $\alpha$ where the
+			lesser value has the sequence diverge and the greater requires it to be bounded as $n \to \infty$. As we would approximate a root of a polynomial, we can apply the
+			bisection method to estimate $\alpha_*$. The algorithm would be defined as follows:
+			\begin{itemize}
+				\item Calculate the midpoint of our interval containing the infimum and determine if our sequence is divergent using that value.
+				\item If the left endpoint is convergent and the midpoint is divergent or the left endpoint is divergent and the midpoint is divergent then let the midpoint be the
+					new right endpoint. In any other condition, let midpoint be the new left endpoint.
+				\item Repeat the process with the new subinterval until an appropriate precision is achieved.
+			\end{itemize}
+		\end{proof}
+
+
+	% problem 7
+	\item[\textbf{7.}] Write a computer program that bisects the interval $[1, 2]$ to find an approximation of $\alpha_*$ good to at least four significant digits. Include the full
+		program listing and output.
+
+		\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+			Observe the following Julia code under the module \verb|Bisection|.
+			\begin{lstlisting}[basicstyle=\ttfamily\footnotesize, numbers=left, tabsize=4, frame=single]
+module Bisection
+
+	export bisect
+
+	# bisect: performs the bisection method returning approximated value
+	#	n: number of decimal places of accuracy
+	#	[a, b]: closed interval
+	#	s: sequence
+	#	f: bisection condition (divergence of the sequence)
+	function bisect( n, a, b, s, f )
+		# c: midpoint
+		c = 0
+		# ceil( n * log2( 10 ) ) is the number of iterations required for
+		# 	n decimals of accuracy
+		for i in 1:ceil( n * log2( 10 ) )
+			c = ( a + b ) / 2
+			f_a = f( a, s ); f_c = f( c, s )
+			# if ( s_a conv and s_c div ) or ( s_a div and s_c conv ), then look
+			# 	to left subinterval
+			if !f_a && f_c || f_a && !f_c
+				b = c
+			# otherwise, look to right subinterval
+			else
+				a = c
+			end
+		end
+		# return approximated value
+		return c
+	end
+
+end
+			\end{lstlisting}
+			Additionally, the following function is of importance.
+			\begin{lstlisting}[basicstyle=\ttfamily\footnotesize, numbers=left, tabsize=4, frame=single]
+# div: determines if sequence s diverges with initial value s_1
+# 	computes first few indices to see if they become large
+function div( s_1, s )
+	for i in 1:50
+		if s( s_1, i ) > 100
+			return true
+		end
+	end
+	return false
+end
+			\end{lstlisting}
+			In the above code, the function \verb|bisect| performs the entirety of the bisection method returning the approximated value to the proper accuracy. The \verb|div|
+			determines if a provided sequence will diverge with a given initial condition. The function is passed as a parameter to \verb|bisect| as the bisection condition.
+			Computing $\alpha_*$ to four decimal places can be done via \\ \verb|Bisection.bisect( 4, 1, 2, Sequence.x_odd, div )| which provides 1.18743896484375.
+		\end{proof}
+
+
+	% problem 8
+	\item[\textbf{8.}] Explain theoretically how many times the interval $[1, 2]$ needs to be bisected to ensure the resulting approximation is good to at least four significant digits.
+		What if six significant digits are desired? How about eight significant digits?
+
+		\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+			Suppose we have the interval $[1, 2]$. If the value of interest lies within this interval then we can guarentee it to be $\frac{3}{2}$ with an error of $\frac{1}{2}$.
+			Then after the next iteration, we cut the interval in half and so our error is also cut in half. Similarly, it can be seen that our error is $\frac{1}{2^k}$ after $k$
+			iterations of the algorithm. Hence, if we desire our approximation to have $n$ decimals of precision then to determine the minimal number of interations we have the
+			following inequality $$\frac{1}{2^k} < 10^{-n}.$$ Then it follows that $k \geq \left \lceil n \lg 10 \right \rceil$. Thus, $k = \left \lceil n \lg 10 \right \rceil$
+			provides an optimal result. \\
+
+			To obtain four significant digits, only three decimal places are required illustrating that at least 10 iterations are required. Likewise, 17 and 24 iterations are
+			required for six and eight significant digits, respectively.
+		\end{proof}
+
+
+	% problem 9
+	\item[\textbf{9.}] Define $$\alpha^* = \inf \{ \alpha : |x_{2n}|\; \mathrm{is\; bounded\; as}\; n \to \infty \}.$$ Intuitively $\alpha^*$ is the largest value of $\alpha$ such that
+		$|x_{2n}|$ is bounded. Modify the program from \textbf{7} to obtain an approximation of $\alpha^*$. Include the output and describe what modifications were made to the code.
+
+		\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+			Due to the generality of the \verb|bisect| function under the \verb|Bisection| module, no changes are needed from its original design. Computing $\alpha^*$ to four decimal
+			places can be done via \\ \verb|Bisection.bisect( 4, 1, 2, Sequence.x_even, div )| which provides 1.18743896484375.
+		\end{proof}
+
+
+	% problem 10
+	\item[\textbf{10.}] Based on the numerical evidence obtained in the previous two problems conjecture whether the values of $\alpha_*$ and $\alpha^*$ are equal or different.
+
+		\begin{proof}[Solution]\renewcommand{\qedsymbol}{}
+			Based on our numerical results it seems fair to conjecture that $\alpha_*$ and $\alpha^*$ are in fact equal. In other words, it would appear that $|x_{2n}|$ and $|x_{2n+1}|$
+			are both bounded exclusively when the initial condition is $\alpha_* = \alpha^* \approx 1.18745235112650$.
+		\end{proof}
+
+
+	% problem 11
+	\item[\textbf{11.}] Use rigorous mathematical analyisis to prove the conjecture stated in \textbf{10}.
+
+		\begin{proof}
+			Since $|x_{2n+1}|$ and $|x_{2n}|$ are both bounded, then we know that they must not diverge, so we must find a way to find the supremum or infemum of $\alpha$ such that $|x_{2n+1}|$ and $|x_{2n}|$ don't diverge. To do this, we will take the bisection method, starting with the largest bounded interval and noting that for one endpoint, the sequence converges and at the other it diverges. Using Newtons Binomial Theorem, we take the midpoint and note whether it also diverges or converges, then shrinking the interval so that we always have one endpoint diverging and one converging. Since we are dealing with significant digits, we can do this until the endpoints are the same point with significant digits and thus recieve our answer. As previously proven, if $|x_{2n+1}|$ diverges, then $|x_{2n}|$ will converge and vice versa. Thus as done similarly to Riemman Sums, we know that for an alternating series $|x_n|$ if $|x_{2n+1}|$ diverges and $|x_{2n}|$ converges then $\sup\{|x_{2n+1}|\}=\inf\{|x_{2n}|\}$ as required.
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

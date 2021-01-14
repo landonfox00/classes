@@ -1,0 +1,155 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, enumitem, graphicx, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 485 \\
+\noindent September 16, 2020 \\
+\noindent \textbf{Collaborated with Logan Leavitt}
+
+\begin{center}
+\Large Homework 3
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}]
+		\begin{enumerate}
+			\item[\textbf{i.}] Let $p$ be a prime number and $0 < k < p$. Show that $p | \binom{p}{k}$.
+			\item[\textbf{ii.}] Use \textbf{i} to show Fermat's Little Theorem: $a^p \equiv a\; (\mathrm{mod}\; p)$, for any $a \in \mathbb{Z}$.
+		\end{enumerate}
+
+		\begin{proof}
+			\item[\textbf{i.}] Suppose $p$ is a prime number and $0 < k < p$. By the Commitee-Chair Identity, we can see that $\binom{p}{k} = \frac{p}{k}\binom{p-1}{k-1}
+				\in \mathbb{Z}$. Additionally, $k \nmid p$ since $p$ is prime (unless $k=1$, but this is an irrelevant case); hence, $k | \binom{p-1}{k-1}$. Thus, $p | \binom{p}{k}$.
+
+			\item[\textbf{ii.}] Suppose $p$ is prime and $a \in \mathbb{N} \cup \{ 0 \}$. As a base case, let $a=0$. Trivially, the assertion for $a=0$ holds. For the
+				inductive step, suppose the assertion holds for some $b = a-1 \geq 0$. Then by the Binomial Theorem, $$a^p = (1+b)^p = \sum_{k \in [n] \cup \{ 0 \}}
+				\binom{p}{k} b^k.$$ Applying mod $p$ to the equality, we have $$a^p \equiv \sum_{k \in [n] \cup \{ 0 \}} \binom{p}{k} b^k \equiv 1 + b^p\; ( \mathrm{mod}\; p )$$ via
+				\textbf{i}. Then by the inductive hypothesis, $$a^p \equiv 1 + b^n \equiv 1 + b \equiv a \; ( \mathrm{mod}\; p )$$ proving the claim for $a \in \mathbb{N} \cup \{ 0 \}$.
+				Let us now turn to the case that $a \in \mathbb{Z}^-$. If $p = 2$, then we can see that the parity of $a$ and $a^2$ are equal. Hence, $a^2 \equiv a\; (
+				\mathrm{mod}\; p )$. Otherwise, if $p$ is odd, then it follows that $a^p \equiv a\; ( \mathrm{mod}\; p )$, for positive $a$, implies $-a^p \equiv (-a)^p \equiv
+				-a\; ( \mathrm{mod}\; p )$.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}]
+		\begin{enumerate}
+			\item[\textbf{i.}] Show using combinatorial arguments $$k^2 = 2\binom{k}{2} + \binom{k}{1}$$ and $$k^3 = 6\binom{k}{3} + 6\binom{k}{2} + \binom{k}{1}.$$
+			\item[\textbf{ii.}] Use \textbf{i} to find the formula for $\sum_{k \in [n]} k^2$ and $\sum_{k \in [n]} k^3$.
+		\end{enumerate}
+		\newpage
+
+		\begin{proof}
+			\item[\textbf{i.}] Suppose $k \in \mathbb{N}$. Further, suppose we have a set $\{ (x, y) : x, y \in [k] \}$. Clearly, we can see that there are $k$ options for
+				$x$ and $y$, providing $k^2$ options. Another way we can count this is by selecting all possible points on the diagonal of the grid summed with all possible points
+				off the diagonal. There are $\binom{k}{1}$ ways to choose a point on the diagonal. Additionally, there are $2\binom{k}{2}$ ways to select two unique off diagonal
+				values then permute them. Thus, $$k^2 = 2\binom{k}{2} + \binom{k}{1}.$$ \\
+				Let us now consider a set $\{ (x, y, z) : x, y, z \in [k] \}$. Again, we can see that there are $k$ options for $x$, $y$, and $z$, providing $k^3$ options. Another
+				way we can count this is by selecting 1, 2, and 3 distinct values in $[k]$, then permuting them. Furthermore, we can select one value in $\binom{k}{1}$ ways; two
+				values in $2 \cdot \binom{3}{1, 2} \binom{k}{2} = 6\binom{k}{2}$ ways because we need choose which value will be repeated; three values in $3! \binom{k}{3} = 
+				6\binom{k}{3}$. Thus, $$k^3 = 6\binom{k}{3} + 6\binom{k}{2} + \binom{k}{1}.$$
+			\item[\textbf{ii.}] Using \textbf{i}, the Hockey Stick Identity, and the definition of a binomial coefficient, we can see that
+				\begin{align*}
+					\sum_{k \in [n]} k^2 &= \sum_{k \in [n]} \left ( 2\binom{k}{2} + \binom{k}{1} \right ) \\
+					&= 2\binom{n+1}{3} + \binom{n+1}{2} \\
+					\sum_{k \in [n]} k^2 &= \frac{n(n+1)(2n+1)}{6}.
+				\end{align*}
+				Additionally, it can be seen that
+				\begin{align*}
+					\sum_{k \in [n]} k^3 &= \sum_{k \in [n]} \left ( 6\binom{k}{3} + 6\binom{k}{2} + \binom{k}{1} \right ) \\
+					&= 6\binom{n+1}{4} + 6\binom{n+1}{3} + \binom{n+1}{2} \\
+					\sum_{k \in [n]} k^3 &= \left ( \frac{n(n+1)}{2} \right )^2.
+				\end{align*}
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Prove each identity below by counting a set in two ways.
+		\begin{enumerate}
+			\item[\textbf{i.}] $\binom{2n}{n} = 2\binom{2n-1}{n-1}$
+			\item[\textbf{ii.}] $\sum_{k \in [n]} \binom{n}{k}\binom{k}{l} = \binom{n}{l} 2^{n-l}$
+			\item[\textbf{iii.}] $\sum_{k \in [n]} q^{k-1} = \frac{q^n-1}{q-1}$ for $q, n \in \mathbb{N}$
+			\item[\textbf{iv.}] $\sum_{k \in [n]} k(n-k) = \sum_{k \in [n]} \binom{k}{2}$
+			\item[\textbf{v.}] $\sum_{k \in [n] \cup \{ 0 \}} \binom{n}{k} 2^k = 3^n$
+		\end{enumerate}
+		\newpage
+
+		\begin{proof}
+			\item[\textbf{i.}] Suppose we have the set of all possible lattice paths from $(0, 0)$ to $(n, n)$. To count this set, we can see that there are $2n$ steps required;
+				furthermore, we know that exactly $n$ of them must be horizontal and the rest vertical. Then it follows that there $\binom{2n}{n}$ paths. Let us consider another
+				form of counting, two cases dependent on our first step. If our first step is horizontal, then there are $2n-1$ steps remaining and $n-1$ must be horizontal.
+				Likewise, if our first step is vertical, there are $2n-1$ steps remaining and $n-1$ must be vertical. Moreover, it follows that there are $\binom{2n-1}{n-1}
+				+ \binom{2n-1}{n-1} = 2\binom{2n-1}{n-1}$ paths. Thus, $$\binom{2n}{n} = 2\binom{2n-1}{n-1}.$$
+
+			\item[\textbf{ii.}] Suppose we have the set of all ternary strings of length $n$ with precisely $l$ 2's. To count this set, we can first choose which positions will be
+				2's then let all other digits be either 0's or 1's, providing a count of $\binom{n}{l} 2^{n-l}$. Let us now count this set in another way; let us choose $n-k$
+				digits to be 1's, then choose $l$ from the $k$ to be 2's, finally letting the remaining to be 0's. This counting process provides $\binom{n}{n-k}\binom{k}{l} =
+				\binom{n}{k}\binom{k}{l}$. Since each value of $k$ will give a distinct number of 1's, we can sum the cases without double/undercounting; hence the count provides
+				$\sum_{k \in [n]} \binom{n}{k}\binom{k}{l}$. Thus, $$\sum_{k \in [n]} \binom{n}{k}\binom{k}{l} = \binom{n}{l} 2^{n-l}.$$
+
+			\item[\textbf{iii.}] Suppose we have the set of all base $q$ strings of length $n$ with at least one leading non-zero digit being 1. Observe that there are $q^n - 1$
+				base $q$ strings excluding the string of all zeros. Then to ensure the leading digit is 1, we must divide by $q-1$; providing $\frac{q^n - 1}{q - 1}$. Let us consider
+				another counting, suppose the $k$th digit is the leading 1, digits preceeding it must be 0's, and all digits upto but not including $k$ can be any possible digit.
+				Then it follows that there are $q^{k-1}$ strings. Furthermore, for any possible $k$, there are $\sum_{k \in [n]} q^{k-1}$ strings in the set. Thus,
+				$$\sum_{k \in [n]} q^{k-1} = \frac{q^n - 1}{q - 1}.$$
+
+			\item[\textbf{iv.}] Suppose we have the set of all binary strings of length $n+1$ with exactly three 1's. By the proof of the Hockey Stick Identity we can see that
+				$\sum_{k \in [n]} \binom{k}{2}$ counts our set precisely; however, for our purposes let us reiterate. Suppose we assign a 1 to be placed at the $(k+1)$th location.
+				Then let us place the other two 1's in the first $k$ digits which provides $\binom{k}{2}$ ways. Summing over all $k$, we obtain $\sum_{k \in [n]} \binom{k}{2}$.
+				Now, let us turn to another form of counting where we assign a 1 at location $k+1$ and insist that it is surrounded on both sides by the remaining 1's. Furthermore,
+				for any $k$, there are $k$ and $n-k$ positions available before and after digit $k$, respectively. Hence, the count can be expressed as $\sum_{k \in [n]} k(n-k)$.
+				Thus, $$\sum_{k \in [n]} k(n-k) = \sum_{k \in [n]} \binom{k}{2}.$$
+
+			\item[\textbf{v.}] Suppose we have the set of all ternary strings of length $n$. Clearly, we can see that count of the set can be expressed as $3^n$. To count the
+				set in another way, let us choose $k$ digits to be 2's, then let the remaining be either 0 or 1. Then for all $k$, we can express the count as
+				$\sum_{k \in [n] \cup \{ 0 \}} \binom{n}{k} 2^k$. Thus, $$\sum_{k \in [n] \cup \{ 0 \}} \binom{n}{k} 2^k = 3^n.$$
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Prove the following by induction and counting in two ways. $$\sum_{k \in [n]} k \cdot k! = (n+1)! - 1$$
+
+		\begin{proof}[Induction Proof]
+			As a base case, let $n = 1$, obviously we can see that the equality will hold. Let us turn to the inductive step. Suppose $\sum_{k \in [n]} k \cdot k! = (n+1)! - 1$ holds
+			for an arbitrary $n \geq 1$. Now consider,
+			\begin{align*}
+				\sum_{k \in [n]} k \cdot k! &= (n+1)! - 1 \\
+				\sum_{k \in [n]} k \cdot k! + (n+1)(n+1)! &= (n+1)! + (n+1)(n+1)! - 1 \\
+				\sum_{k \in [n+1]} k \cdot k! &= (n+2)! - 1,
+			\end{align*}
+			concluding the inductive step.
+		\end{proof}
+
+		\begin{proof}[Combinatorial Proof]
+			Suppose $n+1$ individuals have an assigned seating. Further, suppose we have the set of all possible seating arrangements such that at least one individual is not sitting
+			in their own seat. Clearly we can see that $(n+1)!-1$ represents the count of our set since there is only one way all individuals can sit properly. Let us consider another
+			counting by the following:
+			\begin{enumerate}
+				\item[\textbf{a.}] Let the first $n-k$ people take their proper seat.
+				\item[\textbf{b.}] Then, let the next individual take a seat that is not their own.
+				\item[\textbf{c.}] Finally, let the remaining $k$ take arbitrary seats.
+			\end{enumerate}
+			By these rules, we can see that all seating arrangements are accounted for when considering all possible $k$. Additionally, for each particular $k$, there are precisely
+			$k \cdot k!$ arrangements. Thus, $$\sum_{k \in [n]} k \cdot k! = (n+1)! - 1.$$
+		\end{proof}
+
+
+	% problem 5
+	\item[\textbf{5.}] By counting in two ways, prove that $$\sum_{A \subseteq [n]} \sum_{B \subseteq [n]} |A \cap B| = n4^{n-1}.$$
+
+		\begin{proof}
+			Suppose we have a fully connected hypergraph, $( \mathcal{P}[n], [n] )$, and we count the number of items in the intersection of all possible edges $A$ and $B$. Clearly,
+			$\sum_{A \subseteq [n]} \sum_{B \subseteq [n]} |A \cap B|$ depicts our count. Let us now consider how many times a particular node is counted within an edges'
+			intersection. With binary representations in mind, we can see that a specific node will occur in $2^{n-1}$ edges. Furthermore, for a particular node to occur in two (not
+			necessarily distinct) edges, the count will be $2^{n-1} \cdot 2^{n-1} = 4^{n-1}$. Then accounting for all $n$ nodes, our final count is exactly $n4^{n-1}$. Thus,
+			$$\sum_{A \subseteq [n]} \sum_{B \subseteq [n]} |A \cap B| = n4^{n-1}.$$
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}
