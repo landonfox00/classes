@@ -1,0 +1,128 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\newcounter{lecture_num}
+\theoremstyle{plain}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[lecture_num]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 440 \\
+\noindent April 19, 2021
+
+\begin{center}
+	\Large Lecture Summary Week 12
+\end{center}
+
+\setcounter{lecture_num}{30}
+\setcounter{theorem}{0}
+\section*{Lecture 30}
+
+\subsection*{Products and Compactness}
+
+\begin{theorem}
+	If $X$ and $Y$ are compact spaces, then the product $X \times Y$ is compact.
+\end{theorem}
+
+\begin{lemma}[Tube Lemma]
+	Let $X$ and $Y$ be topological spaces with $X$ compact. Further, let $y \in Y$ and suppose $\mathcal{W} = \{ W_\alpha \}_{\alpha \in \mathcal{A}}$ is a collection of open subsets of
+	$X \times Y$ such that $$X \times \{ y \} \subseteq \bigcup_{\alpha \in \mathcal{A}} W_\alpha.$$ Then there exists a finite cover $\mathcal{U}(y) = \{ U_i \}_{i=1}^N$ of $X$ and an
+	open subset $V(y) \subseteq Y$ such that $y \in V(y)$ that satisfies the property that each product $U_i(y) \times V(y)$ is contained in some $W_\alpha \in \mathcal{W}$.
+\end{lemma}
+
+\begin{remark} $ $
+	\begin{enumerate}
+		\item Let $\{ X_i \}_{i=1}^n$ be a finite collection of compact topological spaces. Then the product $X_1 \times X_2 \times \hdots \times X_n$ is also compact.
+		\item Suppose $\{ X_i \}_{i \in \mathcal{A}}$ is an arbitrary collection of compact spaces. Then the product $\prod_{i \in \mathcal{A}} X_i$ is compact.
+	\end{enumerate}
+\end{remark}
+
+
+\setcounter{lecture_num}{31}
+\setcounter{theorem}{0}
+\section*{Lecture 31}
+
+\subsection*{Connectedness}
+
+Connectedness is a topological property that allows one to extend the Intermediate Value Theorem from analysis to functions on a more general topological space.
+
+\begin{definition}
+	Let $X$ be a topological space. A \textbf{separation} of $X$ is a pair $U, V$ of disjoint, nonempty, open subsets of $X$ such that $X = U \cup V$.
+	We say $X$ is \textbf{connected} if and only if there does not exist a separation of $X$. Otherwise, we say $X$ is \textbf{disconnected}.
+\end{definition}
+
+\begin{proposition}
+	Let $X$ be a topological space. The following are equivalent statements.
+	\begin{enumerate}
+		\item $X$ is disconnected.
+		\item $X$ is the disjoint union of two nonempty closed subsets.
+		\item There exists a nonempty proper subset $A \subset X$ that is both open and closed.
+	\end{enumerate}
+\end{proposition}
+
+\begin{example} $ $
+	\begin{itemize}
+		\item Let $X$ be any set. Then $(X, \mathcal{T}_\mathrm{triv})$ is connected.
+		\item If $X$ is a set with $|X| \geq 2$, then $(X, \mathcal{T}_\mathrm{disc})$ is disconnected.
+		\item The following Euclidean topologies are disconnected: $$X = (-1, 0) \cup (0, 1) \subseteq{R}\;\;\; \mathrm{and}\;\;\; Y = \{ v : ||v|| < 1 \} \cup \{ v : ||v|| > 1 \}
+			\subseteq \mathbb{R}^2.$$
+	\end{itemize}
+\end{example}
+
+\begin{theorem}
+	Let $f : X \to Y$ be a continuous function. If $X$ is connected, then the subspace $f(X) \subseteq Y$ is connected.
+\end{theorem}
+
+\begin{corollary}
+	Connectedness is a topological property; that is, if $X \cong Y$ and $X$ is connected, it follows that $Y$ is also connected.
+\end{corollary}
+
+
+\setcounter{lecture_num}{32}
+\setcounter{theorem}{0}
+\section*{Lecture 32}
+
+\subsection*{Connectedness}
+
+\begin{theorem}
+	Let $A \subseteq \mathbb{R}$ be a subspace with at least two elements. Then $A$ is connected if and only if for each $a < b \in A$ we have $[a, b] \subseteq A$.
+\end{theorem}
+
+\begin{corollary}
+	The connected subspaces of $\mathbb{R}$ are the following
+	\begin{enumerate}
+		\item closed intervals $[a, b]$ with $a < b \in \mathbb{R}$.
+		\item open intervals $(a, b)$ with $a < b \in \mathbb{R}$.
+		\item half-open intervals $[a, b)$ with $a \in \mathbb{R}$ and $b \in \mathbb{R} \cup \{ \infty \}$ or $(a, b]$ with $a \in \mathbb{R} \cup \{ -\infty \}$ and $b \in \mathbb{R}$.
+	\end{enumerate}
+\end{corollary}
+
+\begin{corollary}[Intermediate Value Theorem]
+	If $X$ is connected and $f : X \to \mathbb{R}$ is a continuous function, then for all $x, y \in X$, if $c \in \mathbb{R}$ is between $f(x)$ and $f(y)$, then there exists a $z \in X$
+	such that $f(z) = c$.
+\end{corollary}
+
+\begin{theorem}
+	The subspace $S^1$ is not homeomorphic to $[0, 1]$.
+\end{theorem}
+
+
+\end{document}

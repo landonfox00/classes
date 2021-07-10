@@ -1,0 +1,104 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\newcounter{lecture_num}
+\theoremstyle{plain}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[lecture_num]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 440 \\
+\noindent April 26, 2021
+
+\begin{center}
+	\Large Lecture Summary Week 13
+\end{center}
+
+\setcounter{lecture_num}{33}
+\setcounter{theorem}{0}
+\section*{Lecture 33}
+
+\subsection*{Building Connected Spaces}
+
+\begin{lemma}
+	If $f : X \overset{\cong}{\to} Y$ is a homeomorphism, and $C \subseteq X$ is a subspace then the restriction $f \mid_C : C \overset{\cong}{\to} f(C)$ is a homeomorphism.
+\end{lemma}
+
+\begin{remark}
+	The unit circle omitting two distinct points is disconnected. That is, $S^1 \setminus \{ x, y \}$ for any $x \neq y \in S^1$ is disconnected.
+\end{remark}
+
+\begin{lemma}
+	Let $X$ be a topological space and $C \subseteq X$ is an open and closed subset. If $A \subseteq X$ is a connected subspace, then either $A \subseteq C$ of $A \subseteq X \setminus C$.
+\end{lemma}
+
+\begin{theorem}
+	Let $X$ be a topological space and $A, B \subseteq X$ are connected subspaces. If $A \cap B \neq \varnothing$, then $A \cup B$ is connected.
+\end{theorem}
+
+\begin{remark}
+	If $A, B \subseteq X$ are connected and $A \cap B \neq \varnothing$, then $A \cap B$ is not necessarily connected.
+\end{remark}
+
+
+\setcounter{lecture_num}{34}
+\setcounter{theorem}{0}
+\section*{Lecture 34}
+
+\subsection*{Building Connected Spaces}
+
+\begin{definition}
+	Let $X$ be a topological space. For any $x, y \in X$, we write $x \sim y$ if and only if there exists a connected subspace $A \subseteq X$ such that $x, y \in A$. It can be shown that $\sim$ is an equivalence relation on $X$. Equivalence classes of $\sim$ are called the \textbf{connected components of $X$}.
+\end{definition}
+
+\begin{example} $ $
+	\begin{itemize}
+		\item If $X$ is nonempty and connected, then $X$ has one connected component.
+		\item If $X$ has the discrete topology, then the components of $X$ are the singletons.
+	\end{itemize}
+\end{example}
+
+\begin{theorem}
+	The connected components of $X$ are the \textbf{maximal connected} subspaces of $X$.
+\end{theorem}
+
+\begin{theorem}
+	If $X$ is a topological space and $A \subseteq X$ is nonempty and connected, then its closure $\overline{A}$ is connected.
+\end{theorem}
+
+\begin{corollary}
+	If $A \subseteq X$ is connected compact, then $A$ is closed.
+\end{corollary}
+
+\begin{remark}
+	Connected components are not necessarily open subsets of $X$.
+\end{remark}
+
+\begin{corollary}
+	If $A \subseteq X$ connected and $B \subseteq X$ is a subset such that $A \subseteq B \subseteq \overline{A}$, then $B$ is connected.
+\end{corollary}
+
+\begin{theorem}
+	If $X$ and $Y$ are nonempty connected spaces, then $X \times Y$ is connected.
+\end{theorem}
+
+
+\end{document}

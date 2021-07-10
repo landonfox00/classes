@@ -1,0 +1,139 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\newcounter{lecture_num}
+\theoremstyle{plain}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[lecture_num]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 440 \\
+\noindent March 8, 2021
+
+\begin{center}
+	\Large Lecture Summary Week 6
+\end{center}
+
+\setcounter{lecture_num}{15}
+\setcounter{theorem}{0}
+\section*{Lecture 15}
+
+\subsection*{Continuous Functions}
+
+\begin{definition}
+	Let $(X, \mathcal{T}_X)$ and $(Y, \mathcal{T}_Y)$ be topological spaces. Further, let $x \in X$. A function $f : X \to Y$ is \textbf{continuous at $x$} if and only if for all open
+	subsets $V \subseteq Y$ containing $f(x)$, there exists an open subset $U \subseteq X$ such that $x \in U$ and $f(U) \subseteq V$. We say that $f : X \to Y$ is \textbf{continuous} or
+	a \textbf{map} if and only if for all $x \in X$, $f$ is continuous at $x$.
+\end{definition}
+
+\begin{theorem}
+	A function $f : X \to Y$ is continuous if and only if for all open subsets $V \subseteq Y$ it holds that $f^{-1}(V) \subseteq X$ is open.
+\end{theorem}
+
+\begin{proposition}
+	Let $(X, d_X)$ and $(Y, d_Y)$ be metric spaces and $\mathcal{T}_{d_X}$, $\mathcal{T}_{d_Y}$ their corresponding metric topologies. Then a function $f : X \to Y$ is a map between
+	$(X, d_X)$ and $(Y, d_Y)$ if and only if for all $a \in X$ and for all $\epsilon > 0$ there exists a $\delta_a > 0$ such that $d_X(x, a) < \delta_a$ implies that $d_Y\left( f(x),
+	f(a) \right) < \epsilon$.
+\end{proposition}
+
+\begin{remark}
+	\textbf{Proposition 15.3} illustrates that all continuous functions studied from analysis are examples of maps between topological spaces.
+\end{remark}
+
+
+\setcounter{lecture_num}{16}
+\setcounter{theorem}{0}
+\section*{Lecture 16}
+
+\subsection*{Continuous Functions}
+
+\begin{theorem}
+	Let $(X, \mathcal{T}_X)$ and $(Y, \mathcal{T}_Y)$ be topological spaces and consider a function $f : X \to Y$.
+	\begin{enumerate}
+		\item The function $f$ is continuous if and only if for all closed subsets $B \subseteq Y$, it holds that $f^{-1}(B) \subseteq X$ is also closed.
+		\item Let $\mathcal{B}_X$ and $\mathcal{B}_Y$ be bases for $\mathcal{T}_X$ and $\mathcal{T}_Y$, respectively. Then $f$ is continuous if and only if for all $B' \in \mathcal{B}_Y$
+		and for all $x \in f^{-1}(B')$ there exists a set $B \in \mathcal{B}_X$ such that $x \in B \subseteq f^{-1}(B')$.
+	\end{enumerate}
+\end{theorem}
+
+\begin{example}
+	Let $(X, \mathcal{T})$ be a topological space and let $A \subseteq X$ be any subset equipped with the subspace topology. Further, let $i_A : A \to X$ be the \textbf{inclusion
+	function} defined as $i_A(a) = a$. Then $i_A$ is continuous.
+\end{example}
+
+\begin{remark}
+	The subspace topology $\mathcal{T}_\mathrm{sub}$ of $A \subseteq X$ can be characterized uniquely as the \textit{smallest} topology on $A$ with the property that $i_A : A \to X$ is
+	continuous.
+	\begin{enumerate}
+		\item Take $A = X$. Then $$i_X = \mathrm{id}_X : X \to X$$ is continuous.
+		\item Let $X$ and $Y$ be topological spaces. For a particular $y \in Y$, define $c_y : X \to Y$ as $c_y(x) = y$ for all $x \in X$. Then $c_y$, a \textbf{constant map}, is
+			continuous.
+	\end{enumerate}
+\end{remark}
+
+\begin{proposition}
+	If $f : X \to Y$ and $g : Y \to Z$ are continuous functions between spaces $X$, $Y$, and $Z$, then $g \circ f : X \to Z$ is continuous.
+\end{proposition}
+
+\begin{corollary}[Restriction of Domain]
+	If $f : X \to Y$ is continuous and $A \subseteq X$ is equipped with subspace topology, then the restriction $$f \mid_A = f \circ i_A : A \to Y$$ is continuous.
+\end{corollary}
+
+\begin{proposition}
+	Let $f : X \to Y$ be continuous. Further, let $B \subseteq Y$ be a subspace. Finally, let $j_B : B \to Y$ be the inclusion and suppose $f(X) \subseteq B$. Then there exists a unique
+	continuous function $g : X \to B$ such that $f = j_b \circ g$.
+\end{proposition}
+
+\begin{theorem}[The Pasting Lemma]
+	Let $X$ and $Y$ be topological spaces. Additionally, let $\mathcal{A} = \{ A_\alpha \}_{\alpha \in \mathcal{I}}$ be a collection of subspaces of $X$ such that $$X = \bigcup_{a \in
+	\mathcal{I}} A_\alpha.$$ Suppose $\{ f_\alpha : A_\alpha \to Y \}_{\alpha \in \mathcal{I}}$ is a collection of continuous functions such that $$f_\alpha \mid_{A_\alpha \cap A_\beta}
+	= f_\beta \mid_{A_\alpha \cap A_\beta}$$ for all $\alpha, \beta \in \mathcal{I}$.
+	If either
+	\begin{enumerate}
+		\item[i.] $\mathcal{A}$ is a collection of open subspaces of $X$
+		\item[ii.] $\mathcal{A}$ is a finite collection of subspaces of $X$
+	\end{enumerate}
+	then there exists a unique map $f : X \to Y$ such that $f \mid_{A_\alpha} = f_\alpha$ for all $\alpha \in \mathcal{I}$.
+\end{theorem}
+
+
+\setcounter{lecture_num}{17}
+\setcounter{theorem}{0}
+\section*{Lecture 17}
+
+\subsection*{Homeomorphisms}
+
+Homeomorphisms provide a fundamental measure of \textit{sameness} in topology.
+
+\begin{definition}
+	A continuous bijective function $f : X \to Y$ between topological spaces is a \textbf{homeomorphism} if and only if its set-theoretic inverse $f^{-1} : Y \to X$ is continuous. Two
+	spaces $X$ and $Y$ are \textbf{homeomorphic} if and only if there exists a homeomorphism $f : X \to Y$ between them; we write $X \cong Y$.
+\end{definition}
+
+\begin{remark} $ $
+	\begin{enumerate}
+		\item For any topological space $X$, $\mathrm{id}_X : X \to X$ is a homeomorphism.
+		\item If $f : X \to Y$ is a homeomorphism, then $f^{-1} : Y \to X$ is also a homeomorphism.
+		\item Given $$X \overset{f}{\rightarrow} Y \overset{g}{\rightarrow} Z,$$ if $f$ and $g$ are homeomorphisms, then $g \circ f : X \to Z$ is a homeomorphism.
+	\end{enumerate}
+\end{remark}
+
+\end{document}

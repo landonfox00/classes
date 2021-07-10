@@ -1,0 +1,41 @@
+
+ LP OPTIMUM FOUND AT STEP      4
+
+        OBJECTIVE FUNCTION VALUE
+
+        1)      323000.0
+
+  VARIABLE        VALUE          REDUCED COST
+        G1      3000.000000          0.000000
+        G2      2000.000000          0.000000
+        H1      2000.000000          0.000000
+        H2      8000.000000          0.000000
+
+
+       ROW   SLACK OR SURPLUS     DUAL PRICES
+        2)         0.000000         -2.450000
+        3)         0.000000         -2.450000
+        4)         0.000000         29.700001
+        5)         0.000000         17.450001
+
+ NO. ITERATIONS=       4
+
+
+ RANGES IN WHICH THE BASIS IS UNCHANGED:
+
+                           OBJ COEFFICIENT RANGES
+ VARIABLE         CURRENT        ALLOWABLE        ALLOWABLE
+                   COEF          INCREASE         DECREASE
+       G1       24.799999        58.166668         8.166666
+       G2       24.799999        87.250000         6.125000
+       H1       19.900000         8.166666        58.166668
+       H2       19.900000         6.125000        14.541667
+
+                           RIGHTHAND SIDE RANGES
+      ROW         CURRENT        ALLOWABLE        ALLOWABLE
+                    RHS          INCREASE         DECREASE
+        2        0.000000      5000.000000     20000.000000
+        3        0.000000     10000.000000      6666.666504
+        4     5000.000000     10000.000000      2500.000000
+        5    10000.000000     10000.000000      6666.666504
+

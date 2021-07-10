@@ -1,0 +1,159 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 440 \\
+\noindent March 12, 2021
+
+\begin{center}
+	\Large Problem Set 3
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}]
+		\begin{enumerate}
+			\item[\textbf{a.}] Let $X$ be a topological space and $A \subseteq X$ be a subspace. Prove that every closed subset $C \subseteq A$ is also closed in $X$ if and only if $A$
+				itself if closed in $X$.
+			\item[\textbf{b.}] Prove the Pasting Lemma for the case when $\mathcal{A} = \{ A_\alpha \}_{\alpha \in \mathcal{I}}$ is a finite collection of closed subspaces.
+		\end{enumerate}
+
+		\begin{proof} $ $
+			\begin{enumerate}
+				\item[\textbf{a.}] Suppose $X$ is a topological space and $A \subseteq X$ is a subspace. Further, suppose by contraposition that $X$ is not closed; that is, there exists
+					a limit point $y \in \overline{A}$ yet $y \notin A$. By the definition of a limit point, we can take a neighborhood $U$ such that $$A \cap (U \setminus \{y\}) \neq
+					\varnothing.$$ Then by Proposition 10.1, $C = A \cap \overline{U}$ is closed in $A$. However, notice that $y$ is a limit point of $A \cap \overline{U}$ yet $y \notin
+					C$. Therefore, $C$ is not closed in $X$. \\
+
+					Conversely, let $A$ be closed in $X$ and $C \subseteq A$ an arbitrary closed subset of $A$. By Proposition 10.1, there exists a closed subset $B \subseteq X$ such
+					that $C = A \cap B$. Hence, $C$ is the intersection of two closed sets in $X$ implying that it also is closed in $X$.
+			
+				\item[\textbf{b.}] Let $X$ and $Y$ be topological spaces and $\mathcal{A} = \{ A_\alpha \}_{\alpha \in \mathcal{I}}$ a finite collection of closed subspaces of $X$
+					such that $$X = \bigcup_{\alpha \in \mathcal{I}} A_\alpha.$$ Further, suppose $\{ f_\alpha : A_\alpha \to Y \}_{\alpha \in \mathcal{I}}$ is a collection of continuous
+					functions such that $$f_\alpha \mid_{A_\alpha \cap A_\beta} = f_\beta \mid_{A_\alpha \cap A_\beta}$$ for all $\alpha, \beta \in \mathcal{I}$. Consider a function $f :
+					X \to Y$ defined as $f(x) = f_\alpha(x)$ if $x \in A_\alpha$. It is clear that $f$ is well defined since $f_\alpha(x) = f_\beta(x)$ when $x \in A_\alpha \cap
+					A_\beta$. Additionally, we can see that $f$ is uniquely defined; indeed, if $g : X \to Y$ is defined such that $g \mid_{A_\alpha} = f_\alpha$ for all $\alpha \in
+					\mathcal{I}$, then it must hold that $f(x) = g(x)$ for all $x \in X$. \\
+
+					Let us now show that $f$ is a continuous map. Consider a closed subset $V \subseteq Y$. Observe that $$f^{-1}(V) = f^{-1}(V) \cap X = f^{-1}(V) \cap \bigcup_{
+					\alpha \in \mathcal{I}} A_\alpha = \bigcup_{\alpha \in \mathcal{I}} f^{-1}(V) \cap A_\alpha = \bigcup_{\alpha \in \mathcal{I}} f^{-1} \mid_{A_\alpha}(V) =
+					\bigcup_{\alpha \in \mathcal{I}} f_\alpha^{-1}(V).$$ By Theorem 16.1.1 it follows that $f_\alpha^{-1}(V)$ is closed in $A_\alpha$ since $f_\alpha$ is continuous
+					for all $\alpha \in \mathcal{I}$. Furthermore, due to the assumption that $A_\alpha$ is closed in $X$, we can see that $f_\alpha^{-1}(V) \subseteq X$ is closed
+					in $X$ via \textbf{1a}. Hence, $$\bigcup_{\alpha \in \mathcal{I}} f_\alpha^{-1}(V) = f^{-1}(V)$$ is closed in $X$ and so $f$ is continuous by Theorem 16.1.1.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Disprove the Pasting Lemma when we ease the restriction of finiteness in the case that $\mathcal{A} = \{ A_\alpha \}_{\alpha \in \mathcal{I}}$ is a collection of
+		closed subspaces.
+
+		\begin{proof}
+			Let $i : (\mathbb{Z}, \mathcal{T}_\mathrm{cofinite}) \to (\mathbb{R}, \mathcal{T}_\mathrm{euclid})$ be the inclusion function. Consider the collection of inclusive maps
+			$\{ i_\alpha : A_\alpha \to \mathbb{R} \}_{\alpha \in \mathbb{Z}}$ where $A_\alpha = \{\alpha\}$ for all $\alpha \in \mathbb{Z}$. Observe that $$\mathbb{Z} = \bigcup_{
+			\alpha \in \mathbb{Z}} \{\alpha\} = \bigcup_{\alpha \in \mathbb{Z}} A_\alpha$$ and that $$i_\alpha \mid_{A_\alpha \cap A_\alpha} = i_\beta \mid_{A_\alpha \cap A_\alpha}$$
+			holds vacuously for all $\alpha, \beta \in \mathbb{Z}$. Additionally, it is easy to see that $i\mid_{A_\alpha} = i_\alpha$ for all $\alpha \in \mathbb{Z}$. \\
+
+			Now, we show that $i$ is discontinuous. Notice that for any nondegenerate bounded interval $(a, b) \in \mathbb{R}$, $$i^{-1}(a, b) = \{ a_1, a_2, \hdots, a_k \} \subset
+			\mathbb{Z}$$ which is nonopen in $(\mathbb{Z}, \mathcal{T}_\mathrm{cofinite})$ and so $i$ is not continuous via Theorem 15.2.
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Let $f : X \to Y$ be a map between topological spaces.
+		\begin{enumerate}
+			\item[\textbf{a.}] If $X$ is separable, then the subspace $f(X) \subseteq Y$ is separable.
+			\item[\textbf{b.}] If $X$ is second countable and $f$ is an open map, then the subspace $f(X) \subseteq Y$ is second countable.
+		\end{enumerate}
+
+		\begin{proof}
+			Suppose $X$ and $Y$ are topological spaces and $f : X \to Y$ is a map between them.
+			\begin{enumerate}
+				\item[\textbf{a.}] Let $X$ contain a countable dense subset $A \subseteq X$. It is obvious that $$|f(A)| \leq |A| \leq \aleph_0$$ implying that $f(A)$ is countable.
+					Now, consider the closed subset $\overline{f(A)} \subseteq f(X)$. Since $f$ is continuous, it holds that $f^{-1}(\overline{f(A)})$ is also closed via Theorem
+					16.1.1. It is clear that $A \subseteq f^{-1}(\overline{f(A)}) \subseteq X$ and so $$A \subseteq X = \overline{A} \subseteq f^{-1}(\overline{f(A)}) \subseteq X.$$
+					Hence, $f^{-1}(\overline{f(A)}) = X$ implying that $\overline{f(A)} = X$. Thus, $f(X)$ is separable.
+
+				\item[\textbf{b.}] Let $X$ have a countable basis $\mathcal{B}_X = \{ B_i \}$ and let $f$ be an open map. Define a collection of open subsets $\mathcal{B}_{f(X)} =
+				\{ f(B_i) \}$. Clearly, we can see that $$|\mathcal{B}_{f(X)}| \leq |\mathcal{B}_X| \leq \aleph_0.$$ Since $\mathcal{B}_X$ is a basis of $X$, we have that for every $x
+				\in X$ there exists a $B \in \mathcal{B}_X$ such that $x \in B$. Then it follows that for every $f(x) \in f(X)$ there exists a $f(B) \in \mathcal{B}_{f(X)}$ such that
+				$f(x) \in f(B)$. Similarly, we know that for every $B_1, B_2 \in \mathcal{B}_X$ if $x \in B_1 \cap B_2$, then there exists a $B_3 \in \mathcal{B}_X$ such that $$x \in B_3
+				\subseteq B_1 \cap B_2.$$ Therefore, it is easy to see that for every $f(B_1), f(B_2) \in \mathcal{B}_{f(X)}$ if $f(x) \in f(B_1) \cap f(B_2)$, then $f(B_3) \in \mathcal{
+				B}_{f(X)}$ such that $$f(x) \in f(B_3) \subseteq f(B_1 \cap B_2) \subseteq f(B_1) \cap f(B_2).$$ Thus, $f(X)$ contains a countable basis by definition.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Let $f : X \to Y$ be continuous. Disprove the following statement.
+		\begin{displayquote}
+			If $X$ is a limit point of a subset $A \subseteq X$, then $f(x)$ is a limit point of $f(A)$.
+		\end{displayquote}
+
+		\begin{proof}
+			Let $f : X \to Y$ be a constant map defined as $f(x) = y$ for all $x \in X$. Then for an arbitrary set $A$ with limit point $x$, it follows that $f(A) = \{ y \}$. Therefore,
+			it holds that for any subset $V \subseteq Y$ containing $y$, $$f(A) \cap (V \setminus \{y\}) = (\{y\} \cap V) \setminus \{y\} = \varnothing.$$ Thus, $f(x)$ is not a limit
+			point of $f(A)$ by definition.
+		\end{proof}
+
+
+	% problem 5
+	\item[\textbf{5.}] Give an example of a continuous function $f : \mathbb{R} \to \mathbb{R}$ that is neither open nor closed.
+
+		\begin{proof}
+			Let $f : \mathbb{R} \to \mathbb{R}$ be defined as $$f(x) = x(x+1)e^{-x}.$$ It is clear form the results of analysis that $f$ is continuous on $\mathbb{R}$. Observe that
+			$$f(0, \infty) = \left ( 0, (2 + \sqrt{5})e^{-(\sqrt{5} + 1)/2} \right ].$$ Suppose that $f(0, \infty)$ is open in $$f(\mathbb{R}) = \left [ (2 - \sqrt{5})e^{(\sqrt{5} - 1)/2},
+			\infty \right ).$$ Since $f(\mathbb{R})$ is closed in $\mathbb{R}$ it must hold that $f(\mathbb{R}) \setminus f(0, \infty)$ is also closed $\mathbb{R}$ via \textbf{PS 3 \#1a}
+			and so $f$ if not open by definition. Similarly, consider $$f[1, \infty) = (0, 1].$$ By the same argument, $f[1, \infty)$ must be closed in $\mathbb{R}$, however this also
+			fails.
+		\end{proof}
+
+
+	% problem 6
+	\item[\textbf{6.}] Show that any open interval $(a, b) \subseteq \mathbb{R}$ is homeomorphic to $\mathbb{R}$.
+
+		\begin{proof}
+			Let $(a, b) \subseteq \mathbb{R}$ be any arbitrary open interval and define $f : (a, b) \to \mathbb{R}$ as $$f(x) = \tan \frac{\pi}{a-b}\left(x - \frac{a+b}{2}\right).$$
+			Observe that $f$ transforms the period $\left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$ of $\tan$ to $(a, b)$. Furthermore, we know that when $\tan$ is restricted to
+			$\left(-\frac{\pi}{2}, \frac{\pi}{2}\right)$, it is bijective to $\mathbb{R}$. Similarly, it is clear that $f$ is bijective. Additionally, we know from analysis that
+			$f$ is continuous and its inverse, $$f^{-1}(x) = \frac{a-b}{\pi}\tan^{-1} x + \frac{a+b}{2}$$ can also be seen to be continuous. Hence, $(a, b) \cong \mathbb{R}$ by
+			definition.
+		\end{proof}
+
+
+	% problem 7
+	\item[\textbf{7.}] Let $x \in S^1$ be any point on the unit circle. Show that $S^1 \setminus \{ x \}$ is homeomorphic to $\mathbb{R}$.
+
+		\begin{proof}
+			Let $x = (\cos \phi, \sin \phi) \in S^1$. Further, let $\textbf{f} : \mathbb{R} \to S^1 \setminus \{ x \}$ be defined as $$\textbf{f}(x) = (\cos(2\tan^{-1}x + \phi + \pi),
+			\sin(2\tan^{-1}x + \phi + \pi)).$$ Notice that $\theta \mapsto (\cos \theta, \sin \theta)$ is bijective when $\phi \leq \theta < 2\pi + \phi$ which is satisfied
+			by $\theta = 2\tan^{-1}x + \phi + \pi$. Therefore, $\textbf{f}$ is bijective. \\
+
+			In regard to continuity, it is easy to see that both components of $\textbf{f}$ are continuous and so it must also be. Additionally, we can see that $\textbf{f}^{-1}$
+			is continuous via analysis techniques and so $\mathbb{R} \cong S^1 \setminus \{ x \}$.
+		\end{proof}
+
+
+	% problem 8
+	\item[\textbf{8.}] Prove that $(\mathbb{R}, \mathcal{T}_\mathrm{cof})$ is not metrizable.
+
+		\begin{proof}
+			Observe that $(\mathbb{R}, \mathcal{T}_\mathrm{cof})$ is separable; indeed, the smallest closed superset of an infinite subset of $\mathbb{R}$ is $\mathbb{R}$ itself. \\
+
+			Now, we show that $(\mathbb{R}, \mathcal{T}_\mathrm{cof})$ is not second countable. Suppose $\mathcal{B}$ is a countable basis of $(\mathbb{R}, \mathcal{T}_\mathrm{cof})$.
+			Let $U_x = \mathbb{R} \setminus \{ x \} \in \mathcal{T}_\mathrm{cof}$ be an open set containing an arbitrary element $y \in \mathbb{R}$. There must exist a basis element
+			$B_x \in \mathcal{B}$ such that $y \in B_x \subseteq U_x$. Since every element $B \in \mathcal{B}$ is, itself, an open subset of $\mathbb{R}$, it must hold that
+			$\mathbb{R} \setminus B$ is finite. Therefore, $$\bigcup_{x \in \mathbb{R}} (\mathbb{R} \setminus B_x)$$ is countable. However, $x \in \mathbb{R} \setminus B_x$ and so
+			$$\mathbb{R} \subseteq \bigcup_{x \in \mathbb{R}} (\mathbb{R} \setminus B_x)$$ is uncountable, a contradiction. \\
+
+			In regard to metrizability, suppose by contradiction that $(\mathbb{R}, \mathcal{T}_\mathrm{cof})$ is metrizable. Then it must hold that $(\mathbb{R}, \mathcal{T}_\mathrm{cof})$
+			is second countable since it is separable via Theorem 14.4. Thus, $(\mathbb{R}, \mathcal{T}_\mathrm{cof})$ is not metrizable.
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

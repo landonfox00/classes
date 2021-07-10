@@ -1,0 +1,121 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\newcounter{lecture_num}
+\theoremstyle{plain}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[lecture_num]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 440 \\
+\noindent March 15, 2021
+
+\begin{center}
+	\Large Lecture Summary Week 7
+\end{center}
+
+\setcounter{lecture_num}{18}
+\setcounter{theorem}{0}
+\section*{Lecture 18}
+
+\subsection*{Homeomorphisms}
+
+\begin{definition}
+	A map $f : X \to Y$ is an \textbf{open} (\textbf{closed}) map if and only if for each open (closed) subset $B \subseteq X$ the image $f(B) \subseteq Y$ is open (closed).
+\end{definition}
+
+\begin{proposition}
+	Let $f : X \to Y$ be a continuous bijection. Then $f$ is a homeomorphism is and only if $f$ is an open or closed map.
+\end{proposition}
+
+\begin{example} $ $
+	\begin{itemize}
+		\item $\mathbb{R}^2 \overset{f}{\to} \mathbb{R}$ defined as $f(x, y) = x$ is an open map.
+		\item $S^2 \overset{i}{\hookrightarrow} \mathbb{R}^3$, the inclusion map is a closed map.
+	\end{itemize}
+\end{example}
+
+\begin{proposition}
+	The punctured $n$-sphere is homeomorphic to $\mathbb{R}^n$.
+\end{proposition}
+
+\setcounter{lecture_num}{19}
+\setcounter{theorem}{0}
+\section*{Lecture 19}
+
+\subsection*{Topological Properties}
+
+\begin{proposition}
+	If $f : (X, \mathcal{T}_X) \overset{\cong}{\to} (Y, \mathcal{T}_Y)$ is a homeomorphism then it induces a bijection of sets $\mathcal{T}_X \leftrightarrow \mathcal{T}_Y$.
+\end{proposition}
+
+\begin{remark}
+	Let $\mathcal{T}, \mathcal{T}'$ be topologies on $X$. Then
+	\begin{enumerate}
+		\item $\mathrm{id}_X : (X, \mathcal{T}') \to (X, \mathcal{T})$ is a continuous bijection if and only if $\mathcal{T} \subseteq \mathcal{T}'$.
+		\item $\mathrm{id}_X$ is a homeomorphism if and only if $\mathcal{T} = \mathcal{T}'$.
+	\end{enumerate}
+\end{remark}
+
+\begin{definition}
+	A topological space $(X, \mathcal{T})$ is metrizable if and only if there exists a metric $d : X \times X \to \mathbb{R}$ such that the metric topology $\mathcal{T}_d = \mathcal{T}$.
+\end{definition}
+
+\begin{example} $ $
+	\begin{itemize}
+		\item The discrete topology $\mathcal{T}_\mathrm{disc}$ on any set $X$ is metrizable. Indeed define $\widetilde{d} : X \times X \to \mathbb{R}$ as the discrete metric.
+		\item The lower limit topology is not metrizable.
+	\end{itemize}
+\end{example}
+
+\begin{definition}
+	A property $P$ of a topological space is \textbf{topological property} if and only if it is preserved by homeomorphisms. That is, if $(X, \mathcal{T}_X)$ has property $P$ and $(X,
+	\mathcal{T}_X) \cong (Y, \mathcal{T}_Y)$, then $(Y, \mathcal{T}_Y)$ has property $P$.
+\end{definition}
+
+\begin{example}
+	Examples of topological properties include
+	\begin{itemize}
+		\item Second countability.
+		\item Separability.
+		\item Metrizability.
+	\end{itemize}
+\end{example}
+
+\begin{definition}
+	A sequence of points $\{ x_n \}_{n \in \mathbb{N}}$ of a topological space $X$ converges to a point $x \in X$ if and only if for every open neighborhood $U$ of $x$, there exists an
+	$N > 0$ such that $x_n \in U$ for all $n > N$.
+\end{definition}
+
+\begin{example}
+	\textit{Every Cauchy sequence in $A \subseteq \mathbb{R}$ converges} is not a topological property of subspaces of $\mathbb{R}$.
+\end{example}
+
+\begin{definition}
+	A space $(X, \mathcal{T})$ is \textbf{Hausdorff} if and only if for each pair of distinct points $x \neq y \in X$, there exists open subsets $U, V \subseteq X$ such that $x \in U$,
+	$y \in V$, $U \cap V = \varnothing$.
+\end{definition}
+
+\begin{theorem}
+	If $(X, d)$ is a metric space, then $(X, \mathcal{T}_d)$ is Hausdorff.
+\end{theorem}
+
+\end{document}

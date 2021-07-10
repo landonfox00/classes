@@ -1,0 +1,16 @@
+min 5000CA + 6000CB + 2500CC + 4000CD + 3000CF + 7000CG
+s.t. x5 - x1 <= 10
+x2 - x1 + CA >= 3
+x3 - x1 + CC >= 2
+x4 - x1 + CB >= 6
+x4 - x2 + CD >= 5
+x5 - x2 + CF >= 7
+x4 - x3 >= 2
+x5 - x4 + CG >= 4
+CA <= 1
+CB <= 2
+CC <= 1
+CD <= 2
+CF <= 2
+CG <= 2
+END

@@ -1,0 +1,138 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\newcounter{lecture_num}
+\theoremstyle{plain}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[lecture_num]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 440 \\
+\noindent May 3, 2021
+
+\begin{center}
+	\Large Lecture Summary Week 14/15
+\end{center}
+
+\setcounter{lecture_num}{35}
+\setcounter{theorem}{0}
+\section*{Lecture 35}
+
+\subsection*{Path Connectedness}
+
+Path connectedness is a stronger variation of connectedness.
+
+\begin{definition}
+	A topological space $X$ is \textbf{path connected} if and only if for every $x, y \in X$ there exists a continuous function $\gamma : [0, 1] \to X$ such that $\gamma(0) = x$ and
+	$\gamma(1) = y$.
+\end{definition}
+
+\begin{proposition}
+	If $X$ is path connected, then $X$ is connected.
+\end{proposition}
+
+\begin{remark}
+	Converse of Proposition 35.2 is false.
+\end{remark}
+
+\begin{example}
+	Examples of path connected spaces.
+	\begin{itemize}
+		\item Open and closed balls in $\mathbb{R}^n$ with $n \geq 1$ under the Euclidean topology.
+		\item Let $X = \mathbb{R}^n \setminus \{ \textbf{0} \}$. If $n \geq 2$, then $X$ is path connected.
+	\end{itemize}
+\end{example}
+
+\begin{theorem}
+	If $X$ is path connected and $f : X \to Y$ is a continuous function, then the subspace $f(X) \subseteq Y$ is also path connected.
+\end{theorem}
+
+\begin{corollary}
+	If $X$ is path connected and $X \cong Y$, then $Y$ is path connected. Moreover, path connectedness is a topological property.
+\end{corollary}
+
+\begin{corollary}
+	For $n \geq 2$, $\mathbb{R}$ is not homeomorphic to $\mathbb{R}^n$.
+\end{corollary}
+
+
+\setcounter{lecture_num}{36}
+\setcounter{theorem}{0}
+\section*{Lecture 36}
+
+\subsection*{Path Connectedness}
+
+The \textbf{topologist's sine curve} is an example of a connected space that is not path connected. Define $f : (0, \infty) \to \mathbb{R}$ as $f(x) = \sin \left ( \frac{1}{x} \right )$.
+Additionally, let $S = \Gamma_f \subseteq \mathbb{R}^2$. The topologist's sine curve is the connected space $\overline{S}$. 
+
+\begin{theorem}
+	The topologist's sine curve is not path connected.
+\end{theorem}
+
+\subsection*{Quotient Topology}
+
+\begin{definition}
+	Let $(X, \mathcal{T})$ be a topological space and $\sim$ an equivalence relation on $X$. Let $X/\sim$ be the set of equivalence classes and let $\pi : X \to X/\sim$ be the surjection
+	$\pi(x) = [x]$. The quotient topology $\pi_* \mathcal{T}$ on $X/\sim$ is defined by: $V \in \pi_* \mathcal{T}$ if and only if $\pi^{-1}(V) \in \mathcal{T}$.
+\end{definition}
+
+
+\setcounter{lecture_num}{37}
+\setcounter{theorem}{0}
+\section*{Lecture 37}
+
+\subsection*{Quotient Topology}
+
+\begin{remark}
+	The quotient topology on any topological space is also a topological space.
+\end{remark}
+
+\begin{remark}
+	The function $\pi : (X, \mathcal{T}) \to (X/\sim, \pi_* \mathcal{T})$ is continuous.
+\end{remark}
+
+\begin{proposition} $ $
+	\begin{enumerate}
+		\item The quotient topology is the \textit{largest} topology on $X/\sim$ such that $\pi : X \to X/\sim$ is continuous.
+		\item A subset $A \subseteq X/\sim$ is closed with respect to the quotient topology if and only if $\pi^{-1}(A) \subseteq X$ is closed.
+	\end{enumerate}
+\end{proposition}
+
+\begin{theorem}
+	Let $f : X \to Y$ be a map between topological spaces. Let $\sim$ be an equivalence relation on $X$. If $f(x) = f(x')$ whenever $x \sim x'$, then the function $\overline{f} : X/\sim
+	\to Y$ is defined as $\overline{f}([x]) = f(x)$ is continuous with respect to $\pi_*\mathcal{T}$ on $X/\sim$. Moreover, $\overline{f}$ is the unique map such that $\overline{f} \circ
+	\pi = f$.
+\end{theorem}
+
+\begin{definition}
+	Let $f : X \to Y$ be continuous. Further, let $\overline{f} : X/\sim_f \to Y$ be the induced map from Theorem 37.4. If $\overline{f}$ is a homeomorphism, then we say $f$ is a
+	\textbf{quotient map}.
+\end{definition}
+
+\begin{example} $ $
+	\begin{itemize}
+		\item Every surjective open map is a quotient map.
+		\item Every surjective closed map is a quotient map.
+	\end{itemize}
+\end{example}
+
+
+\end{document}

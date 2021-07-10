@@ -1,0 +1,100 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\newcounter{lecture_num}
+\theoremstyle{plain}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[lecture_num]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 440 \\
+\noindent March 29, 2021
+
+\begin{center}
+	\Large Lecture Summary Week 9
+\end{center}
+
+\setcounter{lecture_num}{22}
+\setcounter{theorem}{0}
+\section*{Lecture 22}
+
+\subsection*{Properties Inherited from Subspaces}
+
+\begin{proposition}
+	If $A \subseteq X$ is a subspace and $X$ is metrizable, then $A$ is $T_i$ for $i = 0, 1, 2, 3, 4$.
+\end{proposition}
+
+\begin{lemma}
+	If $X$ is metrizable and $A \subseteq X$ is a subspace, then $A$ is metrizable.
+\end{lemma}
+
+\begin{theorem} $ $
+	\begin{enumerate}
+		\item If $X$ is $T_2$, then every subspace $A \subseteq X$ is $T_2$.
+		\item If $X$ is $T_1$ and $T_3$, then every subspace of $X$ is $T_1$ and $T_3$.
+	\end{enumerate}
+\end{theorem}
+
+\setcounter{lecture_num}{23}
+\setcounter{theorem}{0}
+\section*{Lecture 23}
+
+\subsection*{Compactness}
+
+Compactness is a topological property that implies an analog of the Extreme Value Theorem from Analysis.
+
+\begin{definition}
+	An \textbf{open cover} of a topological space $X$ is a collection $\mathcal{U} = \{ U_\alpha \}_{\alpha \in \mathcal{A}}$ of open subsets of $X$ such that $X = \bigcup_{\alpha \in
+	\mathcal{A}} U_\alpha$. If $U' = \{ U_\beta \}_{\beta \in \mathcal{A}'} \subseteq \mathcal{U}$ is a subcollection such that $X = \bigcup_{\beta \in \mathcal{A}'} U_\beta$, then
+	$\mathcal{U}'$ is called a \textbf{subcover} of $\mathcal{U}$.
+\end{definition}
+
+\begin{example}
+	Let $X = [0, 1] \subseteq \mathbb{R}$. Then $$\mathcal{U} = \left \{ \left [ 0, \frac{1}{10} \right ), \left ( \frac{1}{3}, 1 \right ] \right \} \bigcup \left \{ \left ( \frac{1}{n+2},
+	\frac{1}{n} \right ) \right \}_{n \in \mathbb{N} \setminus \{ 1 \}}$$ is an open cover. Additionally, $$\mathcal{U} = \left \{ \left [ 0, \frac{1}{10} \right ), \left ( \frac{1}{3}, 1
+	\right ] \right \} \bigcup \left \{ \left ( \frac{1}{n+2}, \frac{1}{n} \right ) \right \}_{2 \leq n \leq 9}$$ is a subcover.
+\end{example}
+
+\begin{definition}
+	A topological space $X$ is \textbf{compact} if and only if every open cover of $X$ has a finite subcover.
+\end{definition}
+
+\begin{example}
+	The Euclidean topology on $\mathbb{R}$ is not compact. It can be shown that $\mathcal{U} = \{ (-n, n) \}_{n \in \mathbb{N}}$ has no finite subcover.
+\end{example}
+
+\begin{remark}[Heine-Borel Theorem]
+	Every closed interval $[a, b] \subseteq \mathbb{R}$ is compact. More generally, every closed and bounded subspace of $\mathbb{R}^n$ is compact.
+\end{remark}
+
+\begin{theorem}
+	Let $f : X \to Y$ be a continuous function between topological spaces $X$ and $Y$. If $X$ is compact, then the subspace $f(X) \subseteq Y$ is compact.
+\end{theorem}
+
+\begin{remark}
+	Compactness is a topological property.
+\end{remark}
+
+\begin{corollary}
+	The Euclidean topology on $\mathbb{R}$ is not homeomorphic to $[a, b]$ for any $a, b \in \mathbb{R}$. Hence, $[a, b] \ncong (a, b)$.
+\end{corollary}
+
+\end{document}

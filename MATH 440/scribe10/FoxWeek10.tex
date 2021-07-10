@@ -1,0 +1,117 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\newcounter{lecture_num}
+\theoremstyle{plain}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[lecture_num]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 440 \\
+\noindent April 5, 2021
+
+\begin{center}
+	\Large Lecture Summary Week 10
+\end{center}
+
+\setcounter{lecture_num}{24}
+\setcounter{theorem}{0}
+\section*{Lecture 24}
+
+\subsection*{Heine-Borel Theorem and Compactness}
+
+\begin{definition}
+	Let $(A, \leq)$ be a totally ordered set.
+	\begin{enumerate}
+		\item A nonempty subset $S \subseteq A$ is \textbf{bonded above} if and only if there exists an $a \in A$ such that $x \leq a$ for all $x \in S$. We say $a$ is an \textbf{upper
+			bound}. The value $\sup S \in A$ denotes the least upper bound of $S$.
+		\item The set $A$ has the \textbf{least upper bound property} if and only if every nonempty subset $S \subseteq A$ that is bounded above has a least upper bound.
+	\end{enumerate}
+\end{definition}
+
+\begin{example}
+	It can be shown that $\mathbb{R}$ has the least upper bound property.
+\end{example}
+
+\begin{theorem}[Heine-Borel]
+	Let $a < b \in \mathbb{R}$. Then $[a, b] \subseteq \mathbb{R}$ is compact.
+\end{theorem}
+
+\begin{theorem}
+	If $X$ is a compact topological space and $A \subseteq X$ is a closed subspace, then $A$ is compact.
+\end{theorem}
+
+\begin{theorem}
+	If $X$ is Hausdorff and $A \subseteq X$ is a compact subspace, then $A$ is a closed subset of $X$.
+\end{theorem}
+
+\setcounter{lecture_num}{25}
+\setcounter{theorem}{0}
+\section*{Lecture 25}
+
+\subsection*{Compactness Properties}
+
+\begin{corollary}
+	Let $X$ be compact and $Y$ Hausdorff.
+	\begin{enumerate}
+		\item Every map $f : X \to Y$ is a closed map.
+		\item If $f : X \to Y$ is a continuous bijection, then $f$ is a homeomorphism.
+	\end{enumerate}
+\end{corollary}
+
+\begin{definition}
+	Suppose $f : X \to Y$ is continuous and injective. Give $f(X) \subseteq Y$ the subspace topology and let $\widetilde{f} : X \to f(X)$ denote the induced map onto the image. We say
+	$f$ is a \textbf{topological embedding} if and only if $\widetilde{f}$ is a homeomorphism.
+\end{definition}
+
+\begin{example}
+	The field of Knot Theory often studies topological embeddings in the form $S^1 \to \mathbb{R}^3$.
+\end{example}
+
+\setcounter{lecture_num}{26}
+\setcounter{theorem}{0}
+\section*{Lecture 26}
+
+\subsection*{Compactness Properties}
+
+\begin{definition}
+	A collection $\mathcal{C}$ of subsets of a space $X$ has the \textbf{finite intersection property} if and only if for every finite subcollection $\{ C_1, \hdots, C_n \} \subseteq
+	\mathcal{C}$, it holds that the intersection $$\bigcap_{i = 1}^n C_i \neq \varnothing.$$
+\end{definition}
+
+\begin{theorem}
+	A topological space is compact if and only if for every collection $\mathcal{C}$ of closed subsets in $X$ having the finite intersection property, it holds that $$\bigcap_{C \in
+	\mathcal{C}} C \neq \varnothing.$$
+\end{theorem}
+
+\begin{corollary}
+	If $X$ is compact and $A_1 \supseteq A_2 \supseteq \hdots$ is a nested sequence of nonempty closed subsets of $X$, then $$\bigcap_{i \in \mathbb{N}} A_i \neq \varnothing.$$
+\end{corollary}
+
+\begin{definition}
+	Let $(X, d)$ be a metric space. A subset $A \subseteq X$ is \textbf{bounded} if and only if there exists an $M \in \mathbb{N}$ such that $d(a_1, a_2) \leq M$ for all $a_1, a_2 \in A$.
+\end{definition}
+
+\begin{theorem}
+	A subset $K \subseteq \mathbb{R}$ is compact if and only if $K$ is closed and bounded.
+\end{theorem}
+
+\end{document}

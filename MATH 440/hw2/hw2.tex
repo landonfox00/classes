@@ -1,0 +1,210 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 440 \\
+\noindent February 26, 2021
+
+\begin{center}
+	\Large Problem Set 2
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Consider the set $Y = [-1, 1]$ as a subspace of $\mathbb{R}$. Which of the following are open in $Y$? Which are open in $\mathbb{R}$?
+		\begin{enumerate}
+			\item[\textbf{i.}] $A = \left \{ x : \frac{1}{2} < |x| < 1 \right \}$.
+			\item[\textbf{ii.}] $B = \left \{ x : \frac{1}{2} < |x| \leq 1 \right \}$.
+			\item[\textbf{iii.}] $C = \left \{ x : \frac{1}{2} \leq |x| < 1 \right \}$.
+			\item[\textbf{iv.}] $D = \left \{ x : \frac{1}{2} \leq |x| < \leq \right \}$.
+		\end{enumerate}
+
+		\begin{proof}
+			Let $Y = [-1, 1]$ be a subspace of $\mathbb{R}$. Recall that open intervals are open sets in $\mathbb{R}$. Also of note, all open sets of $Y$ are a intersection of an open
+			set of $\mathbb{R}$ and $Y$.
+			\begin{enumerate}
+				\item[\textbf{i.}] Consider the set $A = \left \{ x : \frac{1}{2} < |x| < 1 \right \}$. Observe that $A = \left(-1, -\frac{1}{2}\right) \cup \left(\frac{1}{2}, 1\right)$
+					and so it is open in $\mathbb{R}$, implying that it must also be open in $Y$ since $Y \cap A = A$.
+
+				\item[\textbf{ii.}] Suppose $B = \left \{ x : \frac{1}{2} < |x| \leq 1 \right \} = \left [ -1, -\frac{1}{2}\right) \cup \left ( \frac{1}{2}, 1\right]$. It is clear to see
+					that $B$ is not open in $\mathbb{R}$. However, $U = \left(-2, -\frac{1}{2}\right) \cup \left(\frac{1}{2}, 2\right)$ is open in $\mathbb{R}$ and so $B = U \cap Y$ is
+					open  in $Y$ by definition.
+
+				\item[\textbf{iii.}] Let $C = \left \{ x : \frac{1}{2} \leq |x| < 1 \right \}$. Similar to \textbf{1ii}, we can see that $C$ is not open in $\mathbb{R}$ as it is composed
+					of partially closed sets. Now, suppose by contradiction that $C$ is open in $Y$. Then there exists an open subset $U$ of $\mathbb{R}$ such that $C = U \cap Y$.
+					Furthermore, we can conclude that $U^c$ is closed in $\mathbb{R}$ and $\left(-\frac{1}{2}, \frac{1}{2}\right) \subseteq U^c$, yet the limit points $-\frac{1}{2},
+					\frac{1}{2} \notin U^c$ which is a contradiction.
+
+				\item[\textbf{iv.}] Consider the set $D = \left \{ x : \frac{1}{2} \leq |x| < \leq \right \}$. Clearly we can see that $D$ is closed and not open in $\mathbb{R}$. In
+					regard to the openness of $D$ in $Y$, we can see that it is not open via the same argument in \textbf{1iii}.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Let $X$ be a topological space and $A \subseteq X$ a subspace. Prove that every open subset $W \subseteq A$ is also open in $X$ if and only if $A$ itself is open
+		in $X$.
+
+		\begin{proof}
+			Suppose $X$ is a topological space and $A \subseteq X$ is a subspace. Assume that every open subset of $A$ is open in $X$. Then by the definition of a topological space, the
+			union of all subsets of $A$, $$\bigcup_{W \subseteq A} W = A$$ is open in $X$.
+
+			Now conversely, assume that $A$ is open in $X$. Let $W$ be an arbitrary open subset of $A$. By the definition of the subset topology, there must exist an open subset $U$ of
+			$X$ such that $W = U \cap A$. Moreover, since $W$ is a finite intersection of open sets in $X$, $W$ must be open in $X$.
+		\end{proof}
+
+	% problem 3
+	\item[\textbf{3.}] Let $X$ be a topological space and $A, B \subseteq X$. Prove the following.
+		\begin{enumerate}
+			\item[\textbf{i.}] If $A \subseteq B$, then $\overline{A} \subseteq \overline{B}$.
+			\item[\textbf{ii.}] $\overline{A \cup B} = \overline{A} \cup \overline{B}$.
+		\end{enumerate}
+
+		\begin{proof}
+			Suppose $X$ is a topological space and $A, B \subseteq X$ are subsets.
+			\begin{enumerate}
+				\item[\textbf{i.}] By Remark 9.3.1, we know that $\overline{B}$ is closed. Furthermore, since $\overline{A}$ is the \textit{smallest} closed set containing $A$ (Remark
+					9.3.2) and that $A \subseteq B \subseteq \overline{B}$, it follows that $\overline{A} \subseteq \overline{B}$.
+
+				\item[\textbf{ii.}] We know that $A \subseteq \overline{A}$ and $B \subseteq \overline{B}$ and so $A \cup B \subseteq \overline{A} \cup \overline{B}$ where $\overline{A}
+					\cup \overline{B}$ is closed. Then by Remark 9.3.2, it holds that $\overline{A \cup B} \subseteq \overline{A} \cup \overline{B}$. Conversely, notice that $A, B
+					\subseteq A \cup B \subseteq \overline{A \cup B}$. Again by Remark 9.3.2, we have that $\overline{A} \subseteq \overline{A \cup B}$ and $\overline{B} \subseteq
+					\overline{A \cup B}$. Hence, $\overline{A} \cup \overline{B} \subseteq \overline{A \cup B}$, proving the assertion.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Let $X$ be a topological space and $A, B \subseteq X$. Show that $\overline{A \cap B} \subseteq \overline{A} \cap \overline{B}$ and that equality may not hold
+		for all possible $A$ and $B$.
+
+		\begin{proof}
+			Consider a topological space $X$ and subsets $A, B \subseteq X$. We can use the same argument in \textbf{3ii}. Since $A \subseteq \overline{A}$ and $B \subseteq
+			\overline{B}$, it follows that $A \cap B \subseteq \overline{A} \cap \overline{B}$. Furthermore, because $\overline{A} \cap \overline{B}$ is closed, Remark 9.3.2
+			state that $\overline{A \cap B} \subseteq \overline{A} \cap \overline{B}$.
+
+			Now, in regard to the lack of equality, suppose $A$ and $B$ have a limit point $x$ in common, yet $x \notin A \cap B$. Additionally, let the neighborhoods of $x$ in $A$
+			($B$, respectively) belong to $A \setminus B$ ($B \setminus A$), then $x \in \overline{A} \cap \overline{B}$ yet $x \notin \overline{A \cap B}$.
+
+			[INSERT PHOTO].
+		\end{proof}
+
+
+	% problem 5
+	\item[\textbf{5.}] Give an example of a metric space $(X, d)$ and an open ball $B_\epsilon(x) \subseteq X$ whose closure is not the subset $\{y \in X : d(x, y) \leq \epsilon\}$.
+
+		\begin{proof}
+			Consider the space $(G, d)$ where $G$ is any arbitrary graph and $d : V(G) \times V(G) \to \mathbb{R}$ denotes the length of any minimal path between two vertices of $G$.
+			It can be easily shown that $d$ is a metric on $G$ and so $(G, d)$ is a metric space. Then for any arbitrary vertex $v \in V(G)$, it follows that $$B_1(v) = \left \{
+			u \in V(G) : d(u, v) \leq \frac{1}{2} \right \} = \{ v \}$$ and so $B_1(v)$ is both open and closed. Hence, $\overline{B}_1(v) = B_1(v)$ via Remark 9.3.3.
+		\end{proof}
+
+
+	% problem 6
+	\item[\textbf{6.}] Find the boundary and interior of each of the following subsets of $\mathbb{R}^2$.
+		\begin{enumerate}
+			\item[\textbf{i.}] $A = \{(x, 0) \in \mathbb{R}^2\}$.
+			\item[\textbf{ii.}] $B = \{(x, y) \in \mathbb{R}^2 : x > 0, y \neq 0\}$.
+			\item[\textbf{iii.}] $C = A \cup B$.
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{i.}] Let $A = \{(x, 0) \in \mathbb{R}^2\}$. Observe that there does not exist any nonempty open subset of $A$; that is, any open ball containing a point
+					on the $x$-axis must contain a point outside of the $x$-axis. Hence, $\mathring{A} = \varnothing$.
+
+					We know that the plot of a single variable continuous function is closed in $\mathbb{R}^2$, namely $A = \Gamma_f$ where $f(x) = 0$ for all $x \in \mathbb{R}$ is
+					closed. Therefore, $$\partial A = \overline{A} \setminus \mathring{A} = A \setminus \varnothing = A.$$
+
+				\item[\textbf{ii.}] Consider the set $B = \{(x, y) \in \mathbb{R}^2 : x > 0, y \neq 0\}$. We can see that only open sets in the first or fourth quadrant of $\mathbb{R}^2$
+					not containing points of the $x$ or $y$-axis will be subsets of $B$. Moreover, $\mathring{B} = B$.
+
+					Clearly we can see that any open subset of $\mathbb{R}^2$ containing a point on the $y$-axis or positive $x$-axis will have a nonempty neighborhood in $B$ and its
+					complement implying that $$\partial B = \{ (x, 0) \in \mathbb{R}^2 : x > 0\} \cup \{(0, y) \in \mathbb{R}^2\}.$$
+
+				\item[\textbf{iii.}] Suppose that $C = A \cup B$. Similar to \textbf{6ii}, we can take any open subset of $\mathbb{R}^2$ in the first or fourth quadrant but the $x$-axis
+					is no longer a restriction. Thus, $$\mathring{C} = \{(x, y) \in \mathbb{R}^2 : x > 0\}.$$
+
+					Additionally, be using both arguments regarding $\partial A$ and $\partial B$ in \textbf{6i} and \textbf{6ii}, respectively, we can see that $$\partial C = \{
+					(x, 0) \in \mathbb{R}^2 : x < 0\} \cup \{ (0, y) \in \mathbb{R}^2 \}.$$
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 7
+	\item[\textbf{7.}] Consider the following topologies on $\mathbb{R}$:
+		\begin{itemize}
+			\item $\mathcal{T}_1 = $ the standard topology,
+			\item $\mathcal{T}_2 = $ the $K$-topology,
+			\item $\mathcal{T}_3 = $ the finite complement topology,
+			\item $\mathcal{T}_4 = $ the upper limit topology,
+			\item $\mathcal{T}_5 = $ the topology having all sets $(-\infty, a)$ as a basis.
+		\end{itemize}
+		Determine, for each of these topologies, which of the others it contains.
+
+		\begin{proof}
+			I claim that $\mathcal{T}_3$ and $\mathcal{T}_5$ are incomparable and that $$\mathcal{T}_3, \mathcal{T}_5 \subset \mathcal{T}_1 \subset \mathcal{T}_2 \subset \mathcal{T}_4.$$
+
+			Observe that $\mathbb{R} \setminus \{a\} \in \mathcal{T}_3$ and $(-\infty, a) \in \mathcal{T}_5$ for all $a \in \mathbb{R}$, yet $(-\infty, a) \notin \mathcal{T}_3$
+			and $\mathbb{R} \setminus \{a\} \notin \mathcal{T}_5$ and so they are incomparable.
+
+			To show that $\mathcal{T}_3 \subseteq \mathcal{T}_1$, let $x \in U \setminus \{a_1, \hdots, a_n\} \in \mathcal{T}_3$ be a point contained in a basis element of
+			$\mathcal{T}_3$. It must hold that $x \in (a_i,  a_{i+1}) \subseteq U \setminus \{a_1, \hdots, a_n\}$ for a particular $1 \leq i \leq n$ and so $\mathcal{T}_1$ is finer than
+			$\mathcal{T}_3$ by Lemma 12.4. However, it is not true that $\mathcal{T}_3 \supset \mathcal{T}_1$; for an arbitrary point $x \in (b, c) \in \mathcal{T}_1$, we cannot construct
+			a finite sequence $\{a_i\}$ such that $x \in \mathbb{R} \setminus \{a_1, \hdots, a_n\} \subseteq (b, c)$. Moreover, $\mathcal{T}_3 \subset \mathcal{T}_1$.
+
+			In regard to $\mathcal{T}_5 \subset \mathcal{T}_1$, for an $x \in (-\infty, a) \in \mathcal{T}_5$, it is clear that there exists a basis element $(b, c) \in \mathcal{T}_1$
+			such that $x \in (b, c) \subseteq (-\infty, a)$. Additionally, we can see that for any basis element $(b, c) \in \mathcal{T}_1$ there exists no basis element $(-\infty,
+			a) \in \mathcal{T}_5$ such that $(-\infty, a) \subseteq (b, c)$. Thus, $\mathcal{T}_5 \subset \mathcal{T}_1$.
+
+			Now we must show that $\mathcal{T}_1 \subset \mathcal{T}_2$. It is quite clear that $\mathcal{T}_1 \subseteq \mathcal{T}_2$ as the definition of the $K$-topology includes
+			the basis of the Euclidean topology in its own. Suppose by contradiction that $\mathcal{T}_1 \supseteq \mathcal{T}_2$. Then, let $0 \in  (a, b) \setminus K$ be a basis
+			element of $\mathcal{T}_2$. It must hold that there exists a basis element $(c, d) \in \mathcal{T}_1$ such that $0 \in (c, d) \subseteq (a, b) \setminus K$. Therefore, $d
+			> 0$, but there exists a value $\frac{1}{n} \in K$ where $\frac{1}{n} < d$, a contradiction to the fact that $(c, d) \subseteq (a, b)$.
+
+			Finally, we show that $\mathcal{T}_2 \subset \mathcal{T}_4$. We consider two cases, a basis element in the form $(a, b) \in \mathcal{T}_2$ or $(a, b) \setminus K \in
+			\mathcal{T}$. Let $x \in (a, b) \in \mathcal{T}_2$ be a point in a basis element of $\mathcal{T}_2$. Then $x \in (a, x] \subseteq (a, b)$ where $(a, x] \in \mathcal{T}_4$
+			is a basis element of $\mathcal{T}_4$. For the latter case, suppose $x \in (a, b) \setminus K \in \mathcal{T}_2$ where $(a, b) \setminus K \neq (a, b)$ otherwise falling into
+			the first case; that is $(a, b) \cap K \neq \varnothing$. If $x > 0$, then there must exist an $n \in \mathbb{N}$ such that $\frac{1}{n+1} < x < \frac{1}{n}$; in this case, we
+			can take $x \in \left( \frac{1}{n+1}, x\right] \subseteq (a, b) \setminus K$. Any other value of $x$ can be simplified to the first case. To show that lack of equality, consider
+			a basis element $x \in (a, x] \in \mathcal{T}_4$. It is clear that there exists no basis element $(a, b) \in \mathcal{T}_2$ such that $x \in (a, b) \subseteq (1, x]$. Thus,
+			concluding the proof. 
+		\end{proof}
+
+
+	% problem 8
+	\item[\textbf{8.}] $ $
+		\begin{enumerate}
+			\item[\textbf{i.}] Determine all topological spaces $X$ for which $X$ itself if the only dense subset of $X$. 
+			\item[\textbf{ii.}] Suppose that $D \subseteq X$ is dense in $X$. Let $A \subseteq X$ be a subspace. Give an example to show that $A \cap D$ is not necessarily dense in $A$.
+		\end{enumerate}
+
+		\begin{proof}
+			\begin{enumerate}
+				\item[\textbf{i.}] I claim that all desired topological spaces are in the form $(X, \mathcal{T}_{\mathrm{disc}})$, $X$ an arbitrary set, $\mathcal{T}_{\mathrm{disc}}$ the
+					discrete topology.
+
+					Let $X$ be the discrete topology. Observe that for every subset $Y \subset X$, $Y^c$ is open, implying that $Y \cap Y^c = \varnothing$ and so no proper subset is dense.
+					Only $X$ is dense.
+
+					Conversely, suppose we have a topological space $X$ such that only $X$ is dense. Moreover, it follows that that for each subset $Y \subset X$ there exists a nonempty
+					subset $U \subset X$ such that $U \cap Y = \varnothing$. Let $Y = X \setminus \{ x \}$ where $x \in X$. Then
+					\begin{align*}
+						U \cap (X \setminus \{x\}) &= \varnothing \\
+						(U \cap X) \setminus \{x\} &= \\
+						U \setminus \{x\} &= \varnothing.
+					\end{align*}
+					Since $U$ is nonempty, it must hold that $U = \{x\}$ is open. Thus, $X$ is the discrete topology by definition.
+
+				\item[\textbf{ii.}] Consider yteh Euclidean topology $\mathbb{R}$. REcall that $D = \mathbb{Q}$ is dense in $\mathbb{R}$. Let $A = \mathbb{R} \setminus \mathbb{Q}
+					\subseteq \mathbb{R}$ be a subspace. We can see that $$A \cap D = \mathbb{Q} \cap ( \mathbb{R} \setminus \mathbb{Q}) = \varnothing$$ is not dense in $A$.
+			\end{enumerate}
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

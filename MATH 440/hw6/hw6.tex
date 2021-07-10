@@ -1,0 +1,84 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 440 \\
+\noindent May 4, 2021
+
+\begin{center}
+	\Large Problem Set 6
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Show that the product of two path connected spaces is also path connected.
+
+		\begin{proof}
+			Suppose $X$ and $Y$ are path connected topological spaces. Consider arbitrary points $x_1, x_2 \in X$ and $y_1, y_2 \in Y$. Then by definition there exists continuous paths
+			$\gamma_X : [0, 1] \to X$ and $\gamma_Y : [0, 1] \to Y$ between the aforementioned points. Consider the function $\gamma : [0, 1] \to X \times Y$ defined as $$\gamma(t) =
+			\left ( \gamma_X(t), \gamma_Y(t) \right ).$$ Observe that $\gamma$ is a path from $(x_1, y_1)$ to $(x_2, y_2)$ and is continuous by Theorem 28.2.1, proving the assertion.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}]
+		\begin{enumerate}
+			\item[\textbf{a.}] Show that $S^n$ is path connected for $n \geq 1$.
+			\item[\textbf{b.}] Prove that $S^1$ is not homeomorphic to $S^2$.
+		\end{enumerate}
+
+		\begin{proof} $ $
+			\begin{enumerate}
+				\item[\textbf{a.}] Let $n \geq 1$. Consider the function $f : \mathbb{R}^{n+1} \setminus \{ \textbf{0} \} \to S^n$ defined as $f( \textbf{x} ) = \frac{\mathbf{x}}{||
+					\textbf{x}||}$. Observe that $f$ is surjective; indeed, $f(S^n) = S^n$. Additionally, it is clear from analysis that $f$ is continuous. We know from lecture that
+					$\mathbb{R}^{n+1} \setminus \{ \textbf{0} \}$ is path connected. Hence, $S^n$ is path connected by Theorem 35.5.
+
+				\item[\textbf{b.}] Suppose by contradiction that $S^1 \cong S^2$. Moreover, by definition there exists a homeomorphism $g : S^2 \to S^1$. Then by Lemma 33.1, it must hold
+					that $\widetilde{g} := g \mid_{S^2 \setminus \{ \textbf{k}, -\textbf{k} \}}$ is a homeomorphism between $S^1 \setminus \{ g(\textbf{k}), g(-\textbf{k}) \}$ and
+					$S^2 \setminus \{ \textbf{k}, -\textbf{k} \}$. \\
+
+					Now, consider two distinct points $$\textbf{p}_1, \textbf{p}_2 = \left ( \cos \theta_1 \sin \phi_1,\, \sin \theta_1 \sin
+					\phi_1,\, \cos \phi_1 \right ), \left ( \cos \theta_2 \sin \phi_2,\, \sin \theta_2 \sin \phi_2,\, \cos \phi_2 \right ) \in S^2 \setminus \{ \textbf{k}, -\textbf{k}
+					\}.$$ observe that $\gamma : [0, 1] \to S^2 \setminus \{ \textbf{k}, -\textbf{k} \}$ defined as \[ \gamma(t) = \begin{cases} \left ( \cos \theta_1 \sin ( 2(\phi_2 -
+					\phi_1)t + \phi_1 ),\, \sin \theta_1 \sin( 2(\phi_2 - \phi_1)t + \phi_1 ),\, \cos( 2(\phi_2 - \phi_1)t + \phi_1 ) \right ); & t \in \left [ 0, \frac{1}{2} \right ), \\
+					\left ( \cos( (\theta_2 - \theta_1)(2t - 1) + \theta_1 ) \sin \phi_2,\, \sin( (\theta_2 - \theta_1)(2t - 1) + \theta_1 ) \sin \phi_2,\, \cos \phi_2 \right ); & t \in
+					\left [ \frac{1}{2}, 1 \right ] \end{cases} \] is a continuous path from $\textbf{p}_1$ to $\textbf{p}_2$ (in essence, $\gamma$ travels along $\phi$ from $\phi_1$
+					and $\phi_2$ on the interval $\left [ 0, \frac{1}{2} \right )$, then travels along $\theta$ from $\theta_1$ to $\theta_2$ on the interval $\left [ \frac{1}{2}, 1
+					\right ]$). Then it follows that $S^2 \setminus \{ \textbf{k}, -\textbf{k} \}$ is path connected; however, $S^1 \setminus \{ g(\textbf{k}), g(-\textbf{k}) \}$
+					is disconnected as illustrated in lecture, contradicting Theorem 35.5.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Define an equivalence relation $\sim$ on $\mathbb{R}^2$ as follows: $$(x_1, y_1) \sim (x_2, y_2)\; \mathrm{if\; and\; only\; if}\; x_1 + y_1^2 = x_2 + y_2^2.$$ Show
+		that $\mathbb{R}^2/\sim$ is homeomorphic to $\mathbb{R}$.
+
+		\begin{proof}
+			Suppose $g : \mathbb{R}^2 \to \mathbb{R}$ is defined as $g(x, y) = x + y^2$. Clearly $g$ is surjective; we can see that $g( \mathbb{R} \times \{ 0 \} ) = \mathbb{R}$. Let
+			$\sim$ denote the equivalence relation defined by $g$. Obviously, we know that $g$ is a continuous function. Now, because $\mathbb{R}^2 = \mathbb{R} \times \mathbb{R}$ is
+			a product, we may consider a basis element $U = (a, b) \times (c, d)$. Observe that $$g(U) = \left ( a + \inf_{y \in (c, d)} y^2,\, c + \sup_{y \in (c, d)} y^2 \right )$$
+			is open in $\mathbb{R}$ and so $g$ is an open map. Hence, $g$ is a quotient map; therefore, $\overline{g} : \mathbb{R}^2/\sim \to \mathbb{R}$, uniquely defined as
+			$\overline{g} \circ \pi = g$, is a homeomorphism.
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Prove that the torus $T^2$ is homeomorphic to $S^1 \times S^1$ using the fact that $T^2$ is the quotient of $I \times I$.
+
+		\begin{proof}
+			Let $\phi : I \to S^1$ be defined as $\phi(t) = ( \cos 2\pi t, \sin 2\pi t )$. Further, let $f : I \times I \to S^1 \times S^1$ denote the function $f(x, y) = (\phi(x),
+			\phi(y))$. We know from lecture that $\phi$ is a quotient map and so $f$ is surjective as well as continuous via Theorem 28.2.1. To illustrate that $f$ is a closed map,
+			take a closed set $A = [a, b] \times [c, d] \subseteq I \times I$. Observe that $\phi[a, b] \subseteq S^1$ is a segment of $S^1$ with endpoints also included. Therefore,
+			we can easily construct a closed ball in $\mathbb{R}^2$ such that its intersection with $S^1$ is $\phi[a, b]$, illustrating closure in $S^1$. Hence, $f$ is a closed map
+			and so $f$ is a quotient map illustrating that $\overline{f}$ is a homeomorphism between $T^2 = I \times I / \sim$ and $S^1 \times S^1$.
+		\end{proof}
+
+
+\end{enumerate}
+
+\end{document}

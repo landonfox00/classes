@@ -1,0 +1,205 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 440 \\
+\noindent February 12, 2021
+
+\begin{center}
+	\Large Problem Set 1
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Let $f : \mathbb{R}^2 \to \mathbb{R}$ be the function defined as $f(0, 0) = 0$ and for $(x, y) \neq \textbf{0}$, $$f(x, y) = \frac{x^2 - y^2}{x^2 + y^2}.$$ Show
+		that
+		\begin{enumerate}
+			\item[\textbf{a.}] $f$ is continuous at every point $(x, y) \neq \textbf{0}$.
+			\item[\textbf{b.}] $f$ is not continuous at the point $\textbf{0}$.
+		\end{enumerate}
+
+		\begin{proof}
+			Suppose $f : \mathbb{R}^2 \to \mathbb{R}$ be defined as stated above.
+			\begin{enumerate}
+				\item[\textbf{a.}] Let $(x, y) \neq \textbf{0}$ be an arbitrary point. Further, let $\textbf{0} \neq (x_k, y_k) \in \mathbb{R}^2$ be a sequence such that $\lim_{k \to
+					\infty} (x_k, y_k) = (x, y)$. Then it follows that $$\lim_{k \to \infty}(x_k^2 + y_k^2) = \lim_{k \to \infty}x_k^2 + \lim_{k \to \infty}y_k^2 = \left ( \lim_{k \to
+					\infty} x_k \right )^2 + \left ( \lim_{k \to \infty} y_k \right )^2 = x^2 + y^2$$ and by the same argument, $\lim_{k \to \infty}(x_k^2 - y_k^2) = x^2 - y^2$. Since
+					$x_k^2 + y_k^2 \neq 0$ and $x^2 + y^2 \neq 0$, we can see that $$\lim_{k \to \infty} f(x_k, y_k) = \lim_{k \to \infty} \frac{x_k^2 - y_k^2}{x_k^2 + y_k^2} =
+					\frac{x^2 - y^2}{x^2 + y^2} = f(x, y).$$ Thus, $f$ is continuous on $\mathbb{R}^2 \setminus \{ \textbf{0} \}$.
+
+				\item[\textbf{b.}] Suppose by contradiction that $f$ is continuous at $\textbf{0}$. Then it must hold that $\lim_{k \to \infty} f(x_k, y_k) = f(0, 0) = 0$ for any
+					sequence $(x_k, y_k) \in \mathbb{R}^2$ that converges to $\textbf{0}$ by Theorem \textbf{J.1.1}. Consider a sequence $\left ( \frac{a}{k}, \frac{b}{k} \right ) \in
+					\mathbb{R}^2$ that clearly approaches $\textbf{0}$  as $k \to \infty$ for all $a, b \in \mathbb{R}$. Observe that $$\lim_{k \to \infty} f \left ( \frac{a}{k},
+					\frac{b}{k} \right ) = \lim_{k \to \infty} \frac{\frac{a^2}{k^2} - \frac{b^2}{k^2}}{\frac{a^2}{k^2} + \frac{b^2}{k^2}} = \frac{a^2 - b^2}{a^2 + b^2} \neq 0 = f(0,
+					0)$$ when $a \neq b$ and $a, b \neq 0$ which is a contradiction.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Let $d_2$ be the Euclidean metric.
+		\begin{enumerate}
+			\item[\textbf{a.}] Give an explicit example, along with justification, of an isometry $\textbf{f} : (\mathbb{R}^2, d_2) \to (\mathbb{R}^2, d_2)$.
+			\item[\textbf{b.}] Give an explicit example, along with justification, of a function $\textbf{f} : (\mathbb{R}^2, d_2) \to (\mathbb{R}^2, d_2)$ that is continuous, but not
+				an isometry.
+		\end{enumerate}
+
+		\begin{proof} $ $
+			\begin{enumerate}
+				\item[\textbf{a.}] Let $\textbf{f}_\theta : (\mathbb{R}^2, d_2) \to (\mathbb{R}^2, d_2)$ be defined as $$\textbf{f}_\theta(x, y) = \begin{bmatrix} \cos \theta & -\sin
+					\theta \\ \sin \theta & \cos \theta \end{bmatrix} \begin{bmatrix} x \\ y \end{bmatrix}.$$ Observe that
+					\begin{align*}
+						d_2( \textbf{f}_\theta(x_1, y_1),\, \textbf{f}_\theta(x_2, y_2) ) &= \sqrt{ \left ( (x_2 - x_1)\cos \theta - (y_2 - y_1)\sin \theta \right )^2 + \left ((x_2 - 
+							x_1)\sin \theta + (y_2 - y_1)\cos \theta \right )^2 } \\
+						&= \sqrt{ (x_2 - x_1)^2( \cos^2 \theta + \sin^2 \theta ) + (y_2 - y_1)^2(\cos^2 \theta + \sin^2 \theta ) } \\
+						&= \sqrt{ (x_2 - x_1)^2 + (y_2 - y_1)^2 } \\
+						d_2( \textbf{f}_\theta(x_1, y_1),\, \textbf{f}_\theta(x_2, y_2) ) &= d_2( (x_1, y_2), (x_2, y_2) )
+					\end{align*}
+					and so $\textbf{f}_\theta$ is an isometry by definition.
+
+				\item[\textbf{b.}] Let $\textbf{f} : (\mathbb{R}^2, d_2) \to (\mathbb{R}^2, d_2)$ be defined as an arbitrary constant function, $\textbf{f}(x, y) = \textbf{a} \in
+					\mathbb{R}^2$. Clearly, we can see that $\textbf{f}$ is a continuous function; for any sequence $\textbf{x}_k \in \mathbb{R}^2$ such that $\lim_{k
+					\to \infty} \textbf{x}_k = \textbf{x} \in \mathbb{R}^2$, notice that $$||\textbf{f}(\textbf{x}_k) - \textbf{f}(\textbf{x})|| = ||\textbf{a} - \textbf{a}|| = 0,$$
+					and so $\textbf{f}$ is certainly continuous. Additionally, observe that for any two points $\textbf{x} \neq \textbf{y} \in \mathbb{R}^2$, $$d_2( \textbf{f}(
+					\textbf{x}), \textbf{f}(\textbf{y}) ) = d_2( \textbf{a}, \textbf{a} ) = 0 \neq \sqrt{(\textbf{x} - \textbf{y}) \cdot (\textbf{x} - \textbf{y})} = d_2(\textbf{x},
+					\textbf{y}).$$ Hence, $\textbf{f}$ is not an isometry.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Show that every isometry $\textbf{f} : (\mathbb{R}^m, d_2) \to (\mathbb{R}^n, d_2)$ is a continuous function.
+
+		\begin{proof}
+			Suppose $\textbf{f} : (\mathbb{R}^m, d_2) \to (\mathbb{R}^n, d_2)$ is an isometry and that $\textbf{x}_k \in \mathbb{R}^m$ such that $\lim_{k \to \infty} \textbf{x}_k =
+			\textbf{a} \in \mathbb{R}^m$, an arbitrary point. Let $\epsilon > 0$ and choose an $N \in \mathbb{N}$ such that $k \geq N$ implies that $d_2(\textbf{x}_k, \textbf{a}) <
+			\epsilon.$ Due to the fact that $\textbf{f}$ is an isometry, observe that $$d_2(\textbf{f}(\textbf{x}_k), \textbf{f}(\textbf{a})) = d_2(\textbf{x}_k, \textbf{a}) <
+			\epsilon.$$ Thus, $\textbf{f}$ is continuous by definition.
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Let $n \geq 1$ and define $\widetilde{d} : \mathbb{R}^n \times \mathbb{R}^n \to \mathbb{R}$ to be the function \[ \widetilde{d}(\textbf{x}, \textbf{y}) =
+		\begin{cases} 0; &\textbf{x} = \textbf{y} \\ 1; &\textbf{x} \neq \textbf{y}. \end{cases} \]
+		\begin{enumerate}
+			\item[\textbf{a.}] Show that $\widetilde{d}$ is a metric on the set $\mathbb{R}^n$.
+			\item[\textbf{b.}] Show that there is no norm $||\cdot|| : \mathbb{R}^n \to [0, \infty)$ on the vector space $\mathbb{R}^n$ for which the equality $\widetilde{d}(\textbf{x},
+				\textbf{y}) = ||\textbf{x} - \textbf{y}||$ holds for all $\textbf{x}, \textbf{y} \in \mathbb{R}^n$.
+		\end{enumerate}
+
+		\begin{proof}
+			Suppose $\widetilde{d} : \mathbb{R}^n \times \mathbb{R}^n$ is defined as stated above.
+			\begin{enumerate}
+				\item[\textbf{a.}] For the following, assume that $\textbf{x}, \textbf{y}, \textbf{z} \in \mathbb{R}^n$ are arbitrary points. Clearly we can see that $\widetilde{d}(
+					\textbf{x}, \textbf{y} ) \geq 0$ with equality if and only if $\textbf{x} = \textbf{y}$. Additionally, it is obvious that $\widetilde{d}( \textbf{x}, \textbf{y} ) =
+					\widetilde{d}( \textbf{y}, \textbf{x} )$. In regard to transitivity, consider two cases concerning the equality $\textbf{x} = \textbf{z}$. If $\textbf{x} =
+					\textbf{z}$, then $$\widetilde{d}( \textbf{x}, \textbf{z} ) = 0 \leq \widetilde{d}( \textbf{x}, \textbf{y} ) + \widetilde{d}( \textbf{y}, \textbf{z} )$$ with
+					equality if and only if $\textbf{x} = \textbf{y} = \textbf{z}$. Otherwise, if $\textbf{x} \neq \textbf{z}$, then $$\widetilde{d}( \textbf{x}, \textbf{z} ) = 1 \leq
+					\widetilde{d}( \textbf{x}, \textbf{y} ) + \widetilde{d}( \textbf{y}, \textbf{z} )$$ since it cannot hold that $\textbf{x} = \textbf{y} = \textbf{z}$. Thus,
+					$\widetilde{d}$ is a metric on $\textbf{R}^n$ by definition.
+
+				\item[\textbf{b.}] Suppose there exists a norm $||\cdot|| : \mathbb{R}^n \to [0, \infty)$ on $\mathbb{R}^n$ such that $\widetilde{d}(\textbf{x}, \textbf{y}) = ||
+					\textbf{x} - \textbf{y}||$ for all $\textbf{x}, \textbf{y} \in \mathbb{R}^n$. Then it follows that $$\widetilde{d}(r\textbf{x}, r\textbf{y}) = ||r\textbf{x} -
+					r\textbf{y}|| = r||\textbf{x} - \textbf{y}|| = r\widetilde{d}(\textbf{x}, \textbf{y})$$ for all $r \in \mathbb{R}$; however, for $r > 1$ and $\textbf{x} \neq
+					\textbf{y}$, $$\widetilde{d}(r\textbf{x}, r\textbf{y}) = r \notin \{ 0, 1 \} = \widetilde{d}(\mathbb{R}^n \times \mathbb{R}^n),$$ a contradiction.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 5
+	\item[\textbf{5.}] Determine if the following subsets of $\mathbb{R}$ are open, closed, or neither.
+		\begin{enumerate}
+			\item[\textbf{a.}] $[0, 1) \cup (1, 2]$.
+			\item[\textbf{b.}] $\mathbb{Q}$.
+			\item[\textbf{c.}] $\mathbb{R} \setminus \mathbb{Q}$.
+			\item[\textbf{d.}] $\bigcup_{n \in \mathbb{Z}} [2n, 2n+1]$.
+		\end{enumerate}
+
+		\begin{proof} $ $
+			\begin{enumerate}
+				\item[\textbf{a.}] Suppose $A = [0, 1) \cup (1, 2]$ is an open set. Observe that there will always exist a value $b < 0$ such that $b \in B_\epsilon( 0 )$ for all
+					$\epsilon > 0$, a contradiction since $b \notin A$ by proposition \textbf{J.1.2}. \\
+
+					Consider $A$ to be a closed set. Further, consider the sequence $\left \{ \frac{k}{k + 1} \right \}_{k \in \mathbb{N}}$. We can see that $\frac{k}{k + 1} \in A$ for
+					all $k \in \mathbb{N}$ and $\lim_{k \to \infty} \frac{k}{k + 1} = 1 \notin A$ which is a contradiction. Thus, $A$ is neither open nor closed.
+
+				\item[\textbf{b.}] Assume $\mathbb{Q}$ is an open set. Let $q \in \mathbb{Q}$ and $\epsilon > 0$. Then by the density of the irrational numbers, there exists an $x
+					\in \mathbb{R} \setminus \mathbb{Q}$ such that $q < x < q + \epsilon$ and so $x \in B_\epsilon(q) \nsubseteq \mathbb{Q}$. Therefore, $\mathbb{Q}$ is not open
+					via proposition \textbf{J.1.2}. \\
+
+					Suppose $\mathbb{Q}$ is closed. Observe that $$\left ( 1 + \frac{1}{k} \right )^k \in \mathbb{Q}\; \mathrm{for\; all}\; n \in \mathbb{N},\; \mathrm{yet},\;
+					\lim_{k \to \infty} \left ( 1 + \frac{1}{k} \right )^k = e \in \mathbb{R} \setminus \mathbb{Q}.$$ Hence, $\mathbb{Q}$ is neither open nor closed.
+
+				\item[\textbf{c.}] From the results of $\textbf{5b}$, we can see that $\mathbb{Q}^c = \mathbb{R} \setminus \mathbb{Q}$ is neither open nor closed by the definition of
+					an open set.
+
+				\item[\textbf{d.}] Let $A_n = (2n - 1, 2n) \subseteq \mathbb{R}$. Notice that $A_n$ is an open set for all $n \in \mathbb{Z}$; moreover, $A_n = B_{1/2}\left ( 2n -
+					\frac{1}{2} \right )$. Then we know by Theorem \textbf{J.1.6b} that the union, $$\bigcup_{n \in \mathbb{Z}} A_n = \bigcup_{n \in \mathbb{Z}} (2n - 1, 2n) = \left (
+					\bigcup_{n \in \mathbb{Z}} [2n, 2n+1] \right )^c$$ is open. Hence, $$\bigcup_{n \in \mathbb{Z}} [2n, 2n+1]$$ is closed as its complement is open.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 6
+	\item[\textbf{6.}] Let $f : \mathbb{R} \to \mathbb{R}$ be a continuous function and let $\Gamma_f$ be its plot, $$\Gamma_f = \{ (x, y) \in \mathbb{R}^2 : y = f(x) \}.$$ Show that
+		$\Gamma_f$ is a closed subset of $\mathbb{R}^2$. Show that this conclusion may not hold when $f$ is not continuous.
+
+		\begin{proof}
+			Suppose $f : \mathbb{R} \to \mathbb{R}$ is a continuous function and that $\Gamma_f$ is its plot. Consider a convergent sequence $x_k \in \mathbb{R}$ where $\lim_{k \to
+			\infty} x_k = x \in \mathbb{R}$. Since $f$ is continuous, it follows that $$\lim_{k \to \infty} f(x_k) = f \left ( \lim_{k \to \infty} x_k \right ) = f(x).$$ Furthermore,
+			any convergent sequence in $\Gamma_f$ must have the form $(x_k, f(x_k))$ and the property that $$\lim_{k \to \infty} (x_k, f(x_k)) = \left ( \lim_{k \to \infty} x_k,
+			\lim_{k \to \infty} f(x_k) \right ) = (x, f(x)) \in \Gamma_f.$$ Hence, every convergent sequence in $\Gamma_f$ converges to a point in $\Gamma_f$ and so it is a closed set
+			by definition. \\
+
+			Now, suppose $f$ is not continuous, perhaps $f(x) = \theta(x)$, the Heaviside step function. Then it follows that $\left ( -\frac{1}{k}, \theta \left ( -\frac{1}{k} \right )
+			\right ) = \left ( -\frac{1}{k}, 0 \right )$ and $$\lim_{k \to \infty} \left ( -\frac{1}{k}, 0 \right ) = (0, 0);$$ however, $(0, 0) \neq (0, 1) \in 
+			\Gamma_\theta$ and so a limit point escapes the set implying that $\Gamma_f$ may not be closed when $f$ is noncontinuous.
+		\end{proof}
+
+
+	% problem 7
+	\item[\textbf{7.}] Show that the local continuity condition of a function $\textbf{f} : \mathbb{R}^n \to \mathbb{R}^m$ expressed in terms of open sets, does not have the following
+		analogue using closed sets:
+		\begin{displayquote}
+			A function $\textbf{f} : \mathbb{R}^n \to \mathbb{R}^m$ is continuous at $\textbf{x} \in \mathbb{R}^n$ if and only if for every closed set $B \subseteq \mathbb{R}^m$
+			containing $\textbf{f}(\textbf{x})$, there exists a closed subset $A \subseteq \mathbb{R}^n$ containing $\textbf{x}$ such that $\textbf{f}(A) \subset B$.
+		\end{displayquote}
+
+		\begin{proof}
+			Suppose by contradiction that there exists a closed set analog for the local continuity condition in terms of open sets. Let $\textbf{f} : \mathbb{R}^n \to \mathbb{R}^m$ be
+			a constant function, $\textbf{f}(\textbf{x}) = \textbf{a} \in \mathbb{R}^m$ for all $\textbf{x} \in \mathbb{R}^n$. Clearly we can see that $\textbf{f}$ is a continuous
+			function (see \textbf{2b}, same argument for $\mathbb{R}^2$ can be applied here). Let $B = \{ \textbf{a} \}$. Observe that $B$ is a closed set since $\lim_{k \to \infty}
+			\textbf{a} = \textbf{a} \in B$. Additionally, the only proper subset of $B$ is $\varnothing$. Then by assumption, there exists a closed set $A \subseteq \mathbb{R}^n$ such
+			that $\textbf{f}(A) = \varnothing$ but this would imply that $A = \varnothing$, contradicting the fact that $\textbf{x} \in A$.
+		\end{proof}
+
+
+	% problem 8
+	\item[\textbf{8.}]
+		\begin{enumerate}
+			\item[\textbf{a.}] Let $d$ be any metric on $\mathbb{R}^n$ and $f : (\mathbb{R}^n, d) \to \mathbb{R}$ a continuous function. Show that the zero locus of $f$ is a closed
+				subset of $\mathbb{R}^n$ with respect to the metric $d$.
+			\item[\textbf{b.}] Let $f : \mathbb{R} \to \mathbb{R}$ be a continuous function and define $S = \{ x \in \mathbb{R} : f(x) = x \}$. Show that $S$ is a closed subset of
+				$\mathbb{R}$.
+		\end{enumerate}
+
+		\begin{proof} $ $
+			\begin{enumerate}
+				\item[\textbf{a.}] Let $d$ be any metric on $\mathbb{R}^n$ and $f : (\mathbb{R}^n, d) \to \mathbb{R}$ a continuous function. Let $\textbf{x}_k$ be a convergent sequence
+					contained entirely in the zero locus of $f$. Since $f$ is continuous, it follows that $$f \left ( \lim_{k \to \infty} \textbf{x}_k \right ) = \lim_{k \to \infty}
+					f(\textbf{x}_k) = \lim_{k \to \infty} 0 = 0$$ and so the zero locus of $f$ contains $\lim_{k \to \infty} \textbf{x}_k$ by definition. Thus, the zero locus of any
+					continuous function is closed.
+
+				\item[\textbf{b.}] Let $f : \mathbb{R} \to \mathbb{R}$ be a continuous function and define $S = \{ x \in \mathbb{R} : f(x) = x \}$. Further, let $g : \mathbb{R} \to
+					\mathbb{R}$ be a function defined as $g(x) = f(x) - x$. Observe that $g$ is a continuous function. Then $S = \{ x \in \mathbb{R} : g(x) = 0 \}$ is the zero locus
+					of $g$. Thus, $S$ is closed via \textbf{8a}.
+			\end{enumerate}
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

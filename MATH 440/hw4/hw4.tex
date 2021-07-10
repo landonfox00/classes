@@ -1,0 +1,186 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 440 \\
+\noindent April 4, 2021
+
+\begin{center}
+	\Large Problem Set 4
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] $ $
+		\begin{enumerate}
+			\item[\textbf{a.}] Verify that first countability is a topology property.
+			\item[\textbf{b.}] Use first countability to show that $(\mathbb{R}, \mathcal{T}_\mathrm{cc})$ is not metrizable.
+			\item[\textbf{c.}] Is first countability strong enough to show that $(\mathbb{R}, \mathcal{T}_\ell)$ is not metrizable?
+			\item[\textbf{d.}] Give an example of spaces $X$ and $Y$ and a function $f : X \to Y$ that is not continuous, but still has the property that for all $x \in X$ it holds that
+				$f(x) = \lim_{n \to \infty} f(x_n)$ for every sequence $\{ x_n \}$ converging to $x$.
+		\end{enumerate}
+
+		\textbf{Lemma.} Every metric space is first countable.
+		\begin{proof}[Lemma Proof]
+			Suppose we have a topological space $(X, \mathcal{T}_d)$ induced by a metric $d$. Let $x \in X$ and consider an arbitrary open subset $U \subseteq X$ containing
+			$x$. Consider the countable collection of open subsets $$\mathcal{B}_x = \{ B_\nu(x) : \nu \in \mathbb{Q} \}.$$ By definition of the metric topology, there exists an open
+			ball $B_\epsilon(x) \subseteq U$. Let $\epsilon \geq \nu \in \mathbb{Q}$ denote a positive rational value below $\epsilon$ and so $B_\nu(x) \subseteq B_\epsilon(x) \subseteq
+			U$.
+		\end{proof}
+
+		\begin{proof} $ $
+			\begin{enumerate}
+				\item[\textbf{a.}] Suppose $f : X \overset{\cong}{\to} Y$ is a homeomorphism between two topological spaces where $X$ is first countable. We may assume that $f$ is an
+					open map. Let $y \in Y$ and consider an arbitrary open subset $V \subseteq Y$ containing $y$. Observe that there exists an $x \in X$ such that $f(x) = y$ and there
+					exists an open subset $U \subseteq X$ such that $x \in U$ and $f(U) = V$. Since $X$ is first countable, there exists a countable basis $\mathcal{B}_x$ containing an
+					open subset $B \in \mathcal{B}_x$ with the property that $x \in B \subseteq U$ and so $y \in f(B) \subseteq f(U) = V$. Hence, $Y$ is first countable with a countable
+					basis $$\mathcal{B}_{f(x)} = \{ f(B) : B \in \mathcal{B}_x \}$$ for all $x \in X$, proving the assertion.
+
+				\item[\textbf{b.}] Let us begin by first illustrating that $\mathbb{R}_\mathrm{cc} = (\mathbb{R}, \mathcal{T}_\mathrm{cc})$ is not first countable. Suppose by
+					contradiction that $\mathbb{R}_\mathrm{cc}$ is first countable. Let $x \in X$ be an arbitrary point. Then there exists a countable basis at $x$, namely $\mathcal{B}_x$.
+					Observe that $$\bigcap_{B \in \mathcal{B}_x} B = \{ x \};$$ indeed, if $B \in \mathcal{B}_x$, then $B$ is open and so $B \setminus \{ y \}$ for an arbitrary $y \in
+					\mathbb{R}_\mathrm{cc}$ is also open in $\mathbb{R}_\mathrm{cc}$ and so there must exist a basis element that is a subset of $B \setminus \{ y \}$. Hence, $y \notin
+					\bigcap_{B \in \mathcal{B}_x} B$ implying that $\bigcap_{B \in \mathcal{B}_x} B = \{ x \}$. Then it follows that $$\mathbb{R} \setminus \{ x \} = \mathbb{R} \setminus
+					\bigcap_{B \in \mathcal{B}_x} B = \bigcup_{B \in \mathcal{B}_x} \mathbb{R} \setminus B$$ is the countable union of countable sets and so it must be countable which is a
+					contradiction. \\
+
+					In regard to metrizability, suppose $\mathbb{R}_\mathrm{cc}$ is metrizable. Then by our Lemma, $\mathbb{R}_\mathrm{cc}$ must be first countable, a contradiction.
+
+				\item[\textbf{c.}] Consider the lower limit topology $\mathbb{R}_\ell$ and a countable collection of open subsets $$\mathcal{B}_x = \left \{ \left [ x, x + \frac{1}{n}
+					\right ) : n \in \mathbb{N} \right \}$$ defined for any point $x \in \mathbb{R}_\ell$. Since the basis $\{ [a, b) : a, b \in \mathbb{R} \}$ generates
+					$\mathbb{R}_\ell$, by definition, for an arbitrary point $x \in \mathbb{R}_\ell$ and open subset $U \subseteq \mathbb{R}_\ell$ containing $x$, there must exist
+					a basis element $[a, b) \subseteq U$ such that $a \leq x < b$. Therefore, there exists an $n \in \mathbb{N}$ such that the open subset $$\left [ x, x + \frac{1}{n}
+					\right ) \subseteq [a, b) \subseteq U$$ satisfies the following and belongs to $\mathcal{B}_x$. Thus, $\mathbb{R}_\ell$ is first countable. \\
+
+					In consideration of metrizability, it would appear that first countability would not suffice in illustrating $\mathbb{R}_\ell$ is not metrizable. To attempt to prove
+					the assertion, we may assume $\mathbb{R}_\ell$ is metrizable. Since we know that $\mathbb{R}_\ell$ is separable, it would imply that it is also second countable, in
+					turn, implying first countability. However, this is not necessarily a contradiction. We may pursue another, more straightforward approach, utilized in \textbf{1b},
+					yet this provides no further improvement. It would seem as if only second countability is strong enough to demonstrate a lack of metrizability.
+
+				\item[\textbf{d.}] Suppose $\mathrm{id} : \mathbb{R}_\mathrm{cc} \to \mathbb{R}_\ell$ denotes the identity function between $\mathbb{R}_\mathrm{cc}$ and
+					$\mathbb{R}_\ell$. Notice that $$\lim_{n \to \infty} \mathrm{id}(x_n) = \lim_{n \to \infty} x_n = x = \mathrm{id}(x) \in \mathbb{R}_\ell$$ for any sequence $\{ x_n
+					\}$ converging to $x \in \mathbb{R}_\mathrm{cc}$. However, consider an arbitrary open interval $[a, b) \subseteq \mathbb{R}_\ell$ with $x \in [a, b)$. Then it follows
+					that $\mathrm{id}^{-1}[a, b) = [a, b) \subseteq \mathbb{R}_\mathrm{cc}$. Observe that $(-\infty, a) \subseteq \mathbb{R} \setminus [a, b)$ is a nondegenerate interval
+					of $\mathbb{R}$ containing an uncountable collection. Hence $\mathrm{id}^{-1}[a, b)$ is not open in $\mathbb{R}_\mathrm{cc}$ implying that $\mathrm{id}$ is continuous
+					nowhere.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Let $f : X \overset{\cong}{\to} Y$ be a homeomorphism between two spaces. Let $A \subseteq X$ be a subspace. Show that the restriction $$f \mid_{X \setminus A} :
+		X \setminus A \to Y \setminus f(A)$$ is also a homeomorphism.
+
+		\begin{proof}
+			Suppose $f : X \overset{\cong}{\to} Y$ is a homeomorphism between two topological spaces and $A \subseteq X$ is a subspace. Consider the restriction $f \mid_{X \setminus A} :
+			X \setminus A \to Y \setminus f(A)$. We can reformulate the restriction as the composition $$f \mid_{X \setminus A}\; =\; i_{Y \setminus f(A)}^{-1}\; f\; i_{X \setminus A}$$
+			where $i$ denotes the inclusion function (since the inverse of $i_{Y \setminus f(A)}$ is not well defined on $f(A)$, for our purposes we will define $i_{Y \setminus f(A)}^{-1
+			}(y)$ to be an arbitrary element of $Y \setminus f(A)$ for all $y \in f(A)$). In regard to bijectivity, we can see that the preimage $$\left (i_{Y \setminus f(A)}^{-1} \right
+			)^{-1}(y) \subseteq \{ y \} \cup f(A) \subseteq Y$$ for a $y \in Y \setminus f(A)$. Further, notice that the preimage of the last result provides $$\left (f\; i_{X \setminus A}
+			\right )^{-1}\left(\{ y \} \cup f(A)\right) = \{ f^{-1}(y) \} \subseteq X \setminus A,$$ a singleton implying injectivity. Finally, we may conclude surjectivity since the
+			image of the last result yields $$f \mid_{X \setminus A}\left(f^{-1}(y)\right) = y \in Y \setminus f(A).$$ It is easy to see that $f \mid_{X \setminus A}$ is continuous via
+			Proposition 16.4 as it is a composition of continuous functions. Similarly, we can see that its inverse $$\left(f \mid_{X \setminus A}\right)^{-1}\; =\; \left(i_{Y \setminus
+			f(A)}^{-1}\; f\; i_{X \setminus A}\right)^{-1} = i_{X \setminus A}^{-1}\; f^{-1}\; i_{Y \setminus f(A)}$$ must also be continuous by the same argument. 
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Consider $\mathbb{R}^2$ equipped with the topology $\mathcal{T}_\mathcal{B}$ generated by the basis $$\mathcal{B} = \{ \{ x \} \times U : x \in \mathbb{R},\; U \in
+		\mathcal{T}_\mathrm{Euc} \}.$$ Show that $(\mathbb{R}^2, \mathcal{T}_\mathcal{B})$ is Hausdorff and normal.
+
+		\begin{proof}
+			Let $(\mathbb{R}^2, \mathcal{T}_\mathcal{B})$ be defined as stated above. Let $(x_1, y_1) \neq (x_2, y_2) \in \mathbb{R}^2$. Consider two cases regarding the equality of $x_1$
+			and $x_2$. If $x_1 = x_2$, then by the Hausdorffness of the Euclidean topology on $\mathbb{R}$, there exists disjoint open subsets $U_1$ and $U_2$ containing $y_1$ and $y_2$
+			respectively. Hence, $\{ x_1 \} \times U_1$ and $\{ x_2 \} \times U_2$ are disjoint open subsets containing $(x_1, y_1)$ and $(x_2, y_2)$, respectively. Otherwise, if $x_1
+			\neq x_2$, then we can take the disjoint open subsets $\{ x_1 \} \times \mathbb{R}$ and $\{ x_2 \} \times \mathbb{R}$. Therefore, $(\mathbb{R}^2, \mathcal{T}_\mathcal{B})$
+			is Hausdorff. \\
+
+			Due to Hausdorffness and Proposition 21.3, we can see that $T_1$ follows. To show $T_4$, we can construct open subsets covering a closed set $E \subseteq \mathbb{R}^2$ in the
+			following manner: for every $(x, y) \in E$, consider an open set $\{ x \} \times B_\epsilon(y)$ then the union $$\bigcup_{(x, y) \in E} \{ x \} \times B_\epsilon(y)$$ is open
+			and covers $E$. Provided another closed subset $F \subseteq \mathbb{R}^2$, disjoint to $E$, we can repeat the previous procedure with a few modifications to ensure the open
+			neighborhoods are also disjoint; when choosing an $\epsilon > 0$, we may abuse the Euclidean metric. For any $(x_1, y_1) \in E$, if there exists an $(x_2, y_2) \in F$ such that
+			$x_1 = x_2$, then let $\epsilon = \frac{1}{2}d(y_1, y_2)$. Otherwise let $\epsilon$ be arbitrary.
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Show that the rationals $\mathbb{Q} \subseteq \mathbb{R}$ equipped with the Euclidean subspace topology is a $T_4$ space.
+
+		\begin{proof}
+			Consider $\mathbb{Q} \subseteq \mathbb{R}$ equipped with the Euclidean subspace topology. Since $\mathbb{R}_\mathrm{Euc}$ is metrizable, it follows that the subspace
+			$\mathbb{Q}$ is $T_4$ via Proposition 22.1.
+		\end{proof}
+
+
+	% problem 5
+	\item[\textbf{5.}] $ $
+		\begin{enumerate}
+			\item[\textbf{a.}] Show that every subspace in $(\mathbb{R}, \mathcal{T}_\mathrm{cof})$ is compact.
+			\item[\textbf{b.}] Prove that the subspace $[0, 1]$ of $(\mathbb{R}, \mathcal{T}_\mathrm{cc})$ is not compact.
+		\end{enumerate}
+
+		\begin{proof} $ $
+			\begin{enumerate}
+				\item[\textbf{a.}] Suppose we have a subspace $A$ of $\mathbb{R}_\mathrm{cof} = (\mathbb{R}, \mathcal{T}_\mathrm{cof})$. If $A$ is a finite, or closed, subset of
+					$\mathbb{R}_\mathrm{cof}$, then any open cover can obviously be made into a finite subcover. Otherwise, if $A$ is infinite, then every open subset of $A$ is also
+					infinite. Consider an open cover $\mathcal{U}$ of $A$ and an arbitrary element of the cover $U \in \mathcal{U}$. Since $A \setminus U$ is finite, consider elements
+					of the cover that contain those items; that is, if $x \in A \setminus U$, let $U_x \in \mathcal{U}$ be a cover element containing $x$. Then $$\{ U \} \cup \{ U_x :
+					x \in \mathbb{R} \setminus U \}$$ is a finite subcover.
+
+				\item[\textbf{b.}] Consider the open cover $$\mathcal{U} = \{ [0, 1] \cap \left ( \{ q \} \cup \mathbb{R} \setminus \mathbb{Q} \right ) : q \in \mathbb{Q} \}$$ of the
+					subspace $[0, 1]$ of $\mathbb{R}_\mathrm{cc} = (\mathbb{R}, \mathcal{T}_\mathrm{cc})$; moreover, every cover element of $\mathcal{U}$ is the set of all irrationals
+					from $[0, 1]$ unioned with a single rational value in the interval. Therefore, to obtain a subcover, the rational $q \in [0, 1]$ can only be obtained via $$U_q =
+					[0, 1] \cap \left ( \{ q \} \cup \mathbb{R} \setminus \mathbb{Q} \right ).$$ Hence, no finite subcover exists and so $[0, 1]$ is not compact.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 6
+	\item[\textbf{6.}] Show that a finite union of compact subspaces of a topological space $X$ is compact.
+
+		\begin{proof}
+			Let $X$ be a topological space and $\mathcal{C}$, a finite collection of compact subspaces of $X$. Consider an arbitrary open cover $\mathcal{U}$ of $\bigcup_{C \in
+			\mathcal{C}} C$. For a particular compact subspace $C$, let $$\mathcal{U}_C = \{ C \cap U : U \in \mathcal{U} \}$$ denote the open cover $\mathcal{U}$ induced by $C$. Observe
+			that $\mathcal{U}_C$, itself, is an open cover of $C$ and so there exists a finite open cover by assumption; let $\mathcal{U}_C' \subseteq \mathcal{U}$ denote the set of
+			cover elements in $\mathcal{U}$ utilized to cover $C$. Thus, $$\bigcup_{C \in \mathcal{C}} \mathcal{U}_C'$$ is a finite collection of open subsets covering $\bigcup_{C \in
+			\mathcal{C}} C$.
+		\end{proof}
+
+
+	% problem 7
+	\item[\textbf{7.}] Show that if $X$ is a nonempty compact Hausdorff space with no isolated points, then $X$ is uncountable. Use this to prove that $\mathbb{R}$ is uncountable.
+
+		\textbf{Lemma.} Let $X$ be a nonempty Hausdorff space with no isolated points. For any nonempty open subset $U \subseteq X$ and point $x \in X$ there exists a nonempty open subset
+			$V \subseteq U$ such that $x \notin \overline{V}$.
+		
+		\begin{proof}[Lemma Proof]
+			Suppose $X \neq \varnothing$ is a Hausdorff space with no isolated points, $U \subseteq X$ an open subset, and $x \in X$ a point. Since $x$ is not an isolated point,
+			we may consider an open neighborhood $Y$ of $x$. If $x \notin U$, then $U$ is our desired subset since $\overline{U} \subseteq X \setminus Y$. Otherwise, let $y \in U$
+			be a point in the neighborhood of $x$. Then there exists two disjoint open subsets $W_x$ and $W_y$ containing $x$ and $y$, respectively, due to Hausdorffness. Furthermore,
+			$\overline{W_y} \subseteq X \setminus W_x$ and so the closure $$\overline{W_y \cap U} \subseteq \overline{W_y} \cap \overline{U} \subseteq X \setminus W_x$$ is a nonempty
+			subset (since $y \in W_y \cap U$) such that $x \notin \overline{W_y \cap U}$. Thus, $W_y \cap U$ is our desired subset.
+		\end{proof}
+
+		\begin{proof}
+			Let $X \neq \varnothing$ be a compact Hausdorff space with no isolated points. Consider an arbitrary function $f : \mathbb{N} \to X$. Via our Lemma, if we consider
+			the entire space $X$ and the point $f(1)$, we can construct an open subset $A_1 \subseteq X$ such that $f(1) \notin \overline{A_1}$. We can continue this process using $A_1$
+			and $f(2)$ to create $A_2 \subseteq A_1$; more generally, define $A_i \subseteq A_{i-1}$ to be the open subset resulting from our Lemma using $A_{i-1}$ and $f(i)$. Then we
+			obtain a chain of closed subsets $$\overline{A_1} \subseteq \overline{A_2} \subseteq \hdots \subseteq \overline{A_i} \subseteq \hdots$$ such that $f(i) \notin \overline{A_i}$
+			for all $i \in \mathbb{N}$. Then by Corollary 26.3, $$\bigcap_{i \in \mathbb{N}} A_i \neq \varnothing$$ and so for any element $y \in X$ in the intersection, it follows that
+			$y \notin f(\mathbb{N})$. Hence, there exists no bijection between $\mathbb{N}$ and $X$ implying that $X$ is uncountable. \\
+
+			Regarding the real numbers, we know by the Heine-Borel Theorem that every closed interval $[a, b] \subseteq \mathbb{R}_\mathrm{Euc}$ is compact. Additionally, we know that
+			$\mathbb{R}_\mathrm{Euc}$ is metrizable and so $[a, b]$ as a subspace, is Hausdorff via Proposition 22.1. If $[a, b]$, where $a \neq b$, contains an isolated point $x$, then
+			there must exist an open subset of $\mathbb{R}_\mathrm{Euc}$ such that $[a, b] \cap U = \{ x \}$. Furthermore, it must hold that there is an open ball $B_\epsilon(x)
+			\subseteq U$; however, $\{ x \} \subset [a, b] \cap B_\epsilon(x)$ illustrating that values besides $x$ are included in $[a, b] \cap U$, a contradiction. Thus, $[a, b]$ for
+			an $a \neq b$ is uncountable allowing us to conclude that $$\aleph_0 < |[a, b]| \leq |\mathbb{R}|.$$
+		\end{proof}
+
+
+\end{enumerate}
+
+\end{document}

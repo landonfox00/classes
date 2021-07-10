@@ -1,0 +1,124 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\newcounter{lecture_num}
+\theoremstyle{plain}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[lecture_num]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 440 \\
+\noindent February 22, 2021
+
+\begin{center}
+	\Large Lecture Summary Week 4
+\end{center}
+
+\setcounter{lecture_num}{10}
+\setcounter{theorem}{0}
+\section*{Lecture 10}
+
+\subsection*{Closure, Interior, and Boundary}
+
+\begin{proposition}
+	Let $X$ be a topological space and $Y \subseteq X$ a subspace. Then $B \subseteq Y$ is closed in $Y$ if and only if there exists a closed subset $A \subseteq X$ such that $B = Y \cap
+	A$.
+\end{proposition}
+
+\begin{example}
+	Let $A = [-1, 0) \subseteq \mathbb{R}$. Then $\overline{A} = A \cup L(A) = [-1, 0] \subseteq \mathbb{R}$. Let $Y = [-1, 0) \cup (0, 2] \subseteq \mathbb{R}$. Providing $Y$ the
+	subspace topology, then $\overline{A} = Y \cap [-1, 0] = [-1, 0)$. Note that \textbf{Proposition 10.1} implies that if $A$ is a closed subset of $Y$, then $\overline{A} = A$ as a
+	subset of $Y$.
+\end{example}
+
+\begin{definition}
+	Let $X$ be a topological space and $A \subseteq X$ a subset. The \textbf{interior of $A$}, denoted as $\mathring{A}$, is the union of all open subsets contained in $A$; that is,
+	$$\mathring{A} = \bigcup_{\substack{U \subseteq X\; \mathrm{open}, \\ U \subseteq A}} U.$$ The \textbf{boundary of $A$} is the subset $\partial A = \overline{A} \setminus
+	\mathring{A}$.
+\end{definition}
+
+\begin{remark}
+	Basic facts about $\mathring{A}$ and $\partial A$ in a topological space $X$.
+	\begin{enumerate}
+		\item $\mathring{A}$ is open in $X$ and is the largest open subset of $X$ contained in $A$.
+		\item $\partial A \subseteq X$ is a closed subset of $X$. In fact, $\partial A = \overline{A} \cap (X \setminus \mathring{A})$.
+	\end{enumerate}
+\end{remark}
+
+\begin{example} $ $
+	\begin{itemize}
+		\item If $X = \mathbb{R}$ and $A = (0, 1)$, then $\overline{A} = [0, 1]$, $\mathring{A} = A$, and $\partial A = \overline{A} \setminus \mathring{A} = \{0, 1\}$.
+		\item If $X = \mathbb{R}^2$ and $A = \overline{B}_\epsilon(\textbf{x})$, then $\overline{A} = A$, $$\mathring{A} = \{ \textbf{y} \in \mathbb{R}^2 : d_2(\textbf{x}, \textbf{y}) <
+			\epsilon \},\;\;\; \mathrm{and}\;\;\; \partial A = \{ \textbf{y} \in \mathbb{R}^2 : d_2(\textbf{x}, \textbf{y}) = \epsilon \}.$$
+	\end{itemize}
+\end{example}
+
+\begin{proposition}
+	Let $X$ be a topological space. Further, let $A \subseteq X$ and $x \in X$. Then $x \in \mathring{A}$ if and only if there exists an open neighborhood $V \subseteq X$ of $x$ such
+	that $V \subseteq A$.
+\end{proposition}
+
+\begin{proposition}
+	Let $X$ be a topological space. Additionally, let $A \subseteq X$ and $x \in X$. Then $x \in \partial A$ if and only if for every open neighborhood $U \subseteq X$ of $x$ it holds
+	that $U \cap A \neq \varnothing$ and $U \cap (X \setminus A) \neq \varnothing$.
+\end{proposition}
+
+
+\setcounter{lecture_num}{11}
+\setcounter{theorem}{0}
+\section*{Lecture 11}
+
+\subsection*{Density and Separability}
+
+Recall from Math 310 the density of the rationals in the real numbers; for all $r \in \mathbb{R}$ and for all $\epsilon > 0$, there exists a $q \in \mathbb{Q}$ such that $r - \epsilon <
+q < r + \epsilon$. An important consequence is that every continuous function $f : \mathbb{R} \to \mathbb{R}$ is uniquely determined by its values on the rationals.
+
+\begin{definition}
+	Let $X$ be a topological space. A subset $A \subseteq X$ is \textbf{dense} in $X$ if and only if $\overline{A} = X$. We say $X$ is \textbf{separable} if and only if $X$ contains a
+	countable dense subset; moreover, there exists a subset $A \subseteq X$ such that $|A| = \aleph_0$ and $\overline{A} = X$.
+\end{definition}
+
+\begin{example}
+	Common examples of density and separability.
+	\begin{itemize}
+		\item $\mathbb{Q} \subset \mathbb{R}$ is dense and countable.
+		\item $\mathbb{Q}^n \subset \mathbb{R}^n$ is dense and countable and so $(\mathbb{R}^n, \mathcal{T}_{\mathrm{euclid}})$ is separable.
+		\item If $X = (\mathbb{R}, \mathcal{T}_{\mathrm{cof}})$ and $U \subseteq \mathbb{R}$ then $U$ is dense in $\mathbb{R}$.
+	\end{itemize}
+\end{example}
+
+\subsection*{Basis of a Topological Space}
+
+Recall how we characterized open subsets of $\mathbb{R}^n$; a subset $U \subseteq \mathbb{R}^n$ is open if and only if $U$ can be expressed as a union of open balls.
+
+\begin{definition}
+	If $X$ is a set, a \textbf{basis} for a topology on $X$ is a collection $\mathcal{B}$, called basis elements, of subsets of $X$ such that
+	\begin{enumerate}
+		\item for each $x \in X$, there exists at least one basis element $B \in \mathcal{B}$ such that $x \in B$.
+		\item if $B_1, B_2 \in \mathcal{B}$ and $x \in B_1 \cap B_2$, then there must exists a $B_3 \in \mathcal{B}$ such that $x \in B_3 \subseteq B_1 \cap B_2$.
+	\end{enumerate}
+\end{definition}
+
+\begin{proposition}
+	If $X$ is a topological space, then $A \subseteq X$ is dense if and only if $A \cap U \neq \varnothing$ where $U$ is any nonempty open subset of $X$.
+\end{proposition}
+
+\end{document}

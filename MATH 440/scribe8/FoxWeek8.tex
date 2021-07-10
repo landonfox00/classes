@@ -1,0 +1,115 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, graphicx, listings, mathrsfs}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\newcounter{lecture_num}
+\theoremstyle{plain}
+
+\theoremstyle{plain}
+\newtheorem{theorem}{Theorem}[lecture_num]
+\newtheorem{proposition}[theorem]{Proposition}
+\newtheorem{lemma}[theorem]{Lemma}
+\newtheorem{corollary}[theorem]{Corollary}
+
+\theoremstyle{definition}
+\newtheorem{definition}[theorem]{Definition}
+\newtheorem{notation}[theorem]{Notation}
+\newtheorem{observation}[theorem]{Observation}
+\newtheorem{question}[theorem]{Question}
+
+\theoremstyle{remark}
+\newtheorem{remark}[theorem]{Remark}
+\newtheorem{example}[theorem]{Example}
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 440 \\
+\noindent March 22, 2021
+
+\begin{center}
+	\Large Lecture Summary Week 8
+\end{center}
+
+\setcounter{lecture_num}{20}
+\setcounter{theorem}{0}
+\section*{Lecture 20}
+
+\subsection*{Separation Properties}
+
+\begin{example}
+	Let $|X| \geq 2$. Then $(X, \mathcal{T}_\mathrm{triv})$ is not metrizable.
+\end{example}
+
+\begin{example}
+	Let $X$ be an infinite set. Consider $(X, \mathcal{T}_\mathrm{cof})$. Then $\{ x \} \subseteq X$ is closed for all $x \in X$.
+\end{example}
+
+\begin{example}
+	The lower limit topology, $( \mathbb{R}, \mathcal{T}_\ell)$, is Hausdorff but not metrizable.
+\end{example}
+
+\begin{definition}
+	Let $X$ be a topological space.
+	\begin{enumerate}
+		\item $X$ is $T_1$ if and only if for all $x \in X$, it holds that $\{ x \} \subseteq X$ is closed.
+		\item $X$ is $T_2$ if and only if $X$ is Hausdorff.
+	\end{enumerate}
+\end{definition}
+
+\begin{proposition} $ $
+	\begin{enumerate}
+		\item $T_1$ and $T_2$ are properties necessary but not sufficient topological properties for $(X, \mathcal{T})$ to be metrizable.
+		\item Separation and countability properties are distinct.
+	\end{enumerate}
+\end{proposition}
+
+\begin{example}
+	Let $X = \{a, b, c\}$ and $$\mathcal{T} = \{ \varnothing, \{ c \}, \{ a, c \}, \{ b, c \}, X \}.$$ Let $\{ x_n \}$ be the sequence $x_n = c$ for all $n \geq 1$. Then $x_n \to c$,
+	$x_n \to a$, and $x_n \to b$.
+\end{example}
+
+\begin{theorem}
+	If $X$ is Hausdorff, then every sequence in $X$ converges to at most one point.
+\end{theorem}
+
+\setcounter{lecture_num}{21}
+\setcounter{theorem}{0}
+\section*{Lecture 21}
+
+\subsection*{Separation Properties}
+
+\begin{definition}
+	Let $X$ be a topological space.
+	\begin{enumerate}
+		\item $X$ is $T_0$ if and only if for any points $x \neq y \in X$, there exists open subsets $U \subseteq X$ such that $x \in U$ and $y \notin U$ or $x \notin U$ and $y \in U$.
+		\item $X$ is $T_3$ if and only if for all closed subsets $A \subseteq X$ and for all $x \in X \setminus A$, there exists disjoint open subsets $U_A, U_x \subseteq X$ such that
+			$A \subseteq U_A$ and $x \in U_x$.
+		\item $X$ is $T_4$ if and only if for any pair of disjoint closed subsets $A, B \subseteq X$, there exists disjoint open subsets $U, V \subseteq X$ such that $A \subseteq U$ and
+			$B \subseteq V$.	
+	\end{enumerate}
+\end{definition}
+
+\begin{definition} $ $
+	\begin{itemize}
+		\item $X$ is \textbf{regular} if and only if $X$ is $T_0$ and $T_3$.
+		\item $X$ is \textbf{normal} if and only if $X$ is $T_1$ and $T_4$.
+	\end{itemize}
+\end{definition}
+
+\begin{proposition}
+	The following implications hold for a topological space $X$.
+	\begin{enumerate}
+		\item $T_1$ implies $T_0$.
+		\item $T_2$ implies $T_1$.
+		\item $T_1$ and $T_3$ implies $T_2$.
+		\item $T_1$ and $T_4$ implies $T_3$.
+	\end{enumerate}
+\end{proposition}
+
+\begin{theorem}
+	If $(X, \mathcal{T})$ is metrizable, then $X$ is $T_i$ for $i = 0, 1, 2, 3, 4$.
+\end{theorem}
+
+\end{document}
