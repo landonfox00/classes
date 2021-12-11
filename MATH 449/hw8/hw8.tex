@@ -1,0 +1,97 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, bbold, enumitem, extpfeil, graphicx, listings, mathrsfs, tikz-cd}
+\usepackage[margin=0.5in]{geometry}
+
+\usepackage{newunicodechar}
+
+\newunicodechar{よ}{\text{\usefont{U}{min}{m}{n}\symbol{'210}}}
+
+\DeclareFontFamily{U}{min}{}
+\DeclareFontShape{U}{min}{m}{n}{<-> udmj30}{}
+
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 449, Category Theory and TQFTs \\
+\noindent October 20, 2021
+
+\begin{center}
+\Large Homework 8
+\end{center}
+
+\begin{enumerate}
+
+	% problem 1
+	\item[\textbf{1.}] For $[n], [m] \in \mathsf{Fin}$, give an explicit description of the set $[n] \amalg [m]$. Show that $(\mathsf{Fin}, \amalg)$ provides a strict symmetric monoidal structure.
+
+		\begin{proof}
+			Let $\amalg$ denote the disjoint union. As an example, $$[2] \amalg [3] = \{ 1, 2, 1', 2', 3' \} \coloneqq [5] \in \mathsf{Fin}.$$ It is easy to see that $\amalg$ is the coproduct of $\mathsf{Fin}$ with universal morphisms $$f \amalg g = \begin{cases} f(k); & k \in [m], \\ g(k); & k \in [n] \end{cases} : [m] \amalg [n] \to [\ell]$$ provided a cocone $f : [m] \to [\ell], g : [n] \to [\ell]$. Note that in the piecewise function definition above, we treat $[m]$ and $[n]$ as disjoint sets for convenience. Provided the associativity and commutativity of the disjoint union, observe that the associativity coherence diagram below commutes.
+			\begin{center}
+			\begin{tikzcd}
+			{\left ( [\ell] \amalg [m] \right ) \amalg [n]} \arrow[dd, "{\mathrm{id}_{\ell, m, n}}"'] \arrow[rr, "{\mathrm{id}_{\ell, m} \amalg \mathrm{id}_n}"] &  & {\left ( [m] \amalg [\ell] \right ) \amalg [n]} \arrow[dd, "{\mathrm{id}_{m, \ell, n}}"]                    \\
+			                                                                                                                                                        &  &                                                                                                               \\
+			{[\ell] \amalg \left ( [m] \amalg [n] \right )} \arrow[dd, "{\mathrm{id}_{\ell, m \amalg n}}"']                                                      &  & {[m] \amalg \left ( [\ell] \amalg [n] \right )} \arrow[dd, "{\mathrm{id}_m \amalg \mathrm{id}_{\ell, n}}"] \\
+			                                                                                                                                                        &  &                                                                                                               \\
+			{\left ( [m] \amalg [n] \right ) \amalg [\ell]} \arrow[rr, "{\mathrm{id}_{m, n, \ell}}"']                                                             &  & {[m] \amalg \left ( [n] \amalg [\ell] \right )}                                                            
+			\end{tikzcd}
+			\end{center}
+			Indeed, the diagram contracts to the identity. As for the unitality coherence, consider the following diagram.
+			\begin{center}
+			\begin{tikzcd}
+			{[n] \amalg \varnothing} \arrow[rr, "{\mathrm{id}_{n, 0}}"] \arrow[rd, "\mathrm{id}_n"'] &       & {\varnothing \amalg [n]} \arrow[ld, "\mathrm{id}_n"] \\
+			                                                                                          & {[n]} &                                                      
+			\end{tikzcd}
+			\end{center}
+			Lastly, for the invertibility of the twist transformation, we can see that the diagram below commutes.
+			\begin{center}
+			\begin{tikzcd}
+			                                                                                              & {[n] \amalg [m]} \arrow[rd, "{\mathrm{id}_{n, m}}"] &                   \\
+			{[m] \amalg [n]} \arrow[rr, "\mathrm{id}_{m \amalg n}"'] \arrow[ru, "{\mathrm{id}_{m, n}}"] &                                                      & {[m] \amalg [n]}
+			\end{tikzcd}
+			\end{center}
+			Hence, $\mathsf{Fin}$ is a strict symmetric monoidal category under $\amalg$ with unit $\varnothing$.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Prove that $[1]$ is a commutative monoid in $\mathsf{Fin}$ with respect to the coproduct monoidal structure.
+
+		\begin{proof}
+			Let $\mu : [1] \amalg [1] \to [1]$ and $\eta : \varnothing \to [1]$, both uniquely defined. Provided that $\mu$ is a constant function, it holds that $$\mu\; \mathrm{id}_1 \amalg \mu = \mu\; \mu \amalg \mathrm{id}_1$$ and so the associativity diagram below commutes.
+			\begin{center}
+			\begin{tikzcd}
+			{[1] \amalg [1] \amalg [1]} \arrow[rr, "\mathrm{id}_1 \amalg \mu"] \arrow[dd, "\mu \amalg \mathrm{id}_1"'] &  & {[1] \amalg [1]} \arrow[dd, "\mu"] \\
+			                                                                                                           &  &                                    \\
+			{[1] \amalg [1]} \arrow[rr, "\mu"']                                                                        &  & {[1]}                             
+			\end{tikzcd}
+			\end{center}
+			Similarly, any function $[1] \to [1]$ that is factored through $\mu$ must be an identity; indeed, if $\mu$ is postcomposed with a function, $\mu$ will map any provided element to the only element in $[1]$. Hence, $$\mathrm{id}_1 = \mu\; \eta \amalg \mathrm{id}_1\;\;\; \mathrm{and}\;\;\; \mathrm{id}_1 = \mu\; \mathrm{id}_1 \amalg \eta$$ providing unitality.
+			\begin{center}
+			\begin{tikzcd}
+			{\varnothing \amalg [1]} \arrow[rr, "\eta \amalg \mathrm{id}_1"] \arrow[rrdd, "\mathrm{id}_1"'] &  & {[1] \amalg [1]} \arrow[dd, "\mu"] &  & {[1] \amalg \varnothing} \arrow[ll, "\mathrm{id}_1 \amalg \eta"'] \arrow[lldd, "\mathrm{id}_1"] \\
+			                                                                                                &  &                                    &  &                                                                                                 \\
+			                                                                                                &  & {[1]}                              &  &                                                                                                
+			\end{tikzcd}
+			\end{center}
+			Lastly, utilizing the twist morphism from \textbf{1}, observe that the diagram below commutes since $\sigma_{1, 1}$ is equality.
+			\begin{center}
+			\begin{tikzcd}
+			{[1] \amalg [1]} \arrow[rr, "{\sigma_{1, 1}}"] \arrow[rd, "\mu"'] &       & {[1] \amalg [1]} \arrow[ld, "\mu"] \\
+			                                                                  & {[1]} &                                   
+			\end{tikzcd}
+			\end{center}
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Let $F : \mathsf{Fin} \to \mathsf{Set}$ be a strict symmetric monoidal functor. Given a permutation $\phi : [n] \to [n]$, determine how $F \phi$ acts on $F [n]$. Further, describe the map $F \psi$ where $\psi : [n] \to [m]$ is a surjection.
+
+		\begin{proof}
+			Suppose $F : \mathsf{Fin} \to \mathsf{Set}$ is a strict symmetric monoidal functor. Let $\phi : [n] \to [n] \in \mathsf{Fin}$ be a permutation. Provided that $F$ is a strict monoidal functor, it follows that $$F [n] = F \amalg_n [1] = \prod_n F[1] = F [1]^n.$$ Then $F \phi : F[1]^n \to F[1]^n$ is a permutation on the indices of the $n$-tuples in $F[1]^n$. As an example, if $$\phi(k) = k + 1 \mod 4,$$ then $$(a, b, c, d) \in F[1]^n \xmapsto{\;\;F \phi\;\;} (d, a, b, c) \in F[1]^n.$$ Similarly, if $\psi : [n] \to [m]$ is a surjection, $F \psi$ additionally takes the product of all tuple elements that are mapped to the same index. As a result of $[1] \in \mathsf{Fin}$ being a commutative monoid from \textbf{2}, it follows that $F[1]$ is also a commutative monoid. Thus, a product of tuple elements from $F[1]$ is well defined regarding its use in $F \phi$. To further illustrate, let $\psi : [4] \to [3]$ be defined as $$\psi(1) = 1,\;\;\; \psi(2) = 2,\;\;\; \psi(3) = 3,\;\;\; \mathrm{and}\;\;\; \psi(4) = 2,$$ then $$(a, b, c, d) \in F[1]^4 \xmapsto{\;\;F \psi\;\;} (a, bd, c) \in F[1]^3.$$
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

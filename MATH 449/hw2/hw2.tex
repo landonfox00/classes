@@ -1,0 +1,185 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, bbold, enumitem, extpfeil, graphicx, listings, mathrsfs, tikz-cd}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 449, Category Theory and TQFTs \\
+\noindent September 6, 2021
+
+\begin{center}
+\Large Homework 2
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Let $\mathscr{C}$ be a category and suppose we have two commutative squares in $\mathscr{C}$:
+		\begin{center}
+		\begin{tikzcd}
+		A \arrow[rr, "f"] \arrow[dd, "h"'] &  & B \arrow[dd, "g"] &  & C \arrow[dd, "\phi"'] \arrow[rr, "j"] &  & D \arrow[dd, "\psi"] \\
+		                                   &  &                   &  &                                       &  &                      \\
+		C \arrow[rr, "j"']                 &  & D                 &  & E \arrow[rr, "\theta"']               &  & F                   
+		\end{tikzcd}
+		\end{center}
+		Prove that the following square also commutes.
+		\begin{center}
+		\begin{tikzcd}
+		C \arrow[dd, "\phi h"'] \arrow[rr, "f"] &  & D \arrow[dd, "\psi g"] \\
+		                                        &  &                        \\
+		E \arrow[rr, "\theta"']                 &  & F                     
+		\end{tikzcd}
+		\end{center}
+
+		\begin{proof}
+			Suppose $\mathscr{C}$ is a category with the two commutative squares provided above; that is, $gf = jh$ and $\psi j = \theta \phi$. Therefore, $$\psi g f = \psi j h = \theta \phi h$$ as desired.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Prove that $F : \mathscr{C} \to \mathscr{D}$ is an isomorphism of categories if and only if $F$ gives a bijection between $\mathrm{ob}(\mathscr{C})$ and $\mathrm{ob}(\mathscr{D})$ and bijections $\mathscr{C}(A, B) \overset{\cong}{\to} \mathscr{D}(FA, FB)$ for all $A, B \in \mathscr{C}$.
+
+		\begin{proof}
+			Let $F : \mathscr{C} \to \mathscr{D}$ be an isomorphism of categories with inverse $F^{-1} : \mathscr{D} \to \mathscr{C}$. Since the collections of objects and morphisms of a category form a set (or class, if the category is not concrete), it suffices to construct isomorphisms. Let $F_\mathrm{ob}$ and $F_\mathrm{ob}^{-1}$ denote the object maps of $F$ and $F^{-1}$, respectively. By definition, $F_\mathrm{ob}\, F_\mathrm{ob}^{-1} = \mathrm{id}_{\mathrm{ob}(\mathscr{D})}$ and $F_\mathrm{ob}^{-1}\, F_\mathrm{ob} = \mathrm{id}_{\mathrm{ob}(\mathscr{C})}$ and so $F_\mathrm{ob}$ is a bijection. Similarly, define $F_{AB}$ and $F_{AB}^{-1}$ as the map of morphisms between objects $A, B \in \mathrm{ob}(\mathscr{C})$. As before, we conclude that $F_{AB}$ is bijective since $F_{AB}\, F_{AB}^{-1} = \mathrm{id}_{\mathscr{D}(FA, FB)}$ and $F_{AB}^{-1}\, F_{AB} = \mathrm{id}_{\mathscr{C}(A, B)}$. \\
+
+			Conversely, suppose we have a functor $F : \mathscr{C} \to \mathscr{D}$ providing bijections $\mathrm{ob}(\mathscr{C}) \xrightarrow{F_\mathrm{ob}} \mathrm{ob}(\mathscr{D})$ and $\mathscr{C}(A, B) \xrightarrow{F_{AB}} \mathscr{D}(FA, FB)$ for all objects $A, B \in \mathscr{C}$. Define a functor $F^{-1} : \mathscr{D} \to \mathscr{C}$ with object map $F_\mathrm{ob}^{-1}$ and morphism maps $F_{AB}^{-1}$ for all $A, B \in \mathscr{C}$. To illustrate functoriality, notice that for objects $X, Y, Z \in \mathscr{D}$ with preimages $A, B, C \in \mathscr{C}$, respectively, and morphisms $f : X \to Y,\, g : Y \to Z \in \mathscr{D}$, $$F^{-1}\, \mathrm{id}_X = F_{AA}^{-1}\, \mathrm{id}_X = \mathrm{id}_A$$ and
+			\begin{align*}
+				F^{-1}\, gf &= F_{AC}^{-1}\, gf \\
+				&= F_{AC}^{-1} ( F_{BC} F_{BC}^{-1} g\, F_{AB} F_{AB}^{-1} f ) \\
+				&= F_{AC}^{-1} F_{AC} ( F_{BC}^{-1} g\, F_{AB}^{-1} f ) \\
+				&= F_{BC}^{-1} g\, F_{AB}^{-1} f \\
+				F^{-1} gf &= F^{-1} g\, F^{-1} f
+			\end{align*}
+			via the functoriality of $F$. By its definition, its clear that $F F^{-1} = \mathrm{Id}_\mathscr{D}$ and $F^{-1} F = \mathrm{Id}_\mathscr{C}$ and so $F$ is an isomorphism of categories.
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Prove that, for any category $\mathscr{C}$, there is an isomorphism of categories $[\mathbb{2}, \mathscr{C}] \cong \mathscr{C} \times \mathscr{C}$.
+
+		\begin{proof}
+			Let $\mathscr{C}$ be an arbitrary category. Define a functor $F : [\mathbb{2}, \mathscr{C}] \to \mathscr{C} \times \mathscr{C}$ with the following object and morphism maps
+			\begin{align*}
+				G : \mathbb{2} \to \mathscr{C} &\longmapsto (G0, G1), \\
+				\eta : G \implies H &\longmapsto (\eta_0 : G0 \to H0,\, \eta_1 : G1 \to H1)\; \mathrm{for\; all}\; G, H : \mathbb{2} \to \mathscr{C}
+			\end{align*}
+			where $0, 1 \in \mathbb{2}$. Indeed, $F$ is a functor, observe that
+			\begin{align*}
+				F\, \mathrm{Id}_G &= (\mathrm{id}_{G0}, \mathrm{id}_{G1}) = \mathrm{id}_{(G0, G1)}, \\
+				F \eta \epsilon &= (\eta_0 \epsilon_0, \eta_1 \epsilon_1) = (\eta_0, \eta_1)\, (\epsilon_0, \epsilon_1) = F \eta\, F \epsilon.
+			\end{align*}
+			Since $\mathbb{2}$ has no morphisms other than identities, the object map of each functor $G : \mathbb{2} \to \mathscr{C}$ uniquely defines $G$ and so the object map of $F$ is bijective. Similarly, a natural transformation is uniquely defined by its components, hence the morphisms map of $F$ is also bijective. Thus, $[\mathbb{2}, \mathscr{C}] \cong \mathscr{C} \times \mathscr{C}$ by \textbf{2}.
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] $ $
+		\begin{enumerate}
+			\item[\textbf{1.3.31.}] Let $\mathrm{Sym} X$ denote the set of all permutations on a set $X$. Similarly, let $\mathrm{Ord} X$ be the collection of all total orders of $X$. Further, let $\mathscr{B}$ denote the category of finite sets and bijections.
+			\begin{enumerate}
+				\item[\textbf{a.}] Give canonical definitions of $\mathrm{Sym}$ and $\mathrm{Ord}$ as functors $\mathscr{B} \to \mathsf{Set}$.
+				\item[\textbf{b.}] Show that there is no natural transformation $\mathrm{Sym} \implies \mathrm{Ord}$.
+				\item[\textbf{c.}] For an $n$-element set $X$, determine the cardinality of $\mathrm{Sym} X$ and $\mathrm{Ord} X$.
+			\end{enumerate}
+
+			\begin{proof} $ $
+				\begin{enumerate}
+					\item[\textbf{a.}] Define $\mathrm{Sym} : \mathscr{B} \to \mathsf{Set}$ as a functor with the object map $\mathrm{Sym} X = \mathscr{B}(X, X)$ and morphism map $$\mathrm{Sym}(f : X \to Y) = f \circ - \circ f^{-1}$$ which acts as conjugation, mapping a morphism $g : X \to X \longmapsto f g f^{-1} : Y \to Y$. Next, we define the functor $\mathrm{Ord} : \mathscr{B} \to \mathsf{Set}$ as $\mathrm{Ord} X \subseteq 2^{X \times X}$, the set of all total order relations on $X$, and $$R \in \mathrm{Ord} X \xmapsto{\mathrm{Ord}(f : X \to Y)} \{ (fa, fb) : (a, b) \in R \} \in \mathrm{Ord} Y.$$ We now show that $\mathrm{Sym}$ and $\mathrm{Ord}$ are in fact functors. It is easy to see that $\mathrm{Sym}\, \mathrm{id}_X = \mathrm{id}_{\mathscr{B}(X, X)}$ since $$(\mathrm{Sym}\, \mathrm{id}_X) g = \mathrm{id}_X\, g\, \mathrm{id}_X^{-1} = g.$$ Additionally, $$\mathrm{Sym} fg = fg \circ - \circ (fg)^{-1} = fg \circ - \circ g^{-1} f^{-1} = f (\mathrm{Sym} g) f^{-1} = \mathrm{Sym} f\, \mathrm{Sym} g$$ and so $\mathrm{Sym}$ is a functor by definition. As for $\mathrm{Ord}$, it is clear that $$(\mathrm{Ord} fg) R = \{ (fga, fgb) : (a, b) \in R \} = \mathrm{Ord} f \{ (ga, gb) : (a, b) \in R \} = \mathrm{Ord} f\, \mathrm{Ord} g,$$ demonstrating the functoriality of $\mathrm{Ord}$.
+
+					\item[\textbf{b.}] Suppose there exists a natural transformation $\eta : \mathrm{Sym} \Rightarrow \mathrm{Ord}$. Then for an automorphism $\sigma : X \to X \in \mathscr{B}$, there exists a commutative square;
+					\begin{center}
+					\begin{tikzcd}
+					\mathrm{Sym}\, X \arrow[dd, "\eta_X"'] \arrow[rr, "\mathrm{Sym}\, \sigma"] &  & \mathrm{Sym}\, X \arrow[dd, "\eta_X"] \\
+					                                                                           &  &                                       \\
+					\mathrm{Ord}\, X \arrow[rr, "\mathrm{Ord}\, \sigma"']                      &  & \mathrm{Ord}\, X                     
+					\end{tikzcd}
+					\end{center}
+					that is, there exists a component $\eta_X$ such that $$\eta_X\, \mathrm{Sym} \sigma = \mathrm{Ord} \sigma\, \eta_X : \mathrm{Sym} X \to \mathrm{Ord} X.$$ Now, consider the identity $\mathrm{id}_X$. Observe that $$(\eta_X\, \mathrm{Sym} \sigma) \mathrm{id}_X = \eta_X (\sigma \mathrm{id}_X \sigma^{-1}) = \eta_X \mathrm{id}_X,$$ a relation $R \coloneqq \eta_X \mathrm{id}_X$. Similarly, applying $\mathrm{Ord} \sigma\, \eta_X$ to $\mathrm{id}_X$, we obtain a relation $$(\mathrm{Ord} \sigma\, \eta_X) \mathrm{id}_X = \mathrm{Ord} \sigma R = \{ (\sigma a, \sigma b) : (a, b) \in R \} \coloneqq S.$$ However when $\sigma \neq \mathrm{id}_X$, it is clear that $R \neq S$ and so the diagram above does no commute.
+
+					\item[\textbf{c.}] For an $n$-element set $X$, it is clear that $|\mathrm{Sym} X| = n!$, the set of all permutations on $X$. As for $\mathrm{Ord} X$, each total order of $X$ is an enumeration of $X$, again a permutation. Hence, $|\mathrm{Sym} X| = |\mathrm{Ord} X| = n!$. Moreover, $\mathrm{Sym} X \cong \mathrm{Ord} X$ for all $X \in \mathscr{B}$ in $\mathsf{Set}$, but not naturally in $X \in \mathscr{B}$.
+				\end{enumerate}
+			\end{proof}
+
+			\item[\textbf{1.3.32.}] Let $F$ be a functor. Show that $F$ is an equivalence if and only if $F$ is fully faithful and essentially surjective on elements.
+
+			\begin{proof}
+				Let $F : \mathscr{C} \to \mathscr{D}$ be an equivalence; that is, there exists a functor $G : \mathscr{D} \to \mathscr{C}$ and natural isomorphisms $\eta : \mathrm{Id}_\mathscr{C} \Rightarrow GF$ and $\epsilon : FG \Rightarrow \mathrm{Id}_\mathscr{D}$. Then for arbitrary morphisms $f : X \to Y \in \mathscr{C}$ and $g : A \to B \in \mathscr{D}$, the following diagrams commute:
+				\begin{center}
+				\begin{tikzcd}
+				\mathrm{Id}_\mathscr{C}\, X \arrow[rr, "\mathrm{Id}_\mathscr{C}\, f"] \arrow[dd, "\eta_X"'] &  & \mathrm{Id}_\mathscr{C}\, Y \arrow[dd, "\eta_Y"] &  & FG\, A \arrow[dd, "\epsilon_A"'] \arrow[rr, "FG\, g"]                  &  & FG\, B \arrow[dd, "\epsilon_B"] \\
+				                                                                                            &  &                                                  &  &  &                      \\
+				GF\, X \arrow[rr, "GF\, f"']                                                                &  & GF\, Y                                           &  & \mathrm{Id}_\mathscr{D}\, A \arrow[rr, "\mathrm{Id}_\mathscr{D}\, g"'] &  & \mathrm{Id}_\mathscr{D}\, B                   
+				\end{tikzcd}
+				\end{center}
+				In other words, $\eta_Y\, \mathrm{Id}_\mathscr{C}\, f = GF f\, \eta_X$ and $\epsilon_B\, FG g = \mathrm{Id}_\mathscr{D} g\, \epsilon_A$. Examining the first expression, we have
+				\begin{align*}
+					GF f\, \eta_X &= \eta_Y\, \mathrm{Id}_\mathscr{C} f \\
+					GF f\, \eta_X &= \eta_Y\, f \\
+					GF f &= \eta_Y\, f\, \eta_X^{-1}
+				\end{align*}
+				since we know all components of $\eta$ are isomorphisms. Consider another morphism $f' : X \to Y$ such that $GF f' = GF f$. Then, $\eta_Y f' \eta_X^{-1} = \eta_Y f \eta_X^{-1}$ demonstrating that $f' = f$, again due to the invertiability of $\eta = \{ \eta_A \}_{A \in \mathscr{C}}$, and so the morphism map of $GF$ is injective. Consequently, $F$ is faithful. As for the second expression, we can see that $FG g = \epsilon_B^{-1} g \epsilon_A$. If $h : FG A \to FG B \in \mathscr{D}$ then there exists a morphism $\epsilon_B h \epsilon_A^{-1} \xmapsto{FG} h$. Therefore, the morphism map of $FG$ is surjective, implying $F$ to be full. Lastly, to show that $F$ is essentially surjective on the objects, we can guarantee for any object $A \in \mathscr{D}$, $F(GA) \cong A$ via $\epsilon_A : FGA \xrightarrow{\cong} \mathrm{Id}_\mathscr{D} A$. \\
+
+				Conversely, assume $F : \mathscr{C} \to \mathscr{D}$ is fully faithful and essentially surjective on objects. Define a functor $G : \mathscr{D} \to \mathscr{C}$ as follows: for any object $A \in \mathscr{D}$, there exists an object $X \in \mathscr{C}$ such that $FX \cong A$ due to essential surjectivity on objects, let $GA = X$; for morphisms maps take a morphism $f : A \to B$, assuming the global axiom of choice, we may obtain isomorphisms $r : FX \xrightarrow{\cong} A$ and $s : FY \xrightarrow{\cong} B$ to map $f$ to the preimage of $s^{-1} f r : FX \to FY$ under the morphism maps of $F$ since $F$ is fully faithful. To show the functorality of $G$, notice that for morphisms $f : A \to B$, $g : B \to C$ and isomorphisms $r : FX \xrightarrow{\cong} A$, $s : FY \xrightarrow{\cong} B$, and $t : FZ \xrightarrow{\cong} C$, $$G\, \mathrm{id}_A = F_{XX}^{-1} r^{-1} \mathrm{id}_A r = F_{XX}^{-1} \mathrm{id}_{A} = \mathrm{id}_X = \mathrm{id}_{GA}$$ and
+				\begin{align*}
+					G gf &= F_{XZ}^{-1} t^{-1} gf r \\
+					&= F_{XZ}^{-1} t^{-1} g ss^{-1} f r \\
+					&= F_{XZ}^{-1} (F_{YZ} F_{YZ}^{-1} t^{-1} g s)(F_{XY} F_{XY}^{-1} s^{-1} f r) \\
+					&= F_{XZ}^{-1} F_{XZ} (F_{YZ}^{-1} t^{-1} g s)(F_{XY}^{-1} s^{-1} f r) \\
+					&= (F_{YZ}^{-1} t^{-1} g s)(F_{XY}^{-1} s^{-1} f r) \\
+					G gf &= Gg\, Gf.
+				\end{align*}
+				Now, define a natural isomorphism $\epsilon = \{ \epsilon_A : FG A \xrightarrow{\cong} A \}_{A \in \mathscr{D}} : FG \Rightarrow \mathrm{Id}_\mathscr{D}$, again utilizing isomorphisms from essential surjectivity by the axiom of global choice. For an arbitrary morphism $f : A \to B$, naturality can be observe by the following
+				\begin{align*}
+					f \epsilon_A &= \epsilon_B \epsilon_B^{-1} f \epsilon_A \\
+					f \epsilon_A &= \epsilon_B\, F F_{AB}^{-1}( \epsilon_B^{-1} f \epsilon_A ) \\
+					\mathrm{Id}_\mathscr{D} f\, \epsilon_A &= \epsilon_B\, FG f,
+				\end{align*}
+				and so the diagram below commutes.
+				\begin{center}
+				\begin{tikzcd}
+				FG\, A \arrow[dd, "\epsilon_A"'] \arrow[rr, "FG\, f"]                  &  & FG\, B \arrow[dd, "\epsilon_B"] \\
+				                                                                       &  &                                 \\
+				\mathrm{Id}_\mathscr{D}\, A \arrow[rr, "\mathrm{Id}_\mathscr{D}\, f"'] &  & \mathrm{Id}_\mathscr{D}\, B                     
+				\end{tikzcd}
+				\end{center}
+				Finally, we will define a natural isomorphism $\eta = \{ \eta_X : X \xrightarrow{\cong} GF X \}_{X \in \mathscr{C}} : \mathrm{Id}_\mathscr{C} \Rightarrow GF$, proving that $F$ is an equivalence. For an object $X \in \mathscr{C}$, we know that $FX \xmapsto{G} Z \in \mathscr{C}$ ($Z$ need not equal $X$) such that $FX \cong FZ$. Since $F$ is fully faithful, the preimage of the isomorphism $\epsilon_{FX}^{-1} : FX \xrightarrow{\cong} FZ$ (and its inverse) will reside in $\mathscr{C}(X, Z)$; hence, $X \cong Z$ and we associate the preimage of $\epsilon_{FX}^{-1}$ with the component $\eta_X$, assuming the axiom of global choice as needed. As for naturality, we have
+				\begin{center}
+				\begin{tikzcd}
+				\mathrm{Id}_\mathscr{C}\, X \arrow[dd, "\eta_X"'] \arrow[rr, "\mathrm{Id}_\mathscr{C}\, f"] &  & \mathrm{Id}_\mathscr{C}\, Y \arrow[dd, "\eta_Y"] \\
+				                                                                                            &  &                                                  \\
+				GF\, X \arrow[rr, "GF\, f"']                                                                &  & GF\, Y                     
+				\end{tikzcd}
+				\end{center}
+				\begin{align*}
+					\eta_Y f &= F_{X\, GFY}^{-1} F(\eta_Y f) \\
+					&= F_{X\, GFY}^{-1} F\eta_Y\, Ff \\
+					&= F_{X\, GFY}^{-1} \epsilon_{FY}^{-1}\, Ff \\
+					&= F_{X\, GFY}^{-1} \epsilon_{FY}^{-1}\, Ff\, \epsilon_{FX} \epsilon_{FX}^{-1} \\
+					&= F_{X\, GFY}^{-1} (F_{GFX\, GFY} F_{GFX\, GFY}^{-1} \epsilon_{FY}^{-1}\, Ff\, \epsilon_{FX})\, (F_{X\, GFX} F_{X\, GFX}^{-1} \epsilon_{FX}^{-1}) \\
+					&= F_{X\, GFY}^{-1} F_{X\, GFY} (F_{GFX\, GFY}^{-1} \epsilon_{FY}^{-1}\, Ff\, \epsilon_{FX})\, (F_{X\, GFX}^{-1} \epsilon_{FX}^{-1}) \\
+					\eta_Y f &= (F_{GFX\, GFY}^{-1} \epsilon_{FY}^{-1}\, Ff\, \epsilon_{FX})\, (F_{X\, GFX}^{-1} \epsilon_{FX}^{-1}) \\
+					\eta_Y\, \mathrm{Id}_\mathscr{C} f &= GF f\, \eta_X,
+				\end{align*}
+				concluding the proof.
+			\end{proof}
+		\end{enumerate}
+
+
+	% problem 5
+	\item[\textbf{5.}] Let $\mathscr{C}$ and $\mathscr{C}'$ be equivalent categories. Prove that for any category $\mathscr{D}$, there is another equivalence $[\mathscr{C}, \mathscr{D}] \simeq [\mathscr{C}', \mathscr{D}]$.
+
+		\begin{proof}
+			Suppose $F : \mathscr{C} \to \mathscr{C}'$ is an equivalence with $G : \mathscr{C}' \to \mathscr{C}$, $\eta : \mathrm{Id}_\mathscr{C} \overset{\cong}{\Rightarrow} GF$, and $\epsilon : FG \overset{\cong}{\Rightarrow} \mathrm{Id}_{\mathscr{C}'}$. For an arbitrary category $\mathscr{D}$, we will define new functors $\widetilde{F} : [\mathscr{C}', \mathscr{D}] \to [\mathscr{C}, \mathscr{D}]$ and $\widetilde{G} : [\mathscr{C}, \mathscr{D}] \to [\mathscr{C}', \mathscr{D}]$. The functor $\widetilde{F}$ will map functors $H : \mathscr{C}' \to \mathscr{D} \longmapsto HF$ and natural transformations $$\alpha = \{ \alpha_X \}_{X \in \mathscr{C}'} : H \Rightarrow H' \longmapsto \{ \alpha_{FX} \}_{X \in \mathscr{C}} : HF \Rightarrow H'F.$$ Provided that $\alpha : H \Rightarrow H'$ is a natural transformation, for any $g : X \to Y \in \mathscr{C}'$, $\alpha_Y\, Hf = H' f\, \alpha_X$, it is easy to see that replacing $g$ with $Ff : X \to Y$ will illustrate that $\widetilde{F} \alpha$ is also a natural transformation. Furthermore, we will define $\widetilde{G}$ similarly: let $\widetilde{G}$ map functors $H : \mathscr{C} \to \mathscr{D} \longmapsto HG$ and natural transformations $$\alpha = \{ \alpha_X \}_{X \in \mathscr{C}} : H \Rightarrow H' \longmapsto \{ \alpha_{GX} \}_{X \in \mathscr{C}'} : HG \Rightarrow H'G.$$ Now we will show the functorality of $\widetilde{F}$; the functorality of $\widetilde{G}$ can be demonstrated in an extremely similar fashion. Observe that $$\widetilde{F}\, \mathrm{Id}_H = \{ \mathrm{id}_{F(HX)} \}_{X \in \mathscr{C}} = \mathrm{Id}_{\widetilde{F}H}$$ and $$\widetilde{F} \alpha \beta = \{ (\alpha \beta)_{FX} \}_{X \in \mathscr{C}} = \{ \alpha_{FX} \beta_{FX} \}_{X \in \mathscr{C}} = \{ \alpha_{FX} \}_{X \in \mathscr{C}}\, \{ \beta_{FX} \}_{X \in \mathscr{C}} = \widetilde{F} \alpha\, \widetilde{F} \beta.$$ Next, we define natural isomorphisms $$\widetilde{\eta} = \{ \widetilde{\eta}_H = \{ H \eta_X : HX \overset{\cong}{\to} HGFX \}_{X \in \mathscr{C}} : \mathrm{Id}_{[\mathscr{C}, \mathscr{D}]} H \overset{\cong}{\Rightarrow} \widetilde{F} \widetilde{G} H \}_{H \in [\mathscr{C}, \mathscr{D}]} : \mathrm{Id}_{[\mathscr{C}, \mathscr{D}]} \overset{\cong}{\Rightarrow} \widetilde{F} \widetilde{G}$$ and $$\widetilde{\epsilon} = \{ \widetilde{\epsilon}_H = \{ H \epsilon_X : HFGX \overset{\cong}{\to} HX \}_{X \in \mathscr{C}'} : \widetilde{G} \widetilde{F} H \overset{\cong}{\Rightarrow} \mathrm{Id}_{[\mathscr{C}', \mathscr{D}]} H \}_{H \in [\mathscr{C}', \mathscr{D}]} : \widetilde{G} \widetilde{F} \overset{\cong}{\Rightarrow} \mathrm{Id}_{[\mathscr{C}', \mathscr{D}]}$$ which are isomorphisms because their components, which are also natural transformations, are natural isomorphisms because \textit{their} components are isomorphisms since $\eta$ and $\epsilon$ are assumed so. Finally, we will show that $\widetilde{\eta}$ is natural and conclude that $\widetilde{\epsilon}$ is also natural due to the large similarities in their definitions. Moreover, by the naturality of $\eta$, we have
+			\begin{align*}
+				H' \eta_X\, \alpha_X &= \alpha_{FGX}\, H \eta_X \\
+				\{ H' \eta_x \alpha_X \}_{X \in \mathscr{C}} &= \{ \alpha_{FGX} H \eta_X \}_{X \in \mathscr{C}} \\
+				\{ H' \eta_x \}_{X \in \mathscr{C}} \{ \alpha_X \}_{X \in \mathscr{C}} &= \{ \alpha_{FGX} \}_{X \in \mathscr{C}} \{ H \eta_X \}_{X \in \mathscr{C}} \\
+				\widetilde{\eta}_{H'}\, \alpha &= \{ \alpha_{FGX} \}_{X \in \mathscr{C}}\, \widetilde{\eta}_H \\
+				\widetilde{\eta}_{H'}\, \mathrm{Id}_{[\mathscr{C}, \mathscr{D}]} \alpha &= \widetilde{F} \widetilde{G} \alpha\, \widetilde{\eta}_H.
+			\end{align*}
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,66 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, extpfeil, graphicx, listings, mathrsfs, tikz-cd}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 731, Modern Algebra \\
+\noindent October 6, 2021
+
+\begin{center}
+\Large Homework 5
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}]
+	\begin{enumerate}
+		\item[\textbf{a.}] Show that the units in $M_2(\mathbb{Z}_2)$ are the six elements: $$\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix},\;\; \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix},\;\; \begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix},\;\; \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix},\;\; \begin{bmatrix} 1 & 0 \\ 1 & 1 \end{bmatrix},\;\; \begin{bmatrix} 0 & 1 \\ 1 & 1 \end{bmatrix}.$$ Conclude that if $x \in M_2(\mathbb{Z}_2)$ is one of the units above, then $(x) = M_2(\mathbb{Z}_2)$.
+		\item[\textbf{b.}] Show that for each of the nonzero nonunits $x \in M_2(\mathbb{Z}_2)$, it also holds that $(x) = M_2(\mathbb{Z}_2)$.
+		\item[\textbf{c.}] Show that if $J \subseteq M_2(\mathbb{Z}_2)$ is any nonzero ideal, then $J = M_2(\mathbb{Z}_2)$.
+		\item[\textbf{d.}] Show that the zero ideal $(0) \subseteq M_2(\mathbb{Z}_2)$ is maximal in $M_2(\mathbb{Z}_2)$, but its associated quotient ring $M_2(\mathbb{Z}_2)/(0)$ is not a division ring.
+	\end{enumerate}
+
+		\begin{proof} $ $
+			\begin{enumerate}
+				\item[\textbf{a.}] To illustrate the unitality of the six matrices listed above, observe the following:
+				\begin{align*}
+					\begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \\
+					\begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 0 & 1 \\ 1 & 0 \end{bmatrix} &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \\
+					\begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 0 & 1 \\ 1 & 1 \end{bmatrix} &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ 1 & 1 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 1 & 0 \end{bmatrix}, \\
+					\begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 0 & 1 \end{bmatrix} &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}, \\
+					\begin{bmatrix} 1 & 0 \\ 1 & 1 \end{bmatrix} \begin{bmatrix} 1 & 0 \\ 1 & 1 \end{bmatrix} &= \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix}.
+				\end{align*}
+				Consider a matrix $s \in M_2(\mathbb{Z}_2)$ distinct from the units listed above. If $s$ is a unit, then there exists a $t \in M_2(\mathbb{Z}_2)$ such that $st = ts = 1 \in M_2(\mathbb{Z}_2)$; in other words, the equations below must hold
+				\begin{align*}
+					s_{11} t_{11} + s_{12} t_{21} &= 1, & s_{11} t_{12} + s_{12} t_{22} = 0, \\
+					s_{21} t_{12} + s_{22} t_{22} &= 1, & s_{21} t_{11} + s_{22} t_{21} = 0, \\
+					s_{11} t_{11} + s_{21} t_{12} &= 1, & s_{12} t_{11} + s_{22} t_{12} = 0, \\
+					s_{12} t_{21} + s_{22} t_{22} &= 1, & s_{11} t_{21} + s_{21} t_{22} = 0.
+				\end{align*}
+				Notice that $s$ cannot have a row or column of zeros without violating one of the left-hand equations. Similarly, if $s = [1]_{2 \times 2}$, then it is easy to see that the right-hand equations have no solution. Hence, there exists no units other than the six listed above. \\
+
+				Consider a principal ideal $(x) \subseteq M_2(\mathbb{Z}_2)$ where $x$ is a unit. Consider an arbitrary matrix $y \in M_2(\mathbb{Z}_2)$. Then $$y = (yx^{-1})x \in (x)$$ illustrating that $(x) = M_2(\mathbb{Z}_2)$.
+
+				\item[\textbf{b.}] Let $x \in M_2(\mathbb{Z}_2)$ be a nonzero nonunit. Observe that $$j = \begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix} \in (x).$$ Indeed, using permutation matrices, one may permute the nonzero entries of $x$ such that a sum of such permutation matrices result in $j$. As an example, consider the matrix $$\begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix} \in M_2(\mathbb{Z}_2)$$ and the sum $$j = \begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix} + \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} + \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix} + \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix} \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} \in \left ( \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix} \right ).$$ Additionally, we can see that $$1 = \begin{bmatrix} 1 & 0 \\ 0 & 1 \end{bmatrix} = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix} + \begin{bmatrix} 1 & 1 \\ 1 & 1 \end{bmatrix} \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} \in (j).$$ Hence, $$1 \in (j) \subseteq (x)$$ and so $(x) = M_2(\mathbb{Z}_2)$.
+
+				\item[\textbf{c.}] Let $(0) \neq J \subseteq M_2(\mathbb{Z}_2)$ be an ideal. Let $0 \neq x \in J$. It follows that $(x) \subseteq J$. We know that $(x) = M_2(\mathbb{Z}_2)$ from \textbf{1a} and \textbf{1b}, demonstrating that $J = M_2(\mathbb{Z}_2)$.
+
+				\item[\textbf{d.}] Suppose $(0) \subseteq N \subseteq M_2(\mathbb{Z}_2)$ is an ideal. If $N \neq (0)$, then $N = M_2(\mathbb{Z}_2)$ via \textbf{1c}. Hence, $(0)$ is a maximal ideal. Consider the quotient ring $M_2(\mathbb{Z}_2)/(0)$ and the element $$\{j\} = j + (0) \in M_2(\mathbb{Z}_2)/(0)$$ where $j = [1]_{2 \times 2}$. Since $j$ is a nonunit, there exists no $x \in M_2(\mathbb{Z}_2)$ such that $$xj = 1 = jx.$$ Furthermore, there exists no $x + (0) \in M_2(\mathbb{Z}_2)/(0)$ such that $$(x + (0))(j + (0)) = \{xj\} = \{1\} = 1 + (0)$$ and $$(j + (0))(x + (0)) = \{jx\} = \{1\} = 1 + (0).$$ Thus, $M_2(\mathbb{Z}_2)/(0)$ is not a division ring.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Let $R$ be a commutative principal ideal ring with identity and let $X = \{x_1, \hdots, x_n\}$ be a finite subset of $R$. Show that $X$ has a greatest common divisor.
+
+		\begin{proof}
+			Suppose $R$ is a commutative principal ideal ring with identity. Let $X = \{x_1, \hdots, x_n\} \subseteq R$ be a finite subset. Since $R$ is a principal ideal, it must hold that $(X) = (g)$ for some $g \in R$. We will show that $g = \mathrm{gcd}\, X$. First, observe that for all $x \in X$, we have that $$(x) \subseteq (X) = (g),$$ illustrating that $g \mid x$. Then $g$ is a divisor of $X$. Next, consider an arbitrary divisor $d \in R$ of $X$; that is, $(d) \supseteq (x)$ for all $x \in X$. Furthermore, for any element $y = r_1 x_1 + \hdots + r_n x_n \in X$, it holds that $r_i x_i \in (x)$ for all $1 \leq i \leq n$ and so $y \in (d)$ and $$(g) = (X) \subseteq (d).$$ Therefore, $d \mid g$ as desired.
+		\end{proof}
+
+
+\end{enumerate}
+
+\end{document}

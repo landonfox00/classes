@@ -1,0 +1,158 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, bbold, enumitem, extpfeil, graphicx, listings, mathrsfs, tikz-cd}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 449, Category Theory and TQFTs \\
+\noindent September 21, 2021
+
+\begin{center}
+\Large Homework 4
+\end{center}
+
+\begin{enumerate}
+
+	% problem 1
+	\item[\textbf{1.}] \textbf{6.} Let $F : \mathsf{B}G \to \mathsf{Set}$ with $F \ast = X$ be a left $G$ action on $X$. Prove that $X/G$ is a colimit of $F$.
+
+		\begin{proof}
+			Let $\pi_\ast : X \to X/G$ be the quotient map; that is, $\pi_\ast x = [x] = \{ g \cdot x : g \in G \}$ for all $x \in X$. We will show that $(X/G, \pi_\ast)$ is a colimit of $F$. First, notice that $$\pi_\ast x = [x] = [g \cdot x] = \pi_\ast (g \cdot x) = \pi_\ast\, Fg\, x$$ for all $g \in G$ and $x \in X$ and so $X/G$ is a cocone. Now consider an arbitrary cocone.
+			\begin{center}
+			\begin{tikzcd}
+			  &  &     &  & X \arrow[dd, "Fg"] \arrow[lld, "\pi_\ast"'] \arrow[lllld, "\rho_\ast"', bend right] \\
+			A &  & X/G &  &                                                                                     \\
+			  &  &     &  & X \arrow[llu, "\pi_\ast"] \arrow[llllu, "\rho_\ast", bend left]                    
+			\end{tikzcd}
+			\end{center}
+			Define a morphism $\varphi : X/G \to A$ where $\varphi[x] = \rho_\ast x$. If $[x] = [y] \in X/G$, then there exists a group element $g \in G$ such that $g \cdot x = y$. Since it is assumed that $\rho_\ast = \rho_\ast Fg$, it holds that $$\varphi[x] = \rho_\ast x = \rho_\ast\, Fg\, x = \rho_\ast (g \cdot x) = \rho_\ast y = \varphi [y].$$ Hence, $\varphi$ is well defined. By its definition, it is clear that $\rho_\ast = \varphi \pi_\ast$ and that $\rho_\ast$ uniquely determines $\varphi$. Thus, $X/G$ is a colimit of $F$.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Assume that taking limits is functorial. Prove that $\Delta : \mathscr{C} \to [\mathscr{I}, \mathscr{C}]$ is left adjoint to $\lim$, where $\Delta A$ is the constant functor on $A \in \mathscr{C}$.
+
+		\begin{proof}
+			Define $\lim : [\mathscr{I}, \mathscr{C}] \to \mathscr{C}$ as a functor with object map $F : \mathscr{I} \to \mathscr{C} \xmapsto{\;\;\;\;\;} \lim F \in \mathscr{C}$. As for morphism maps, consider a natural transformation $\alpha : F \Rightarrow G$. By the definition of the limit and natural transformation,
+			\begin{center}
+			\begin{tikzcd}
+			FX \arrow[dd, "Ff"'] \arrow[rrrrrr, "\alpha_X", bend left] &  &                                                                                     &  &                                                       &  & GX \arrow[dd, "Gf"] \\
+			                                                           &  & \lim F \arrow[llu, "\pi_X^F"'] \arrow[lld, "\pi_Y^F"] \arrow[rr, "\varphi", dashed] &  & \lim G \arrow[rru, "\pi_X^G"] \arrow[rrd, "\pi_Y^G"'] &  &                     \\
+			FY \arrow[rrrrrr, "\alpha_Y"', bend right]                 &  &                                                                                     &  &                                                       &  & GY                 
+			\end{tikzcd}
+			\end{center}
+			we have $\pi_Y^F = Ff \pi_X^F$ and $\alpha_Y Ff = Gf \alpha_X$ for all $f : X \to Y \in \mathscr{I}$. Therefore,
+			\begin{align*}
+				\alpha_Y\, Ff &= Gf\, \alpha_X \\
+				\alpha_Y\, Ff\, \pi_X^F &= Gf\, \alpha_X\, \pi_X^F \\
+				\alpha_Y\, \pi_Y^F &= Gf\, \alpha_X\, \pi_X^F,
+			\end{align*}
+			illustrating that there must exist unique morphism $\varphi : \lim F \to \lim G \in \mathscr{C}$ such that $\alpha_X \pi_X^F = \pi_X^G \varphi$. Let $\lim \alpha = \varphi$. We assume without justification that $\lim$ is functorial. In addition to $\lim$, we define a functor $\Delta : \mathscr{C} \to [\mathscr{I}, \mathscr{C}]$ where $\Delta A$ is the constant functor on $A \in \mathscr{C}$ and $\Delta (f : A \to B) = \{ f \} : \Delta A \Rightarrow \Delta B$ is a natural transformation. It is trivial that $\Delta$ is indeed a functor. \\
+
+			Let $A \in \mathscr{C}$ be an object. Observe that the triangle of identities below forms a cone.
+			\begin{center}
+			\begin{tikzcd}
+			                                                             &  & A \arrow[dd, "\mathrm{id}_A"] \\
+			A \arrow[rru, "\mathrm{id}_A"] \arrow[rrd, "\mathrm{id}_A"'] &  &                               \\
+			                                                             &  & A                            
+			\end{tikzcd}
+			\end{center}
+			Then there exists a unique morphism $\psi : A \to \lim \Delta A$ such that the following limit diagram commutes.
+			\begin{center}
+			\begin{tikzcd}
+			                                                                                                                   &  &                                                                                &  & (\Delta A)X = A \arrow[dd, "(\Delta A)f = \mathrm{id}_A"] \\
+			A \arrow[rr, "\psi", dashed] \arrow[rrrru, "\mathrm{id}_A", bend left] \arrow[rrrrd, "\mathrm{id}_A"', bend right] &  & \lim \Delta A \arrow[rru, "\pi_X^{\Delta A}"] \arrow[rrd, "\pi_Y^{\Delta A}"'] &  &                                                           \\
+			                                                                                                                   &  &                                                                                &  & (\Delta A)Y = A                                          
+			\end{tikzcd}
+			\end{center}
+			Define a natural transformation $\eta : \mathrm{Id}_\mathscr{C} \Rightarrow \lim \Delta$ with components $\eta_A = \psi$ arising from the limit diagrams of $\lim \Delta A$ for each $A \in \mathscr{C}$. Notice that $\eta_A$ is an isomorphism; indeed, we can see that $A$ is a limit of $\Delta A$ as illustrated by the diagram below,
+			\begin{center}
+			\begin{tikzcd}
+			                                                                                                 &  &                                                              &  & A \arrow[dd, "\mathrm{id}_A"] \\
+			B \arrow[rr, "\rho", dashed] \arrow[rrrru, "\rho", bend left] \arrow[rrrrd, "\rho"', bend right] &  & A \arrow[rru, "\mathrm{id}_A"] \arrow[rrd, "\mathrm{id}_A"'] &  &                               \\
+			                                                                                                 &  &                                                              &  & A                            
+			\end{tikzcd}
+			\end{center}
+			then combining the limit diagrams of $A$ and $\lim \Delta A$, we can utilize the uniqueness property to show that composites equal identities (see end of problem \textbf{7} of the last problem set for more details). Furthermore, from their definitions we know that $\mathrm{id}_A = \pi_X^{\Delta A} \eta_A$ for all $A \in \mathscr{C}$ and that $\lim \Delta f$, for a morphism $f : A \to B$, satisfies $$f\, \pi_X^{\Delta A} = (\Delta f)_X\, \pi_X^{\Delta A} = \pi_X^{\Delta B}\, \lim \Delta f.$$ Then it follows that
+			\begin{align*}
+				f\, \pi_X^{\Delta A} &= \pi_X^{\Delta B}\, \lim \Delta f \\
+				f\, \pi_X^{\Delta A}\, \eta_A &= \pi_X^{\Delta B}\, \lim \Delta f\, \eta_A \\
+				f &= \pi_X^{\Delta B}\, \eta_B\, \eta_B^{-1}\, \lim \Delta f\, \eta_A \\
+				f &= \eta_B^{-1}\, \lim \Delta f\, \eta_A \\
+				\eta_B\, f &= \lim \Delta f\, \eta_A,
+			\end{align*}
+			justifying the naturality of $\eta$.
+			\begin{center}
+			\begin{tikzcd}
+			A \arrow[rr, "f"] \arrow[dd, "\eta_A"']    &  & B \arrow[dd, "\eta_B"] \\
+			                                           &  &                        \\
+			\lim \Delta A \arrow[rr, "\lim \Delta f"'] &  & \lim \Delta B         
+			\end{tikzcd}
+			\end{center}
+			$ $ \\
+
+			Next, we define the counit $\epsilon : \Delta \lim \Rightarrow \mathrm{Id}_{[\mathscr{I}, \mathscr{C}]}$ and prove its naturality. The components $\{ \epsilon^F : \Delta \lim F \Rightarrow F \}_{F \in [\mathscr{I}, \mathscr{C}]}$, individually natural transformations, each defined as $\epsilon^F = \{ \epsilon_X^F = \pi_X^F : \lim F \to FX \}_{X \in \mathscr{I}}$ with projections from the limit of $F$ as components. Provided that $\pi_Y^F = Ff \pi_X^F$, we can see that
+			\begin{align*}
+				\pi_Y^F\, \mathrm{id}_{\lim F} &= Ff\, \pi_X^F \\
+				\epsilon_Y^F\, (\Delta \lim F) f &= Ff\, \epsilon_X^F
+			\end{align*}
+			and so $\epsilon^F$ is natural. As for $\epsilon$, it holds that $\alpha_X \pi_X^F = \pi_X^G \lim \alpha$ for all natural transformations $\alpha : F \Rightarrow G \in [\mathscr{I}, \mathscr{C}]$ and objects $X \in \mathscr{I}$, therefore,
+			\begin{align*}
+				\pi_X^G\, \lim \alpha &= \alpha_X\, \pi_X^F \\
+				\epsilon_X^G\, \lim \alpha &= \alpha_X\, \epsilon_X^F \\
+				\{ \epsilon_X^G\, \lim \alpha \}_{X \in \mathscr{I}} &= \{ \alpha_X\, \epsilon_X \}_{X \in \mathscr{I}} \\
+				\epsilon^G\, \Delta \lim \alpha &= \alpha\, \epsilon^F.
+			\end{align*}
+			Thus, the diagram below commutes.
+			\begin{center}
+			\begin{tikzcd}
+			\Delta \lim F \arrow[rr, "\Delta \lim \alpha", Rightarrow] \arrow[dd, "\epsilon^F"', Rightarrow] &  & \Delta \lim G \arrow[dd, "\epsilon^G", Rightarrow] \\
+			                                                                                                 &  &                                                    \\
+			F \arrow[rr, "\alpha"', Rightarrow]                                                              &  & G                                                 
+			\end{tikzcd}
+			\end{center}
+			$ $ \\
+
+			Lastly, we show that the triangle identities hold true. First, observe that $$\epsilon^{\Delta A}\, \Delta \eta_A = \epsilon^{\Delta A}\, \{ \eta_A \} = \{ \epsilon_X^{\Delta A}\, \eta_A \}_{X \in \mathscr{I}} = \{ \mathrm{id}_A \} = \mathrm{Id}_{\Delta A}.$$ Moreover, the first triangle identity holds and the diagram below commutes.
+			\begin{center}
+			\begin{tikzcd}
+			\Delta A \arrow[rrdd, "\mathrm{Id}_{\Delta A}"', Rightarrow] \arrow[rr, "\Delta \eta_A", Rightarrow] &  & \Delta \lim \Delta A \arrow[dd, "\epsilon^{\Delta A}", Rightarrow] \\
+			                                                                                                     &  &                                                                    \\
+			                                                                                                     &  & \Delta A                                                          
+			\end{tikzcd}
+			\end{center}
+			For the second identity, we know that $\lim \epsilon^F$ uniquely satisfies $\epsilon_X^F \pi_X^{\Delta \lim F} = \pi_X^F \lim \epsilon^F$; however, we can see that $\pi_X^{\Delta \lim F}$ satisfies the identity since $$\epsilon_X^F\, \pi_X^{\Delta \lim F} = \pi_X^F\, \pi_X^{\Delta \lim F}.$$ Hence, $$\lim \epsilon^F\, \eta_{\lim F} = \pi_X^{\Delta \lim F}\, \eta_{\lim F} = \mathrm{id}_{\lim F}$$ and so the last triangle identity holds true.
+			\begin{center}
+			\begin{tikzcd}
+			\lim F \arrow[rrdd, "\mathrm{id}_{\lim F}"'] \arrow[rr, "\eta_{\lim F}"] &  & \lim \Delta \lim F \arrow[dd, "\lim \epsilon^F"] \\
+			                                                                         &  &                                                  \\
+			                                                                         &  & \lim F                                          
+			\end{tikzcd}
+			\end{center}
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] \textbf{2.1.13} Show that functors between discrete categories are adjoints if and only if they form an isomorphism of categories.
+
+		\begin{proof}
+			Let $F : \mathbb{m} \to \mathbb{n}$ and $G : \mathbb{n} \to \mathbb{m}$ be functors between discrete categories $\mathbb{m}$ and $\mathbb{n}$. Suppose $F$ is left adjoint to $G$. Then it holds that $$\mathbb{n}(Fm, n) \cong \mathbb{m}(m, Gn)$$ for all $m \in \mathbb{m}$ and $n \in \mathbb{n}$. By definition of discrete categories, for a morphism to exist between objects, it must be an identity. Hence, $GF m = m$ for all $m \in \mathbb{m}$ illustrating that the object map of $GF$ is the identity. A similar proof with the replacement $m = Gn$ demonstrates that $FG$ also has the identity object map. Furthermore, $FG = \mathrm{Id}_\mathbb{n}$ and $GF = \mathrm{Id}_\mathbb{m}$ as there is no need to consider morphism maps. \\
+
+			Conversely, suppose $FG = \mathrm{Id}_\mathbb{n}$ and $GF = \mathrm{Id}_\mathbb{m}$. It is clear that both $F$ and $G$ form bijections on the objects between their categories. Then for any $n \in \mathbb{n}$, there exists a unique $m \in \mathbb{m}$ such that $Fm = n$ and $Gn = m$, in turn providing
+			\begin{align*}
+				\mathbb{n}(n, n) &\cong \mathbb{m}(m, m) \\
+				\mathbb{n}(Fm, n) &\cong \mathbb{m}(m, Gn)
+			\end{align*}
+			where both sets have cardinality $1$. In the case where $Fm \neq n$, it must hold that
+			\begin{align*}
+				GF m &\neq Gn \\
+				m &\neq Gn.
+			\end{align*}
+			Therefore, $$\mathbb{n}(Fm, n) = \varnothing = \mathbb{m}(m, Gn),$$ proving the claim.
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

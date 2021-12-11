@@ -1,0 +1,78 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, extpfeil, graphicx, listings, mathrsfs, tikz-cd}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 731, Modern Algebra \\
+\noindent December 6, 2021
+
+\begin{center}
+\Large Homework 9
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Consider the following left $\mathbb{Q}$ modules, $$\mathbb{Q} \otimes_\mathbb{Z} \mathbb{Q} = (_\mathbb{Q} \mathbb{Q}_\mathbb{Z}) \otimes_\mathbb{Z} (_\mathbb{Z} \mathbb{Q})\;\;\; \mathrm{and}\;\;\; \mathbb{Q} \otimes_\mathbb{Q} \mathbb{Q} = (_\mathbb{Q} \mathbb{Q}_\mathbb{Q}) \otimes_\mathbb{Q} (_\mathbb{Q} \mathbb{Q}).$$ Show that the above modules are isomorphic.
+
+		\begin{proof}
+			By Theorem 5.7 it holds that $\mathbb{Q} \otimes_\mathbb{Q} \mathbb{Q} \cong \mathbb{Q}$ and so it suffices to show that $\mathbb{Q} \cong \mathbb{Q} \otimes_\mathbb{Z} \mathbb{Q}$. Define a map $\varphi : \mathbb{Q} \to \mathbb{Q} \otimes_\mathbb{Z} \mathbb{Q}$ where $\varphi(q) = q \otimes_\mathbb{Z} 1$. Observe that $$\varphi(p + q) = (p + q) \otimes_\mathbb{Z} 1 = p \otimes_\mathbb{Z} 1 + q \otimes_\mathbb{Z} 1 = \varphi(p) + \varphi(q)$$ and $$\varphi(pq) =pq \otimes_\mathbb{Z} 1 = p(q \otimes_\mathbb{Z} 1) = p \varphi(q)$$ for all $p, q \in \mathbb{Q}$ since $\mathbb{Q} \otimes_\mathbb{Z} \mathbb{Q}$ is a left $\mathbb{Q}$ module and by the definition of the tensor product. Similarly, we define $\mu : \mathbb{Q} \times \mathbb{Q} \to \mathbb{Q}$ as $\mu(p, q) = pq$. It follows that for $p, p', q, q' \in \mathbb{Q}$ and $n \in \mathbb{Z}$, $$\mu(p + p', q) = (p + p') q = pq + p'q = \mu(p, q) + \mu(p', q),$$ $$\mu(p, q + q') = p(q + q') = pq + pq' = \mu(p, q) + \mu(p, q'),$$ and $$\mu(pn, q) = (pn)q = p(nq) = \mu(p, nq).$$ Moreover, $\mu$ is a middle linear map illustrating that there exists a group homomorphism $\overline{\mu} : \mathbb{Q} \otimes_\mathbb{Z} \mathbb{Q} \to \mathbb{Q}$ given by $\overline{\mu}(p \otimes_\mathbb{Z} q) = pq$. It can be further shown that $\overline{\mu}$ is a left $\mathbb{Q}$ module homomorphism by the fact that $$\overline{\mu}(rp \otimes_\mathbb{Z} q) = (rp)q = r(pq) = r \overline{\mu}(p \otimes_\mathbb{Z} q)$$ for all $p, q, r \in \mathbb{Q}$. \\
+
+			Now, we show that $\varphi$ is invertible. For rationals $\frac{a}{b}, \frac{c}{d} \in \mathbb{Q}$ notice that, $$\varphi \overline{\mu} \left ( \frac{a}{b} \otimes_\mathbb{Z} \frac{c}{d} \right ) = \varphi \left ( \frac{ac}{bd} \right ) = \frac{ac}{bd} \otimes_\mathbb{Z} 1 = \frac{ac}{bd} \otimes_\mathbb{Z} \frac{d}{d} = \frac{ad}{bd} \otimes_\mathbb{Z} \frac{c}{d} = \frac{a}{b} \otimes_\mathbb{Z} \frac{c}{d}.$$ Additionally, it holds that $$\overline{\mu} \varphi \left ( \frac{a}{b} \right ) = \overline{\mu} \left ( \frac{a}{b} \otimes_\mathbb{Z} 1 \right ) = \frac{a}{b}.$$ Thus, $\mathbb{Q} \otimes_\mathbb{Z} \mathbb{Q} \cong \mathbb{Q} \otimes_\mathbb{Q} \mathbb{Q}$.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Let $R$ be an integral domain considered as a subring of its field of fractions $Q$.
+	\begin{enumerate}
+		\item[\textbf{i.}] Show that $Q/R$ is an $R$-$R$ bimodule under the scalar multiplications $$r \cdot (q + R) = r \cdot q + R\;\;\; \mathrm{and}\;\;\; (q + R) \cdot r = q \cdot r + R.$$
+		\item[\textbf{ii.}] Show that $(Q/R) \otimes_R (Q/R) = 0$.
+	\end{enumerate}
+
+		\begin{proof}
+			Suppose $R$ is an integral  domain with field of fractions $Q \supseteq R$. Consider the ring $Q/R$.
+			\begin{enumerate}
+				\item[\textbf{i.}] Provided that $Q/R$ has an abelian group structure, we focus on scalar multiplication. Utilizing the scalar multiplications as defined above, if $r, s \in R$ and $p + R, q + R \in Q/R$, then it follows that $$r((p + R) + (q + R)) = r(p + q + R) = r(p + q) + R = rp + rq + R = (rp + R) + (rq + R) = r(p + R) + r(q + R),$$ $$(r + s)(q + R) = (r + s)q + R = rq + sq + R = (rq + R) + (sq + R) = r(q + R) + s(q + R),$$ and $$(rs)(q + R) = (rs)q + R = r(sq) + R = r(sq + R) = r(s(q + R)).$$ Similarly, it holds that $$((p + R) + (q + R))r = (p + q + R)r = (p + q)r + R = pr + qr + R = (pr + R) + (qr + R) = (p + R)r + (q + R)r,$$ $$(q + R)(r + s) = q(r + s) + R = qr + qs + R = (qr + R) + (qs + R) = (q + R)r + (q + R)s,$$ and $$(q + R)(rs) = q(rs) + R = (qr)s + R = (qr + R)s = ((q + R)r)s.$$ Thus, $Q/R$ is an $R$-$R$ bimodule by definition.
+
+				\item[\textbf{ii.}] First, consider an element of the form $\left (\frac{r}{s} + R \right ) \otimes_R R \in (Q/R) \otimes_R (Q/R)$. Since $r + R = R$ for any $r \in R$, observe that
+				\begin{align*}
+					\left ( \frac{r}{s} + R \right ) \otimes_R R &= \left ( \frac{r}{s} + R \right ) \otimes_R (s + R) \\
+					&= \left ( \frac{r}{s} + R \right ) \otimes_R s(1 + R) \\
+					&= \left ( \frac{r}{s} + R \right )s \otimes_R (1 + R) \\
+					&= \left ( \frac{rs}{s} + R \right ) \otimes_R R \\
+					&= ( r + R ) \otimes_R R \\
+					\left ( \frac{r}{s} + R \right ) \otimes_R R &= R \otimes_R R.
+				\end{align*}
+				Furthermore, for an arbitrary simple tensor $\left ( \frac{a}{b} + R \right ) \otimes_R \left ( \frac{c}{d} + R \right ) \in (Q/R) \otimes_R (Q/R)$, it follows that
+				\begin{align*}
+					\left ( \frac{a}{b} + R \right ) \otimes_R \left ( \frac{c}{d} + R \right ) &= \left ( \frac{ad}{bd} + R \right ) \otimes_R \left ( \frac{c}{d} + R \right ) \\
+					&= \left ( \frac{a}{bd} + R \right )d \otimes_R \left ( \frac{c}{d} + R \right ) \\
+					&= \left ( \frac{a}{bd} + R \right ) \otimes_R d \left ( \frac{c}{d} + R \right ) \\
+					&= \left ( \frac{a}{bd} + R \right ) \otimes_R \left ( \frac{dc}{d} + R \right ) \\
+					&= \left ( \frac{a}{bd} + R \right ) \otimes_R ( c + R ) \\
+					&= \left ( \frac{a}{bd} + R \right ) \otimes_R R \\
+					\left ( \frac{a}{b} + R \right ) \otimes_R \left ( \frac{c}{d} + R \right ) &= R \otimes_R R.
+				\end{align*}
+				Provided we know that $(Q/R) \otimes_R (Q/R)$ is generated by simple tensors, it must hold that $$(Q/R) \otimes_R (Q/R) = (R \otimes_R R) \cong 0.$$
+			\end{enumerate}
+		\end{proof}
+
+
+
+	% problem 3
+	\item[\textbf{3.}] Let $R$ be a principal ideal domain. Let $I \subseteq R$ be an ideal in $R$ viewed as an $R$-$R$ bimodule with both left and right scalar multiplications given by ring multiplication in $R$. Show that as an abelian group, $I \otimes_R I$ is torsion-free.
+
+		\begin{proof}
+			Let $R$ be an integral domain with principal ideal $I \subseteq R$. When viewing $I$ as an $R$-$R$ bimodule as depicted above, consider the left $R$ module $I \otimes_R I$. We show that $I \otimes_R I$ is a torsion-free module. Consider the map $\mu : I \times I \to I$ where $\mu(a, b) = ab$ (similar to \textbf{1}). Notice that $$\mu(a + a', b) = (a + a') b = ab + a'b = \mu(a, b) + \mu(a', b),$$ $$\mu(a, b + b') = a(b + b') = ab + ab' = \mu(a, b) + \mu(a, b'),$$ and $$\mu(ar, b) = (ar)b = a(rb) = \mu(a, rb)$$ for all $a, a', b, b' \in I$ and $r \in R$. Hence, $\mu$ is a middle linear map. Therefore, there exists a group homomorphism $\overline{\mu} : I \otimes_R I \to I$ such that $\overline{\mu}(a \otimes_R b) = ab$. Assume that for an $a \otimes_R b \in I \otimes_R I$ there exists a nonzero $0 \neq r \in R$ such that $r(a \otimes_R b) = 0 \otimes_R 0$. Then it follows that $$rab = \overline{\mu}(r(a \otimes_R b)) = \overline{\mu}(0 \otimes_R 0) = 0$$ and so $a = 0$ or $b = 0$. In the case that $a = 0$, we have that $$0 \otimes_R b = (0 
+		\cdot 0) \otimes_R b = 0 \otimes_R (0 \cdot b) = 0 \otimes_R 0;$$ a similar argument illustrates that $a \otimes_R 0 = 0 \otimes_R 0$. Moreover, all simple tensors in $I \otimes_R I$ are torsion-free. This argument can be applied to all of $I \otimes_R I$ since $I = (x)$ is principal; indeed, for any element $$I \otimes_R I \ni \sum_{i=1}^n a_i \otimes_R b_i = \sum_{i=1}^n (r_i x) \otimes_R (s_i x) = \sum_{i=1}^n (r_i s_i x) \otimes_R x = \sum_{i=1}^n r_i s_i (x \otimes_R x) = \left ( \sum_{i=1}^n r_i s_i \right )(x \otimes_R x),$$ and so $I \otimes_R I$ consists of only simple tensors. Thus, any nonzero element of $I \otimes_R I$ is torsion-free. \\
+
+		To show that $I \otimes_R I$ is a torsion-free abelian group, we have shown that for any nonzero $a \otimes_R b \in I \otimes_R I$, there does not exist an $r \in R$ such that $r(a \otimes_R b) = 0 \otimes_r 0$. Consequently, there exists no scalar in the form $r = 1 + 1 + \hdots + 1 \in R$ such that $r(a \otimes_R b) = 0 \otimes_R 0$.
+		\end{proof}
+
+
+
+\end{enumerate}
+
+\end{document}

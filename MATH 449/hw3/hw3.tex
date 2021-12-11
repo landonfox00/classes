@@ -1,0 +1,142 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, bbold, enumitem, extpfeil, graphicx, listings, mathrsfs, tikz-cd}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 449, Category Theory and TQFTs \\
+\noindent September 13, 2021
+
+\begin{center}
+\Large Homework 3
+\end{center}
+
+\begin{enumerate}
+
+	% problem 2
+	\item[\textbf{2.}] Prove that $0 \times 0 \cong 0$ in the category $\mathbb{1}$ with its only object $0 \in \mathbb{1}$.
+
+		\begin{proof}
+			Consider the object $0 \in \mathbb{1}$. To show that $0$ is a product of itself, let $A \in \mathbb{1}$ be an object and $f, g : A \to 0$ morphisms. Then it is clear that the projections $\pi_1, \pi_2 : 0 \to 0$ must be identities of $0$ since $\mathbb{1}(0, 0) = \{ \mathrm{id}_0 \}$. Hence, the product diagram below commutes if and only if $f = \pi_1 \varphi = \varphi$ and $g = \pi_2 \varphi = \varphi$, providing the uniqueness of $\varphi$.
+			\begin{center}
+			\begin{tikzcd}
+			  &  & A \arrow[llddd, "f"', bend right] \arrow[rrddd, "g", bend left] \arrow[dd, "\varphi", dotted] &  &   \\
+			  &  &                                                                                               &  &   \\
+			  &  & 0 \arrow[lld, "\pi_1"] \arrow[rrd, "\pi_2"']                                                  &  &   \\
+			0 &  &                                                                                               &  & 0
+			\end{tikzcd}
+			\end{center}
+			Hence, $0 \times 0$ exists and $0$ is one such. We will now demonstrate uniqueness up to isomorphism. Provided the combined product diagrams below instantiated with the objects and pairs of morphisms $0 \times 0, \rho_1, \rho_2$ as well as $0, \pi_1, \pi_2$, respectively,
+			\begin{center}
+			\begin{tikzcd}
+			  &  & 0 \times 0 \arrow[llddd, "\rho_1"', bend right] \arrow[rrddd, "\rho_2", bend left] \arrow[dd, "\varphi", dotted] &  &   &  &   &  & 0 \arrow[llddd, "\pi_1"', bend right] \arrow[rrddd, "\pi_2", bend left] \arrow[dd, "\psi", dotted] &  &   \\
+			  &  &                                                                                                                  &  &   &  &   &  &                                                                                                    &  &   \\
+			  &  & 0 \arrow[lld, "\pi_1"'] \arrow[rrd, "\pi_2"] \arrow[d, "\psi", dotted]                                           &  &   &  &   &  & 0 \times 0 \arrow[lld, "\rho_1"'] \arrow[rrd, "\rho_2"] \arrow[d, "\varphi", dotted]               &  &   \\
+			0 &  & 0 \times 0 \arrow[ll, "\rho_1"] \arrow[rr, "\rho_2"']                                                            &  & 0 &  & 0 &  & 0 \arrow[ll, "\pi_1"] \arrow[rr, "\pi_2"']                                                         &  & 0
+			\end{tikzcd}
+			\end{center}
+			we obtain the following equations
+			\begin{align*}
+				\rho_1 &= \rho_1\, \psi\, \varphi, & \pi_1 &= \pi_1\, \varphi\, \psi, \\
+				\rho_2 &= \rho_2\, \psi\, \varphi, & \pi_2 &= \pi_2\, \varphi\, \psi.
+			\end{align*}
+			By definition, both $\psi \varphi$ and $\varphi \psi$ are unique; yet $\mathrm{id}_{0 \times 0}$ and $\mathrm{id}_0$, respectively, satisfy the equations above and so $\psi \varphi = \mathrm{id}_{0 \times 0}$ and $\varphi \psi = \mathrm{id}_0$. Thus, $0 \times 0 \cong 0$ by definition.
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Prove that if $\ast \times \ast$ exists in $\mathsf{B}G$, then $G$ is the trivial group.
+
+		\begin{proof}
+			Let $G$ be a group. Since $\mathrm{ob}(\mathsf{B}G) = \{ \ast \}$, we may assume $\ast \times \ast = \ast$. Utilizing the product with a single morphism $f \in G$ constituting as a pair, we obtain the following:
+			\begin{center}
+			\begin{tikzcd}
+			     &  & \ast \arrow[llddd, "f"', bend right] \arrow[rrddd, "f", bend left] \arrow[dd, "\varphi", dotted] &  &   \\
+			     &  &                                                                                                  &  &   \\
+			     &  & \ast \arrow[lld, "\pi_1"] \arrow[rrd, "\pi_2"']                                                  &  &   \\
+			\ast &  &                                                                                                  &  & \ast
+			\end{tikzcd}
+			\end{center}
+			$$f = \pi_1 \varphi = \pi_2 \varphi,$$ illustrating that $\pi \coloneqq \pi_1 = \pi_2$ by invertibility. Now considering arbitrary morphisms $f, g \in G$, we can see that the commutative diagram
+			\begin{center}
+			\begin{tikzcd}
+			     &  & \ast \arrow[llddd, "f"', bend right] \arrow[rrddd, "g", bend left] \arrow[dd, "\psi", dotted] &  &   \\
+			     &  &                                                                                               &  &   \\
+			     &  & \ast \arrow[lld, "\pi"] \arrow[rrd, "\pi"']                                                   &  &   \\
+			\ast &  &                                                                                               &  & \ast
+			\end{tikzcd}
+			\end{center}
+			provides $f = \pi \psi = g$. Thus, $G$ is the trivial group.
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] \textbf{5.1.35.} Take a commutative diagram
+	\begin{center}
+	\begin{tikzcd}
+	A \arrow[dd, "\lambda"'] \arrow[rr, "\mu"] &  & C \arrow[dd, "\sigma"] \arrow[rr, "\varphi"] &  & E \arrow[dd, "\omega"] \\
+	                                           &  &                                              &  &                        \\
+	B \arrow[rr, "\rho"']                      &  & D \arrow[rr, "\psi"']                        &  & F                     
+	\end{tikzcd}
+	\end{center}
+	from some category. Suppose that the right-hand square is a pullback. Show that the left-hand square is a pullback if and only if the outer rectangle is a pullback.
+
+		\begin{proof}
+			Suppose we have the commutative diagram provided above from some arbitrary category with the right-hand square a pullback. First, let us assume the outer rectangle is a pullback. Consider the following diagram where $\rho g_1 = \sigma g_2$.
+			\begin{center}
+			\begin{tikzcd}
+			G \arrow[rddd, "g_1"', bend right] \arrow[rrrd, "g_2", bend left] &                                            &  &                                              &  &                        \\
+			                                                                  & A \arrow[dd, "\lambda"'] \arrow[rr, "\mu"] &  & C \arrow[dd, "\sigma"] \arrow[rr, "\varphi"] &  & E \arrow[dd, "\omega"] \\
+			                                                                  &                                            &  &                                              &  &                        \\
+			                                                                  & B \arrow[rr, "\rho"']                      &  & D \arrow[rr, "\psi"']                        &  & F                     
+			\end{tikzcd}
+			\end{center}
+			As a result of commutativity, it follows that $\psi (\rho g_1) = \omega (\varphi g_2)$, providing the commutative squares for both existing pullbacks. Furthermore, there exists a unique morphism $\widetilde{g} : G \to A$ such that $g_1 = \lambda \widetilde{g}$ and $\varphi g_2 = \varphi \mu \widetilde{g}$. Observe that the following expressions hold true when $\widetilde{h}$ is replaced with either $g_2$ or $\mu \widetilde{g}$
+			\begin{align*}
+				\rho g_1 &= \sigma \widetilde{h} & \varphi g_2 &= \varphi \widetilde{h}.
+			\end{align*}
+			Hence, $g_2 = \mu \widetilde{g}$ via the uniqueness of the morphism that satisfies the above equations as a result of the right-hand square being a pullback. Thus, the left-hand square is a pullback, utilizing $\widetilde{g}$, by definition. \\
+
+			Conversely, suppose the left-hand square is a pullback. Then for any commutative diagram,
+			\begin{center}
+			\begin{tikzcd}
+			G \arrow[rddd, "g_1"', bend right] \arrow[rrrrrd, "g_2", bend left] &                                            &  &                                              &  &                        \\
+			                                                                    & A \arrow[dd, "\lambda"'] \arrow[rr, "\mu"] &  & C \arrow[dd, "\sigma"] \arrow[rr, "\varphi"] &  & E \arrow[dd, "\omega"] \\
+			                                                                    &                                            &  &                                              &  &                        \\
+			                                                                    & B \arrow[rr, "\rho"']                      &  & D \arrow[rr, "\psi"']                        &  & F                     
+			\end{tikzcd}
+			\end{center}
+			there exists a unique morphism $\widetilde{h} : G \to C$ such that $\rho g_1 = \sigma \widetilde{h}$ and $g_2 = \varphi \widetilde{h}$ since $\psi \rho g_1 = \omega g_2$. Provided the new morphism $\widetilde{h}$, we know that $\rho g_1 = \sigma \widetilde{h}$ and so there exists a unique $\widetilde{g} : G \to A$ with the property that $g_1 = \lambda \widetilde{g}$ and $\widetilde{h} = \mu \widetilde{g}$. Therefore, $$g_2 = \varphi \widetilde{h} = \varphi \mu \widetilde{g}$$ as desired. Moreover, the outer rectangle is a pullback utilizing the morphism $\widetilde{g}$ from the left-hand square.
+		\end{proof}
+
+
+	% problem 7
+	\item[\textbf{7.}] Let $G$ be a group. Further, let $F : \mathsf{B}G \to \mathsf{Set}$ with $F \ast = X \in \mathsf{Set}$ denote a left $G$ action on $X$. Prove that the limit of $F$ is the set of all fixed points of the $G$ action on $X$.
+
+		\begin{proof}
+			Suppose $G$ is a group and $F : \mathsf{B}G \to \mathsf{Set}$ with $F \ast = X \in \mathsf{Set}$ is a left $G$ action on $X$. Define $$X^g = \{ x \in X : g \cdot x = x \}.$$ We begin by showing $\bigcap_{g \in G} X^g$ is a limit of $F$. Let $\iota : \bigcap_{g \in G} X^g \hookrightarrow X$ denote the inclusion. Then it follows that $$(Fg\, \iota) x = g \cdot (\iota x) = g \cdot x = x = \iota x$$ for any $g \in G$ and $x \in \bigcap_{g \in G} X^g$ and so $\left ( \bigcap_{g \in G} X^g, \iota \right )$ is a cone. Now, consider an arbitrary cone $(A, f_\ast)$.
+			\begin{center}
+			\begin{tikzcd}
+			                                                                          &  &                                                                 &  & X \arrow[dd, "Fg"] \\
+			A \arrow[rrrru, "f_\ast", bend left] \arrow[rrrrd, "f_\ast"', bend right] &  & \bigcap_{g \in G} X^g \arrow[rru, "\iota"] \arrow[rrd, "\iota"'] &  &                    \\
+			                                                                          &  &                                                                 &  & X                 
+			\end{tikzcd}
+			\end{center}
+			By definition, it must hold that for any $g \in G$, $$(Fg\, f_\ast) x = g \cdot (f_\ast x) = f_\ast x,$$ implying that $\mathrm{im} f_\ast \subseteq \bigcap_{g \in G} X^g$. Therefore, we may define a function $\widetilde{f} : A \to \bigcap_{g \in G} X^g$ where $\widetilde{f} x = f_\ast x$. It is clear that $\widetilde{f}$ is uniquely determined by $A$ and $f_\ast$. Additionally, we can see that $\iota \widetilde{f} = f_\ast$. Hence, $\bigcap_{g \in G} X^g$ is a limit. \\
+
+			Lastly, we show that $\lim F \cong \bigcap_{g \in G} X^g$. Consider the combined cone diagram below.
+			\begin{center}
+			\begin{tikzcd}
+			                                                                                                                       &  &                                                                                                                                       &  &                                                     &  & X \arrow[dd, "Fg"] \\
+			\lim F \arrow[rrrrrru, "p_\ast", bend left] \arrow[rrrrrrd, "p_\ast"', bend right] \arrow[rr, "\widetilde{f}", dotted] &  & \bigcap_{g \in G} X^g \arrow[rrrru, "\iota", bend left] \arrow[rrrrd, "\iota"', bend right] \arrow[rr, "\widetilde{\varphi}", dotted] &  & \lim F \arrow[rru, "p_\ast"] \arrow[rrd, "p_\ast"'] &  &                    \\
+			                                                                                                                       &  &                                                                                                                                       &  &                                                     &  & X                 
+			\end{tikzcd}
+			\end{center}
+			Observe that $\widetilde{\varphi} \widetilde{f}$ satisfies the equation $p_\ast = p_\ast \widetilde{\varphi} \widetilde{f}$ since $\iota = p_\ast \widetilde{\varphi}$ and $p_\ast = \iota \widetilde{f}$. However, $\mathrm{id}_{\lim F}$ also satisfies the equation and so $\widetilde{\varphi} \widetilde{f} = \mathrm{id}_{\lim F}$ by uniqueness. Similarly, we can conclude that $\widetilde{f} \widetilde{\varphi} = \mathrm{id}_{\bigcap X^g}$ by utilizing the diagram above, but interchanging the role of $\lim F$ and $\bigcap_{g \in G} X^g$, then applying the same argument. Thus, $\bigcap_{g \in G} X^g$ is the limit of $F$.
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

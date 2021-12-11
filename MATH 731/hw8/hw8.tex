@@ -1,0 +1,58 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, extpfeil, graphicx, listings, mathrsfs, tikz-cd}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 731, Modern Algebra \\
+\noindent November 17, 2021
+
+\begin{center}
+\Large Homework 8
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Show that $\mathbb{Q}$ is a projective $\mathbb{Q}$-module but projective when viewed as a $\mathbb{Z}$-module.
+
+		\begin{proof}
+			We first consider $\mathbb{Q}$ as a $\mathbb{Q}$-module. Notice that $\mathbb{Q}$ is free; indeed, take a basis of $\{ 1 \}$ (or any nonzero element). Clearly, all of $\mathbb{Q}$ is spanned by $1$ and since it is a singleton and $\mathbb{Q}$ is a integral domain, linear independence is guaranteed. Consequently, $\mathbb{Q}$ is projective. \\
+
+			We now view $\mathbb{Q}$ as a $\mathbb{Z}$-module. Suppose $\mathbb{Q}$ is projective. Then it follows that $\mathbb{Q}$ is a subgroup of a free abelian group and so $\mathbb{Q}$ is also free abelian. Let $0 \neq \frac{p}{q}, \frac{r}{s} \in \mathbb{Q}$ be nonzero rationals. Observe that $$qr \cdot \frac{p}{q} - ps \cdot \frac{r}{s} = 0$$ illustrating that any two rationals are linearly dependent. Therefore, $\mathbb{Q}$ must have a singleton basis. If $$\mathbb{Q} = \left \{ n \cdot \frac{p}{q} : n \in \mathbb{Z} \right \},$$ we can create an isomorphism $\mathbb{Q} \xrightarrow{\cong} \mathbb{Z}$ as $\mathbb{Z}$ is also cyclic. However, we know that $\mathbb{Q} \ncong \mathbb{Z}$, a contradiction.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Show that for a ring $R$ the following are equivalent:
+	\begin{enumerate}
+		\item[\textbf{a.}] Every $R$-module is projective.
+		\item[\textbf{b.}] Every $R$-module is injective.
+	\end{enumerate}
+	Find an example of a ring $R$ that satisfies these equivalent conditions.
+
+		\begin{proof}
+			Let $R$ be a ring. Suppose that every $R$-module is projective. It then follows that for any choice of $R$-module $P$ and choice of short exact sequence $$0 \longrightarrow A \xrightarrow{\;\;f\;\;} B \xrightarrow{\;\;g\;\;} P \longrightarrow 0,$$ we have that the sequence is split exact. Furthermore, it holds that any choice of $R$-modules and $R$-module homomorphisms in a short exact sequence produces a split exact sequence. Particularly, for a projective $R$-module $P$, any short exact sequence $$0 \longrightarrow P \xrightarrow{\;\;f'\;\;} B \xrightarrow{\;\;g'\;\;} C \longrightarrow 0$$ is short exact and so $P$ is also an injective $R$-module. \\
+
+			Conversely, if every $R$-module is injective, we also obtain the same condition that every short exact sequence is split exact and by the same argument, we can see that every injective $R$-module is projective. \\
+
+			To illustrate that a ring exhibits the above equivalent conditions, consider a field $\mathbb{F}$ (for concreteness, we may arbitrarily take $\mathbb{F} = \mathbb{R}$). We know that any vector space over $\mathbb{F}$ will have a nonempty basis and so it is a free $\mathbb{F}$-module. Thus, all $\mathbb{F}$-modules are projective.
+		\end{proof}
+
+
+
+	% problem 3
+	\item[\textbf{3.}] Show that for any prime $p \in \mathbb{N}$, $\mathbb{Z}(p^\infty)$ is a subgroup of $\mathbb{Q}/\mathbb{Z}$ and that it is an injective $\mathbb{Z}$-module.
+
+		\begin{proof}
+			Let $p \in \mathbb{N}$ be prime. Consider two arbitrary cosets $\frac{a}{p^n} + \mathbb{Z},\, \frac{b}{p^m} + \mathbb{Z} \in \mathbb{Z}(p^\infty)$. Observe that $$\left ( \frac{a}{p^n} + \mathbb{Z} \right ) - \left ( \frac{b}{p^m} + \mathbb{Z} \right ) = \left ( \frac{a}{p^n} - \frac{b}{p^m} \right ) + \mathbb{Z} = \frac{ap^m + bp^n}{p^{m+n}} + \mathbb{Z} \in \mathbb{Z}(p^\infty),$$ and so $\mathbb{Z}(p^\infty)$ is a subgroup of $\mathbb{Q}/\mathbb{Z}$. \\
+
+			Now we show that $\mathbb{Z}(p^\infty)$ is an injective $\mathbb{Z}$-module. Recall that it suffices to show that $\mathbb{Z}(p^\infty)$ is divisible. For any $k \in \mathbb{N}$, let $\varphi_k : \mathbb{Z}(p^\infty) \to \mathbb{Z}(p^\infty)$ denote multiplication with $\varphi_k \left ( \frac{a}{p^n} + \mathbb{Z} \right ) = \frac{ka}{p^n} + \mathbb{Z}$. If $p \neq q \in \mathbb{N}$ is a prime, we know that $\mathrm{gcd}(q, p^n) = 1$, implying that there exists integers $r, s \in \mathbb{Z}$ such that $rq + sp^n = 1$ by B$\acute{\mathrm{e}}$zout's lemma; therefore, for an arbitrary coset $\frac{a}{p^n} + \mathbb{Z} \in \mathbb{Z}(p^\infty)$, we have that $$\varphi_q \left ( \frac{ar}{p^n} + \mathbb{Z} \right ) = \frac{arq}{p^n} + \mathbb{Z} = \left ( \frac{arq}{p^n} + as \right ) + \mathbb{Z} = \frac{arq + asp^n}{p^n} + \mathbb{Z} = \frac{a(rq + sp^n)}{p^n} + \mathbb{Z} = \frac{a}{p^n} + \mathbb{Z}$$ providing surjectivity. Let $k \in \mathbb{N}$ such that $p \nmid k$. Further, let $k_i$ for $1 \leq i \leq \ell \in \mathbb{N}$ denote the sequence of (not necessarily distinct) prime factors of $k$. Observe that $$\varphi_k = \varphi_{k_1} \circ \varphi_{k_2} \circ \hdots \circ \varphi_{k_\ell}$$ is a surjection. Hence, for any $\frac{a}{p^n} + \mathbb{Z} \in \mathbb{Z}(p^\infty)$ and $k \in \mathbb{N}$ with $p \nmid k$, there exists a preimage $\frac{b}{p^m} + \mathbb{Z} \in \varphi_k^{-1} \left ( \frac{a}{p^n} + \mathbb{Z} \right )$ such that $$\frac{a}{p^n} + \mathbb{Z} = k \left ( \frac{b}{p^m} + \mathbb{Z} \right ).$$ In the case that $p^m \mid k$ where $m \in \mathbb{N}$ is maximal, apply the previous argument with $\frac{a}{p^{n+m}} + \mathbb{Z} \in \mathbb{Z}(p^\infty)$ and $\frac{k}{p^m} \in \mathbb{N}$.
+		\end{proof}
+
+
+
+\end{enumerate}
+
+\end{document}

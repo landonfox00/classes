@@ -1,0 +1,157 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, bbold, enumitem, extpfeil, graphicx, listings, mathrsfs, tikz-cd}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 449, Category Theory and TQFTs \\
+\noindent September 28, 2021
+
+\begin{center}
+\Large Homework 5
+\end{center}
+
+\begin{enumerate}
+
+	% problem 1
+	\item[\textbf{1.}] For a category and object $X \in \mathscr{C}$, prove that the functor $\mathscr{C}(X, -) : \mathscr{C} \to \mathsf{Set}$ preserves limits.
+
+		\begin{proof}
+			Let $\mathscr{C}$ be a category and $X \in \mathscr{C}$ an object. To prove that $\mathscr{C}(X, -) : \mathscr{C} \to \mathsf{Set}$ preserves limits, it suffices to show that $\mathscr{C}(X, \lim D) \cong \lim \mathscr{C}(X, D-)$ via the canonical map for all functors $D : \mathscr{I} \to \mathscr{C}$ from an index category $\mathscr{I}$. Provided that $(\lim D, \{\pi_i\}_{i \in \mathscr{I}})$ is the limit of $D$, it holds that $(\mathscr{C}(X, \lim D), \{\mathscr{C}(X, \pi_i)\}_{i \in \mathscr{I}})$ is a cone in $\mathsf{Set}$ because
+			\begin{align*}
+				\pi_j &= Df\, \pi_i \\
+				\mathscr{C}(X, \pi_j) &= \mathscr{C}(X, Df\, \pi_i) \\
+				\mathscr{C}(X, \pi_j) &= \mathscr{C}(X, Df)\, \mathscr{C}(X, \pi_i)
+			\end{align*}
+			for all morphisms $f : i \to j \in \mathscr{I}$. Consider an arbitrary cone in $\mathsf{Set}$ depicted below.
+			\begin{center}
+			\begin{tikzcd}
+			                                               &  & {\mathscr{C}(X, Di)} \arrow[dd, "{\mathscr{C}(X, Df)}"] \\
+			A \arrow[rru, "\rho_i"] \arrow[rrd, "\rho_j"'] &  &                                                         \\
+			                                               &  & {\mathscr{C}(X, Dj)}                                   
+			\end{tikzcd}
+			\end{center}
+			Then for any element $a \in A$, we obtain a morphism $\rho_i a : X \to Di \in \mathscr{C}$. It is easy to see that for all $a \in A$, $(X, \{\rho_i a\}_{i \in \mathscr{I}})$ is a cone in $\mathscr{C}$. Hence, there exists a unique morphism $\varphi_a : X \to \lim D$ for each $a \in A$ such that the following diagram commutes.
+			\begin{center}
+			\begin{tikzcd}
+			                                                                                                              &  &                                                   &  & Di \arrow[dd, "Df"] \\
+			X \arrow[rrrru, "\rho_i a", bend left] \arrow[rrrrd, "\rho_j a"', bend right] \arrow[rr, "\varphi_a", dashed] &  & \lim D \arrow[rru, "\pi_i"] \arrow[rrd, "\pi_j"'] &  &                     \\
+			                                                                                                              &  &                                                   &  & Dj                 
+			\end{tikzcd}
+			\end{center}
+			Furthermore, consider the morphism $\varphi : A \to \mathscr{C}(X, \lim D)$ defined as the map $a \mapsto \varphi_a$. Observe that $\rho_i = \mathscr{C}(X, \pi_i) \varphi$ as a result of $$\rho_i a = \pi_i \varphi_a = (\pi_i \varphi) a = (\mathscr{C}(X, \pi_i) \varphi) a$$ for all $a \in A$. Additionally, it is clear that $\varphi$ is uniquely determined by $\{\rho_i\}_{i \in \mathscr{I}}$. Thus, $(\mathscr{C}(X, \lim D), \newline
+			\mathscr{C}(X, \pi_i))$ is a limit of $\mathscr{C}(X, D-)$ and so $\mathscr{C}(X, \lim D) \cong \lim \mathscr{C}(X, D-)$ by the uniqueness of the limit.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Prove that the functor $Y : \mathscr{C} \to [\mathscr{C}^\mathrm{op}, \mathsf{Set}]$ given by $A \mapsto \mathscr{C}(-, A)$ is fully faithful.
+
+		\begin{proof}
+			Let $Y : \mathscr{C} \to [\mathscr{C}^\mathrm{op}, \mathsf{Set}]$ denote the Yoneda embedding; that is, $YA = \mathscr{C}(-, A)$. By the Yoneda Lemma, we know that there exists a bijection $$\psi : \mathrm{Nat}(\mathscr{C}(-, A),\, \mathscr{C}(-, B)) \cong \mathscr{C}(-, B) A = \mathscr{C}(A, B)$$ in $\mathsf{Set}$ for any $A, B \in \mathscr{C}$ such that $$\alpha = \{\alpha_i\} : \mathscr{C}(-, A) \Rightarrow \mathscr{C}(-, B) \overset{\psi}{\longmapsto} \alpha_A\, \mathrm{id}_A.$$ It then suffices to show that $Y = \psi^{-1}$, or equivalently, $\psi Y f = f$ for all $f : A \to B \in \mathscr{C}$. Indeed, observe that $$\psi\, Y f = \psi\, \mathscr{C}(f, -) = \mathscr{C}(f, -)_A\, \mathrm{id}_A = (f \cdot -)\, \mathrm{id}_A = f\, \mathrm{id}_A = f.$$
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Show that if we have a natural isomorphism of representable functors $\mathscr{C}(-, A) \cong \mathscr{C}(-, B)$ in $[\mathscr{C}^\mathrm{op}, \mathsf{Set}]$, then $A \cong B$ in $\mathscr{C}$.
+
+		\begin{proof}
+			Let $\alpha : \mathscr{C}(-, A) \xRightarrow{\cong} \mathscr{C}(-, B)$ be a natural isomorphism between hom functors in $[\mathscr{C}^\mathrm{op}, \mathsf{Set}]$. Provided that the Yoneda embedding is fully faithful, we may consider its preimage $Y^{-1}$ (or inverse when restricted to the subcategory $\mathrm{im}\, Y$). Moreover, there exists unique morphisms $f : A \to B,\, g : B \to A \in \mathscr{C}$ such that $Yf = \alpha$ and $Yg = \alpha^{-1}$. Since we know from previous problem sets that the preimages are functorial, it holds that $$fg = Y^{-1} \alpha\, Y^{-1} \alpha^{-1} = Y^{-1} \alpha \alpha^{-1} = Y^{-1} \mathrm{id}_{\mathscr{C}(-, B)} = \mathrm{id}_B$$ and $$gf = Y^{-1} \alpha^{-1}\, Y^{-1} \alpha = Y^{-1} \alpha^{-1} \alpha = Y^{-1} \mathrm{id}_{\mathscr{C}(-, A)} = \mathrm{id}_A$$ as desired.
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Prove that if a category has all finite products then every object of the category has a comonoid structure.
+
+		\begin{proof}
+			Suppose $\mathscr{C}$ is a category with all finite products. Let $M \in \mathscr{C}$ be an arbitrary object. First recall that a product $f \times g : A \times B \to C \times D$ from morphisms $f : A \to C$ and $g : B \to D$ satisfies the identities $$\pi_C \cdot f \times g = f\, \pi_A\;\;\;\; \mathrm{and}\;\;\;\; \pi_D \cdot f \times g = g\, \pi_B$$ where $\pi$ denotes the respective projections on the products. Consider the following diagram
+			\begin{center}
+			\begin{tikzcd}
+			  &  & M \arrow[dd, "\Delta", dashed] \arrow[llddd, "\mathrm{id}_M"', bend right] \arrow[rrddd, "\mathrm{id}_M", bend left] &  &   \\
+			  &  &                                                                                                                      &  &   \\
+			  &  & M \times M \arrow[lld, "\pi"] \arrow[rrd, "\pi"']                                                                    &  &   \\
+			M &  &                                                                                                                      &  & M
+			\end{tikzcd}
+			\end{center}
+			with $\Delta : M \to M \times M$ denoting the unique morphism from the product. Additionally, observe that $\mathrm{id}_M \times \Delta$ satisfies the product diagram;
+			\begin{center}
+			\begin{tikzcd}
+			  &  & M \times M \arrow[dd, "\mathrm{id}_M \times \Delta", dashed] \arrow[llddd, "\pi"', bend right] \arrow[rrddd, "\Delta \pi", bend left] &  &   \\
+			  &  &                                                                                                                                       &  &   \\
+			  &  & M \times (M \times M) \arrow[lld, "\rho_M"] \arrow[rrd, "\rho_{M \times M}"']                                                         &  &   \\
+			M &  &                                                                                                                                       &  & M
+			\end{tikzcd}
+			\end{center}
+			indeed, commutativity follows from a result of the morphism product identities:
+			\begin{align*}
+				\rho_M \cdot \mathrm{id}_M \times \Delta = \mathrm{id}_M\, \pi = \pi, \\
+				\rho_{M \times M} \cdot \mathrm{id}_M \times \Delta = \Delta \pi.
+			\end{align*}
+			Similarly, we may conclude that $\Delta \times \mathrm{id}_M$ satisfies the product diagram below
+			\begin{center}
+			\begin{tikzcd}
+			  &  & M \times M \arrow[dd, "\Delta \times \mathrm{id}_M", dashed] \arrow[llddd, "\Delta \pi"', bend right] \arrow[rrddd, "\pi", bend left] &  &   \\
+			  &  &                                                                                                                                       &  &   \\
+			  &  & (M \times M) \times M \arrow[lld, "\rho_{M \times M}'"] \arrow[rrd, "\rho_M'"']                                                       &  &   \\
+			M &  &                                                                                                                                       &  & M
+			\end{tikzcd}
+			\end{center}
+			and we obtain the equations $$\rho_M' \cdot \Delta \times \mathrm{id}_M = \pi\;\;\;\; \mathrm{and}\;\;\;\; \rho_{M \times M}' \cdot \Delta \times \mathrm{id}_M = \Delta \pi.$$ Next, we define $\alpha : (M \times M) \times M \to M \times (M \times M) \times M$ to be the unique morphism satisfying $\rho_M' = \rho_M \alpha$ and $\rho_{M \times M}' = \rho_{M \times M} \alpha$ from the following product diagram.
+			\begin{center}
+			\begin{tikzcd}
+			  &  & (M \times M) \times M \arrow[dd, "\alpha", dashed] \arrow[llddd, "\rho_M'"', bend right] \arrow[rrddd, "\rho_{M \times M}'", bend left] &  &            \\
+			  &  &                                                                                                                                         &  &            \\
+			  &  & M \times (M \times M) \arrow[lld, "\rho_M'"] \arrow[rrd, "\rho_{M \times M}"']                                                          &  &            \\
+			M &  &                                                                                                                                         &  & M \times M
+			\end{tikzcd}
+			\end{center}
+			We now show that $\alpha \cdot \Delta \times \mathrm{id}_M$ satisfies the commutativity of the $M \times (M \times M)$ product diagram with object $M \times M$. Provided the identities we obtained above, it follows that $$\rho_M (\alpha \cdot \Delta \times \mathrm{id}_M) = \rho_M' \cdot \Delta \times \mathrm{id}_M = \pi$$ as well as $$\rho_{M \times M} (\alpha \cdot \Delta \times \mathrm{id}_M) = \rho_{M \times M}' \cdot \Delta \times \mathrm{id}_M = \Delta \pi.$$ Hence, $\mathrm{id}_M \times \Delta = \alpha \cdot \Delta \times \mathrm{id}_M$ by uniqueness. Furthermore, the associativity diagram below commutes as desired.
+			\begin{center}
+			\begin{tikzcd}
+			                                                      & M \arrow[ldd, "\Delta"'] \arrow[rr, "\Delta"] &                                             & M \times M \arrow[rdd, "\Delta \times \mathrm{id}_M"] &                       \\
+			                                                      &                                               &                                             &                                                       &                       \\
+			M \times M \arrow[rr, "\mathrm{id}_M \times \Delta"'] &                                               & M \times (M \times M) \arrow[rr, "\alpha"'] &                                                       & (M \times M) \times M
+			\end{tikzcd}
+			\end{center}
+			$ $ \\
+
+			Now we demonstrate unitality. Let $\ast \in \mathscr{C}$ denote the zero product; that is, $\ast$ is the terminal object of $\mathscr{C}$ with unique maps $\eta_M : M \to \ast$. Consider the following product diagrams, let $\psi : M \to M \times \ast$ and $\psi' : M \to \ast \times M$ be the universal morphisms
+			\begin{center}
+			\begin{tikzcd}
+			  &  & M \arrow[dd, "\psi", dashed] \arrow[llddd, "\mathrm{id}_M"', bend right] \arrow[rrddd, "\eta_M", bend left] &  &      &  &      &  & M \arrow[dd, "\psi'", dashed] \arrow[llddd, "\eta_M"', bend right] \arrow[rrddd, "\mathrm{id}_M", bend left] &  &   \\
+			  &  &                                                                                                             &  &      &  &      &  &                                                                                                              &  &   \\
+			  &  & M \times \ast \arrow[lld, "\rho_M"] \arrow[rrd, "\rho_\ast"']                                               &  &      &  &      &  & \ast \times M \arrow[lld, "\rho_\ast '"] \arrow[rrd, "\rho_M'"]                                              &  &   \\
+			M &  &                                                                                                             &  & \ast &  & \ast &  &                                                                                                              &  & M
+			\end{tikzcd}
+			\end{center}
+			satisfying
+			\begin{align*}
+				\mathrm{id}_M &= \rho_M\, \psi, & \mathrm{id}_M = \rho_m'\, \psi', \\
+				\eta_M &= \rho_\ast\, \psi, & \eta_M = \rho_\ast'\, \psi'.
+			\end{align*}
+			As before, with morphisms products $\mathrm{id}_M \times \eta_M$ and $\eta_M \times \mathrm{id}_M$, we obtain identities
+			\begin{align*}
+				\rho_M \cdot \mathrm{id}_M \times \eta_M &= \mathrm{id}_M\, \pi = \pi, & \rho_M' \cdot \eta_M \times \mathrm{id}_M = \mathrm{id}_M\, \pi = \pi, \\
+				\rho_\ast \cdot \mathrm{id}_M \times \eta_M &= \eta_M\, \pi = \eta_{M \times M}, & \rho_\ast' \cdot \eta_M \times \mathrm{id}_M = \eta_M\, \pi = \eta_{M \times M},
+			\end{align*}
+			where $\eta_{M \times M} = \eta_M \pi : M \times M \to \ast$ because of terminality. By definition of $\Delta$, we know that $\pi \Delta = \mathrm{id}_M$, then it holds that
+			\begin{align*}
+				\rho_M (\mathrm{id}_M \times \eta_M \cdot \Delta) &= \pi\, \Delta = \mathrm{id}_M, & \rho_M' (\eta_M \times \mathrm{id}_M \cdot \Delta) = \pi\, \Delta = \mathrm{id}_M, \\
+				\rho_\ast (\mathrm{id}_M \times \eta_M \cdot \Delta) &= \eta_{M \times M} \cdot \Delta = \eta_M, & \rho_\ast' (\eta_M \times \mathrm{id}_M \cdot \Delta) = \eta_{M \times M} \cdot \Delta = \eta_M
+			\end{align*}
+			Therefore, $\psi = \mathrm{id}_M \times \eta_M \cdot \Delta$ and $\psi' = \eta_M \times \mathrm{id}_M \cdot \Delta$ and so the unitary diagram commutes.
+			\begin{center}
+			\begin{tikzcd}
+			              &  & M \arrow[dd, "\Delta"] \arrow[llddd, "\psi"', bend right] \arrow[rrddd, "\psi'", bend left]       &  &               \\
+			              &  &                                                                                                   &  &               \\
+			              &  & M \times M \arrow[lld, "\mathrm{id}_M \times \eta_M"] \arrow[rrd, "\eta_M \times \mathrm{id}_M"'] &  &               \\
+			M \times \ast &  &                                                                                                   &  & \ast \times M
+			\end{tikzcd}
+			\end{center}
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

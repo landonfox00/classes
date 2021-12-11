@@ -1,0 +1,71 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, bbold, enumitem, extpfeil, graphicx, listings, mathrsfs, tikz-cd}
+\usepackage[margin=0.5in]{geometry}
+
+\usepackage{newunicodechar}
+
+\newunicodechar{よ}{\text{\usefont{U}{min}{m}{n}\symbol{'210}}}
+
+\DeclareFontFamily{U}{min}{}
+\DeclareFontShape{U}{min}{m}{n}{<-> udmj30}{}
+
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 449, Category Theory and TQFTs \\
+\noindent November 1, 2021
+
+\begin{center}
+\Large Homework 10
+\end{center}
+
+\begin{enumerate}
+
+	% problem 1
+	\item[\textbf{1.}] Show that a matrix ring over $\mathbb{C}$ is a Frobenius algebra over $\mathbb{R}$. Show that a matrix ring over $\mathbb{H}$ is a Frobenius algebra over $\mathbb{R}$.
+
+		\begin{proof}
+			Let $M \subseteq \mathcal{M}_n(\mathbb{C})$ be a matrix algebra over $\mathbb{R}$. Consider the linear map $\Re\, \mathrm{tr} : M \to \mathbb{R}$; that is, the real component of the trace of a matrix. Let $I \subseteq \mathrm{ker}\, \Re\, \mathrm{tr}$ be an ideal and $A \in I$. Furthermore, it holds that $$a_{sr} = \Re (a_{sr} + ib_{sr}) = \Re\, \mathrm{tr}\, E_{rs} A = 0$$ for all $1 \leq r, s \leq n$ where $E_{jk}$ consists of a single nonzero element $1$ at index $jk$. Additionally, we have that $$b_{sr} = \Re (b_{sr} - ia_{sr}) = \Re\, \mathrm{tr}(-iE_{rs}A) = 0.$$ Hence, $A = 0$, the zero matrix, and so $I = (0)$ as desired. \\
+
+			Regarding a matrix algebra $N \subseteq \mathcal{M}_n(\mathbb{H})$, $N$ forms a Frobenius algebra under $\Re\, \mathrm{tr} : N \to \mathbb{R}$ as well. Indeed, for any matrix $B \in J \subseteq \mathrm{ker}\, \Re\, \mathrm{tr}$ where $J$ is an ideal, we may repeat the process above to illustrate that $B$ contains no real components. Further, applying $\Re\, \mathrm{tr}$ to $-iE_{rs}$, $-jE_{rs}$, and $-kE_{rs}$ for all $1 \leq r, s \leq n$ demonstrates that all nonreal components must also be zero. Thus, $N$ is a Frobenius algebra.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Let $G$ be a finite group and assume that there is at least one $g \in G$ not in the center of $G$. Let $\mathbb{k}$ be a field and show that the linear map $\mathbb{k}[G] \to \mathbb{k}$ given by $g \mapsto 1$ and $g' \mapsto 0$ for all $g' \neq g$ is a Frobenius form making $\mathbb{k}[G]$ into a non-symmetric Frobenius algebra. What is the associated Frobenius pairing?
+
+		\begin{proof}
+			Let $G = \{ g_0, \hdots, g_n \}$ be a finite group and $\mathbb{k}$ a field. Further, let $\epsilon : \mathbb{k}[G] \to \mathbb{k}$ where, without loss of generality, $g_0 \mapsto 1$ and $g_i \mapsto 0$ for all $i > 0$, extended linearly. Suppose $I \subseteq \mathrm{ker}\, \epsilon$ is an ideal and $\sum_{i=0}^n k_i g_i \in I$. Then it follows that $$k_j = \sum_{i=0}^n k_i \epsilon(g_0 g_j^{-1} g_i) = \epsilon \left ( g_0 g_j^{-1} \sum_{i=0}^n k_i g_i \right ) = 0.$$ Hence, $I = (0)$ and $\epsilon$ is a Frobenius form on $\mathbb{k}[G]$. In the case that $G$ is nonabelian, that is, there exists a $g \in G$ not in the center of $G$, then we have that $$\epsilon(g_0 g g' (g g')^{-1}) = 1 \neq 0 = \epsilon(g_0 g' g (g g')^{-1})$$ for some $g' \in G$, otherwise $g' g = g g'$. Therefore, $(\mathbb{k}[G], \epsilon)$ is non-symmetric. The associated Frobenius pairing is given by $$g_i \otimes g_j \longmapsto \epsilon(g_i g_j).$$
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Let $G$ be a finite group and $\mathbb{k}$ a field. Show that group multiplication $\mu_G : G \times G \to G$ induces a commutative $\mathbb{k}$-algebra structure on $\mathbb{k}[G]^\ast$. Show that the map $\mathbb{k}[G]^\ast \to \mathbb{k}$ given by $\phi \mapsto \sum_{g \in G} \phi(g)$ is a Frobenius form on $\mathbb{k}[G]^\ast$.
+
+		\begin{proof}
+			As before, let $G = \{ g_0, \hdots, g_n \}$ be finite group with $\gamma^0$ the identity and let $\mathbb{k}$ be a field. Let $\mu : \mathbb{k}[G]^\ast \otimes \mathbb{k}[G]^\ast \to \mathbb{k}[G]^\ast$ denote group multiplication of $G$ applied to $\mathbb{k}[G]$ with basis $\{ \gamma^0, \hdots, \gamma^n \}$; let $\mu(\gamma^i \otimes \gamma^j) = \gamma^k$ where $g_i g_j = g_k$ for all $1 \leq i, j \leq n$, extended linearly. We now show that the associative diagram below commutes.
+			\begin{center}
+			\begin{tikzcd}
+			{\mathbb{k}[G]^\ast \otimes \mathbb{k}[G]^\ast \otimes \mathbb{k}[G]^\ast} \arrow[dd, "{\mu \otimes \mathrm{id}_{\mathbb{k}[G]^\ast}}"'] \arrow[rr, "{\mathrm{id}_{\mathbb{k}[G]^\ast} \otimes \mu}"] &  & {\mathbb{k}[G]^\ast \otimes \mathbb{k}[G]^\ast} \arrow[dd, "\mu"] \\
+			                                                                                                                                                                                                      &  &                                                                   \\
+			{\mathbb{k}[G]^\ast \otimes \mathbb{k}[G]^\ast} \arrow[rr, "\mu"']                                                                                                                                    &  & {\mathbb{k}[G]^\ast}                                            
+			\end{tikzcd}
+			\end{center}
+			When evaluated with $\gamma^i \otimes \gamma^j \otimes \gamma^k$, it is clear that $$\mu \cdot \mathrm{id}_{\mathbb{k}[G]^\ast} \otimes \mu (\gamma^i \otimes \gamma^j \otimes \gamma^k) = \gamma^i (\gamma^j \gamma^k).$$ Similarly, it holds that $$\mu \cdot \mu \otimes \mathrm{id}_{\mathbb{k}[G]^\ast} (\gamma^i \otimes \gamma^j \otimes \gamma^k) = (\gamma^i \gamma^j) \gamma^k.$$ Observe that $\gamma^i (\gamma^j \gamma^k) = (\gamma^i \gamma^j) \gamma^k$ as a result of the associativity property of $G$. As for unitality,
+			\begin{center}
+			\begin{tikzcd}
+			{\mathbb{k} \otimes \mathbb{k}[G]^\ast} \arrow[rr, "{\eta \otimes \mathrm{id}_{\mathbb{k}[G]^\ast}}"] \arrow[rrdd, "\cong"'] &  & {\mathbb{k}[G]^\ast \otimes \mathbb{k}[G]^\ast} \arrow[dd, "\mu"] &  & {\mathbb{k}[G]^\ast \otimes \mathbb{k}} \arrow[ll, "{\mathrm{id}_{\mathbb{k}[G]^\ast} \otimes \eta}"'] \arrow[lldd, "\cong"] \\
+			                                                                                                                             &  &                                                                   &  &                                                                                                                              \\
+			                                                                                                                             &  & {\mathbb{k}[G]^\ast}                                              &  &                                                                                                                             
+			\end{tikzcd}
+			\end{center}
+			observe that $$\mu \cdot \eta \otimes \mathrm{id}_{\mathbb{k}[G]^\ast}(1 \otimes \gamma^i) = \mu(\gamma^0 \otimes \gamma^i) = \gamma^i\;\;\; \mathrm{and}\;\;\; \mu \cdot \mathrm{id}_{\mathbb{k}[G]^\ast} \otimes \eta(\gamma^i \otimes 1) = \mu(\gamma^i \otimes \gamma^0) = \gamma^i$$ as desired. Lastly regarding commutativity, it would not appear to hold in this construction. In the case that $G$ is nonabelian, then there exists $g_i, g_j$ such that $g_i g_j \neq g_j g_i$ and so $\gamma^i \gamma^j \neq \gamma^j \gamma^i$. There must be another construction in which commutativity holds. \\
+
+			Now, consider the map $\epsilon : \mathbb{k}[G]^\ast \to \mathbb{k}$ given by $\phi \mapsto \sum_{g \in G} \phi(g)$. Let $I \subseteq \mathrm{ker}\; \epsilon$ be an ideal and $\phi = \sum_{i=0}^n k_i \gamma^i \in I$ a linear functional. By assumption it hold that $$\sum_{i=0}^n k_i = \sum_{i=0}^n \sum_{j=0}^n k_j \gamma^j g_i = \sum_{g \in G} \left ( \sum_{j=0}^n k_j \gamma^j \right ) g = 0.$$
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

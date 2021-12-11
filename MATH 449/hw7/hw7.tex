@@ -1,0 +1,128 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, bbold, enumitem, extpfeil, graphicx, listings, mathrsfs, tikz-cd}
+\usepackage[margin=0.5in]{geometry}
+
+\usepackage{newunicodechar}
+
+\newunicodechar{よ}{\text{\usefont{U}{min}{m}{n}\symbol{'210}}}
+
+\DeclareFontFamily{U}{min}{}
+\DeclareFontShape{U}{min}{m}{n}{<-> udmj30}{}
+
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 449, Category Theory and TQFTs \\
+\noindent October 13, 2021
+
+\begin{center}
+\Large Homework 7
+\end{center}
+
+\begin{enumerate}
+
+	% problem 1
+	\item[\textbf{1.}] Let $(\mathbb{1}, \cdot)$ be the trivial category with the trivial monoidal structure and $(\mathscr{D}, \boxtimes)$ another monoidal category. Show that there is a bijection correspondence between monoids in $\mathscr{D}$ with respect to $\boxtimes$ and lax monoidal functors $\mathbb{1} \to \mathscr{D}$.
+
+		\begin{proof}
+			Let $\mathscr{D}$ be a category with monoidal structure provided by $\boxtimes$. First, suppose $M \in \mathscr{D}$ is a monoid under $\boxtimes$ with multiplication $\mu$, associator $\alpha$, and unitors $\lambda$, $\rho$ where $I \in \mathscr{D}$ is the unit element. By definition, the diagrams below commute.
+			\begin{center}
+			\begin{tikzcd}
+			(M \boxtimes M) \boxtimes M \arrow[r, "\alpha"] \arrow[dd, "\mu \boxtimes \mathrm{id}_M"'] & M \boxtimes (M \boxtimes M) \arrow[r, "\mathrm{id}_M \boxtimes \mu"] & M \boxtimes M \arrow[dd, "\mu"] &  & I \boxtimes M \arrow[rdd, "\lambda"'] \arrow[r, "\eta \boxtimes \mathrm{id}_M"] & M \boxtimes M \arrow[dd, "\mu"] & M \boxtimes I \arrow[l, "\mathrm{id}_M  \boxtimes \eta"'] \arrow[ldd, "\rho"] \\
+			                                                                                           &                                                                      &                                 &  &                                                                                 &                                 &                                                                               \\
+			M \boxtimes M \arrow[rr, "\mu"']                                                           &                                                                      & M                               &  &                                                                                 & M                               &                                                                              
+			\end{tikzcd}
+			\end{center}
+			Consider the unique functor $F : \mathbb{1} \to \mathscr{D}$ with $F \ast = M$. Provided the trivial monoidal structure $\cdot$ on $\mathbb{1}$ (that is, $\ast \cdot \ast = \ast$), observe that the commutative diagrams above provide the following.
+			\begin{center}
+			\begin{tikzcd}
+			(F \ast \boxtimes F \ast) \boxtimes F \ast \arrow[rr, "\alpha"] \arrow[dd, "\mu \boxtimes \mathrm{id}_M"'] &                                              & F \ast \boxtimes (F \ast \boxtimes F \ast) \arrow[rr, "\mathrm{id}_M \boxtimes \mu"] &                                                                                     & F \ast \boxtimes F \ast \cdot \ast \arrow[dd, "\mu"] \\
+			                                                                                                           &                                              &                                                                                      &                                                                                     &                                                      \\
+			F \ast \cdot \ast \boxtimes F \ast \arrow[rr, "\mu"']                                                      &                                              & F (\ast \cdot \ast) \cdot \ast \arrow[rr, "\mathrm{id}_M"']                          &                                                                                     & F \ast \cdot (\ast \cdot \ast)                       \\
+			F \ast \boxtimes I \arrow[r, "\mathrm{id}_M \boxtimes \eta"] \arrow[dd, "\rho"']                           & F \ast \boxtimes F \ast \arrow[dd, "\mu"]    &                                                                                      & I \boxtimes F \ast \arrow[r, "\eta \boxtimes \mathrm{id}_M"] \arrow[dd, "\lambda"'] & F \ast \boxtimes F \ast \arrow[dd, "\mu"]            \\
+			                                                                                                           &                                              &                                                                                      &                                                                                     &                                                      \\
+			F \ast                                                                                                     & F \ast \cdot \ast \arrow[l, "\mathrm{id}_M"] &                                                                                      & F \ast                                                                              & F \ast \cdot \ast \arrow[l, "\mathrm{id}_M"]        
+			\end{tikzcd}
+			\end{center}
+			Hence, $F$ is a lax monoidal functor by definition. \\
+
+			Conversely, let $F : \mathbb{1} \to \mathscr{D}$ be a lax monoidal functor. Let $M = F \ast$. It is clear that $M$ is uniquely determined by $F$. As before, by definition we obtain the diagrams below.
+			\begin{center}
+			\begin{tikzcd}
+			(F \ast \boxtimes F \ast) \boxtimes F \ast \arrow[rr, "\alpha"] \arrow[dd, "{ \phi_{\ast, \ast} \boxtimes \mathrm{id}_M}"'] &                                                                       & F \ast \boxtimes (F \ast \boxtimes F \ast) \arrow[rr, "{\mathrm{id}_M \boxtimes \phi_{\ast, \ast}}"] &                                                                                     & F \ast \boxtimes F \ast \cdot \ast \arrow[dd, "{ \phi_{\ast, \ast}}"] \\
+			                                                                                                                            &                                                                       &                                                                                                      &                                                                                     &                                                                       \\
+			F \ast \cdot \ast \boxtimes F \ast \arrow[rr, "{ \phi_{\ast, \ast}}"']                                                      &                                                                       & F (\ast \cdot \ast) \cdot \ast \arrow[rr, "{F\, \mathrm{id}_\ast = \mathrm{id}_M}"']                 &                                                                                     & F \ast \cdot (\ast \cdot \ast)                                        \\
+			F \ast \boxtimes I \arrow[r, "\mathrm{id}_M \boxtimes \phi"] \arrow[dd, "\rho"']                                            & F \ast \boxtimes F \ast \arrow[dd, "{ \phi_{\ast, \ast}}"]            &                                                                                                      & I \boxtimes F \ast \arrow[r, "\phi \boxtimes \mathrm{id}_M"] \arrow[dd, "\lambda"'] & F \ast \boxtimes F \ast \arrow[dd, "{ \phi_{\ast, \ast}}"]            \\
+			                                                                                                                            &                                                                       &                                                                                                      &                                                                                     &                                                                       \\
+			F \ast                                                                                                                      & F \ast \cdot \ast \arrow[l, "{F\, \mathrm{id}_\ast = \mathrm{id}_M}"] &                                                                                                      & F \ast                                                                              & F \ast \cdot \ast \arrow[l, "{F\, \mathrm{id}_\ast = \mathrm{id}_M}"]
+			\end{tikzcd}
+			\end{center}
+			Furthermore, when simplifying products in $\mathbb{1}$ and replacing $F \ast$ with $M$, it is clear that we obtain the associativity and unitality of $M$ via multiplication $\phi_{\ast, \ast}$ and unit $\phi$ and so $M$ is a monoid in $\mathscr{D}$.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Prove that $[\mathscr{C}, \mathscr{C}]$ is a strict monoidal category under composition for any category $\mathscr{C}$.
+
+		\begin{proof}
+			Consider functors $E, F, G, H : \mathscr{C} \to \mathscr{C}$. By the associativity of functor composition, it holds that $$E(F(GH)) = E((FG)H) = (E(FG))H = ((EF)G)H = (EF)(GH).$$ Furthermore, the diagram below commutes and all morphisms are identities.
+			\begin{center}
+			\begin{tikzcd}
+			E(F(GH)) \arrow[rr, "{\alpha_{E, F, GH}}"] \arrow[dd, "{\mathrm{Id}_E \cdot \alpha_{F, G, H}}"'] &  & (EF)(GH) \arrow[rr, "{\alpha_{EF, G, H}}"] &  & ((EF)G)H                                                      \\
+			                                                                                                 &  &                                            &  &                                                               \\
+			E((FG)H) \arrow[rrrr, "{\alpha_{E, FG, H}}"']                                                     &  &                                            &  & (E(FG))H \arrow[uu, "{\alpha_{E, F, G} \cdot \mathrm{Id}_H}"']
+			\end{tikzcd}
+			\end{center}
+			Additionally, using the identity functor on $\mathscr{C}$ we have, $$F (\mathrm{Id}_\mathscr{C} G) = (F \mathrm{Id}_\mathscr{C}) G = FG.$$ Moreover, we have the following commutative diagram with $\lambda_G$ and $\rho_F$ denoting the equalities $\mathrm{Id}_\mathscr{C} G = G$ and $F \mathrm{Id}_\mathscr{C} = F$.
+			\begin{center}
+			\begin{tikzcd}
+			F (\mathrm{Id}_\mathscr{C} G) \arrow[rdd, "\mathrm{Id}_F \cdot \lambda_G"'] \arrow[rr, "{\alpha_{F, \mathrm{Id}_\mathscr{C}, G}}"] &    & (F \mathrm{Id}_\mathscr{C}) G \arrow[ldd, "\rho_F \cdot \mathrm{Id}_G"] \\
+			                                                                                                                                   &    &                                                                         \\
+			                                                                                                                                   & FG &                                                                        
+			\end{tikzcd}
+			\end{center}
+			It is easy to see that the diagram above is also contractible to the identity and so $[\mathscr{C}, \mathscr{C}]$ is a strict monoidal category under composition by definition. 
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Give a concrete description of the natural transformation $\mu : UFUF \Rightarrow UF$ obtained by applying the counit of $F \dashv U$, the free-forgetful adjunction of groups to sets, to the functors $U$ and $F$.
+
+		\begin{proof}
+			Let $F \dashv U$ denote the free-forgetful adjunction between sets and groups. Further, let $\epsilon : FU \Rightarrow \mathrm{Id}_\mathsf{Grp}$ denote the counit of the adjunction. Define a natural transformation $$\mu = U \epsilon F = \{ U \epsilon_{FX} \}_{X \in \mathsf{Set}} : UFUF \Rightarrow UF.$$ Provided a set $X$, $\mu$ gives a group homomorphism $\mu_X = U \epsilon_{FX} : UFUFX \to UFX \in \mathsf{Set}$ mapping between the free group of all reduced strings constructed from $X$ (the free group of the free group) and the free group of $X$. Moreover, any string of strings from $X$ is mapped to the concatenation of all provided strings; that is, let $\{ w_i \}_{i \in \mathscr{I}}$ be a string of strings from $X$, then $$\{ w_i \}_{i \in \mathscr{I}} \longmapsto \prod_{i \in \mathscr{I}} w_i = w_1 w_2 \hdots.$$ We know this to be true provided the definition of $\epsilon$; indeed, if $g_1 \hdots g_n$ is a string of group elements, then $$g_1 \hdots g_n \xmapsto{\epsilon_G} \prod_{i = 1}^n g_i \in G.$$
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Prove that $\mu$, as defined above, along with the unit of the adjunction $\eta : \mathrm{Id}_\mathsf{Set} \Rightarrow UF$ provide a monoid structure of $UF$ in $[\mathsf{Set}, \mathsf{Set}]$.
+
+		\begin{proof}
+			Let $\mu$ be defined as in \textbf{3} and consider the adjunction $(\eta, \epsilon) : F \dashv U$. First observe that for a set $X \in \mathsf{Set}$, $$\mu_X\, UF \mu_X = \mu_X\, \mu_{UFX}.$$ Indeed, both sides of the equation take words of words of words, then concatenate all collections together to arrive at a single word in $FX$. Furthermore,
+			\begin{align*}
+				\{ \mu_X\, (UF \mu)_X \}_{X \in \mathsf{Set}} &= \{ \mu_X\, (\mu UF)_X \}_{X \in \mathsf{Set}} \\
+				\mu\, UF \mu &= \mu\, \mu UF \\
+				\mu\, UF \mu\, \alpha &= \mu\, \mu UF
+			\end{align*}
+			and so the associativity diagram below commutes.
+			\begin{center}
+			\begin{tikzcd}
+			{(UF\, UF)\, UF} \arrow[r, "\alpha"] \arrow[dd, "{\mu\, UF}"'] & {UF\, (UF\, UF)} \arrow[r, "{UF\, \mu}"] & {UF\, UF} \arrow[dd, "\mu"] \\
+			                                                               &                                          &                             \\
+			{UF\, UF} \arrow[rr, "\mu"']                                   &                                          & UF                         
+			\end{tikzcd}
+			\end{center}
+			Provided that $\eta : \mathrm{Id}_\mathsf{Set} \Rightarrow UF$ has components $x \xmapsto{\eta_X} x \in UFX$, we can see that $$\mu_X\, \eta_{UFX} w = \mu_X \{ w \} = w\;\;\; \mathrm{and}\;\;\; \mu_X\, UF \eta_X w = \eta_X \{ w \} = w$$ for any $X \in \mathsf{Set}$ and $w \in FX$. Hence, $$\mu\, \eta UF = \mathrm{Id}_{UF}\;\;\; \mathrm{and}\;\;\; \mu\, UF \eta = \mathrm{Id}_{UF}$$ providing unitality as in the diagram below.
+			\begin{center}
+			\begin{tikzcd}
+			{\mathrm{Id}_\mathsf{Set}\, UF} \arrow[rdd, "="'] \arrow[r, "{\eta\, UF}"] & {UF\, UF} \arrow[dd, "\mu"] & {UF\, \mathrm{Id}_\mathsf{Set}} \arrow[l, "{UF\, \eta}"'] \arrow[ldd, "="] \\
+			                                                                           &                             &                                                                            \\
+			                                                                           & UF                          &                                                                           
+			\end{tikzcd}
+			\end{center}
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

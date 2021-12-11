@@ -1,0 +1,89 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, graphicx, listings, mathrsfs, tikz-cd}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 449, Category Theory and TQFTs \\
+\noindent August 31, 2021
+
+\begin{center}
+\Large Homework 1
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Let $P$ be the set of all people, and say that there is a morphism from person $A$ to person $B$ if and only if $A$ is friends with $B$. Does this describe a category? Why or why not?
+
+		\begin{proof}
+			The construction depicted above may not necessarily form a category; the composition axiom is likely violated since it may be that person $A$ is friends with $B$ and $B$ is friends with $C$, yet $A$ and $C$ are not friends.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Prove that if $\mathscr{C}$ is a category, then so is $\mathscr{C}^\mathrm{op}$.
+
+		\begin{proof}
+			Recall that the opposite category $\mathscr{C}^\mathrm{op}$ of a category $\mathscr{C}$ simply reverses all the morphisms in $\mathscr{C}$. Therefore by definition, $\mathrm{ob}(\mathscr{C}^\mathrm{op}) = \mathrm{ob}(\mathscr{C})$ and $$\mathrm{hom}(\mathscr{C}^\mathrm{op}) = \{ f^\mathrm{op} : Y \to X \mid f : X \to Y \in \mathscr{C} \}.$$ Similarly, by definition we know that for any two morphisms $f^\mathrm{op} : Z \to Y,\, g^\mathrm{op} : Y \to X \in \mathscr{C}^\mathrm{op}$, there exists their composition $g^\mathrm{op} f^\mathrm{op} = (fg)^\mathrm{op} : Z \to X$. In regard to associativity, observe that $$(h^\mathrm{op} g^\mathrm{op}) f^\mathrm{op} = (gh)^\mathrm{op} f^\mathrm{op} = (f(gh))^\mathrm{op} = ((fg)h)^\mathrm{op} = h^\mathrm{op} (fg)^\mathrm{op} = h^\mathrm{op} (g^\mathrm{op} f^\mathrm{op}).$$ Lastly, we can see that $\mathrm{id}_X^\mathrm{op} = \mathrm{id}_X : X \to X$ acts as the identity on $X \in \mathscr{C}^\mathrm{op}$; indeed, for any two morphisms $f^\mathrm{op} : X \to Y,\, g^\mathrm{op} : Y \to X \in \mathscr{C}^\mathrm{op}$, it holds that $$f^\mathrm{op} = (f \mathrm{id}_X)^\mathrm{op} = \mathrm{id}_X^\mathrm{op}f^\mathrm{op}\;\; \mathrm{and}\;\; g^\mathrm{op} = (\mathrm{id}_X g)^\mathrm{op} = g^\mathrm{op} \mathrm{id}_X^\mathrm{op}.$$
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Let $G$ be a group. Prove that the category, denoted $\mathsf{B}G$, defined by $\mathrm{ob}(\mathsf{B}G) = \{ \ast \}$ and $\mathsf{B}G(\ast, \ast) = G$, $\mathrm{id}_\ast = 0_G$ the identity of $G$, whose composition is given by group multiplication is truly a category. 
+
+		\begin{proof}
+			Provided $\mathsf{B}G$ as defined above, it suffices to show associativity and identity of morphisms. Assuming $G$ is a group, it holds that $(ab)c = a(bc)$ and $a 0_G = 0_G a = a$ for all morphisms (group elements) $a, b, c \in G$.
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Prove that if $G$ is a group, then every morphism in $\mathsf{B}G$ is an isomorphism.
+
+		\begin{proof}
+			Let $G$ be a group and consider a morphism $a \in G$. Consequently, $a^{-1} \in G$ and so $$aa^{-1} = a^{-1}a = 0_G = \mathrm{id}_\ast.$$ Thus, every morphism in $\mathsf{B}G$ is an isomorphism by definition.
+		\end{proof}
+
+
+	% problem 5
+	\item[\textbf{5.}] Describe a category $\mathsf{Sq}$ such that for any other category $\mathscr{C}$, the image of a functor $F : \mathsf{Sq} \to \mathscr{C}$ is a commutative square in $\mathscr{C}$. 
+
+		\begin{proof}
+			Define the category $\mathsf{Sq}$ as the following commutative diagram.
+			\begin{center}
+			\begin{tikzcd}
+				A \arrow[dd, "f'"'] \arrow[rr, "f"] \arrow[rr] &  & B \arrow[dd, "g"] \\
+				                                               &  &                   \\
+				C \arrow[rr, "g'"]                             &  & D
+			\end{tikzcd}
+			\end{center}
+			Then for any functor $F : \mathsf{Sq} \to \mathscr{C}$ mapping to an arbitrary category $\mathscr{C}$, the image $\mathrm{im}\, F$ also commutes;
+			\begin{center}
+			\begin{tikzcd}
+				FA \arrow[dd, "Ff'"'] \arrow[rr, "Ff"] \arrow[rr] &  & FB \arrow[dd, "Fg"] \\
+				                                                  &  &                   \\
+				FC \arrow[rr, "Fg'"]                              &  & FD
+			\end{tikzcd}
+			\end{center}
+			indeed, observe that
+			\begin{align*}
+				gf &= g'f' \\
+				F gf &= F g'f' \\
+				Fg\, Ff &= Fg'\, Ff'.
+			\end{align*}
+		\end{proof}
+
+
+	% problem 6
+	\item[\textbf{6.}] Prove that a set $X$ has a left $G$ action if and only if there is a functor $F : \mathsf{B}G \to \mathsf{Set}$ such that $F \ast = X$.
+
+		\begin{proof}
+			Suppose there is a functor $F : \mathsf{B}G \to \mathsf{Set}$ such that $F \ast = X \in \mathsf{Set}$. Let $\alpha : \mathrm{hom}(\mathsf{B}G) \to \mathrm{hom}(\mathsf{Set})$, defined as $\alpha g = Fg$, denote $F$'s mapping of morphisms. Then by the functoriality of $F$, it holds that $$\alpha(\mathrm{id}_\ast, x) = F \mathrm{id}_\ast x = \mathrm{id}_X x = x$$ and $$\alpha(g, \alpha(h, x)) = \alpha(g, Fhx) = Fg(Fhx) = (Fg\, Fh)x = F(gh)x = \alpha(gh, x)$$ for all $g, h \in G$ and $x \in X$. \\
+
+			Conversely, suppose we have a left $G$ action $\alpha : G \times X \to X$ on a set $X$. Define a functor $F : \mathsf{B}G \to \mathsf{Set}$ such that $F \ast = X$ and $Fg = \alpha g : X \to X$ for all $g \in G$. To verify the functoriality of $F$, observe that $$F \mathrm{id}_\ast = \alpha \mathrm{id}_\ast = \mathrm{id}_X$$ and $$Fg\, Fh = \alpha g\, \alpha h = \alpha(gh) = F gh,$$ as desired.
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

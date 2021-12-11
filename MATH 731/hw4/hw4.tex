@@ -1,0 +1,64 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, extpfeil, graphicx, listings, mathrsfs, tikz-cd}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 731, Modern Algebra \\
+\noindent October 1, 2021
+
+\begin{center}
+\Large Homework 4
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Let $P \subset M_n(\mathbb{R})$ with $n \geq 2$ be the zero ideal. Show that $P$ is prime but not completely prime in $M_n(\mathbb{R})$.
+
+		\begin{proof}
+			Define $(0) \subset M_n(\mathbb{R})$ with $n \geq 2$ to be the zero ideal. Suppose by contradiction that there exists ideals $A, B \subseteq R$ such that $A \cdot B \subseteq (0)$, yet $A \neq (0)$ and $B \neq (0)$. We may assume that there exists matrices $a \in A$ and $b \in B$ such that they do not equal the zero matrix; that is, there exists nonzero entries $a_{ij}, b_{k\ell} \neq 0 \in \mathbb{R}$. Consider permutation matrices $\rho, \rho', \sigma, \sigma' \in M_n(\mathbb{R})$ such that $$(\rho a \sigma)_{11} = a_{ij}\;\;\;\; \mathrm{and}\;\;\;\; (\rho' b \sigma')_{11} = b_{k\ell}.$$ Provided that $A$ and $B$ are ideals, it must hold that $\rho a \sigma \in A$ and $\rho' b \sigma' \in B$. Thus, $$((\rho a \sigma)(\rho' b \sigma'))_{11} \neq 0 \in \mathbb{R},$$ contradicting the fact that $\rho a \sigma \rho' b \sigma' \in A \cdot B \subseteq (0)$. \\
+
+			Regarding a lack of complete primeness, one may consider nonzero zero divisors such as the following $$\begin{bmatrix} 1 & 0 & \hdots & 0 \\ 0 & 0 & \hdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \hdots & 0 \end{bmatrix} \begin{bmatrix} 0 & 0 & \hdots & 0 \\ 0 & 1 & \hdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \hdots & 0 \end{bmatrix} = \begin{bmatrix} 0 & 0 & \hdots & 0 \\ 0 & 0 & \hdots & 0 \\ \vdots & \vdots & \ddots & \vdots \\ 0 & 0 & \hdots & 0 \end{bmatrix}.$$
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}]
+	\begin{enumerate}
+		\item[\textbf{a.}] Let $R$ be a commutative ring with $a, b \in R$. Show that $$(a) \cdot (b) = (a \cdot b).$$
+		\item[\textbf{b.}] Find an example of elements $A, B \in M_n(\mathbb{R})$ such that $(A) \cdot (B) \nsubseteq (AB)$.
+	\end{enumerate}
+
+		\begin{proof} $ $
+			\begin{enumerate}
+				\item[\textbf{a.}] Let $R$ be a commutative ring with elements $a, b \in R$. We know from lecture that $$(a) \cdot (b) \subseteq (ab)$$ and so it suffices to show that $(a) \cdot (b) \supseteq (ab)$. Consider an arbitrary element $t (ab) + k (ab) \in (ab)$, with $t \in R$ and $k \in \mathbb{Z}$, we may assume such form because $R$ is commutative. Furthermore,
+				\begin{align*}
+					t (ab) + k (ab) &= (t \cdot 0 + 1 \cdot t + k \cdot 0) ab + (1 \cdot k) ab \\
+					&\in \{ (r \cdot s + m \cdot r + n \cdot s) ab + (m \cdot n) ab : r, s \in R,\; m, n \in \mathbb{Z} \} \\
+					&= \{ (rs)ab + (m \cdot r)ab + (n \cdot s)ab + (mn)ab : r, s \in R,\; m, n \in \mathbb{Z} \} \\
+					&= \{ ra + n \cdot a : r \in R,\; n \in \mathbb{Z} \} \cdot \{ sb + m \cdot b : s \in R,\; m \in \mathbb{Z} \} \\
+					&= (a) \cdot (b).
+				\end{align*}
+
+				\item[\textbf{b.}] As with \textbf{1}, consider matrices $$A = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix},\;\; B = \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix} \in M_2(\mathbb{R}).$$ It is clear that $AB = 0 \in M_2(\mathbb{R})$ and so $(AB)$ is the zero ideal in $M_2(\mathbb{R})$, yet we may obtain the matrix $$A = \begin{bmatrix} 1 & 0 \\ 0 & 0 \end{bmatrix} = \begin{bmatrix} 0 & 1 \\ 0 & 0 \end{bmatrix} \begin{bmatrix} 0 & 0 \\ 0 & 1 \end{bmatrix} \begin{bmatrix} 0 & 0 \\ 1 & 0 \end{bmatrix} \in (B).$$ Thus, $$0 \neq A = AA \in (A) \cdot (B),$$ proving the claim.
+			\end{enumerate}
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Let $R$ be a commutative ring with identity and let $S \subseteq R$ be the set $$S = \{ r : r = 0\; \mathrm{or}\; r\; \mathrm{is\; a\; zero\; divisor} \}.$$ Show that $S$ contains at least one prime ideal.
+
+		\begin{proof}
+			First, suppose $0 = 1$, then $R = S = \{ 0 \}$ which trivially contains a prime ideal. We will then assume $0 \neq 1$. Suppose $R$ is a commutative ring with identity and define a subset $$S = \{ r : r = 0\; \mathrm{or}\; r\; \mathrm{is\; a\; zero\; divisor} \} \subseteq R.$$ Next, observe that $R \setminus S$ is closed under multiplication; indeed, if $a, b \in R \setminus S$ and $ab \in S$, then there would exist an element $0 \neq r \in R$ such that $a(br) = 0$; however, $a \notin S$ and so it must hold $br = 0$, but again, $b \notin S$, a contradiction. \\
+
+			Let $$\mathscr{I} = \{ I \subseteq S : I\; \mathrm{is\; an\; ideal\; of}\; R \}$$ which is nonempty due to the zero ideal. Utilizing ordinary set inclusion, consider an arbitrary chain $K_i \in \mathscr{I}$ with $i \in \mathscr{J}$. Additionally, consider the union $$K = \bigcup_{i \in \mathscr{J}} K_i \subseteq S.$$ Let $a, b \in K$ be arbitrary elements. Then it follows that $a \in K_i$ and $b \in K_j$; furthermore, $a, b \in K_\ell$ where $\ell = \max \{ i, j \}$ by the definition of a chain. Therefore, $a - b \in K_\ell \subseteq K$ and so $K$ is a subgroup of $R$. Now, for any $r \in R$, we have $ra \in K_i$ since $K_i$ is an ideal illustrating that $ra \in K$. Then by commutativity, $K$ is a twosided ideal; that is, $K \in \mathscr{I}$. Provided that $K \supseteq K_i$ for any $i \in \mathscr{J}$, Zorn's Lemma states that there exists a maximal element $P \subseteq S$ in $\mathscr{I}$. We now show that $P$ is prime. \\
+
+			Consider two ideals $A, B \subseteq R$ with $A \cdot B \subseteq P$. Suppose by contradiction that $A, B \nsubseteq P$. Then it must hold that $A, B \nsubseteq S$, otherwise $A, B \subseteq P$ by maximality. Moreover, there must exist elements $a \in A$ and $b \in B$ such that $a, b \in R \setminus S$, a set we know to be nonempty because $1 \notin S$. Take arbitrary elements $p, p' \in P$. Observe that $p + a, p' + b \notin P$, otherwise $$a = (p + a) - p \in P$$ and so we may also conclude that both $p + a, p' + b \in R \setminus S$ by the previous argument. Provided that $R \setminus S$ is closed under multiplication, the product $$(p + a)(p' + b) = pp' + ap' + bp + ab \in R \setminus S.$$ However, $p p' \in P$ by multiplicative closure; $ap', bp \in P$ by idealship; $ab \in P$ since $A \cdot B \subseteq P$.
+		\end{proof}
+
+
+\end{enumerate}
+
+\end{document}

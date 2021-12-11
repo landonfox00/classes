@@ -1,0 +1,142 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, bbold, enumitem, extpfeil, graphicx, listings, mathrsfs, tikz-cd}
+\usepackage[margin=0.5in]{geometry}
+
+\usepackage{newunicodechar}
+
+\newunicodechar{よ}{\text{\usefont{U}{min}{m}{n}\symbol{'210}}}
+
+\DeclareFontFamily{U}{min}{}
+\DeclareFontShape{U}{min}{m}{n}{<-> udmj30}{}
+
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 449, Category Theory and TQFTs \\
+\noindent October 6, 2021
+
+\begin{center}
+\Large Homework 6
+\end{center}
+
+\begin{enumerate}
+
+	% problem 1
+	\item[\textbf{1.}] Prove that the \textit{twist} isomorphisms $V \otimes W \to W \otimes V$ given on simple tensors by $v \otimes w \mapsto w \otimes v$ assemble into a natural isomorphism $- \otimes - \cdot \tau \cong - \otimes -$, where $\tau : \mathsf{Vect} \times \mathsf{Vect} \to \mathsf{Vect} \times \mathsf{Vect}$ is the twist functor $(V, W) \mapsto (W, V)$.
+
+		\begin{proof}
+			Let $\tau : \mathsf{Vect} \times \mathsf{Vect} \to \mathsf{Vect} \times \mathsf{Vect}$ denote the twist functor. Further, let $\tau_{V, W} : V \otimes W \to W \otimes V$ denote the twist isomorphisms. Then any morphism $f \times g : W \times V \to W' \times V'$, observe that
+			\begin{align*}
+				\tau_{V', W'} \cdot - \otimes - \cdot \tau\, f \times g\, (v, w) &= \tau_{V', W'} \cdot - \otimes - \cdot g \times f\, (v, w) \\
+				&= \tau_{V', W'} \cdot - \otimes - (gv, fw) \\
+				&= \tau_{V', W'} \cdot gv \otimes fw \\
+				&= fw \otimes gv \\
+				&= - \otimes - (fw, gv) \\
+				&= - \otimes - \cdot f \times g\, (w, v) \\
+				\tau_{V', W'} \cdot - \otimes - \cdot \tau\, f \times g\, (v, w) &= - \otimes - \cdot f \times g \cdot \tau_{V, W}\, (v, w)
+			\end{align*}
+			for all $(v, w) \in V \times W$. Thus, $\{ \tau_{V, W} \}_{V, W \in \mathsf{Vect}} : - \otimes - \cdot \tau \xRightarrow{\cong} - \otimes -$ is a natural isomorphism as the diagram below commutes.
+			\begin{center}
+			\begin{tikzcd}
+			V \otimes W \arrow[dd, "{\tau_{V, W}}"'] \arrow[rrr, "{- \otimes - \cdot \tau\, f \times g}"] &  &  & V' \otimes W' \arrow[dd, "{\tau_{V', W'}}"] \\
+			                                                                                              &  &  &                                             \\
+			W \otimes V \arrow[rrr, "- \otimes - \cdot f \times g"']                                      &  &  & W' \otimes V'                              
+			\end{tikzcd}
+			\end{center}
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Prove that $X \in \mathsf{Set}$ is a monoid if and only if there exists a commutative diagram of the following form:
+	\begin{center}
+	\begin{tikzcd}
+	                                                                   &  & \mathsf{Mon} \arrow[dd, "U"] \\
+	                                                                   &  &                              \\
+	\mathsf{Set}^\mathsf{op} \arrow[rruu, "\Theta"] \arrow[rr, "よ_X"'] &  & \mathsf{Set}                
+	\end{tikzcd}
+	\end{center}
+
+		\begin{proof}
+			Suppose $X \in \mathsf{Set}$ is a monoid with multiplication map $\mu : X \times X \to X$. Define a functor $\Theta : \mathsf{Set}^\mathsf{op} \to \mathsf{Mon}$ with $\Theta Y = \mathsf{Set}(Y, X)$ for all $Y \in \mathsf{Set}$ and $\Theta f = - \cdot f : \mathsf{Set}(Z, X) \to \mathsf{Set}(Y, X)$, post composition with an arbitrary function $f : Y \to Z$. We first verify that $\mathsf{Set}(Y, X)$ is a monoid in the traditional sense. Given two functions $f, g : Y \to X$, we can define the product $(f \cdot g)(y) = f(y) \cdot g(y)$, pointwise multiplication utilizing the product of $X$. It is easy to see the existence of an identity with the function $\eta(y) = e \in X$ mapping all elements of $Y$ to the identity element of $X$. We must also verify that $\Theta f$ is a monoid homomorphism for any function $f : Y \to Z \in \mathsf{Set}$. Observe that for functions $g, h : Z \to X$, it holds that
+			\begin{align*}
+				(\Theta f\, g \cdot h)(y) &= (g \cdot h\, f)(y) \\
+				&= (g \cdot h)\, f(y) \\
+				&= gf(y) \cdot hf(y) \\
+				&= \Theta f\, g(y) \cdot \Theta f\, h(y) \\
+				(\Theta f\, g \cdot h)(y) &= (\Theta f\, g \cdot \Theta f\, h)(y)
+			\end{align*}
+			for all $y \in Y$. Additionally, we can see that identities are preserved by the following $$(\Theta f\, \eta)(y) = (\eta f)(y) = \eta f(y) = e.$$ In regard to the functorality of $\Theta$, notice that $\Theta \mathrm{id}_Y = - \cdot \mathrm{id}_Y$ is the identity of $\mathsf{Set}(Y, X)$ and that $$\Theta fg = - \cdot fg = - \cdot g\, - \cdot f = \Theta g\, \Theta f$$ for all morphisms $f, g \in \mathsf{Set}$ (recall that $\Theta$ is contravariant on $\mathsf{Set}$). Lastly, by definition it is clear that $よ_X = \Theta U$. \\
+
+			Conversely, let $\Theta : \mathsf{Set}^\mathsf{op} \to \mathsf{Mon}$ be a functor such that $よ_X = \Theta U$. Since $U : \mathsf{Mon} \to \mathsf{Set}$ is the forgetful functor, it must hold that $\Theta Y = \mathsf{Set}(Y, X)$ and $\Theta f = - \cdot f$, similar to the Yoneda embedding $よ_X$. Consider the singleton set $\ast \in \mathsf{Set}$ and, more particularly, its image $\Theta \ast = \mathsf{Set}(\ast, X) \in \mathsf{Mon}$. It must hold that $\mathsf{Set}(\ast, X)$ holds a monoid structure, let $\cdot : \mathsf{Set}(\ast, X) \times \mathsf{Set}(\ast, X) \to \mathsf{Set}(\ast, X)$ denote its operation and $\eta : \ast \to X$ its identity. We define an operation on $X$ by applying $\cdot$ in the following manner: $$f \ast \cdot g \ast = (f \cdot g) \ast.$$ Observe that $$(f \ast \cdot g \ast) \cdot h \ast = (f \cdot g) \ast \cdot h \ast = ((f \cdot g) \cdot h) \ast = (f \cdot (g \cdot h)) \ast = f \ast \cdot (g \cdot h) \ast = f \ast \cdot (g \ast \cdot h \ast)$$ illustrating that $\cdot$ is associative on $X$ via its associativity on $\mathsf{Set}(\ast, X)$. As for unitality, we can see that $$f \ast \cdot \eta \ast = (f \cdot \eta) \ast = f \ast = ( \eta \cdot f) \ast = \eta \ast \cdot f \ast$$ and so $\eta \ast$ is the identity of $X$. Furthermore, $X$ is a monoid by definition. Provided that monoids, both algebraic and categorical, coincide in $\mathsf{Set}$, this proves the claim.
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Show that if $\mathscr{C}$ has a terminal object, then $X \times \ast \cong X$ for any $X \in \mathscr{C}$.
+
+		\begin{proof}
+			Let $\mathscr{C}$ be a category with terminal object $\ast \in \mathscr{C}$ where $\eta_X : X \to \ast$ denotes the unique morphism. Furthermore, let $X \in \mathscr{C}$ be an arbitrary object. For any object $Z \in \mathscr{C}$ with morphisms $f : Z \to X$ and $g : Z \to \ast$, the following diagram commutes precisely when $\varphi = f$;
+			\begin{center}
+			\begin{tikzcd}
+			  &  & Z \arrow[dd, "\varphi", dashed] \arrow[llddd, "f"', bend right] \arrow[rrddd, "g", bend left] &  &      \\
+			  &  &                                                                                               &  &      \\
+			  &  & X \arrow[lld, "\mathrm{id}_X"] \arrow[rrd, "\eta_X"']                                         &  &      \\
+			X &  &                                                                                               &  & \ast
+			\end{tikzcd}
+			\end{center}
+			indeed, $$g = \eta_Z = \eta_X f$$ by terminality and it is clear that $f = \mathrm{id}_X f$. Hence, $X$ is a product of $X$ and $\ast$ and so $X \times \ast \cong X$ by the uniqueness of the product.
+		\end{proof}
+
+
+	% problem 4
+	\item[\textbf{4.}] Prove that if $G$ is a group, then a right $G$-module is $\mathsf{Set}$ is exactly a set with right $G$-action.
+
+		\begin{proof}
+			Let $G$ be a group. First, assume $X \in \mathsf{Set}$ is a right $G$-module with multiplication map $\mu : G \times G \to G$, unit $\eta : \ast \to G$, and action $\alpha : X \times G \to G$. By definition, the following diagrams commute;
+			\begin{center}
+			\begin{tikzcd}
+			X \times G \times G \arrow[dd, "\alpha \times \mathrm{id}_G"'] \arrow[rr, "\mathrm{id}_X \times \mu"] &  & X \times G \arrow[dd, "\alpha"] &  & X \times \ast \arrow[rrdd, "\cong"'] \arrow[rr, "\mathrm{id}_X \times \eta"] &  & X \times G \arrow[dd, "\alpha"] \\
+			                                                                                                      &  &                                 &  &                                                                              &  &                                 \\
+			X \times G \arrow[rr, "\alpha"']                                                                      &  & X                               &  &                                                                              &  & X                              
+			\end{tikzcd}
+			\end{center}
+			that is, $$\alpha \cdot \alpha \times \mathrm{id}_G = \alpha \cdot \mathrm{id}_X \times \mu\;\;\;\; \mathrm{and}\;\;\;\; \psi = \alpha \cdot \mathrm{id}_X \times \eta$$ where $\psi : X \times \ast \to X$ is an isomorphism. Furthermore,
+			\begin{align*}
+				\alpha( \alpha(x, g)\, h) &= \alpha(\alpha(x, g),\, \mathrm{id}_G h) \\
+				&= \alpha \cdot \alpha \times \mathrm{id}_G (x, g, h) \\
+				&= \alpha \cdot \mathrm{id}_G \times \mu (x, g, h) \\
+				&= \alpha (\mathrm{id}_X x,\, \mu(g, h)) \\
+				\alpha( \alpha(x, g)\, h) &= \alpha (x,\, \mu(g, h))
+			\end{align*}
+			and
+			\begin{align*}
+				x &= \psi(x, \ast) \\
+				&= \alpha \cdot \mathrm{id}_X \times \eta (x, \ast) \\
+				&= \alpha (\mathrm{id}_X x,\, \eta \ast) \\
+				x &= \alpha (x, 1)
+			\end{align*}
+			for all $x \in X$ and $g, h \in G$. Hence, $X$ is a right $G$-action by definition. \\
+
+			Conversely, let $X$ be a right $G$-action. Similarly, we may conclude that $X$ is also a right $G$-module as
+			\begin{align*}
+				\alpha \cdot \alpha \times \mathrm{id}_G (x, g, h) &= \alpha (\alpha(x, g),\, \mathrm{id}_G h) \\
+				&= \alpha(\alpha(x, g),\, h) \\
+				&= \alpha( x,\, \mu(g, h)) \\
+				&= \alpha(\mathrm{id}_X x,\, \mu(g, h)) \\
+				\alpha \cdot \alpha \times \mathrm{id}_G (x, g, h) &= \alpha \cdot \mathrm{id}_X \times \mu (x, g, h)
+			\end{align*}
+			and
+			\begin{align*}
+				\psi(x, \ast) &= x \\
+				&= \alpha(x, 1) \\
+				&= \alpha( \mathrm{id}_X x, \eta \ast) \\
+				\psi(x, \ast) &= \alpha \cdot \mathrm{id}_X \times \eta(x, \ast)
+			\end{align*}
+			for all $x \in X$ and $g, h \in G$.
+		\end{proof}
+
+\end{enumerate}
+
+\end{document}

@@ -1,0 +1,73 @@
+\documentclass[ 12pt ]{article}
+\usepackage{amsmath, amsthm, amssymb, csquotes, enumitem, extpfeil, graphicx, listings, mathrsfs, tikz-cd}
+\usepackage[margin=0.5in]{geometry}
+\graphicspath{ ./ }
+
+\begin{document}
+
+\noindent Landon Fox \\
+\noindent Math 731, Modern Algebra \\
+\noindent September 15, 2021
+
+\begin{center}
+\Large Homework 2
+\end{center}
+
+\begin{enumerate}
+	% problem 1
+	\item[\textbf{1.}] Let $R$ be a commutative ring of prime characteristic $p$. Show that the function $f : R \to R$ given by $f(a) = a^p$ is a ring homomorphism. 
+
+		\begin{proof}
+			Suppose $R$ is a commutative ring with prime characteristic $p \in \mathbb{N}$. Further, let $f : R \to R$ be a function defined as $f(a) = a^p$. We first show that addition is preserved. Using the binomial formula, observe that
+			\begin{align*}
+				f(a + b) &= (a + b)^p \\
+				&= \sum_{k = 0}^p \binom{p}{k} a^k b^{p - k} \\
+				f(a + b) &= a^p + b^p + \sum_{k = 1}^{p - 1} \binom{p}{k} a^k b^{p - k}
+			\end{align*}
+			for arbitrary ring elements $a, b \in R$. Consider the combination $\binom{p}{k}$ where $k \in \mathbb{N}$ and $1 \leq k \leq p - 1$. Provided the algebraic definition of binomial coefficients, we can see that $$\frac{p}{k} \binom{p-1}{k-1} = \frac{p}{k} \frac{(p-1)!}{(p-1-(k-1))! (k-1)!} = \frac{p!}{(p-k)!k!} = \binom{p}{k} \in \mathbb{Z}.$$ Since binomial coefficients are integers and we are under the assumption that $k < p$ and $p$ is prime, it must hold that $k \mid \binom{p - 1}{k - 1}$. Therefore, $p \mid \frac{p}{k} \binom{p - 1}{k - 1} = \binom{p}{k}$. Furthermore,
+			\begin{align*}
+				f(a + b) &= a^p + b^p + \sum_{k = 1}^{p - 1} \binom{p}{k} a^k b^{p - k} \\
+				&= a^p + b^p + \sum_{k = 1}^{p - 1} 0 \\
+				f(a + b) &= f(a) + f(b)
+			\end{align*}
+			by the definition of the characteristic. Lastly, provided that $R$ is commutative, it is easy to see that $$f(ab) = (ab)^p = a^p b^p = f(a) f(b)$$ for all $a, b \in R$. Thus, $f$ is a ring homomorphism by definition.
+		\end{proof}
+
+
+	% problem 2
+	\item[\textbf{2.}] Show that if $R$ is commutative and $a, b \in R$ are both nilpotent, then so is $a + b$.
+
+		\begin{proof}
+			Let $R$ be a commutative ring and $a, b \in R$, both nilpotent ring elements. Moreover, let $m, n \in \mathbb{N}$ be naturals such that $a^m = 0$ and $b^n = 0$. First, notice that $a^k = b^\ell = 0$ for all $k \geq m$ and $\ell \geq n$ since $a^k = a^k a^{k - m} = 0$ and $b^\ell = b^n b^{\ell - n} = 0$. Next, utilizing the binomial formula, it follows that $$(a + b)^{mn} = \sum_{k = 0}^{mn} \binom{mn}{k} a^k b^{mn - k} = \sum_{k = 0}^{m - 1} \binom{mn}{k} a^k b^{mn - k} + \sum_{k = m}^{mn} \binom{mn}{k} a^k b^{mn - k}.$$ Due to the fact that $k \geq m$ in the latter summation, it holds that $$\sum_{k = m}^{mn} \binom{mn}{k} a^k b^{mn - k} = 0$$ because of the nilpotence of $a$. Similarly, the minimal power for $b$ in the other summation is $$mn - m + 1 = m(n - 1) + 1 \geq n - 1 + 1 = n;$$ hence, $$\sum_{k = 0}^{m - 1} \binom{mn}{k} a^k b^{mn - k} = 0.$$ Furthermore, $a + b$ is nilpotent as a result of $(a + b)^{mn} = 0$. \\
+
+			Now we show that commutativity is a necessary condition. Consider the following matrices in the ring $(\mathcal{M}_3(\mathbb{R}), +, \cdot)$, $$A = \begin{bmatrix} 0 & 1 & 0 \\ 0 & 0 & 1 \\ 0 & 0 & 0 \end{bmatrix},\;\;\; B = \begin{bmatrix} 0 & 0 & 0 \\ 1 & 0 & 0 \\ 0 & 1 & 0 \end{bmatrix}.$$ It is easy to see that both $A$ and $B$ are nilpotent; indeed, $A^3 = 0$ and $B^3 = 0$ where $0 = [0]_{3 \times 3}$, the zero matrix. We will now show that $$(A + B)^{2k} = 2^{k - 1} \begin{bmatrix} 1 & 0 & 1 \\ 0 & 2 & 0 \\ 1 & 0 & 1 \end{bmatrix}\;\;\; \mathrm{and}\;\;\; (A + B)^{2k + 1} = 2^{k} \begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 1 \end{bmatrix}$$ for all $k \in \mathbb{N}$, thus justifying that $A + B$ is not nilpotent. As a base case, $n = 2$, it is clear that $$(A + B)^2 = \begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 1 \end{bmatrix} = \begin{bmatrix} 1 & 0 & 1 \\ 0 & 2 & 0 \\ 1 & 0 & 1 \end{bmatrix}$$ which satisfies the criterion. Let us assume $(A + B)^n$ is equal to one the desired matrices based on the parity of $n$, for a particular $n \geq 2$. First, suppose $n = 2k$ for some $k \in \mathbb{N}$. Then, utilizing the inductive hypothesis provides $$(A + B)^{n + 1} = (A + B)^{2k} (A + B) = 2^{k - 1} \begin{bmatrix} 1 & 0 & 1 \\ 0 & 2 & 0 \\ 1 & 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 1 \end{bmatrix} = 2^{k - 1} \begin{bmatrix} 2 & 0 & 2 \\ 0 & 2 & 0 \\ 2 & 0 & 2 \end{bmatrix} = 2^k \begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 1 \end{bmatrix}$$ as desired. As for odd values of $n$, let $n = 2k + 1$ for a $k \in \mathbb{N}$. Similarly, we obtain $$(A + B)^{n + 1} = (A + B)^{2k + 1} (A + B) = 2^{k} \begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 1 \end{bmatrix} \begin{bmatrix} 1 & 0 & 1 \\ 0 & 1 & 0 \\ 1 & 0 & 1 \end{bmatrix} = 2^{k} \begin{bmatrix} 1 & 0 & 1 \\ 0 & 2 & 0 \\ 1 & 0 & 1 \end{bmatrix},$$ concluding proof.
+		\end{proof}
+
+
+	% problem 3
+	\item[\textbf{3.}] Let $R$ and $S$ be rings with identities $1_R$ and $1_S$ respectively, and let $f : R \to S$ be a ring homomorphism.
+	\begin{enumerate}
+		\item[\textbf{a.}] Show that if $f$ is surjective, then $f(1_R) = 1_S$.
+		\item[\textbf{b.}] Show that if $u \in R$ and $f(u) \in S$ are both units, then $f(u)^{-1} = f(u^{-1})$.
+	\end{enumerate}
+
+		\begin{proof}
+			As depicted above, suppose $R$ and $S$ are rings with identities $1_R$ and $1_S$. Additionally, let $f : R \to S$ be a ring homomorphism.
+			\begin{enumerate}
+				\item[\textbf{a.}] Suppose $f$ is surjective. Then there exists an element $a \in R$ such that $f(a) = 1_S$. Thus, $$f(1_R) = f(1_R) 1_S = f(1_R) f(a) = f(1_R a) = f(a) = 1_S.$$
+
+				\item[\textbf{b.}] Let $u \in R$ and $f(u) \in S$ both be units. First, notice that $$f(u^{-1}) f(u) = f(u^{-1} u) = f(1_R)$$ which provides $f(u^{-1}) = f(1_R) f(u)^{-1}$. Then it follows that
+				\begin{align*}
+					f(u) f(u^{-1}) &= f(u) f(1_R) f(u)^{-1} \\
+					&= f(u 1_R) f(u)^{-1} \\
+					f(u) f(u^{-1}) &= f(u) f(u)^{-1} \\
+					f(u^{-1}) &= f(u)^{-1},
+				\end{align*}
+				proving the claim.
+			\end{enumerate}
+		\end{proof}
+
+
+\end{enumerate}
+
+\end{document}
